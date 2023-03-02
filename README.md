@@ -1,1 +1,1 @@
-"# szoftver_projekt_bme" 
+# szoftver_projekt_bme

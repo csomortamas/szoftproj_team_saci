@@ -1,6 +1,5 @@
-ECHO is on.
-.gradle/*
-.idea/*
-.vs/*
-build/*
-gradle/*
+.gradle/
+.idea/
+.vs/
+build/
+gradle/

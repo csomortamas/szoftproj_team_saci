@@ -1,0 +1,6 @@
+ECHO is on.
+.gradle/*
+.idea/*
+.vs/*
+build/*
+gradle/*

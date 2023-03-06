@@ -7,5 +7,6 @@ public class Main {
         Logger.info("Proba");
         System.out.println("Hello world!");
         System.out.println("Szia helo ");
+        System.out.println("Helloszőia");
     }
 }

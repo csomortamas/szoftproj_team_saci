@@ -1,11 +1,13 @@
-package main.java.org.example;
+package main.java.desert;
 import org.tinylog.Logger;
 
+
+/**
+ * Eintrittspunkt der Programm.
+ */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("proba commit");
         Logger.info("Proba");
         System.out.println("Hello world!");
-        System.out.println("Szia helo ");
     }
 }

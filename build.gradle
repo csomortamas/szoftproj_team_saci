@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = 'main.java.org.example.Main'
+    mainClassName = 'main.java.desert.Main'
 }
 
 run {
@@ -14,7 +14,7 @@ run {
 
 jar {
     manifest {
-        attributes "Main-Class": "main.java.org.example.Main"
+        attributes "Main-Class": "main.java.desert.Main"
     }
 }
 

@@ -10,45 +10,41 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
-    @Getter
-    @Setter
-    private List<Rohr> rohre;
+
+    @Getter @Setter private List<Rohr> rohre;
 
     /**
      *
      */
-    @Getter
-    @Setter
-    private Rohr eingangsRohr;
+
+    @Getter @Setter private Rohr eingangsRohr;
     /**
      *
      */
-    @Getter
-    @Setter
-    private Rohr ausgangsRohr;
+
+    @Getter @Setter private Rohr ausgangsRohr;
 
 
     /**
      *
      */
-    @Getter
-    @Setter
-    private int wasserTank;
+
+    @Getter @Setter private int wasserTank;
 
     /**
      *
      */
 
 
-    @Getter
-    @Setter
-    private int maxRohrAnzahl;
+
+    @Getter @Setter private int maxRohrAnzahl;
 
     /**
      * Default Konstruktor
      */
-    public Pumpe() {
-        Pumpe p = new Pumpe();
+    public Pumpe(int maxRohrAnzahl) {
+        this.maxRohrAnzahl = maxRohrAnzahl;
+        this.wasserTank = 0;
         Logger.info("Neue Pumpe erstellt.");
     }
 
@@ -69,6 +65,8 @@ public class Pumpe extends Netzelement {
      */
     public void addRohr(Rohr rohr) {
         // TODO implement here
+        this.rohre.add(rohr);
+
     }
 
     /**

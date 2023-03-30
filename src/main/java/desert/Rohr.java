@@ -11,19 +11,22 @@ public class Rohr extends Netzelement {
     /**
      *
      */
+
     @Getter private List<Pumpe> endPumpen;
+
+
     /**
      *
      */
-    @Getter private List<Pumpe> enden;
-    /**
-     *
-     */
+
     @Getter @Setter private int flusswert;
+
     /**
      *
      */
+
     @Getter @Setter private boolean besetzt;
+
     /**
      * Default Konstruktor
      */

@@ -11,11 +11,6 @@ public class Rohr extends Netzelement {
      */
     @Getter @Setter private List<Pumpe> endPumpen;
 
-    /**
-     *
-     */
-    @Getter @Setter private List<Pumpe> enden;
-
 
     /**
      *

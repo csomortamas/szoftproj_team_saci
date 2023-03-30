@@ -10,21 +10,23 @@ public abstract class Wasserbehaelter {
     /**
      *
      */
-    @Getter @Setter protected List<Rohr> rohre;
+    @Getter protected List<Rohr> rohre;
 
 
     /**
      * @param rohr
      */
     public void addRohr(Rohr rohr) {
-        // TODO implement here
+        rohre.add(rohr);
+
+        Logger.info("Rohr wurde");
     }
 
     /**
      * Konstruktor
      */
     public Wasserbehaelter() {
-
+        Logger.info("Wasserbehaelter wurde erschaffen");
     }
 
 }

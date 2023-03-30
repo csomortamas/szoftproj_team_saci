@@ -11,16 +11,16 @@ public class Kontroller {
     /**
      *
      */
-    @Getter @Setter protected List<Pumpe> allePumpen;
+    @Getter protected List<Pumpe> allePumpen;
     /**
      *
      */
-    @Getter @Setter protected List<Zisterne> alleZisternen;
+    @Getter protected List<Zisterne> alleZisternen;
 
     /**
      *
      */
-    @Getter @Setter protected List<Rohr> alleRohre;
+    @Getter protected List<Rohr> alleRohre;
 
     /**
      *
@@ -47,6 +47,7 @@ public class Kontroller {
      */
     public Kontroller(int maxRunde) {
         this.maxRunde = maxRunde;
+        this.aktuelleRunde = 1;
         System.out.println("Kontroller Object erstellt mit Konstruktor");
     }
 
@@ -82,7 +83,7 @@ public class Kontroller {
      * @return
      */
     public Pumpe pumpeErstellen() {
-        Pumpe neuePumpe = new Pumpe();
+        Pumpe neuePumpe = new Pumpe(4);
         Logger.info("Pumpe wurde erstellt");
         return neuePumpe;
     }
@@ -96,7 +97,15 @@ public class Kontroller {
             for(int j = 0; j < alleZisternen.get(i).getRohre().size(); j++) {
                 if(alleZisternen.get(i).getRohre().get(j).isIstAktiv() && !alleZisternen.get(i).getRohre().get(j).isIstKaputt()) {
                     leaderboard.setPunkteTeam1(leaderboard.getPunkteTeam1() + alleZisternen.get(i).getRohre().get(j).getFlusswert());
+                    Logger.info(alleZisternen.get(i).getRohre().get(j).getFlusswert() + "Punkte zu Installateur");
                 }
+            }
+        }
+
+        for(int i = 0; i < alleRohre.size(); i++) {
+            if(alleRohre.get(i).isIstAktiv() && alleRohre.get(i).isIstKaputt()) {
+                leaderboard.setPunkteTeam2(leaderboard.getPunkteTeam2() + alleRohre.get(i).getFlusswert());
+                Logger.info(alleRohre.get(i).getFlusswert() + " Punkte für Saboteure");
             }
         }
     }
@@ -105,14 +114,30 @@ public class Kontroller {
      *
      */
     public void spielStarten() {
-        // TODO implement here
+        Leaderboard leaderboard = new Leaderboard("TestInstallTeam", "TestSaboTeam");
+        team1 = leaderboard.getSpielendeTeam1();
+        team2 = leaderboard.getSpielendeTeam2();
+
+        alleZisternen.add(new Zisterne());
+        allePumpen.add(this.pumpeErstellen());
+        allePumpen.add(this.pumpeErstellen());
+
+        Wasserquelle wasserquelle = new Wasserquelle();
+        wasserquelle.wasserStarten();
+
+        Spieler InstallPlayer = new Installateur(allePumpen.get(0), this);
+        Spieler SaboPlayer = new Saboteur();
+
+        Logger.info("Spiel wurde gestartet");
     }
 
     /**
      * @param zisterne
      *      */
     public void addZisterne(Zisterne zisterne) {
-        // TODO implement here
+        alleZisternen.add(zisterne);
+
+        Logger.info("Eine Zisterne wurde hinzugefügt");
     }
 
     /**
@@ -120,6 +145,8 @@ public class Kontroller {
      *
      */
     public void addPumpe(Pumpe pumpe) {
-        // TODO implement here
+        allePumpen.add(pumpe);
+
+        Logger.info("Eine Pumpe wurde hinzugefügt");
     }
 }

@@ -5,7 +5,7 @@ import org.tinylog.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rohr {
+public class Rohr extends Netzelement {
     /**
      *
      */

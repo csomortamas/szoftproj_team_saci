@@ -13,11 +13,11 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
-    @Getter @Setter private List<Rohr> eingangsRohr;
+    @Getter @Setter private Rohr eingangsRohr;
     /**
      *
      */
-    @Getter @Setter private List<Rohr> ausgangsRohr;
+    @Getter @Setter private Rohr ausgangsRohr;
 
 
     /**

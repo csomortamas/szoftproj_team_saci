@@ -40,7 +40,7 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
-    private void tankFuellen() {
+    public void tankFuellen() {
         // TODO implement here
         if (this.ausgangsRohr.istKaputt || this.ausgangsRohr == null || this.eingangsRohr.getFlusswert() > this.ausgangsRohr.getFlusswert()) {
             int plusWasser = this.eingangsRohr.getFlusswert() - this.ausgangsRohr.getFlusswert();
@@ -71,6 +71,7 @@ public class Pumpe extends Netzelement {
             eingangsRohr = null;
         }
         this.rohre.remove(rohr);
+        Logger.info("Rohr entfernt");
     }
     /**
      *

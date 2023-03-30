@@ -1,4 +1,6 @@
 package main.java.desert;
+import lombok.Getter;
+import lombok.Setter;
 import org.tinylog.Logger;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,23 +9,23 @@ public class Rohr {
     /**
      *
      */
-    private List<Pumpe> endPumpen;
+    @Getter @Setter private List<Pumpe> endPumpen;
 
     /**
      *
      */
-    private List<Pumpe> enden;
+    @Getter @Setter private List<Pumpe> enden;
 
 
     /**
      *
      */
-    private int flusswert;
+    @Getter @Setter private int flusswert;
 
     /**
      *
      */
-    private boolean besetzt;
+    @Getter @Setter private boolean besetzt;
 
     /**
      * Default Konstruktor

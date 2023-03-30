@@ -1,4 +1,6 @@
 package main.java.desert;
+import lombok.Getter;
+import lombok.Setter;
 import org.tinylog.Logger;
 import java.util.List;
 
@@ -10,20 +12,20 @@ public abstract class Netzelement {
     /**
      *
      */
-    protected boolean istAktiv;
+    @Getter @Setter protected boolean istAktiv;
 
     /**
      *
      */
-    protected boolean istKaputt;
+    @Getter @Setter protected boolean istKaputt;
     /**
      *
      */
-    protected int ID;
+    @Getter @Setter protected int ID;
 
     /**
      *
      */
-    protected int kapazitaet;
+    @Getter @Setter protected int kapazitaet;
 
 }

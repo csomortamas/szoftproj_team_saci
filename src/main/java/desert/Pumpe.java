@@ -1,4 +1,6 @@
 package main.java.desert;
+import lombok.Getter;
+import lombok.Setter;
 import org.tinylog.Logger;
 import java.util.List;
 
@@ -6,27 +8,29 @@ public class Pumpe {
     /**
      *
      */
-    private List<Rohr> rohre;
+    @Getter @Setter private List<Rohr> rohre;
 
     /**
      *
      */
-    private List<Rohr> eingangsRohr;
+    @Getter @Setter private List<Rohr> eingangsRohr;
     /**
      *
      */
-    private List<Rohr> ausgangsRohr;
+    @Getter @Setter private List<Rohr> ausgangsRohr;
 
 
     /**
      *
      */
-    private int wasserTank;
+    @Getter @Setter private int wasserTank;
 
     /**
      *
      */
-    private int maxRohrAnzahl;
+
+
+    @Getter @Setter private int maxRohrAnzahl;
 
     /**
      * Default Konstruktor

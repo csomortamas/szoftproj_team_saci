@@ -1,5 +1,9 @@
 package main.java.desert;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.tinylog.Logger;
+
 /**
  *
  */
@@ -7,12 +11,15 @@ public class Zisterne extends Wasserbehaelter {
     /**
      *
      */
-    private boolean neuePumpe;
+
+
+    @Getter @Setter private boolean neuePumpe;
 
     /**
      * Default Konstruktor
      */
     public Zisterne() {
+        Logger.info("Zisterne erstellt");
     }
 
 
@@ -29,6 +36,8 @@ public class Zisterne extends Wasserbehaelter {
      */
     public void pumpeErstellen() {
         // TODO implement here
+
+
     }
 
 }

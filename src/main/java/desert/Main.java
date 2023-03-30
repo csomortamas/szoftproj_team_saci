@@ -7,7 +7,15 @@ import org.tinylog.Logger;
  */
 public class Main {
     public static void main(String[] args) {
-        Logger.info("Proba");
-        System.out.println("Hello world!");
+        // SKELETON TEST
+
+        // INIT
+        Kontroller kontroller = new Kontroller(100);
+        Wasserquelle wasserquelle = new Wasserquelle();
+        Pumpe pumpe1 = new Pumpe();
+        Pumpe pumpe2 = new Pumpe();
+        Rohr rohr1 = new Rohr();
+        Rohr rohr2 = new Rohr();
+        Rohr rohr3 = new Rohr();
     }
 }

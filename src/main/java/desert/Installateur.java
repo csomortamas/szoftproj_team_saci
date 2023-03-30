@@ -1,4 +1,6 @@
 package main.java.desert;
+import lombok.Getter;
+import lombok.Setter;
 import org.tinylog.Logger;
 /**
  *
@@ -7,9 +9,9 @@ public class Installateur extends Spieler {
     /**
      * Objekt von Pumpe in der Hand von der Installateur.
      */
-    private Pumpe pumpeInHand;
+    @Getter @Setter private Pumpe pumpeInHand;
     /**
-     * Default constructor
+     * Default Konstruktor
      */
     public Installateur() {
     }

@@ -1,4 +1,6 @@
 package main.java.desert;
+import lombok.Getter;
+import lombok.Setter;
 import org.tinylog.Logger;
 /**
  *
@@ -7,7 +9,7 @@ public abstract class Spieler {
     /**
      * Aktuelle Position der Spieler.
      */
-    protected Netzelement akutellePosition;
+    @Getter @Setter protected Netzelement akutellePosition;
     /**
      * Default Konstruktor
      */

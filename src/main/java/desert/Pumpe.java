@@ -10,7 +10,7 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
-    @Getter @Setter private List<Rohr> rohre;
+    @Getter private List<Rohr> rohre;
     /**
      *
      */
@@ -71,7 +71,7 @@ public class Pumpe extends Netzelement {
             eingangsRohr = null;
         }
         this.rohre.remove(rohr);
-        Logger.info("Rohr entfernt");
+        Logger.info("Rohr aus Pumpe entfernt");
     }
     /**
      *
@@ -82,10 +82,10 @@ public class Pumpe extends Netzelement {
         if(this.eingangsRohr.getFlusswert() > this.ausgangsRohr.kapazitaet){
             setTo = ausgangsRohr.kapazitaet;
             this.ausgangsRohr.setFlusswert(setTo);
-
         }else{
+            setTo = eingangsRohr.getFlusswert();
             this.ausgangsRohr.setFlusswert(eingangsRohr.getFlusswert());
         }
-        Logger.info("Ausgangsrohr Flusswert gestellt auf: " +);
+        Logger.info("Ausgangsrohr Flusswert gestellt auf: " + setTo);
     }
 }

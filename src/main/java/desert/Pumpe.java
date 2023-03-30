@@ -4,7 +4,7 @@ import lombok.Setter;
 import org.tinylog.Logger;
 import java.util.List;
 
-public class Pumpe {
+public class Pumpe extends Netzelement {
     /**
      *
      */

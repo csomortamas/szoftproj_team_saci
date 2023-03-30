@@ -1,6 +1,7 @@
 package main.java.desert;
 import org.tinylog.Logger;
 import java.util.List;
+import lombok.Getter; import lombok.Setter;
 
 /**
  *
@@ -9,12 +10,7 @@ public abstract class Wasserbehaelter {
     /**
      *
      */
-    protected List<Rohr> rohre;
-
-    /**
-     *
-     */
-    protected int ID;
+    @Getter @Setter protected List<Rohr> rohre;
 
 
     /**
@@ -22,6 +18,13 @@ public abstract class Wasserbehaelter {
      */
     public void addRohr(Rohr rohr) {
         // TODO implement here
+    }
+
+    /**
+     * Konstruktor
+     */
+    public Wasserbehaelter() {
+
     }
 
 }

@@ -38,7 +38,9 @@ public class Kontroller {
     /**
      * Default Konstruktor
      */
-    public Kontroller() {
+    public Kontroller(int maxRunde) {
+        this.maxRunde = maxRunde;
+        System.out.println("Kontroller Object erstellt mit Konstruktor");
     }
 
     /**

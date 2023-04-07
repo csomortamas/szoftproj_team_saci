@@ -31,7 +31,6 @@ public class Rohr extends Netzelement {
      * Default Konstruktor
      */
     public Rohr() {
-        Rohr rohr = new Rohr();
         Logger.info("Neues Rohr erstellt.");
     }
 

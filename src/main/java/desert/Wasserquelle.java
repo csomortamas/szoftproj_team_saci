@@ -5,6 +5,7 @@ public class Wasserquelle extends Wasserbehaelter {
      * Default Konstruktor
      */
     public Wasserquelle() {
+
     }
 
     /**

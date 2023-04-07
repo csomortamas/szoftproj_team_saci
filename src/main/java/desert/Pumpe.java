@@ -88,7 +88,7 @@ public class Pumpe extends Netzelement {
             this.ausgangsRohr.setFlusswert(setTo);
         }else{
             setTo = eingangsRohr.getFlusswert();
-            this.ausgangsRohr.setFlusswert(eingangsRohr.getFlusswert());
+            this.ausgangsRohr.setFlusswert(setTo);
         }
         Logger.info("Ausgangsrohr Flusswert gestellt auf: " + setTo);
     }

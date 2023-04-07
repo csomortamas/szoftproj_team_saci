@@ -123,7 +123,7 @@ public class Kontroller {
         allePumpen.add(this.pumpeErstellen());
 
         Wasserquelle wasserquelle = new Wasserquelle();
-        wasserquelle.wasserStarten();
+        //wasserquelle.wasserStarten(); Ez nem fog kelleni, mert a konstruktor meghívja majd a wasserStartent és az úgy marad a játék végéig, hogy a wasserQuelle rohrjába ami a konstans pumpához van kötve. Ad neki flussWertet.
 
         Spieler InstallPlayer = new Installateur(allePumpen.get(0), this);
         Spieler SaboPlayer = new Saboteur();

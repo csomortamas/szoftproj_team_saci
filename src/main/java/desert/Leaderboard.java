@@ -11,12 +11,12 @@ public class Leaderboard {
     /**
      *
      */
-    @Getter @Setter private String spielendeTeam1;
+    @Getter @Setter private String spielendeTeam1Name;
 
     /**
      *
      */
-    @Getter @Setter private String spielendeTeam2;
+    @Getter @Setter private String spielendeTeam2Name;
 
     /**
      *
@@ -51,8 +51,8 @@ public class Leaderboard {
      * Constructor
      */
     public Leaderboard(String team1Name, String team2Name) {
-        spielendeTeam1 = team1Name;
-        spielendeTeam2 = team2Name;
+        spielendeTeam1Name = team1Name;
+        spielendeTeam2Name = team2Name;
 
         punkteTeam1 = 0;
         punkteTeam2 = 0;

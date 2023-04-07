@@ -10,6 +10,10 @@ public class Main {
         // SKELETON TEST
         Kontroller kontroller = new Kontroller(100);
 
+        kontroller.spielStarten();
+
+
+        /*
         // Pumpe starten
         System.out.println("Pumpe starten:");
         Pumpe pumpe1 = new Pumpe(2);
@@ -28,6 +32,6 @@ public class Main {
         Pumpe pumpe3 = new Pumpe(2);
         Rohr rohr3 = new Rohr();
         Spieler spieler3 = new Installateur(pumpe3, kontroller);
-  //helo
+        */
     }
 }

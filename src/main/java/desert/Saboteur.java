@@ -9,7 +9,7 @@ public class Saboteur extends Spieler {
      */
     public Saboteur(Netzelement startPunkt, Kontroller kontroller) {
         super(startPunkt, kontroller);
-
+        Logger.info("Saboteur wurde erstellt.");
     }
 
     /**

@@ -93,13 +93,12 @@ public class Kontroller {
      *
      */
     public void punkteKalkulieren(Leaderboard leaderboard) {
+        int punkteToInstallateure = 0;
         for(int i = 0; i < alleZisternen.size(); i++) {
-            for(int j = 0; j < alleZisternen.get(i).getRohre().size(); j++) {
-                if(alleZisternen.get(i).getRohre().get(j).isIstAktiv() && !alleZisternen.get(i).getRohre().get(j).isIstKaputt()) {
-                    leaderboard.setPunkteTeam1(leaderboard.getPunkteTeam1() + alleZisternen.get(i).getRohre().get(j).getFlusswert());
-                    Logger.info(alleZisternen.get(i).getRohre().get(j).getFlusswert() + "Punkte zu Installateur");
-                }
-            }
+            punkteToInstallateure = alleZisternen.get(i).getP().getAusgangsRohr().getFlusswert();
+                    leaderboard.setPunkteTeam1(leaderboard.getPunkteTeam1() + punkteToInstallateure);
+                    Logger.info(punkteToInstallateure + "Punkte zu Installateur");
+
         }
 
         for(int i = 0; i < alleRohre.size(); i++) {

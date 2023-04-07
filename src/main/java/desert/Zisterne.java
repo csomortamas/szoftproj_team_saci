@@ -14,13 +14,20 @@ public class Zisterne extends Wasserbehaelter {
      *
      */
     @Getter @Setter private boolean neuePumpe;
-    @Getter @Setter private Pumpe meinePumpe;
+
+
 
     /**
      * Default Konstruktor
      */
     public Zisterne() {
         Logger.info("Zisterne erstellt");
+        Rohr rohrToZisterne = new Rohr();
+        this.setP(new Pumpe(4));
+        this.setSpeziellesRohr(rohrToZisterne);
+        this.getP().addRohr(rohrToZisterne);
+        this.getP().setAusgangsRohr(rohrToZisterne);
+
     }
 
 
@@ -33,7 +40,7 @@ public class Zisterne extends Wasserbehaelter {
         int rn = random.nextInt(7);
         if(rn == 6){
             Rohr newRohr = new Rohr();
-            this.meinePumpe.addRohr(newRohr);
+            this.getP().addRohr(newRohr);
             Logger.info("Neues Rohr zur Zisterne hinzugefügt");
             return;
         }

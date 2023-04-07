@@ -6,8 +6,9 @@ public class Wasserquelle extends Wasserbehaelter {
      */
     public Wasserquelle() {
         this.setP(new Pumpe(4));
-        Rohr r=new Rohr();
-        wasserStarten(r);
+        Rohr rohrFromQuelleToPumpe=new Rohr();
+        this.setSpeziellesRohr(rohrFromQuelleToPumpe);
+        wasserStarten(rohrFromQuelleToPumpe);
         Logger.info("Quelle initialisiert, wasser gestartet");
     }
 
@@ -19,6 +20,7 @@ public class Wasserquelle extends Wasserbehaelter {
         r.getEndPumpen().add(this.getP());
         r.setFlusswert(3);
         Logger.info("3 Wasserquantitäten zur Pumpe r Wasserquelle");
+
     }
 
 }

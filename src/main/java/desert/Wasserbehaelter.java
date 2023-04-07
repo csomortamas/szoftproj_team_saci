@@ -7,6 +7,7 @@ import lombok.Getter; import lombok.Setter;
  *
  */
 public abstract class Wasserbehaelter {
+    @Getter @Setter private Rohr speziellesRohr; //Cisternát és pumpát, quellét és pumpát összekötő rohr ami nem változtatható
     /**
      *
      */

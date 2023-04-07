@@ -120,8 +120,8 @@ public class Kontroller {
      */
     public void spielStarten() {
         Leaderboard leaderboard = new Leaderboard("TestInstallTeam", "TestSaboTeam");
-        team1 = leaderboard.getSpielendeTeam1();
-        team2 = leaderboard.getSpielendeTeam2();
+        team1 = leaderboard.getSpielendeTeam1Name();
+        team2 = leaderboard.getSpielendeTeam2Name();
 
         alleZisternen.add(new Zisterne());
         allePumpen.add(this.pumpeErstellen());

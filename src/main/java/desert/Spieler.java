@@ -86,7 +86,7 @@ public abstract class Spieler {
                     if(aktuellePumpe.getRohre().get(i)== (Rohr) netzwerkElement){
                         setAktuelleRohr((Rohr) netzwerkElement);
                         setAktuellePumpe(null);
-                        Logger.info("Der Spieler ist auf ein naechste rohr gezogen!");
+                        Logger.info("Der Spieler ist auf auf eine benachbarte rohr gezogen!");
                         return;
                     }
                 }

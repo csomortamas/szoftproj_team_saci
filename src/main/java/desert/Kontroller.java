@@ -60,7 +60,7 @@ public class Kontroller {
     /**
      *
      */
-    public void pumpeKaputtMacht() {
+    public void pumpeKaputtMachen() {
         Random rand = new Random();
         int randomNumber = rand.nextInt(10);
         int randomPumpeIndex = rand.nextInt(allePumpen.size());

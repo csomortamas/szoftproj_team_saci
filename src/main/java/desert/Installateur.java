@@ -19,6 +19,7 @@ public class Installateur extends Spieler {
      */
     public Installateur(Pumpe startPunkt, Kontroller kontroller) {
         super(startPunkt, kontroller);
+        pumpeInHand = null;
         Logger.info("Installateur erstellt!");
     }
     
@@ -44,7 +45,7 @@ public class Installateur extends Spieler {
         if (aktuelleRohr!=null){
             if (aktuelleRohr.getEndPumpen().size()==1){
                 aktuelleRohr.getEndPumpen().add(pumpeWohin);
-                Logger.info("Rohr repariert!");
+                Logger.info("Rohr mit freiem Ende wurde eingebunden!");
             } else {
                 Logger.error("Beide Enden des Rohres sind bereits mit einer Pumpe verbunden.");
             }
@@ -122,7 +123,7 @@ public class Installateur extends Spieler {
     public void pumpeAufnehmen() {
         if (aktuellePumpe!=null){
             if (aktuellePumpe.isForZisterne()){
-                if (pumpeInHand!=null){
+                if (pumpeInHand==null){
                     pumpeInHand=new Pumpe(4);
                     Logger.info("Pumpe aufgenommen!");
                 }else{

@@ -31,6 +31,7 @@ public class Rohr extends Netzelement {
      * Default Konstruktor
      */
     public Rohr() {
+        endPumpen = new ArrayList<>();
         Logger.info("Neues Rohr erstellt.");
     }
 

@@ -24,10 +24,10 @@ public class Zisterne extends Wasserbehaelter {
         Logger.info("Zisterne erstellt");
         Rohr rohrToZisterne = new Rohr();
         this.setPumpe(new Pumpe(4));
+        this.getPumpe().setForZisterne(true);
         this.setSpeziellesRohr(rohrToZisterne);
         this.getPumpe().addRohr(rohrToZisterne);
         this.getPumpe().setAusgangsRohr(rohrToZisterne);
-
     }
 
 

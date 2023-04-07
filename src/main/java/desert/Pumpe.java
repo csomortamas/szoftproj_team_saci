@@ -27,6 +27,10 @@ public class Pumpe extends Netzelement {
      *
      */
     @Getter @Setter private int maxRohrAnzahl;
+    /**
+     *
+     */
+    @Getter @Setter private boolean isForZisterne;
 
     /**
      * Default Konstruktor

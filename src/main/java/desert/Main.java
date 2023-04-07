@@ -11,7 +11,11 @@ public class Main {
 
         // INIT
         Kontroller kontroller = new Kontroller(100);
+        Leaderboard leaderboard = new Leaderboard("Installateur", "Saboteur");
+
         Wasserquelle wasserquelle = new Wasserquelle();
+        Zisterne zisterne = new Zisterne();
+
 
     }
 }

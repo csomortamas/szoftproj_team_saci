@@ -17,10 +17,11 @@ public class Wasserquelle extends Wasserbehaelter {
      */
     public void wasserStarten(Rohr r) {
         // TODO implement here
-        r.getEndPumpen().add(this.getP());
-        r.setFlusswert(3);
-        Logger.info("3 Wasserquantitäten zur Pumpe r Wasserquelle");
-
+        if (r.getEndPumpen() != null) {
+            r.getEndPumpen().add(this.getP());
+            r.setFlusswert(3);
+            Logger.info("3 Wasserquantitäten zur Pumpe r Wasserquelle");
+        }
     }
 
 }

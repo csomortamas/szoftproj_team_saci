@@ -70,17 +70,32 @@ public abstract class Spieler {
     public void step(Netzelement netzwerkElement) {
         if (aktuellePumpe!=null){
             if (aktuellePumpe.getClass() != netzwerkElement.getClass()){
-                setAktuelleRohr((Rohr) netzwerkElement);
-                Logger.info("Der Spieler ist auf ein neues Feld gezogen!");
+                for(int i=0; i<aktuellePumpe.getRohre().size(); i++){
+                    if(aktuellePumpe.getRohre().get(i)== (Rohr) netzwerkElement){
+                        setAktuelleRohr((Rohr) netzwerkElement);
+                        setAktuellePumpe(null);
+                        Logger.info("Der Spieler ist auf ein naechste rohr gezogen!");
+                        return;
+                    }
+                }
+
             }else {
-                Logger.error("Von einen Rohr können wir nur auf eine Pumpe treten.");
+                Logger.error("Von einer Pumpe können wir nur auf einen benachbarten Rohr treten.");
             }
         } else {
             if (aktuelleRohr.getClass() != netzwerkElement.getClass()){
-                setAktuellePumpe((Pumpe) netzwerkElement);
-                Logger.info("Der Spieler ist auf ein neues Feld gezogen!");
+                for(int i=0; i<aktuelleRohr.getEndPumpen().size(); i++){
+                    if(aktuelleRohr.getEndPumpen().get(i)== (Pumpe) netzwerkElement){
+                        setAktuellePumpe((Pumpe) netzwerkElement);
+                        setAktuelleRohr(null);
+
+                        Logger.info("Der Spieler ist auf ein naechste pumpe gezogen!");
+                        return;
+                    }
+                }
+
             }else {
-                Logger.error("Von einen Pumpe können wir nur auf eine Rohr treten.");
+                Logger.error("Von einem Rohr können wir nur auf eine der Endpumpen treten.");
             }
         }
     }

@@ -32,6 +32,8 @@ public class Pumpe extends Netzelement {
      */
     @Getter @Setter private boolean isForZisterne;
 
+    @Getter @Setter private boolean isForQuelle;
+
     /**
      * Default Konstruktor
      */

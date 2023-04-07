@@ -15,8 +15,6 @@ public abstract class Spieler {
      */
     @Getter @Setter protected Rohr aktuelleRohr;
 
-
-
     /**
      *
      */

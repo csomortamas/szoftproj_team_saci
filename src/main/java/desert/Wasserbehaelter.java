@@ -19,7 +19,7 @@ public abstract class Wasserbehaelter {
     public void addRohr(Rohr rohr) {
         rohre.add(rohr);
 
-        Logger.info("Rohr wurde");
+        Logger.info("Rohr wurde zum Wasserbehälter addiert");
     }
 
     /**

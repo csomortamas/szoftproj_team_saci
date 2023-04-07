@@ -7,7 +7,9 @@ public class Saboteur extends Spieler {
     /**
      * Default Konstruktor
      */
-    public Saboteur() {
+    public Saboteur(Netzelement startPunkt, Kontroller kontroller) {
+        super(startPunkt, kontroller);
+
     }
 
     /**

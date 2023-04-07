@@ -14,14 +14,11 @@ public class Installateur extends Spieler {
      */
     @Getter @Setter private Pumpe pumpeInHand;
 
-    private Kontroller kontroller;
-
     /**
      * Default Konstruktor
      */
-    public Installateur(Pumpe startPunkt, Kontroller k) {
-        aktuellePumpe = startPunkt;
-        kontroller = k;
+    public Installateur(Pumpe startPunkt, Kontroller kontroller) {
+        super(startPunkt, kontroller);
         Logger.info("Installateur erstellt!");
     }
     

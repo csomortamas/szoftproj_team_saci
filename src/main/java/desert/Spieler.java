@@ -18,6 +18,18 @@ public abstract class Spieler {
     /**
      *
      */
+    @Getter @Setter Kontroller kontroller;
+
+
+    public Spieler(Netzelement startPunkt, Kontroller kontroller) {
+        this.aktuellePumpe = (Pumpe)startPunkt;
+        this.kontroller = kontroller;
+    }
+
+
+    /**
+     *
+     */
     public void pumpeStarten() {
         if (aktuellePumpe!=null){
             aktuellePumpe.setIstAktiv(true);

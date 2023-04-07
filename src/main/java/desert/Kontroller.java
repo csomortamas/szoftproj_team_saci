@@ -1,6 +1,8 @@
 package main.java.desert;
 import lombok.Getter; import lombok.Setter;
 import org.tinylog.Logger;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -48,6 +50,10 @@ public class Kontroller {
     public Kontroller(int maxRunde) {
         this.maxRunde = maxRunde;
         this.aktuelleRunde = 1;
+        allePumpen = new ArrayList<>();
+        alleRohre = new ArrayList<>();
+        alleZisternen = new ArrayList<>();
+
         Logger.info("Kontroller erstellt");
     }
 
@@ -125,7 +131,7 @@ public class Kontroller {
         //wasserquelle.wasserStarten(); Ez nem fog kelleni, mert a konstruktor meghívja majd a wasserStartent és az úgy marad a játék végéig, hogy a wasserQuelle rohrjába ami a konstans pumpához van kötve. Ad neki flussWertet.
 
         Spieler InstallPlayer = new Installateur(allePumpen.get(0), this);
-        Spieler SaboPlayer = new Saboteur();
+        Spieler SaboPlayer = new Saboteur(allePumpen.get(0), this);
 
         Logger.info("Spiel wurde gestartet");
     }
@@ -147,5 +153,15 @@ public class Kontroller {
         allePumpen.add(pumpe);
 
         Logger.info("Eine Pumpe wurde hinzugefügt");
+    }
+
+    /**
+     * @param rohr
+     *
+     */
+    public void addRohr(Rohr rohr) {
+        alleRohre.add(rohr);
+
+        Logger.info("Ein Rohr wurde hinzugefügt");
     }
 }

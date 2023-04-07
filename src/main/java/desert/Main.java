@@ -12,9 +12,10 @@ public class Main {
         // INIT
         Kontroller kontroller = new Kontroller(100);
         Leaderboard leaderboard = new Leaderboard("Installateur", "Saboteur");
+        Pumpe pumpe = new Pumpe(2);
+        Rohr rohr1 = new Rohr();
+        Rohr rohr2 = new Rohr();
 
-        Wasserquelle wasserquelle = new Wasserquelle();
-        Zisterne zisterne = new Zisterne();
 
 
     }

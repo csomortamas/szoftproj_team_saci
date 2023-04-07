@@ -5,7 +5,7 @@ public class Wasserquelle extends Wasserbehaelter {
      * Default Konstruktor
      */
     public Wasserquelle() {
-        this.setP(new Pumpe(4));
+        this.setPumpe(new Pumpe(4));
         Rohr rohrFromQuelleToPumpe=new Rohr();
         this.setSpeziellesRohr(rohrFromQuelleToPumpe);
         wasserStarten(rohrFromQuelleToPumpe);
@@ -18,7 +18,7 @@ public class Wasserquelle extends Wasserbehaelter {
     public void wasserStarten(Rohr r) {
         // TODO implement here
         if (r.getEndPumpen() != null) {
-            r.getEndPumpen().add(this.getP());
+            r.getEndPumpen().add(this.getPumpe());
             r.setFlusswert(3);
             Logger.info("3 Wasserquantitäten zur Pumpe r Wasserquelle");
         }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.tinylog.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pumpe extends Netzelement {
@@ -38,6 +39,7 @@ public class Pumpe extends Netzelement {
      * Default Konstruktor
      */
     public Pumpe(int maxRohrAnzahl) {
+        this.rohre = new ArrayList<>();
         this.maxRohrAnzahl = maxRohrAnzahl;
         this.wasserTank = 0;
         Logger.info("Neue Pumpe erstellt.");

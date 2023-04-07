@@ -56,5 +56,7 @@ public class Leaderboard {
 
         punkteTeam1 = 0;
         punkteTeam2 = 0;
+
+        Logger.info("Leaderboard erstellt");
     }
 }

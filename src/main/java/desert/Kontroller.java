@@ -48,7 +48,7 @@ public class Kontroller {
     public Kontroller(int maxRunde) {
         this.maxRunde = maxRunde;
         this.aktuelleRunde = 1;
-        System.out.println("Kontroller Object erstellt mit Konstruktor");
+        Logger.info("Kontroller erstellt");
     }
 
     /**
@@ -95,7 +95,7 @@ public class Kontroller {
     public void punkteKalkulieren(Leaderboard leaderboard) {
         int punkteToInstallateure = 0;
         for(int i = 0; i < alleZisternen.size(); i++) {
-            punkteToInstallateure = alleZisternen.get(i).getP().getAusgangsRohr().getFlusswert();
+            punkteToInstallateure = alleZisternen.get(i).getPumpe().getAusgangsRohr().getFlusswert();
                     leaderboard.setPunkteTeam1(leaderboard.getPunkteTeam1() + punkteToInstallateure);
                     Logger.info(punkteToInstallateure + "Punkte zu Installateur");
 

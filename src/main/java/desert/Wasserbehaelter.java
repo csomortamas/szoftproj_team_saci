@@ -13,7 +13,7 @@ public abstract class Wasserbehaelter {
      */
     @Getter protected List<Rohr> rohre;
 
-    @Getter @Setter private Pumpe p;
+    @Getter @Setter private Pumpe pumpe;
     /**
      * @param rohr
      */

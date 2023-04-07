@@ -77,24 +77,20 @@ public class Installateur extends Spieler {
                     kontroller.addPumpe(pumpeInHand);
                     pumpeInHand.addRohr(rohren.get(0));
                     pumpeInHand.addRohr(rohren.get(1));
+
+                    pumpeInHand = null;
+                    Logger.info("Pumpe eingebindet.");
                 } else {
                     Logger.error("Der Spieler steht derzeit nicht auf eine Rohr.");
                 }
             } else {
                 if (aktuelleRohr!=null){
-                    ArrayList<Rohr> rohren = (ArrayList<Rohr>) aktuelleRohr.rohrSplit();
-
-                    aktuelleRohr.getEndPumpen().get(0).removeRohr(aktuelleRohr);
-                    rohren.get(0).getEndPumpen().add(aktuelleRohr.getEndPumpen().get(0));
-                    aktuelleRohr.getEndPumpen().get(0).addRohr(rohren.get(0));
-
-                    aktuelleRohr.getEndPumpen().get(1).removeRohr(aktuelleRohr);
-                    rohren.get(1).getEndPumpen().add(aktuelleRohr.getEndPumpen().get(1));
-                    aktuelleRohr.getEndPumpen().get(1).addRohr(rohren.get(1));
-
+                    aktuelleRohr.getEndPumpen().add(pumpeInHand);
+                    pumpeInHand.addRohr(aktuelleRohr);
                     kontroller.addPumpe(pumpeInHand);
-                    pumpeInHand.addRohr(rohren.get(0));
-                    pumpeInHand.addRohr(rohren.get(1));
+
+                    pumpeInHand = null;
+                    Logger.info("Pumpe eingebindet.");
                 } else {
                     Logger.error("Der Spieler steht derzeit nicht auf eine Rohr.");
                 }
@@ -110,14 +106,37 @@ public class Installateur extends Spieler {
      * @param rohr
      *
      */
-    public void rohrEinbinden(Pumpe pumpeWohin, Pumpe pumpeWoher, Rohr rohr) {
-        // TODO implement here
+    public void rohrEinbinden(Pumpe pumpeWoher, Pumpe pumpeWohin, Rohr rohr) {
+        if(aktuellePumpe!=null){
+            pumpeWoher.addRohr(rohr);
+            pumpeWohin.addRohr(rohr);
+            rohr.getEndPumpen().add(pumpeWoher);
+            rohr.getEndPumpen().add(pumpeWohin);
+
+            Logger.info("Rohr eingebindet!");
+        }else{
+            Logger.error("Der Spieler steht derzeit nicht auf einen Pumpe!");
+        }
     }
 
     /**
      *
      */
     public void pumpeAufnehmen() {
-        // TODO implement here
+        if (aktuellePumpe!=null){
+            if (aktuellePumpe.isForZisterne()){
+                if (pumpeInHand!=null){
+                    pumpeInHand=new Pumpe(4);
+                    Logger.info("Pumpe aufgenommen!");
+                }else{
+                    Logger.error("Der Spieler hat schon einer Pumpe in der Hand!");
+                }
+
+            }else{
+                Logger.error("Der Spieler befindet sich derzeit nicht an einer Pumpe, die zu einer Zisterne gehört.");
+            }
+        }else{
+            Logger.error("Der Spieler steht derzeit nicht auf einer Pumpe!");
+        }
     }
 }

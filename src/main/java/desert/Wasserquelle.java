@@ -5,9 +5,10 @@ public class Wasserquelle extends Wasserbehaelter {
      * Default Konstruktor
      */
     public Wasserquelle() {
-        this.getP()=new Pumpe();
+        this.setP(new Pumpe(4));
         Rohr r=new Rohr();
         wasserStarten(r);
+        Logger.info("Quelle initialisiert, wasser gestartet");
     }
 
     /**
@@ -17,6 +18,7 @@ public class Wasserquelle extends Wasserbehaelter {
         // TODO implement here
         r.getEndPumpen().add(this.getP());
         r.setFlusswert(3);
+        Logger.info("3 Wasserquantitäten zur Pumpe r Wasserquelle");
     }
 
 }

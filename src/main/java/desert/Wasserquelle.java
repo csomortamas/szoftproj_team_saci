@@ -8,8 +8,6 @@ public class Wasserquelle extends Wasserbehaelter {
         this.getP()=new Pumpe();
         Rohr r=new Rohr();
         wasserStarten(r);
-
-
     }
 
     /**

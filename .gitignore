@@ -1,6 +1,5 @@
-.gradle/
-.idea/
-.vs/
-build/
-gradle/
-
+*/.gradle/*
+.idea/*
+.vs/*
+build/*
+gradle/*

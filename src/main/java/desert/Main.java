@@ -33,7 +33,19 @@ public class Main {
         installateur.step(rohr1);
         saboteur.step(rohr2);
 
+        Kontroller.getKontroller().tick();
+        Kontroller.getKontroller().tick();
+
         saboteur.position.kaputtMachen();
+
+        Kontroller.getKontroller().tick();
+
+        installateur.step(pumpe);
+        saboteur.step(zisterne);
+
+        installateur.step(rohr2);
+
+        installateur.position.reparieren();
 
         Kontroller.getKontroller().tick();
 

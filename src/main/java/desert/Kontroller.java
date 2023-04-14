@@ -119,6 +119,19 @@ public class Kontroller {
         if(randomNumber == 0)
             alleZisternen.get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe());
     }
+    public void rohrErstellen() {
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(10);
+        int randomZisterneIndex = rand.nextInt(alleZisternen.size());
+
+        if(randomNumber == 0) {
+            Rohr newRohr = new Rohr();
+            alleZisternen.get(randomZisterneIndex).getNachbarn().add(newRohr);
+            newRohr.getNachbarn().add(alleZisternen.get(randomZisterneIndex));
+
+            alleZisternen.get(randomZisterneIndex).getNachbarn().add(newRohr);
+        }
+    }
 
     /**
      * @param

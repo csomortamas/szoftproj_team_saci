@@ -39,10 +39,7 @@ public class Pumpe extends Netzelement {
      * Default Konstruktor
      */
     public Pumpe(int maxRohrAnzahl) {
-        this.rohre = new ArrayList<>();
-        this.maxRohrAnzahl = maxRohrAnzahl;
-        this.wasserTank = 0;
-        Logger.info("Neue Pumpe erstellt.");
+
     }
 
     /**
@@ -50,50 +47,25 @@ public class Pumpe extends Netzelement {
      */
     public void tankFuellen() {
         // TODO implement here
-        if (this.ausgangsRohr.istKaputt || this.ausgangsRohr == null || this.eingangsRohr.getFlusswert() > this.ausgangsRohr.getFlusswert()) {
-            int plusWasser = this.eingangsRohr.getFlusswert() - this.ausgangsRohr.getFlusswert();
-            this.wasserTank += plusWasser;
-            Logger.info("Die WassermAnge in dieser Pumpe wurde mit " + plusWasser + "erhöht");
-        }
+
     }
 
     /**
      * @param rohr
      */
     public void addRohr(Rohr rohr) {
-        // TODO implement here
-        if(this.rohre.size() == maxRohrAnzahl){
-            Logger.error("Neues Rohr konnte nicht zur Pumpe addiert werden, maximale Anzahl von Rohre schon erreicht");
-            throw new RuntimeException("Max Rohrenanzahl schon erreicht");
-        }
-        this.rohre.add(rohr);
-        Logger.info("Neues Rohr zur Pumpe gefügt.");
+
     }
     /**
      *
      */
     public void removeRohr(Rohr rohr){
-        if(this.ausgangsRohr == rohr){
-            ausgangsRohr = null;
-        }else if (this.eingangsRohr == rohr) {
-            eingangsRohr = null;
-        }
-        this.rohre.remove(rohr);
-        Logger.info("Rohr aus Pumpe entfernt");
+
     }
     /**
      *
      */
     public void flussKalkulierenn() {
-        // TODO implement here
-        int setTo;
-        if(this.eingangsRohr.getFlusswert() > this.ausgangsRohr.kapazitaet){
-            setTo = ausgangsRohr.kapazitaet;
-            this.ausgangsRohr.setFlusswert(setTo);
-        }else{
-            setTo = eingangsRohr.getFlusswert();
-            this.ausgangsRohr.setFlusswert(setTo);
-        }
-        Logger.info("Ausgangsrohr Flusswert gestellt auf: " + setTo);
+
     }
 }

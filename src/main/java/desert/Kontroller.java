@@ -10,6 +10,11 @@ import java.util.Random;
  *
  */
 public class Kontroller {
+    private Kontroller kontroller;
+    public Kontroller(){}
+    public Kontroller getKontroller(){
+        return this.kontroller;
+    }
     /**
      *
      */
@@ -48,13 +53,7 @@ public class Kontroller {
      * Konstruktor
      */
     public Kontroller(int maxRunde) {
-        this.maxRunde = maxRunde;
-        this.aktuelleRunde = 1;
-        allePumpen = new ArrayList<>();
-        alleRohre = new ArrayList<>();
-        alleZisternen = new ArrayList<>();
 
-        Logger.info("Kontroller erstellt");
     }
 
     /**
@@ -84,7 +83,6 @@ public class Kontroller {
             Logger.info("Der Tank einer Pumpe wird gefüllt");
         }
     }
-
     /**
      * @return
      */
@@ -99,41 +97,14 @@ public class Kontroller {
      *
      */
     public void punkteKalkulieren(Leaderboard leaderboard) {
-        int punkteToInstallateure = 0;
-        for(int i = 0; i < alleZisternen.size(); i++) {
-            punkteToInstallateure = alleZisternen.get(i).getPumpe().getAusgangsRohr().getFlusswert();
-                    leaderboard.setPunkteTeam1(leaderboard.getPunkteTeam1() + punkteToInstallateure);
-                    Logger.info(punkteToInstallateure + "Punkte zu Installateur");
 
-        }
-
-        for(int i = 0; i < alleRohre.size(); i++) {
-            if(alleRohre.get(i).isIstAktiv() && alleRohre.get(i).isIstKaputt()) {
-                leaderboard.setPunkteTeam2(leaderboard.getPunkteTeam2() + alleRohre.get(i).getFlusswert());
-                Logger.info(alleRohre.get(i).getFlusswert() + " Punkte für Saboteure");
-            }
-        }
     }
 
     /**
      *
      */
     public void spielStarten() {
-        Leaderboard leaderboard = new Leaderboard("TestInstallTeam", "TestSaboTeam");
-        team1 = leaderboard.getSpielendeTeam1();
-        team2 = leaderboard.getSpielendeTeam2();
 
-        alleZisternen.add(new Zisterne());
-        allePumpen.add(this.pumpeErstellen());
-        allePumpen.add(this.pumpeErstellen());
-
-        Wasserquelle wasserquelle = new Wasserquelle();
-        //wasserquelle.wasserStarten(); Ez nem fog kelleni, mert a konstruktor meghívja majd a wasserStartent és az úgy marad a játék végéig, hogy a wasserQuelle rohrjába ami a konstans pumpához van kötve. Ad neki flussWertet.
-
-        Spieler InstallPlayer = new Installateur(allePumpen.get(0), this);
-        Spieler SaboPlayer = new Saboteur(allePumpen.get(0), this);
-
-        Logger.info("Spiel wurde gestartet");
     }
 
     /**
@@ -150,9 +121,7 @@ public class Kontroller {
      *
      */
     public void addPumpe(Pumpe pumpe) {
-        allePumpen.add(pumpe);
 
-        Logger.info("Eine Pumpe wurde hinzugefügt");
     }
 
     /**
@@ -160,8 +129,6 @@ public class Kontroller {
      *
      */
     public void addRohr(Rohr rohr) {
-        alleRohre.add(rohr);
 
-        Logger.info("Ein Rohr wurde hinzugefügt");
     }
 }

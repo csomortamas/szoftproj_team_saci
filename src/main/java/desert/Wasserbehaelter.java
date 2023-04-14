@@ -18,16 +18,13 @@ public abstract class Wasserbehaelter {
      * @param rohr
      */
     public void addRohr(Rohr rohr) {
-        rohre.add(rohr);
 
-        Logger.info("Rohr wurde zum Wasserbehälter addiert");
     }
 
     /**
      * Konstruktor
      */
     public Wasserbehaelter() {
-        Logger.info("Wasserbehaelter wurde erschaffen");
     }
 
 }

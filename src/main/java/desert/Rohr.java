@@ -19,8 +19,6 @@ public class Rohr extends Netzelement {
      *
      */
 
-    @Getter @Setter private int flusswert;
-
     /**
      *
      */
@@ -38,15 +36,6 @@ public class Rohr extends Netzelement {
      * @return
      */
     public List<Rohr> rohrSplit() {
-        // TODO implement here
-        Rohr r1 = new Rohr();
-        Rohr r2 = new Rohr();
 
-        List<Rohr> splittedRohre = new ArrayList<>();
-        splittedRohre.add(r1);
-        splittedRohre.add(r2);
-
-        Logger.info("Rohre splitted um Pumpe einbauen zu können");
-        return splittedRohre;
     }
 }

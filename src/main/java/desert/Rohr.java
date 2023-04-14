@@ -8,35 +8,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rohr extends Netzelement {
-    /**
-     *
-     */
-
-    @Getter private List<Pumpe> endPumpen;
-
 
     /**
      *
      */
-
-    /**
-     *
-     */
-
     @Getter @Setter private boolean besetzt;
 
     /**
      * Default Konstruktor
      */
     public Rohr() {
-        endPumpen = new ArrayList<>();
+        istAktiv = false;
         Logger.info("Neues Rohr erstellt.");
     }
 
     /**
      * @return
      */
-    public List<Rohr> rohrSplit() {
+    public void rohrSplit(Pumpe pumpeInHand) {
+        Rohr r1 = new Rohr();
+        Rohr r2 = new Rohr();
 
+        Kontroller.getKontroller().alleRohre.remove(this);
+
+        Kontroller.getKontroller().addRohr(r1);
+        Kontroller.getKontroller().addRohr(r2);
+
+        // binden
+        Kontroller.getKontroller().binden(r1, this.getNachbarn().get(0), pumpeInHand);
+        Kontroller.getKontroller().binden(r2, pumpeInHand, this.getNachbarn().get(1));
     }
 }

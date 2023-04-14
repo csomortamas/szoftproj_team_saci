@@ -8,55 +8,5 @@ import java.util.Map;
  *
  */
 public class Leaderboard {
-    /**
-     *
-     */
-    @Getter @Setter private String spielendeTeam1Name;
-
-    /**
-     *
-     */
-    @Getter @Setter private String spielendeTeam2Name;
-
-    /**
-     *
-     */
-    @Getter @Setter private int punkteTeam1;
-
-    /**
-     *
-     */
-    @Getter @Setter private int punkteTeam2;
-
-    /**
-     *
-     */
-    @Getter @Setter private Map daten;
-
-    /**
-     *
-     */
-    public void fileSchreiben() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void fileLesen() {
-        // TODO implement here
-    }
-
-    /**
-     * Constructor
-     */
-    public Leaderboard(String team1Name, String team2Name) {
-        spielendeTeam1Name = team1Name;
-        spielendeTeam2Name = team2Name;
-
-        punkteTeam1 = 0;
-        punkteTeam2 = 0;
-
-        Logger.info("Leaderboard erstellt");
-    }
+    // TODO implement here
 }

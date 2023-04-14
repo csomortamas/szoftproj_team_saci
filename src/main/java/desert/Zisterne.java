@@ -9,11 +9,11 @@ import java.util.Random;
 /**
  *
  */
-public class Zisterne extends Wasserbehaelter {
+public class Zisterne extends Pumpe {
     /**
      *
      */
-    @Getter @Setter private boolean neuePumpe;
+    @Getter @Setter private Pumpe pumpeZurVerfuegung;
 
 
     /**

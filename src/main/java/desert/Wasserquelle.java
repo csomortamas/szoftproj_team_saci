@@ -1,11 +1,11 @@
 package main.java.desert;
 import org.tinylog.Logger;
-public class Wasserquelle extends Wasserbehaelter {
+public class Wasserquelle extends Pumpe {
     /**
      * Default Konstruktor
      */
     public Wasserquelle() {
-
+        istAktiv = true;
     }
 
     /**

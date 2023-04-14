@@ -27,7 +27,7 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
-    @Getter @Setter private int maxRohrAnzahl;
+    @Getter final private int maxRohrAnzahl = 4;
     /**
      *
      */
@@ -38,34 +38,32 @@ public class Pumpe extends Netzelement {
     /**
      * Default Konstruktor
      */
-    public Pumpe(int maxRohrAnzahl) {
+    public Pumpe() {
+        istAktiv = true;
+        Logger.info("Neue Pumpe erstellt.");
+    }
+
+    /**
+     *
+     */
+    public void tankFuellen(boolean istAktiv) {
 
     }
 
     /**
      *
      */
-    public void tankFuellen() {
-        // TODO implement here
+    public void wasserWeiterleiten() {
+        if(!istAktiv)
+            return;
 
-    }
-
-    /**
-     * @param rohr
-     */
-    public void addRohr(Rohr rohr) {
-
-    }
-    /**
-     *
-     */
-    public void removeRohr(Rohr rohr){
-
-    }
-    /**
-     *
-     */
-    public void flussKalkulierenn() {
-
+        if(eingangsRohr != null && ausgangsRohr != null && eingangsRohr.isIstKaputt()) {
+            ausgangsRohr.setIstAktiv(eingangsRohr.istAktiv);
+        } else if(eingangsRohr != null && ausgangsRohr == null && eingangsRohr.istAktiv && eingangsRohr.isIstKaputt()) {
+            wasserTank++;
+        } else if(eingangsRohr == null && ausgangsRohr != null && ausgangsRohr.istAktiv && wasserTank > 0) {
+            wasserTank--;
+            ausgangsRohr.setIstAktiv(true);
+        }
     }
 }

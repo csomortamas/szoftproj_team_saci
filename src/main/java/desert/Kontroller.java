@@ -10,24 +10,24 @@ import java.util.Random;
  *
  */
 public class Kontroller {
-    private Kontroller kontroller;
-    public Kontroller(){}
-    public Kontroller getKontroller(){
-        return this.kontroller;
+    private static Kontroller kontroller = new Kontroller();
+    private Kontroller(){}
+    public static Kontroller getKontroller(){
+        return kontroller;
     }
     /**
      *
      */
-    @Getter protected List<Pumpe> allePumpen;
+    @Getter protected List<Pumpe> allePumpen = new ArrayList<>();
     /**
      *
      */
-    @Getter protected List<Zisterne> alleZisternen;
+    @Getter protected List<Zisterne> alleZisternen = new ArrayList<>();
 
     /**
      *
      */
-    @Getter protected List<Rohr> alleRohre;
+    @Getter protected List<Rohr> alleRohre = new ArrayList<>();
 
     /**
      *
@@ -37,7 +37,7 @@ public class Kontroller {
     /**
      *
      */
-    @Getter @Setter private int maxRunde;
+    @Getter @Setter private int maxRunde = 50;
 
     /**
      *
@@ -50,15 +50,12 @@ public class Kontroller {
     @Getter @Setter public String team2;
 
     /**
-     * Konstruktor
-     */
-    public Kontroller(int maxRunde) {
-
-    }
-
-    /**
      *
      */
+    @Getter @Setter private int installateurPunkte;
+    @Getter @Setter private int saboteurPunkte;
+
+
     public void pumpeKaputtMacht() {
         Random rand = new Random();
         int randomNumber = rand.nextInt(10);
@@ -66,45 +63,98 @@ public class Kontroller {
 
         // Pumpe Random kaputt machen
         if (allePumpen.size() > 0 && randomNumber == 1) {
-            allePumpen.get(randomPumpeIndex).setIstKaputt(true);
-            Logger.info("Eine Pumpe ist kaputt gegangen");
-        } else {
-            Logger.info("Keine Pumpe ist kaputt gegangen");
+            allePumpen.get(randomPumpeIndex).kaputtMachen();
         }
     }
 
-    /**
-     *
-     */
-    public void wasserTankLaden() {
-        for(int i = 0; i < allePumpen.size(); i++) {
-            Pumpe aktuellePumpe = allePumpen.get(i);
-            aktuellePumpe.tankFuellen();
-            Logger.info("Der Tank einer Pumpe wird gefüllt");
+    public void binden(Rohr rohr, Netzelement left, Netzelement right) {
+        if(left instanceof Pumpe && right instanceof Pumpe) {
+            rohr.getNachbarn().add(left);
+            rohr.getNachbarn().add(right);
+
+            left.getNachbarn().add(rohr);
+            right.getNachbarn().add(rohr);
+
+            Logger.info("Rohr zwischen Pumpe {} und Pumpe {} gebunden", left, right);
         }
     }
+
+    public void setup(Wasserquelle wasserquelle, Zisterne zisterne, Pumpe pumpe, Rohr rohr1, Rohr rohr2, Spieler installateur, Spieler saboteur) {
+        // setup
+        // binden
+        binden(rohr1, wasserquelle, pumpe);
+        binden(rohr2, pumpe, zisterne);
+
+        // add to kontroller
+        allePumpen.add(pumpe);
+        alleRohre.add(rohr1);
+        alleRohre.add(rohr2);
+        alleZisternen.add(zisterne);
+
+        // wasserquell ausgangrohr zu rohr1
+        wasserquelle.setAusgangsRohr(rohr1);
+        rohr1.setIstAktiv(true);
+
+        // zisterne eingangrohr zu rohr2
+        zisterne.setEingangsRohr(rohr2);
+
+        // pumpe eingangrohr zu rohr1
+        pumpe.setEingangsRohr(rohr1);
+
+        // pumpe ausgangrohr zu rohr2
+        pumpe.setAusgangsRohr(rohr2);
+
+        // logger
+        Logger.info("Setup erfolgreich");
+    }
+
     /**
      * @return
      */
-    public Pumpe pumpeErstellen() {
-        Pumpe neuePumpe = new Pumpe(4);
-        Logger.info("Pumpe wurde erstellt");
-        return neuePumpe;
+    public void pumpeErstellen() {
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(10);
+        int randomZisterneIndex = rand.nextInt(alleZisternen.size());
+
+        if(randomNumber == 0)
+            alleZisternen.get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe());
     }
 
     /**
-     * @param leaderboard
+     * @param
      *
      */
-    public void punkteKalkulieren(Leaderboard leaderboard) {
+    public void punkteKalkulieren() {
+        for (Rohr rohr : alleRohre) {
+            if (rohr.istAktiv && rohr.istKaputt) {
+                saboteurPunkte++;
+            }
+        }
 
+        for (Zisterne zisterne : alleZisternen) {
+            if (zisterne.getEingangsRohr().istAktiv && !zisterne.getEingangsRohr().istKaputt) {
+                installateurPunkte++;
+            }
+        }
     }
 
     /**
      *
      */
-    public void spielStarten() {
+    public void tick() {
+        for(int i = 0; i < alleRohre.size() + 1; i++) {
+            for (Pumpe pumpe : allePumpen) {
+                pumpe.wasserWeiterleiten();
+            }
+        }
 
+        punkteKalkulieren();
+
+        aktuelleRunde++;
+        pumpeKaputtMacht();
+        pumpeErstellen();
+
+        Logger.info("Tick");
     }
 
     /**

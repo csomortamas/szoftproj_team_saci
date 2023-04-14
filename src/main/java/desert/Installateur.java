@@ -3,7 +3,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.tinylog.Logger;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,15 +17,8 @@ public class Installateur extends Spieler {
     /**
      * Default Konstruktor
      */
-    public Installateur(Pumpe startPunkt, Kontroller kontroller) {
-
-    }
-    
-    /**
-     *
-     */
-    public void reparieren() {
-
+    public Installateur(Wasserquelle startPunkt) {
+        super(startPunkt);
     }
 
     /**
@@ -41,23 +34,30 @@ public class Installateur extends Spieler {
      *
      */
     public void pumpeEinmontieren(boolean middle) {
+        if(middle && position instanceof Rohr) {
+            List<Rohr> alleRohre = Kontroller.getKontroller().getAlleRohre();
+            for(Rohr rohr : alleRohre) {
+                if(position == rohr)
+                    rohr.rohrSplit(pumpeInHand);
+            }
+        }
 
-    }
-
-    /**
-     * @param pumpeWohin
-     * @param pumpeWoher
-     * @param rohr
-     *
-     */
-    public void rohrEinbinden(Pumpe pumpeWoher, Pumpe pumpeWohin, Rohr rohr) {
-
+        Kontroller.getKontroller().addPumpe(pumpeInHand);
+        pumpeInHand = null;
     }
 
     /**
      *
      */
     public void pumpeAufnehmen() {
+        List<Zisterne> zisterneList = Kontroller.getKontroller().getAlleZisternen();
 
+        for(Zisterne zisterne : zisterneList) {
+            if(position == zisterne && zisterne.getPumpeZurVerfuegung() != null) {
+                pumpeInHand = zisterne.getPumpeZurVerfuegung();
+                zisterne.setPumpeZurVerfuegung(null);
+                Logger.info("Pumpe aufgenommen.");
+            }
+        }
     }
 }

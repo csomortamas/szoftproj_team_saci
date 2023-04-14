@@ -7,15 +7,7 @@ public class Saboteur extends Spieler {
     /**
      * Default Konstruktor
      */
-    public Saboteur(Netzelement startPunkt, Kontroller kontroller) {
-
-
-    }
-
-    /**
-     *
-     */
-    public void rohrLochern() {
-
+    public Saboteur(Zisterne startPunkt) {
+        super(startPunkt);
     }
 }

@@ -7,6 +7,7 @@ import org.tinylog.Logger;
  */
 public class Main {
     public static void main(String[] args) {
+        // SETUP GAME MAP
         // create wasserquelle
         Wasserquelle wasserquelle = new Wasserquelle();
 
@@ -29,24 +30,32 @@ public class Main {
         //Kontroller.getKontroller().binden(rohr1, wasserquelle, pumpe);
         //Kontroller.getKontroller().binden(rohr2, pumpe, zisterne);
 
+        // START SPIEL
         // spieler step
-        installateur.step(rohr1);
-        saboteur.step(rohr2);
+        installateur.step(rohr1); // steht auf rohr1
+        saboteur.step(rohr2); // steht auf rohr2
 
-        Kontroller.getKontroller().tick();
+        // tick (runde beenden, fluss kalkulieren, punkte hinzufügen)
         Kontroller.getKontroller().tick();
 
+        // tick (runde beenden, fluss kalkulieren, punkte hinzufügen)
+        Kontroller.getKontroller().tick();
+
+        // kaputt rohr2 kaputt machen
         saboteur.position.kaputtMachen();
 
+        // tick (runde beenden, fluss kalkulieren, punkte hinzufügen)
         Kontroller.getKontroller().tick();
 
-        installateur.step(pumpe);
-        saboteur.step(zisterne);
+        // spieler step
+        installateur.step(pumpe); // steht auf der Pumpe
+        saboteur.step(zisterne); // steht auf Zisterne
+        installateur.step(rohr2); // steht auf rohr2
 
-        installateur.step(rohr2);
-
+        // rohr2 reparieren
         installateur.position.reparieren();
 
+        // runde beenden
         Kontroller.getKontroller().tick();
 
         System.out.println("Saboteur: " + Kontroller.getKontroller().getSaboteurPunkte());

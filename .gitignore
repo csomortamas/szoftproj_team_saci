@@ -4,3 +4,7 @@
 build/*
 gradle/*
 .gradle/*
+*.class
+*.jar
+*.exe
+*.war

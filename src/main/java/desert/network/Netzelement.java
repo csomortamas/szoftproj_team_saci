@@ -14,6 +14,10 @@ public abstract class Netzelement {
     /**
      *
      */
+    @Getter @Setter protected String name;
+    /**
+     *
+     */
     @Getter @Setter protected boolean istAktiv;
 
     /**

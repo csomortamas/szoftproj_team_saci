@@ -42,8 +42,10 @@ public class Installateur extends Spieler {
         if(middle && position instanceof Rohr) {
             List<Rohr> alleRohre = Kontroller.getKontroller().getAlleRohre();
             for(Rohr rohr : alleRohre) {
-                if(position == rohr)
+                if(position == rohr) {
                     rohr.rohrSplit(pumpeInHand);
+                    this.setPosition(pumpeInHand);
+                }
             }
         }
 

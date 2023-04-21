@@ -27,43 +27,31 @@ public class Main {
         // create 6 rohr
         Rohr rohr1 = new Rohr();
         Rohr rohr2 = new Rohr();
+        Rohr rohr3 = new Rohr();
 
         // create 1 spieler
         Spieler installateur = new Installateur(wasserquelle);
         Spieler saboteur = new Saboteur(zisterne);
 
-        Kontroller.getKontroller().setup(wasserquelle, zisterne, pumpe, rohr1, rohr2, installateur, saboteur);
+        Kontroller.getKontroller().setup(wasserquelle, zisterne, pumpe1, pumpe2, rohr1, rohr2, rohr3, installateur, saboteur);
 
         //Kontroller.getKontroller().binden(rohr1, wasserquelle, pumpe);
         //Kontroller.getKontroller().binden(rohr2, pumpe, zisterne);
 
-        // START SPIEL
-        // spieler step
-        installateur.step(rohr1); // steht auf rohr1
-        saboteur.step(rohr2); // steht auf rohr2
+        // spiel starten
+        installateur.step(rohr1);
+        saboteur.step(rohr3);
+        saboteur.step(pumpe1);
+        saboteur.step(rohr1);
+        //installateur.umbinden(pumpe1, pumpe2);
+        //installateur.step(pumpe2);
+        //installateur.eingangsRohrUmstellen(rohr1);
+        //installateur.ausgangsRohrUmstellen(rohr3);
 
-        // tick (runde beenden, fluss kalkulieren, punkte hinzufügen)
+        Kontroller.getKontroller().tick();
+        Kontroller.getKontroller().tick();
         Kontroller.getKontroller().tick();
 
-        // tick (runde beenden, fluss kalkulieren, punkte hinzufügen)
-        Kontroller.getKontroller().tick();
-
-        // kaputt rohr2 kaputt machen
-        saboteur.getPosition().kaputtMachen();
-
-        // tick (runde beenden, fluss kalkulieren, punkte hinzufügen)
-        Kontroller.getKontroller().tick();
-
-        // spieler step
-        installateur.step(pumpe); // steht auf der Pumpe
-        saboteur.step(zisterne); // steht auf Zisterne
-        installateur.step(rohr2); // steht auf rohr2
-
-        // rohr2 reparieren
-        installateur.getPosition().reparieren();
-
-        // runde beenden
-        Kontroller.getKontroller().tick();
 
         System.out.println("Saboteur: " + Kontroller.getKontroller().getSaboteurPunkte());
         System.out.println("Installateur: " + Kontroller.getKontroller().getInstallateurPunkte());

@@ -70,20 +70,34 @@ public abstract class Spieler {
      */
     public void umbinden(Pumpe pumpeWoher, Pumpe pumpeWohin) {
         List<Rohr> alleRohre = Kontroller.getKontroller().getAlleRohre();
+        Rohr aktuelleRohr = null;
         for (Rohr rohr : alleRohre) {
             if (rohr == position) {
-                if(pumpeWoher == rohr.getNachbarn().get(0)) {
-                    Kontroller.getKontroller().binden(rohr, rohr.getNachbarn().get(1), pumpeWohin);
-                    rohr.getNachbarn().get(0).getNachbarn().remove(rohr); // entfernt das rohr aus der liste der nachbarn
-                    rohr.getNachbarn().remove(rohr.getNachbarn().get(0)); // entfernt die pumpe aus der liste der nachbarn
-                    // TODO: eingangsrohr und ausgangsrohr der pumpe ändern
-                } else {
-                    Kontroller.getKontroller().binden(rohr, rohr.getNachbarn().get(0), pumpeWohin);
-                    rohr.getNachbarn().get(1).getNachbarn().remove(rohr); // entfernt das rohr aus der liste der nachbarn
-                    rohr.getNachbarn().remove(rohr.getNachbarn().get(1)); // entfernt die pumpe aus der liste der nachbarn
-                    // TODO: eingangsrohr und ausgangsrohr der pumpe ändern
-                }
+                aktuelleRohr = rohr;
+                break;
             }
+        }
+
+        if(aktuelleRohr==null) return;
+
+        Netzelement pumpe0 = aktuelleRohr.getNachbarn().get(0);
+        Netzelement pumpe1 = aktuelleRohr.getNachbarn().get(1);
+        if(pumpeWoher == pumpe0) {
+            Kontroller.getKontroller().binden(aktuelleRohr, pumpe1, pumpeWohin);
+            pumpe0.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
+            aktuelleRohr.getNachbarn().remove(pumpe0); // entfernt die pumpe aus der liste der nachbarn
+
+        } else {
+            Kontroller.getKontroller().binden(aktuelleRohr, pumpe0, pumpeWohin);
+            pumpe1.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
+            aktuelleRohr.getNachbarn().remove(pumpe1); // entfernt die pumpe aus der liste der nachbarn
+
+        }
+
+        if(pumpeWoher.getEingangsRohr() == aktuelleRohr) {
+            pumpeWoher.setEingangsRohr(null);
+        } else if (pumpeWoher.getAusgangsRohr() == aktuelleRohr) {
+            pumpeWoher.setAusgangsRohr(null);
         }
     }
 
@@ -106,4 +120,37 @@ public abstract class Spieler {
             Logger.error("NetzwerkElement ist kein Nachbar von " + position);
         }
     }
+
+    // Pumpe eingansrohr umstellen
+    public void eingangsRohrUmstellen(Rohr rohr) {
+        List<Pumpe> allePumpen = Kontroller.getKontroller().getAllePumpen();
+        for(Pumpe pumpe : allePumpen) {
+            if(pumpe == position) {
+                if(pumpe.getNachbarn().contains(rohr)) {
+                    pumpe.setEingangsRohr(rohr);
+                    Logger.info("Eingangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
+                }
+                else {
+                    Logger.error("Rohr ist kein Nachbar von " + position);
+                }
+            }
+        }
+    }
+
+    // Pumpe ausgangsrohr umstellen
+    public void ausgangsRohrUmstellen(Rohr rohr) {
+        List<Pumpe> allePumpen = Kontroller.getKontroller().getAllePumpen();
+        for(Pumpe pumpe : allePumpen) {
+            if(pumpe == position) {
+                if(pumpe.getNachbarn().contains(rohr)) {
+                    pumpe.setAusgangsRohr(rohr);
+                    Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
+                }
+                else {
+                    Logger.error("Rohr ist kein Nachbar von " + position);
+                }
+            }
+        }
+    }
+
 }

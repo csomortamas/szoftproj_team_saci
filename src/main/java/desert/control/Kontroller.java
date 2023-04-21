@@ -81,16 +81,19 @@ public class Kontroller {
         }
     }
 
-    public void setup(Wasserquelle wasserquelle, Zisterne zisterne, Pumpe pumpe, Rohr rohr1, Rohr rohr2, Spieler installateur, Spieler saboteur) {
+    public void setup(Wasserquelle wasserquelle, Zisterne zisterne, Pumpe pumpe1, Pumpe pumpe2, Rohr rohr1, Rohr rohr2, Rohr rohr3, Spieler installateur, Spieler saboteur) {
         // setup
         // binden
-        binden(rohr1, wasserquelle, pumpe);
-        binden(rohr2, pumpe, zisterne);
+        binden(rohr1, wasserquelle, pumpe1);
+        binden(rohr2, pumpe1, zisterne);
+        binden(rohr3, zisterne, pumpe2);
 
         // add to kontroller
-        allePumpen.add(pumpe);
+        allePumpen.add(pumpe1);
+        allePumpen.add(pumpe2);
         alleRohre.add(rohr1);
         alleRohre.add(rohr2);
+        alleRohre.add(rohr3);
         alleZisternen.add(zisterne);
 
         // wasserquell ausgangrohr zu rohr1
@@ -98,13 +101,13 @@ public class Kontroller {
         rohr1.setIstAktiv(true);
 
         // zisterne eingangrohr zu rohr2
-        zisterne.setEingangsRohr(rohr2);
+        zisterne.setEingangsRohr(rohr3);
 
         // pumpe eingangrohr zu rohr1
-        pumpe.setEingangsRohr(rohr1);
+        pumpe1.setEingangsRohr(rohr1);
 
         // pumpe ausgangrohr zu rohr2
-        pumpe.setAusgangsRohr(rohr2);
+        pumpe1.setAusgangsRohr(rohr2);
 
         // logger
         Logger.info("Setup erfolgreich");
@@ -195,5 +198,12 @@ public class Kontroller {
      */
     public void addRohr(Rohr rohr) {
 
+    }
+
+    public void gameLoop() {
+        while (aktuelleRunde < maxRunde) {
+
+            tick();
+        }
     }
 }

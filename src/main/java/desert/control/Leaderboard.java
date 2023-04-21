@@ -7,6 +7,4 @@ import java.util.Map;
 /**
  *
  */
-public class Leaderboard {
-    // TODO implement here
-}
+public class Leaderboard { }

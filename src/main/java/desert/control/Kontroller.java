@@ -9,6 +9,7 @@ import org.tinylog.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -148,6 +149,10 @@ public class Kontroller {
      *
      */
     public void tick() {
+        for(Wasserquelle quelle : alleWasserQuellen){
+            if(quelle.getAusgangsRohr() != null)
+                quelle.getAusgangsRohr().setIstAktiv(true);
+        }
         for(int i = 0; i < alleRohre.size() + 1; i++) {
             for (Pumpe pumpe : allePumpen) {
                 pumpe.wasserWeiterleiten();
@@ -487,5 +492,6 @@ public class Kontroller {
             System.out.println("Saboteur: " + Kontroller.getKontroller().getSaboteurPunkte());
             System.out.println("Installateur: " + Kontroller.getKontroller().getInstallateurPunkte());
         }
+        //TODO: leaderboard hivogatas, jatek befejezése
     }
 }

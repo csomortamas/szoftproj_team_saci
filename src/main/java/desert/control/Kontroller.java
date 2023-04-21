@@ -108,6 +108,7 @@ public class Kontroller {
 
         if(randomNumber == 0) {
             Rohr newRohr = new Rohr();
+            newRohr.setName("R-G");
             alleZisternen.get(randomZisterneIndex).getNachbarn().add(newRohr);
             newRohr.getNachbarn().add(alleZisternen.get(randomZisterneIndex));
 

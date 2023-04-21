@@ -240,6 +240,9 @@ public class Kontroller {
     }
 
     public void game() {
+        System.out.print(alleZisternen.get(0).getNachbarn().size());
+
+
         int spielerZahlProTeam = installateurTeam.size();
         Scanner scanner = new Scanner(System.in);
         int choose;

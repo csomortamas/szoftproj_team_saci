@@ -1,5 +1,6 @@
-package main.java.desert;
-import org.tinylog.Logger;
+package main.java.desert.player;
+import main.java.desert.network.Zisterne;
+
 /**
  *
  */

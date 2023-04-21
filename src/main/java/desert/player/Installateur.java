@@ -1,6 +1,11 @@
-package main.java.desert;
+package main.java.desert.player;
 import lombok.Getter;
 import lombok.Setter;
+import main.java.desert.control.Kontroller;
+import main.java.desert.network.Pumpe;
+import main.java.desert.network.Rohr;
+import main.java.desert.network.Wasserquelle;
+import main.java.desert.network.Zisterne;
 import org.tinylog.Logger;
 
 import java.util.List;

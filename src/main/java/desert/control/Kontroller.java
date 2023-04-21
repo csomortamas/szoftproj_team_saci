@@ -1,5 +1,7 @@
-package main.java.desert;
+package main.java.desert.control;
 import lombok.Getter; import lombok.Setter;
+import main.java.desert.network.*;
+import main.java.desert.player.Spieler;
 import org.tinylog.Logger;
 
 import java.util.ArrayList;
@@ -58,7 +60,7 @@ public class Kontroller {
 
     public void pumpeKaputtMacht() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(10);
+        int randomNumber = rand.nextInt(5);
         int randomPumpeIndex = rand.nextInt(allePumpen.size());
 
         // Pumpe Random kaputt machen
@@ -121,7 +123,7 @@ public class Kontroller {
     }
     public void rohrErstellen() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(10);
+        int randomNumber = rand.nextInt(7);
         int randomZisterneIndex = rand.nextInt(alleZisternen.size());
 
         if(randomNumber == 0) {
@@ -139,13 +141,13 @@ public class Kontroller {
      */
     public void punkteKalkulieren() {
         for (Rohr rohr : alleRohre) {
-            if (rohr.istAktiv && rohr.istKaputt) {
+            if (rohr.isIstAktiv() && rohr.isIstKaputt()) {
                 saboteurPunkte++;
             }
         }
 
         for (Zisterne zisterne : alleZisternen) {
-            if (zisterne.getEingangsRohr().istAktiv && !zisterne.getEingangsRohr().istKaputt) {
+            if (zisterne.getEingangsRohr().isIstAktiv() && !zisterne.getEingangsRohr().isIstKaputt()) {
                 installateurPunkte++;
             }
         }

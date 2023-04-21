@@ -1,5 +1,12 @@
 package main.java.desert;
-import org.tinylog.Logger;
+import main.java.desert.control.Kontroller;
+import main.java.desert.network.Pumpe;
+import main.java.desert.network.Rohr;
+import main.java.desert.network.Wasserquelle;
+import main.java.desert.network.Zisterne;
+import main.java.desert.player.Installateur;
+import main.java.desert.player.Saboteur;
+import main.java.desert.player.Spieler;
 
 
 /**
@@ -42,7 +49,7 @@ public class Main {
         Kontroller.getKontroller().tick();
 
         // kaputt rohr2 kaputt machen
-        saboteur.position.kaputtMachen();
+        saboteur.getPosition().kaputtMachen();
 
         // tick (runde beenden, fluss kalkulieren, punkte hinzufügen)
         Kontroller.getKontroller().tick();
@@ -53,7 +60,7 @@ public class Main {
         installateur.step(rohr2); // steht auf rohr2
 
         // rohr2 reparieren
-        installateur.position.reparieren();
+        installateur.getPosition().reparieren();
 
         // runde beenden
         Kontroller.getKontroller().tick();

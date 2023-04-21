@@ -1,5 +1,7 @@
-package main.java.desert;
-import org.tinylog.Logger;
+package main.java.desert.network;
+import main.java.desert.network.Pumpe;
+import main.java.desert.network.Rohr;
+
 public class Wasserquelle extends Pumpe {
     /**
      * Default Konstruktor

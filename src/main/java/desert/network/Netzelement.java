@@ -1,4 +1,4 @@
-package main.java.desert;
+package main.java.desert.network;
 import lombok.Getter;
 import lombok.Setter;
 import org.tinylog.Logger;

@@ -18,6 +18,8 @@ public abstract class Spieler {
      */
     @Getter @Setter protected Netzelement position;
 
+    @Getter @Setter protected String name;
+
 
     public Spieler(Netzelement startPunkt) {
         position = startPunkt;
@@ -109,6 +111,10 @@ public abstract class Spieler {
      * @param netzwerkElement
      */
     public void step(Netzelement netzwerkElement) {
+        if(netzwerkElement.isIstBesetzt()){
+            Logger.error("Netzwerkelement ist schon besetzt: " + netzwerkElement);
+            return;
+        }
         if(position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isIstBesetzt()) {
             position.setIstBesetzt(false);
 
@@ -151,8 +157,13 @@ public abstract class Spieler {
         for(Pumpe pumpe : allePumpen) {
             if(pumpe == position) {
                 if(pumpe.getNachbarn().contains(rohr)) {
-                    pumpe.setAusgangsRohr(rohr);
-                    Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
+                    if(rohr != pumpe.getAusgangsRohr() ){
+                        pumpe.setAusgangsRohr(rohr);
+                        Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
+                    } else {
+                        Logger.error("Ausgangsrohr und Eingangsrohr dürfen nicht gleich sein.");
+                    }
+
                 }
                 else {
                     Logger.error("Rohr ist kein Nachbar von " + position);

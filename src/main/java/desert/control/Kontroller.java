@@ -239,8 +239,6 @@ public class Kontroller {
         zisternen.get(2).setEingangsRohr(rohre.get(4));
 
 
-
-
         // logger
         Logger.info("Setup erfolgreich");
     }

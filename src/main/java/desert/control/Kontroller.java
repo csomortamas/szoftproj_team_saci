@@ -4,6 +4,7 @@ import main.java.desert.network.*;
 import main.java.desert.player.Installateur;
 import main.java.desert.player.Saboteur;
 
+import main.java.desert.player.Spieler;
 import org.tinylog.Logger;
 
 import java.util.ArrayList;
@@ -287,11 +288,7 @@ public class Kontroller {
                 choose = scanner.nextInt();
                 Pumpe aktuellePumpe = null;
 
-                for (Pumpe pumpe : allePumpen) {
-                    if (pumpe==installateur.getPosition()){
-                        aktuellePumpe=pumpe;
-                    }
-                }
+                aktuellePumpe = getAktuellePosition(installateur, aktuellePumpe);
 
 
                 switch(choose) {
@@ -304,7 +301,6 @@ public class Kontroller {
                         for (Rohr r:alleRohre){
                             if (r==aktuellePumpe.getNachbarn().get(choose - 1)){
                                 aktuellePumpe.setEingangsRohr(r);
-                                break;
                             }
                         }
                         break;
@@ -410,11 +406,9 @@ public class Kontroller {
                 choose = scanner.nextInt();
                 Pumpe aktuellePumpe = null;
 
-                for (Pumpe pumpe : allePumpen) {
-                    if (pumpe==saboteur.getPosition()){
-                        aktuellePumpe=pumpe;
-                    }
-                }
+                aktuellePumpe = getAktuellePosition(saboteur, aktuellePumpe);
+
+
 
                 switch(choose) {
                     case 1: {
@@ -493,5 +487,28 @@ public class Kontroller {
             System.out.println("Installateur: " + Kontroller.getKontroller().getInstallateurPunkte());
         }
         //TODO: leaderboard hivogatas, jatek befejezése
+    }
+
+    private Pumpe getAktuellePosition(Spieler spieler, Pumpe aktuellePumpe) {
+        if(spieler.getPosition() instanceof Zisterne) {
+            for (Zisterne zisterne : alleZisternen) {
+                if (zisterne== spieler.getPosition()){
+                    aktuellePumpe =zisterne;
+                }
+            }
+        } else if(spieler.getPosition() instanceof Wasserquelle) {
+            for (Wasserquelle wasserquelle : alleWasserQuellen) {
+                if (wasserquelle== spieler.getPosition()){
+                    aktuellePumpe =wasserquelle;
+                }
+            }
+        } else {
+            for (Pumpe pumpe : allePumpen) {
+                if (pumpe== spieler.getPosition()){
+                    aktuellePumpe =pumpe;
+                }
+            }
+        }
+        return aktuellePumpe;
     }
 }

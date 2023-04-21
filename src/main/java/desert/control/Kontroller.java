@@ -40,9 +40,7 @@ public class Kontroller {
      *
      */
     @Getter protected List<Rohr> alleRohre = new ArrayList<>();
-
-    /**
-     *
+     /*
      */
     @Getter @Setter private int aktuelleRunde;
 
@@ -254,7 +252,7 @@ public class Kontroller {
 
         //System.out.println("Eralubene befähle:\n" + "");
         while (aktuelleRunde < maxRunde) {
-            System.out.print("\nTeam Installateur: Mit welchen Spieler möchtest du spielen? (Index: <1-"+spielerZahlProTeam+">)\n>");
+            System.out.print("\nTeam Installateur: Mit welchem Spieler möchtest du spielen? (Index: <1-"+spielerZahlProTeam+">)\n>");
             for (int i =0; i < spielerZahlProTeam; i++){
                 System.out.println((i+1) + ": " + installateurTeam.get(i).getName()+"\n");
             }
@@ -375,7 +373,6 @@ public class Kontroller {
                 }
             }
 
-
             // saboteur
             System.out.print("\nTeam Saboteur: Mit welchen Spieler möchtest du spielen? (Index: <1-"+spielerZahlProTeam+">)\n>");
             for (int i =0; i < spielerZahlProTeam; i++){
@@ -400,7 +397,7 @@ public class Kontroller {
                         "\n1: Eingangsrohr Umstellen, " +
                         "\n2: Ausgangsrohr Umstellen" +
                         "\n3: Pumpe aktivieren" +
-                        "\n4: Pumpe schalten" +
+                        "\n4: Pumpe deaktivieren" +
                         "\n>");
                 choose = scanner.nextInt();
                 Pumpe aktuellePumpe = null;

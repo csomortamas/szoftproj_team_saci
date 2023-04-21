@@ -7,10 +7,7 @@ import org.tinylog.Logger;
 import java.util.List;
 
 public class Pumpe extends Netzelement {
-    /**
-     *
-     */
-    @Getter private List<Rohr> rohre;
+
     /**
      *
      */

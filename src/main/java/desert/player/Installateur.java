@@ -64,7 +64,9 @@ public class Installateur extends Spieler {
                 pumpeInHand = zisterne.getPumpeZurVerfuegung();
                 zisterne.setPumpeZurVerfuegung(null);
                 Logger.info("Pumpe aufgenommen.");
+                return;
             }
         }
+        Logger.error("Keine Pumpe aufgenommen.");
     }
 }

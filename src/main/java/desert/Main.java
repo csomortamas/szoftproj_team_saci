@@ -29,31 +29,25 @@ public class Main {
         Rohr rohr2 = new Rohr();
         Rohr rohr3 = new Rohr();
 
-        // create 1 spieler
-        Spieler installateur = new Installateur(wasserquelle);
-        Spieler saboteur = new Saboteur(zisterne);
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Anzahl der Spielern pro Team: ");
+        int spielerAnzahl = sc.nextInt();
+        Random rand = new Random();
+        for(int i = 0; i < spielerAnzahl; i++){
+            //int  randomNum = rand.nextInt(3);
+            Installateur installateur=new Installateur(wasserquelleList.get(i%3));
+            installateur.setName("Installateur"+(i+1));
+            Kontroller.getKontroller().getInstallateurTeam().add(installateur);
 
-        Kontroller.getKontroller().setup(wasserquelle, zisterne, pumpe1, pumpe2, rohr1, rohr2, rohr3, installateur, saboteur);
 
-        //Kontroller.getKontroller().binden(rohr1, wasserquelle, pumpe);
-        //Kontroller.getKontroller().binden(rohr2, pumpe, zisterne);
+            Saboteur sb = new Saboteur(zisterneList.get(i%3));
+            sb.setName("Saboteur"+(i+1));
+            Kontroller.getKontroller().getSaboteurTeam().add(sb);
 
+        }
+
+        Kontroller.getKontroller().setup(wasserquelleList, zisterneList, pumpeList, rohrList);
+        Kontroller.getKontroller().game();
         // spiel starten
-        installateur.step(rohr1);
-        saboteur.step(rohr3);
-        saboteur.step(pumpe1);
-        saboteur.step(rohr1);
-        //installateur.umbinden(pumpe1, pumpe2);
-        //installateur.step(pumpe2);
-        //installateur.eingangsRohrUmstellen(rohr1);
-        //installateur.ausgangsRohrUmstellen(rohr3);
-
-        Kontroller.getKontroller().tick();
-        Kontroller.getKontroller().tick();
-        Kontroller.getKontroller().tick();
-
-
-        System.out.println("Saboteur: " + Kontroller.getKontroller().getSaboteurPunkte());
-        System.out.println("Installateur: " + Kontroller.getKontroller().getInstallateurPunkte());
     }
 }

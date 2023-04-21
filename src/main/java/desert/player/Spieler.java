@@ -82,16 +82,20 @@ public abstract class Spieler {
 
         Netzelement pumpe0 = aktuelleRohr.getNachbarn().get(0);
         Netzelement pumpe1 = aktuelleRohr.getNachbarn().get(1);
+
+
+
         if(pumpeWoher == pumpe0) {
             Kontroller.getKontroller().binden(aktuelleRohr, pumpe1, pumpeWohin);
             pumpe0.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
             aktuelleRohr.getNachbarn().remove(pumpe0); // entfernt die pumpe aus der liste der nachbarn
+            aktuelleRohr.getNachbarn().remove(pumpe1);
 
         } else {
             Kontroller.getKontroller().binden(aktuelleRohr, pumpe0, pumpeWohin);
             pumpe1.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
             aktuelleRohr.getNachbarn().remove(pumpe1); // entfernt die pumpe aus der liste der nachbarn
-
+            aktuelleRohr.getNachbarn().remove(pumpe0);
         }
 
         if(pumpeWoher.getEingangsRohr() == aktuelleRohr) {
@@ -127,8 +131,12 @@ public abstract class Spieler {
         for(Pumpe pumpe : allePumpen) {
             if(pumpe == position) {
                 if(pumpe.getNachbarn().contains(rohr)) {
-                    pumpe.setEingangsRohr(rohr);
-                    Logger.info("Eingangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
+                    if(rohr != pumpe.getAusgangsRohr()) {
+                        pumpe.setEingangsRohr(rohr);
+                        Logger.info("Eingangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
+                    } else {
+                        Logger.error("Ausgangsrohr und Eingangsrohr dürfen nicht gleich sein.");
+                    }
                 }
                 else {
                     Logger.error("Rohr ist kein Nachbar von " + position);

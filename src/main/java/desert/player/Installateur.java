@@ -39,7 +39,8 @@ public class Installateur extends Spieler {
      *
      */
     public void pumpeEinmontieren(boolean middle) {
-        if(middle && position instanceof Rohr) {
+
+        if(middle && position instanceof Rohr && this.pumpeInHand!=null) {
             List<Rohr> alleRohre = Kontroller.getKontroller().getAlleRohre();
             for(Rohr rohr : alleRohre) {
                 if(position == rohr) {

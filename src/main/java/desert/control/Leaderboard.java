@@ -17,8 +17,8 @@ import java.util.Map;
  */
 public class Leaderboard {
     @Getter @Setter private RekordSpeicher rekordSpeicher;
-    @Getter @Setter private Map<Integer, Integer> sortedPunktMap = new HashMap<>();
-    @Getter @Setter private Map<Integer, String> sortedNameMap = new HashMap<>();
+    @Getter @Setter private Map<Integer, Integer> sortedPunktMap = new HashMap<>(); //<ID,Punkt>
+    @Getter @Setter private Map<Integer, String> sortedNameMap = new HashMap<>(); //<ID,Name>
 
     public Leaderboard(){
         importRekorde();
@@ -64,6 +64,13 @@ public class Leaderboard {
                 }
             }
         }
+    }
+
+    public void addRekord(String name,Integer punkt){
+        rekordSpeicher.addRekord(name,punkt);
+        importRekorde();
+        sortRekorde();
+        Logger.info("Rekord hinzugefugt!");
     }
 
     public void listAll(){

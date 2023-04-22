@@ -25,6 +25,7 @@ public class RekordSpeicher {
         nameMap.put(currentID,name);
         currentID++;
         rekordAnzahl++;
+        exportRekorde();
     }
 
     public void exportRekorde(){

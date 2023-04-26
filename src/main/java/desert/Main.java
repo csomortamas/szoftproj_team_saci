@@ -93,7 +93,7 @@ public class Main {
 
         }
 
-        Kontroller.getKontroller().setup(wasserquelleList, zisterneList, pumpeList, rohrList);
+        Kontroller.getKontroller().setup(wasserquelleList, zisterneList, pumpeList, rohrList, "Installateure", "Saboteure");
         Kontroller.getKontroller().game();
         // spiel starten
     }

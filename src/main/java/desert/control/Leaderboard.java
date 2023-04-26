@@ -16,24 +16,15 @@ import java.util.Map;
  *
  */
 public class Leaderboard {
-    @Getter @Setter private RekordSpeicher rekordSpeicher;
+    @Getter @Setter private RekordSpeicher rekordSpeicher=new RekordSpeicher();
     @Getter @Setter private Map<Integer, Integer> sortedPunktMap = new HashMap<>(); //<ID,Punkt>
     @Getter @Setter private Map<Integer, String> sortedNameMap = new HashMap<>(); //<ID,Name>
 
     public Leaderboard(){
-        importRekorde();
+        rekordSpeicher = rekordSpeicher.importRekorde();
         sortRekorde();
     }
-    public void importRekorde(){
-        Gson gson = new Gson ();
-        try {
-            JsonReader reader = new JsonReader (new FileReader("records.json"));
-            rekordSpeicher = gson.fromJson (reader, new TypeToken<RekordSpeicher>() {
-            }.getType ());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace ();
-        }
-    }
+
     public void sortRekorde(){
         //Creating and sorting a list with the points of all the former attempts.
         ArrayList<Integer> punktList = new ArrayList<> ();
@@ -68,13 +59,14 @@ public class Leaderboard {
 
     public void addRekord(String name,Integer punkt){
         rekordSpeicher.addRekord(name,punkt);
-        importRekorde();
+        rekordSpeicher.exportRekorde();
         sortRekorde();
         Logger.info("Rekord hinzugefugt!");
     }
 
     public void listAll(){
-        for (int i = 1; i < rekordSpeicher.getRekordAnzahl (); i++){
+        System.out.println("\nLEADERBOARD:");
+        for (int i = 1; i <= rekordSpeicher.getRekordAnzahl(); i++){
             System.out.println("Name: "+sortedNameMap.get(i)+" Punkt: "+sortedPunktMap.get(i));
         }
     }

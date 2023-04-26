@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RekordSpeicher {
-    @Getter private Integer currentID=1;
-    @Getter private Integer rekordAnzahl=0;
     @Getter private Map<Integer, Integer> punktMap = new HashMap<>();
     @Getter private Map<Integer, String> nameMap = new HashMap<>();
 
@@ -21,10 +19,8 @@ public class RekordSpeicher {
     }
 
     public void addRekord(String name,Integer punkt){
-        punktMap.put(currentID,punkt);
-        nameMap.put(currentID,name);
-        currentID++;
-        rekordAnzahl++;
+        punktMap.put((punktMap.size()+1),punkt);
+        nameMap.put((nameMap.size()+1), name);
         exportRekorde();
     }
 
@@ -34,7 +30,22 @@ public class RekordSpeicher {
             new Gson().toJson (this, writer);
             writer.close ();
         } catch (IOException e) {
-            throw new RuntimeException (e);
+            e.printStackTrace();
         }
+    }
+    public RekordSpeicher importRekorde(){
+        RekordSpeicher rekordSpeicher=null;
+        Gson gson = new Gson ();
+        try {
+            JsonReader reader = new JsonReader (new FileReader("records.json"));
+            rekordSpeicher = gson.fromJson (reader, new TypeToken<RekordSpeicher>() {
+            }.getType ());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace ();
+        }
+        return rekordSpeicher;
+    }
+    public int getRekordAnzahl(){
+        return punktMap.size();
     }
 }

@@ -23,7 +23,13 @@ public class Kontroller {
      */
     @Getter @Setter GameMap map=new GameMap();
 
-     /**
+    /**
+     *
+     */
+    @Getter @Setter Leaderboard leaderboard=new Leaderboard();
+
+
+    /**
       *
       */
     @Getter @Setter private int aktuelleRunde;
@@ -31,7 +37,7 @@ public class Kontroller {
     /**
      *
      */
-    @Getter @Setter private int maxRunde = 50;
+    @Getter @Setter private int maxRunde = 1;
 
     /**
      *
@@ -57,6 +63,9 @@ public class Kontroller {
      *
      */
     @Getter @Setter private int installateurPunkte;
+    /**
+     *
+     */
     @Getter @Setter private int saboteurPunkte;
 
 
@@ -182,11 +191,13 @@ public class Kontroller {
         Logger.info("Ein Rohr wurde hinzugefügt");
     }
 
-    public void setup(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre) {      // binden
+    public void setup(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre, String teamInstName, String teamSabName) {      // binden
         // setup
 
         // add to kontroller
-        map=new GameMap();
+        installateurTeamName = teamInstName;
+        saboteurTeamName = teamSabName;
+        map = new GameMap();
 
         map.getPumpen().add(pumpen.get(0));
         map.getPumpen().add(pumpen.get(1));
@@ -487,8 +498,26 @@ public class Kontroller {
             System.out.println("Saboteur: " + Kontroller.getKontroller().getSaboteurPunkte());
             System.out.println("Installateur: " + Kontroller.getKontroller().getInstallateurPunkte());
         }
-        //TODO: leaderboard hivogatas, jatek befejezése
+
+        endGame();
     }
+
+    private void endGame(){
+        leaderboard.addRekord(installateurTeamName,installateurPunkte);
+        leaderboard.addRekord(saboteurTeamName,saboteurPunkte);
+        if(installateurPunkte>saboteurPunkte){
+            System.out.println("Hurray! Team "+installateurTeamName+" hat gewonnen.");
+        }else if (installateurPunkte<saboteurPunkte){
+            System.out.println("Hurray! Team "+saboteurTeamName+" hat gewonnen.");
+        }else{
+            System.out.println("Das Spiel endet unentschieden.");
+        }
+
+        leaderboard.listAll();
+
+        Logger.info("Spiel beendet.");
+    }
+
 
     private Pumpe getAktuellePosition(Spieler spieler, Pumpe aktuellePumpe) {
         if(spieler.getPosition() instanceof Zisterne) {

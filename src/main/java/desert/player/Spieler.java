@@ -30,7 +30,7 @@ public abstract class Spieler {
      *
      */
     public void rohrUmstellen(Rohr rohr, boolean eingangsRohr) {
-        List<Pumpe> allePumpen = Kontroller.getKontroller().getAllePumpen();
+        List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
         for (Pumpe pumpe : allePumpen) {
             if (pumpe == position) {
                 if (eingangsRohr) {
@@ -49,7 +49,7 @@ public abstract class Spieler {
      *
      */
     public void pumpeSchalten(boolean einSchalten) {
-        List<Pumpe> allePumpen = Kontroller.getKontroller().getAllePumpen();
+        List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
         for (Pumpe pumpe : allePumpen) {
             if (pumpe == position) {
                 if(einSchalten) {
@@ -71,7 +71,7 @@ public abstract class Spieler {
      *
      */
     public void umbinden(Pumpe pumpeWoher, Pumpe pumpeWohin) {
-        List<Rohr> alleRohre = Kontroller.getKontroller().getAlleRohre();
+        List<Rohr> alleRohre = Kontroller.getKontroller().getMap().getRohre();
         Rohr aktuelleRohr = null;
         for (Rohr rohr : alleRohre) {
             if (rohr == position) {
@@ -133,7 +133,7 @@ public abstract class Spieler {
 
     // Pumpe eingansrohr umstellen
     public void eingangsRohrUmstellen(Rohr rohr) {
-        List<Pumpe> allePumpen = Kontroller.getKontroller().getAllePumpen();
+        List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
         for(Pumpe pumpe : allePumpen) {
             if(pumpe == position) {
                 if(pumpe.getNachbarn().contains(rohr)) {
@@ -153,7 +153,7 @@ public abstract class Spieler {
 
     // Pumpe ausgangsrohr umstellen
     public void ausgangsRohrUmstellen(Rohr rohr) {
-        List<Pumpe> allePumpen = Kontroller.getKontroller().getAllePumpen();
+        List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
         for(Pumpe pumpe : allePumpen) {
             if(pumpe == position) {
                 if(pumpe.getNachbarn().contains(rohr)) {

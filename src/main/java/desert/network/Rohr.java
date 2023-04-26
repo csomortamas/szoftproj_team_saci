@@ -5,12 +5,16 @@ import lombok.Setter;
 import main.java.desert.control.Kontroller;
 import org.tinylog.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rohr extends Netzelement {
 
     /**
      *
      */
     @Getter @Setter private boolean besetzt;
+
 
     /**
      * Default Konstruktor
@@ -27,7 +31,7 @@ public class Rohr extends Netzelement {
         Rohr r1 = new Rohr();
         Rohr r2 = new Rohr();
 
-        Kontroller.getKontroller().getAlleRohre().remove(this);
+        Kontroller.getKontroller().getMap().getRohre().remove(this);
 
         Kontroller.getKontroller().addRohr(r1);
         Kontroller.getKontroller().addRohr(r2);

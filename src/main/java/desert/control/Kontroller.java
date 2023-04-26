@@ -7,10 +7,7 @@ import main.java.desert.player.Saboteur;
 import main.java.desert.player.Spieler;
 import org.tinylog.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *
@@ -24,24 +21,11 @@ public class Kontroller {
     /**
      *
      */
+    @Getter @Setter GameMap map=new GameMap();
 
-    @Getter protected List<Pumpe> allePumpen = new ArrayList<>();
-    /**
-     *
-     */
-    @Getter protected List<Zisterne> alleZisternen = new ArrayList<>();
-
-    /**
-     *
-     */
-    @Getter protected List<Wasserquelle> alleWasserQuellen = new ArrayList<>();
-
-    /**
-     *
-     */
-    @Getter protected List<Rohr> alleRohre = new ArrayList<>();
-     /*
-     */
+     /**
+      *
+      */
     @Getter @Setter private int aktuelleRunde;
 
     /**
@@ -94,34 +78,34 @@ public class Kontroller {
     public void pumpeErstellen() {
         Random rand = new Random();
         int randomNumber = rand.nextInt(1);
-        int randomZisterneIndex = rand.nextInt(alleZisternen.size());
+        int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
         if(randomNumber == 0)
-            alleZisternen.get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe());
+            map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe());
     }
     public void rohrErstellen() {
         Random rand = new Random();
         int randomNumber = rand.nextInt(1);
-        int randomZisterneIndex = rand.nextInt(alleZisternen.size());
+        int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
         if(randomNumber == 0) {
             Rohr newRohr = new Rohr();
             newRohr.setName("R-G");
-            alleZisternen.get(randomZisterneIndex).getNachbarn().add(newRohr);
-            newRohr.getNachbarn().add(alleZisternen.get(randomZisterneIndex));
+            map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
+            newRohr.getNachbarn().add(map.getZisternen().get(randomZisterneIndex));
 
-            alleZisternen.get(randomZisterneIndex).getNachbarn().add(newRohr);
+            map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
         }
     }
 
     public void pumpeKaputtMacht() {
         Random rand = new Random();
         int randomNumber = rand.nextInt(5);
-        int randomPumpeIndex = rand.nextInt(allePumpen.size());
+        int randomPumpeIndex = rand.nextInt(map.getPumpen().size());
 
         // Pumpe Random kaputt machen
-        if (allePumpen.size() > 0 && randomNumber == 1) {
-            allePumpen.get(randomPumpeIndex).kaputtMachen();
+        if (map.getPumpen().size() > 0 && randomNumber == 1) {
+            map.getPumpen().get(randomPumpeIndex).kaputtMachen();
         }
     }
 
@@ -130,13 +114,13 @@ public class Kontroller {
      *
      */
     public void punkteKalkulieren() {
-        for (Rohr rohr : alleRohre) {
+        for (Rohr rohr : map.getRohre()) {
             if (rohr.isIstAktiv() && rohr.isIstKaputt()) {
                 saboteurPunkte++;
             }
         }
 
-        for (Zisterne zisterne : alleZisternen) {
+        for (Zisterne zisterne : map.getZisternen()) {
             if (zisterne.getEingangsRohr() != null) {
                 if (zisterne.getEingangsRohr().isIstAktiv() && !zisterne.getEingangsRohr().isIstKaputt()) {
                     installateurPunkte++;
@@ -149,12 +133,12 @@ public class Kontroller {
      *
      */
     public void tick() {
-        for(Wasserquelle quelle : alleWasserQuellen){
+        for(Wasserquelle quelle : map.getWasserquellen()){
             if(quelle.getAusgangsRohr() != null)
                 quelle.getAusgangsRohr().setIstAktiv(true);
         }
-        for(int i = 0; i < alleRohre.size() + 1; i++) {
-            for (Pumpe pumpe : allePumpen) {
+        for(int i = 0; i <  map.getRohre().size() + 1; i++) {
+            for (Pumpe pumpe : map.getPumpen()) {
                 pumpe.wasserWeiterleiten();
             }
         }
@@ -173,7 +157,7 @@ public class Kontroller {
      * @param zisterne
      *      */
     public void addZisterne(Zisterne zisterne) {
-        alleZisternen.add(zisterne);
+        map.getZisternen().add(zisterne);
 
         Logger.info("Eine Zisterne wurde hinzugefügt");
     }
@@ -183,7 +167,7 @@ public class Kontroller {
      *
      */
     public void addPumpe(Pumpe pumpe) {
-        allePumpen.add(pumpe);
+        map.getPumpen().add(pumpe);
 
         Logger.info("Eine Pumpe wurde hinzugefügt");
     }
@@ -193,7 +177,7 @@ public class Kontroller {
      *
      */
     public void addRohr(Rohr rohr) {
-        alleRohre.add(rohr);
+        map.getRohre().add(rohr);
 
         Logger.info("Ein Rohr wurde hinzugefügt");
     }
@@ -202,29 +186,34 @@ public class Kontroller {
         // setup
 
         // add to kontroller
-        allePumpen.add(pumpen.get(0));
-        allePumpen.add(pumpen.get(1));
-        allePumpen.add(pumpen.get(2));
+        map=new GameMap();
 
-        alleRohre.add(rohre.get(0));
-        alleRohre.add(rohre.get(1));
-        alleRohre.add(rohre.get(2));
-        alleRohre.add(rohre.get(3));
-        alleRohre.add(rohre.get(4));
+        map.getPumpen().add(pumpen.get(0));
+        map.getPumpen().add(pumpen.get(1));
+        map.getPumpen().add(pumpen.get(2));
 
-        alleZisternen.add(zisternen.get(0));
-        alleZisternen.add(zisternen.get(1));
-        alleZisternen.add(zisternen.get(2));
+        map.getRohre().add(rohre.get(0));
+        map.getRohre().add(rohre.get(1));
+        map.getRohre().add(rohre.get(2));
+        map.getRohre().add(rohre.get(3));
+        map.getRohre().add(rohre.get(4));
 
-        alleWasserQuellen.add(wasserquellen.get(0));
-        alleWasserQuellen.add(wasserquellen.get(1));
-        alleWasserQuellen.add(wasserquellen.get(2));
+        map.getZisternen().add(zisternen.get(0));
+        map.getZisternen().add(zisternen.get(1));
+        map.getZisternen().add(zisternen.get(2));
+
+        map.getWasserquellen().add(wasserquellen.get(0));
+        map.getWasserquellen().add(wasserquellen.get(1));
+        map.getWasserquellen().add(wasserquellen.get(2));
+
+
 
         binden(rohre.get(0), wasserquellen.get(0), pumpen.get(0));
         binden(rohre.get(1), pumpen.get(0), zisternen.get(0));
         binden(rohre.get(2), zisternen.get(0), pumpen.get(1));
         binden(rohre.get(3), wasserquellen.get(2), pumpen.get(2));
         binden(rohre.get(4), pumpen.get(2), zisternen.get(2));
+
 
 
         wasserquellen.get(0).setAusgangsRohr(rohre.get(0));
@@ -236,6 +225,7 @@ public class Kontroller {
         pumpen.get(2).setEingangsRohr(rohre.get(3));
         pumpen.get(2).setAusgangsRohr(rohre.get(4));
         zisternen.get(2).setEingangsRohr(rohre.get(4));
+
 
 
         // logger
@@ -298,7 +288,7 @@ public class Kontroller {
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        for (Rohr r:alleRohre){
+                        for (Rohr r: map.getRohre()){
                             if (r==aktuellePumpe.getNachbarn().get(choose - 1)){
                                 aktuellePumpe.setEingangsRohr(r);
                             }
@@ -312,7 +302,7 @@ public class Kontroller {
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        for (Rohr r:alleRohre){
+                        for (Rohr r: map.getRohre()){
                             if (r==aktuellePumpe.getNachbarn().get(choose - 1)){
                                 aktuellePumpe.setAusgangsRohr(r);
                                 break;
@@ -352,16 +342,16 @@ public class Kontroller {
                         }
                         System.out.print(">");
                         choose = scanner.nextInt() ;
-                        System.out.println("Index, wohin einbinden (Index: <1-"+(allePumpen.size())+">) ausser der index: "+ choose);
-                        for (int i =0; i < allePumpen.size(); i++){
-                            System.out.println((i+1) + ": " + allePumpen.get(i).getName());
+                        System.out.println("Index, wohin einbinden (Index: <1-"+(map.getPumpen().size())+">) ausser der index: "+ choose);
+                        for (int i =0; i < map.getPumpen().size(); i++){
+                            System.out.println((i+1) + ": " + map.getPumpen().get(i).getName());
                         }
                         System.out.print(">");
                         int chooseWohin = scanner.nextInt();
 
-                        for (Pumpe pumpe: allePumpen) {
+                        for (Pumpe pumpe: map.getPumpen()) {
                             if (installateur.getPosition().getNachbarn().get(choose-1) == pumpe)
-                                installateur.umbinden(pumpe, allePumpen.get(chooseWohin-1));
+                                installateur.umbinden(pumpe, map.getPumpen().get(chooseWohin-1));
                         }
                         break;
                     }
@@ -423,7 +413,7 @@ public class Kontroller {
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        for (Rohr r:alleRohre){
+                        for (Rohr r: map.getRohre()){
                             if (r==aktuellePumpe.getNachbarn().get(choose - 1)){
                                 aktuellePumpe.setEingangsRohr(r);
                             }
@@ -437,7 +427,7 @@ public class Kontroller {
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        for (Rohr r:alleRohre){
+                        for (Rohr r: map.getRohre()){
                             if (r==aktuellePumpe.getNachbarn().get(choose - 1)){
                                 aktuellePumpe.setAusgangsRohr(r);
                             }
@@ -473,17 +463,19 @@ public class Kontroller {
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        System.out.println("Index, wohin einbinden (Index: <1-" + (allePumpen.size()) + ">) ausser der index: " + choose);
-                        for (int i =0; i < allePumpen.size(); i++){
-                            System.out.println((i+1) + ": " + allePumpen.get(i).getName());
+                        System.out.println("Index, wohin einbinden (Index: <1-" + (map.getPumpen().size()) + ">) ausser der index: " + choose);
+                        for (int i =0; i < map.getPumpen().size(); i++){
+                            System.out.println((i+1) + ": " + map.getPumpen().get(i).getName());
                         }
                         System.out.print(">");
                         int chooseWohin = scanner.nextInt();
 
-                        for (Pumpe pumpe : allePumpen) {
+                        /*for (Pumpe pumpe : map.getPumpen()) {
                             if (saboteur.getPosition().getNachbarn().get(choose-1) == pumpe)
-                                saboteur.umbinden(pumpe, allePumpen.get(chooseWohin-1));
-                        }
+                                saboteur.umbinden(pumpe, map.getPumpen().get(chooseWohin-1));
+                        }*/
+                        Pumpe pumpe = map.findPumpe(saboteur.getPosition().getNachbarn().get(choose-1));
+                        if (pumpe!=null){ saboteur.umbinden(pumpe, map.getPumpen().get(chooseWohin-1)); }
                         break;
                     }
                 }
@@ -500,24 +492,31 @@ public class Kontroller {
 
     private Pumpe getAktuellePosition(Spieler spieler, Pumpe aktuellePumpe) {
         if(spieler.getPosition() instanceof Zisterne) {
-            for (Zisterne zisterne : alleZisternen) {
+            /*for (Zisterne zisterne : map.getZisternen()) {
                 if (zisterne== spieler.getPosition()){
                     aktuellePumpe =zisterne;
                 }
-            }
+            }*/
+            Pumpe p=map.findZisterne(spieler.getPosition());
+            if(p!=null){ aktuellePumpe=p; }
         } else if(spieler.getPosition() instanceof Wasserquelle) {
-            for (Wasserquelle wasserquelle : alleWasserQuellen) {
+            /*for (Wasserquelle wasserquelle : map.getWasserquellen()) {
                 if (wasserquelle== spieler.getPosition()){
                     aktuellePumpe =wasserquelle;
                 }
-            }
+            }*/
+            Pumpe p=map.findWasserquelle(spieler.getPosition());
+            if(p!=null){ aktuellePumpe=p; }
         } else {
-            for (Pumpe pumpe : allePumpen) {
+            /*for (Pumpe pumpe : map.getPumpen()) {
                 if (pumpe== spieler.getPosition()){
                     aktuellePumpe =pumpe;
                 }
-            }
+            }*/
+            Pumpe p=map.findPumpe(spieler.getPosition());
+            if(p!=null){ aktuellePumpe=p; }
         }
         return aktuellePumpe;
     }
 }
+

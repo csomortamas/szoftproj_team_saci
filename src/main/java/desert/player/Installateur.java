@@ -41,7 +41,7 @@ public class Installateur extends Spieler {
     public void pumpeEinmontieren(boolean middle) {
 
         if(middle && position instanceof Rohr && this.pumpeInHand!=null) {
-            List<Rohr> alleRohre = Kontroller.getKontroller().getAlleRohre();
+            List<Rohr> alleRohre = Kontroller.getKontroller().getMap().getRohre();
             for(Rohr rohr : alleRohre) {
                 if(position == rohr) {
                     rohr.rohrSplit(pumpeInHand);
@@ -58,7 +58,7 @@ public class Installateur extends Spieler {
      *
      */
     public void pumpeAufnehmen() {
-        List<Zisterne> zisterneList = Kontroller.getKontroller().getAlleZisternen();
+        List<Zisterne> zisterneList = Kontroller.getKontroller().getMap().getZisternen();
 
         for(Zisterne zisterne : zisterneList) {
             if(position == zisterne && zisterne.getPumpeZurVerfuegung() != null) {

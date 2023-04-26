@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.tinylog.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pumpe extends Netzelement {
@@ -30,6 +31,7 @@ public class Pumpe extends Netzelement {
     @Getter @Setter private boolean isForZisterne;
 
     @Getter @Setter private boolean isForQuelle;
+
 
     /**
      * Default Konstruktor

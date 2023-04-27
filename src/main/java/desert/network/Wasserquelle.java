@@ -9,13 +9,4 @@ public class Wasserquelle extends Pumpe {
     public Wasserquelle() {
         istAktiv = true;
     }
-
-    /**
-     *
-     */
-    public void wasserStarten(Rohr r) {
-        // TODO implement here
-
-    }
-
 }

@@ -12,27 +12,4 @@ public class Zisterne extends Pumpe {
      *
      */
     @Getter @Setter private Pumpe pumpeZurVerfuegung;
-
-
-    /**
-     * Default Konstruktor
-     */
-    public Zisterne() {
-
-    }
-
-
-    /**
-     * @return
-     */
-    public void rohrErstellen() {
-
-    }
-
-    /**
-     *
-     */
-    public void pumpeErstellen() {
-
-    }
 }

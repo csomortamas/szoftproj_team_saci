@@ -27,14 +27,6 @@ public class Installateur extends Spieler {
     }
 
     /**
-     * @param pumpeWohin
-     *
-     */
-    public void rohrMitFreiemEndeBinden(Pumpe pumpeWohin) {
-
-    }
-
-    /**
      * @param middle
      *
      */

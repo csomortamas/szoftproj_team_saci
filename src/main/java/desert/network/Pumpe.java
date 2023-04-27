@@ -42,13 +42,6 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
-    public void tankFuellen(boolean istAktiv) {
-
-    }
-
-    /**
-     *
-     */
     public void wasserWeiterleiten() {
         if(!istAktiv)
             return;

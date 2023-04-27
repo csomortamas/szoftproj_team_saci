@@ -95,11 +95,12 @@ public abstract class Spieler {
                 aktuelleRohr.getNachbarn().remove(pumpe0); // entfernt die pumpe aus der liste der nachbarn
                 aktuelleRohr.getNachbarn().remove(pumpe1);
 
-        } else {
-            Kontroller.getKontroller().binden(aktuelleRohr, pumpe0, pumpeWohin);
-            pumpe1.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
-            aktuelleRohr.getNachbarn().remove(pumpe1); // entfernt die pumpe aus der liste der nachbarn
-            aktuelleRohr.getNachbarn().remove(pumpe0);
+            } else {
+                Kontroller.getKontroller().binden(aktuelleRohr, pumpe0, pumpeWohin);
+                pumpe1.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
+                aktuelleRohr.getNachbarn().remove(pumpe1); // entfernt die pumpe aus der liste der nachbarn
+                aktuelleRohr.getNachbarn().remove(pumpe0);
+            }
         }
 
         if(pumpeWoher.getEingangsRohr() == aktuelleRohr) {

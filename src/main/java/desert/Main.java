@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
         // SETUP GAME MAP
         // create wasserquelle
-        Wasserquelle wasserquelle1 = new Wasserquelle();
+        /*Wasserquelle wasserquelle1 = new Wasserquelle();
         wasserquelle1.setName("Q1");
         Wasserquelle wasserquelle2 = new Wasserquelle();
         wasserquelle2.setName("Q2");
@@ -72,8 +72,10 @@ public class Main {
         rohrList.add(rohr2);
         rohrList.add(rohr3);
         rohrList.add(rohr4);
-        rohrList.add(rohr5);
+        rohrList.add(rohr5);*/
 
+
+        Kontroller.getKontroller().setup();
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Anzahl der Spielern pro Team: ");
@@ -81,18 +83,18 @@ public class Main {
         //Random rand = new Random();
         for (int i = 0; i < spielerAnzahl; i++) {
             //int  randomNum = rand.nextInt(3);
-            Installateur installateur = new Installateur(wasserquelleList.get(i % 3));
+            Installateur installateur = new Installateur(Kontroller.getKontroller().getMap().getWasserquellen().get(i % 3));
             installateur.setName("Installateur" + (i + 1));
             Kontroller.getKontroller().getInstallateurTeam().add(installateur);
 
 
-            Saboteur sb = new Saboteur(zisterneList.get(i % 3));
+            Saboteur sb = new Saboteur(Kontroller.getKontroller().getMap().getZisternen().get(i % 3));
             sb.setName("Saboteur" + (i + 1));
             Kontroller.getKontroller().getSaboteurTeam().add(sb);
 
         }
 
-        Kontroller.getKontroller().setup(wasserquelleList, zisterneList, pumpeList, rohrList, "Installateure", "Saboteure");
+
         Kontroller.getKontroller().game();
         // spiel starten
     }

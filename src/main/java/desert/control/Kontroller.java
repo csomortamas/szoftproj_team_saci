@@ -215,6 +215,7 @@ public class Kontroller {
         Logger.info("Ein Rohr wurde hinzugefügt");
     }
 
+    /*
     public void setup(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre, String teamInstName, String teamSabName) {      // binden
         // setup
 
@@ -259,8 +260,15 @@ public class Kontroller {
         pumpen.get(2).setAusgangsRohr(rohre.get(4));
         zisternen.get(2).setEingangsRohr(rohre.get(4));
 
+        map.saveMap();
 
         // logger
+        Logger.info("Setup erfolgreich");
+    }*/
+
+    public void setup(){
+        map = map.loadMap();
+
         Logger.info("Setup erfolgreich");
     }
 

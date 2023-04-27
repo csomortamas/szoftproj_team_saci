@@ -17,8 +17,9 @@ import java.util.Map;
  */
 public class Leaderboard {
     @Getter @Setter private RekordSpeicher rekordSpeicher=new RekordSpeicher();
-    @Getter @Setter private Map<Integer, Integer> sortedPunktMap = new HashMap<>(); //<ID,Punkt>
-    @Getter @Setter private Map<Integer, String> sortedNameMap = new HashMap<>(); //<ID,Name>
+    @Getter @Setter private RekordSpeicher sortedRekordSpeicher=new RekordSpeicher();
+    //@Getter @Setter private Map<Integer, Integer> sortedPunktMap = new HashMap<>(); //<ID,Punkt>
+    //@Getter @Setter private Map<Integer, String> sortedNameMap = new HashMap<>(); //<ID,Name>
 
     public Leaderboard(){
         rekordSpeicher = rekordSpeicher.importRekorde();
@@ -45,8 +46,8 @@ public class Leaderboard {
                 //Finding the attempt that hadn't yet been added with the same points.
                 if ((int) rekordSpeicher.getPunktMap ().values ().toArray ()[i] == num && !keyAdded.contains ((Integer) rekordSpeicher.getPunktMap ().keySet ().toArray ()[i])) {
                     //Putting the attempt in the sorted HashMap
-                    sortedPunktMap.put (count, num);
-                    sortedNameMap.put (count, (String) rekordSpeicher.getNameMap ().values ().toArray ()[i]);
+                    sortedRekordSpeicher.getPunktMap().put (count, num);
+                    sortedRekordSpeicher.getNameMap().put (count, (String) rekordSpeicher.getNameMap ().values ().toArray ()[i]);
                     //Adding the key of the attempt to the list of added keys
                     keyAdded.add ((int) rekordSpeicher.getPunktMap ().keySet ().toArray ()[i]);
                     count++;
@@ -67,7 +68,7 @@ public class Leaderboard {
     public void listAll(){
         System.out.println("\nLEADERBOARD:");
         for (int i = 1; i <= rekordSpeicher.getRekordAnzahl(); i++){
-            System.out.println("Name: "+sortedNameMap.get(i)+" Punkt: "+sortedPunktMap.get(i));
+            System.out.println("Name: "+sortedRekordSpeicher.getNameMap().get(i)+"\t Punkte: "+sortedRekordSpeicher.getPunktMap().get(i));
         }
     }
 }

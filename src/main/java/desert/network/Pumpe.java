@@ -48,7 +48,7 @@ public class Pumpe extends Netzelement {
 
         if(eingangsRohr != null && ausgangsRohr != null && !eingangsRohr.isIstKaputt()) {
             ausgangsRohr.setIstAktiv(eingangsRohr.istAktiv);
-        } else if(eingangsRohr != null && ausgangsRohr == null && eingangsRohr.istAktiv && eingangsRohr.isIstKaputt()) {
+        } else if(eingangsRohr != null && ausgangsRohr == null && eingangsRohr.istAktiv && !eingangsRohr.isIstKaputt()) {
             wasserTank++;
         } else if(eingangsRohr == null && ausgangsRohr != null && ausgangsRohr.istAktiv && wasserTank > 0) {
             wasserTank--;

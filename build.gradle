@@ -24,6 +24,11 @@ sourceSets {
             srcDirs = ['src']
         }
     }
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
 }
 group 'org.example'
 version '1.0-SNAPSHOT'

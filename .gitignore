@@ -8,3 +8,4 @@ gradle/*
 *.jar
 *.exe
 *.war
+records.json

@@ -368,22 +368,36 @@ public class Kontroller {
                         break;
                     }
                     case 2: {
-                        System.out.println("Index, woher ausbinden (Index: <1-" + (installateur.getPosition().getNachbarn().size()) + ">)");
-                        for (int i = 0; i < installateur.getPosition().getNachbarn().size(); i++) {
-                            System.out.println((i + 1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
-                        }
-                        System.out.print(">");
-                        choose = scanner.nextInt();
-                        System.out.println("Index, wohin einbinden (Index: <1-" + (map.getPumpen().size()) + ">) ausser der index: " + choose);
-                        for (int i = 0; i < map.getPumpen().size(); i++) {
-                            System.out.println((i + 1) + ": " + map.getPumpen().get(i).getName());
-                        }
-                        System.out.print(">");
-                        int chooseWohin = scanner.nextInt();
+                        if(installateur.getPosition().getNachbarn().contains(null) == false){
+                            System.out.println("Index, woher ausbinden (Index: <1-" + (installateur.getPosition().getNachbarn().size()) + ">)");
+                            for (int i = 0; i < installateur.getPosition().getNachbarn().size(); i++) {
+                                System.out.println((i + 1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
+                            }
+                            System.out.print(">");
+                            choose = scanner.nextInt();
+                            System.out.println("Index, wohin einbinden (Index: <1-" + (map.getPumpen().size()) + ">) ausser der index: " + choose);
+                            for (int i = 0; i < map.getPumpen().size(); i++) {
+                                System.out.println((i + 1) + ": " + map.getPumpen().get(i).getName());
+                            }
+                            System.out.print(">");
+                            int chooseWohin = scanner.nextInt();
 
-                        for (Pumpe pumpe : map.getPumpen()) {
-                            if (installateur.getPosition().getNachbarn().get(choose - 1) == pumpe)
-                                installateur.umbinden(pumpe, map.getPumpen().get(chooseWohin - 1));
+                            for (Pumpe pumpe : map.getPumpen()) {
+                                if (installateur.getPosition().getNachbarn().get(choose - 1) == pumpe)
+                                    installateur.umbinden(pumpe, map.getPumpen().get(chooseWohin - 1));
+                            }
+                        }else{
+                            System.out.println("Index, wohin einbinden (Index: <1-" + (map.getPumpen().size()) + ">) ausser der index: " + choose);
+                            for (int i = 0; i < map.getPumpen().size(); i++) {
+                                System.out.println((i + 1) + ": " + map.getPumpen().get(i).getName());
+                            }
+                            System.out.print(">");
+                            int chooseWohin = scanner.nextInt();
+
+                            for (Pumpe pumpe : map.getPumpen()) {
+                                if (installateur.getPosition().getNachbarn().get(choose - 1) == pumpe)
+                                    installateur.umbinden(null, map.getPumpen().get(chooseWohin - 1));
+                            }
                         }
                         break;
                     }

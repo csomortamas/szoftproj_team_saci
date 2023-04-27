@@ -85,13 +85,15 @@ public abstract class Spieler {
         Netzelement pumpe0 = aktuelleRohr.getNachbarn().get(0);
         Netzelement pumpe1 = aktuelleRohr.getNachbarn().get(1);
 
-
-
-        if(pumpeWoher == pumpe0) {
-            Kontroller.getKontroller().binden(aktuelleRohr, pumpe1, pumpeWohin);
-            pumpe0.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
-            aktuelleRohr.getNachbarn().remove(pumpe0); // entfernt die pumpe aus der liste der nachbarn
-            aktuelleRohr.getNachbarn().remove(pumpe1);
+        if(aktuelleRohr.getNachbarn().contains(null)){
+            aktuelleRohr.getNachbarn().remove(null);
+            aktuelleRohr.getNachbarn().add(pumpeWohin);
+        } else {
+            if (pumpeWoher == pumpe0) {
+                Kontroller.getKontroller().binden(aktuelleRohr, pumpe1, pumpeWohin);
+                pumpe0.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
+                aktuelleRohr.getNachbarn().remove(pumpe0); // entfernt die pumpe aus der liste der nachbarn
+                aktuelleRohr.getNachbarn().remove(pumpe1);
 
         } else {
             Kontroller.getKontroller().binden(aktuelleRohr, pumpe0, pumpeWohin);

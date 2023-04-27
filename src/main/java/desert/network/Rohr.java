@@ -25,7 +25,7 @@ public class Rohr extends Netzelement {
     }
 
     /**
-     * @return
+     * @param pumpeInHand
      */
     public void rohrSplit(Pumpe pumpeInHand) {
         Rohr r1 = new Rohr();

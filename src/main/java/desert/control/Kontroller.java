@@ -1,5 +1,7 @@
 package main.java.desert.control;
-import lombok.Getter; import lombok.Setter;
+
+import lombok.Getter;
+import lombok.Setter;
 import main.java.desert.network.*;
 import main.java.desert.player.Installateur;
 import main.java.desert.player.Saboteur;
@@ -13,64 +15,88 @@ import java.util.*;
  *
  */
 public class Kontroller {
-    private static Kontroller kontroller = new Kontroller();
-    private Kontroller(){}
-    public static Kontroller getKontroller(){
+    private static final Kontroller kontroller = new Kontroller();
+
+    private Kontroller() {
+    }
+
+    public static Kontroller getKontroller() {
         return kontroller;
     }
-    /**
-     *
-     */
-    @Getter @Setter GameMap map=new GameMap();
 
     /**
      *
      */
-    @Getter @Setter Leaderboard leaderboard=new Leaderboard();
-
-
-    /**
-      *
-      */
-    @Getter @Setter private int aktuelleRunde;
+    @Getter
+    @Setter
+    GameMap map = new GameMap();
 
     /**
      *
      */
-    @Getter @Setter private int maxRunde = 1;
+    @Getter
+    @Setter
+    Leaderboard leaderboard = new Leaderboard();
+
 
     /**
      *
      */
-    @Getter @Setter private String installateurTeamName;
+    @Getter
+    @Setter
+    private int aktuelleRunde;
 
     /**
      *
      */
-    @Getter @Setter public String saboteurTeamName;
+    @Getter
+    @Setter
+    private int maxRunde = 1;
 
     /**
      *
      */
-    @Getter @Setter private List<Installateur> installateurTeam = new ArrayList<>();
+    @Getter
+    @Setter
+    private String installateurTeamName;
 
     /**
      *
      */
-    @Getter @Setter private List<Saboteur> saboteurTeam = new ArrayList<>();
+    @Getter
+    @Setter
+    public String saboteurTeamName;
 
     /**
      *
      */
-    @Getter @Setter private int installateurPunkte;
+    @Getter
+    @Setter
+    private List<Installateur> installateurTeam = new ArrayList<>();
+
     /**
      *
      */
-    @Getter @Setter private int saboteurPunkte;
+    @Getter
+    @Setter
+    private List<Saboteur> saboteurTeam = new ArrayList<>();
+
+    /**
+     *
+     */
+    @Getter
+    @Setter
+    private int installateurPunkte;
+    /**
+     *
+     */
+    @Getter
+    @Setter
+    private int saboteurPunkte;
 
 
     public void binden(Rohr rohr, Netzelement left, Netzelement right) {
-        if(left instanceof Pumpe && right instanceof Pumpe) {
+        if (left instanceof Pumpe && right instanceof Pumpe) {
             rohr.getNachbarn().add(left);
             rohr.getNachbarn().add(right);
 
@@ -82,22 +108,23 @@ public class Kontroller {
     }
 
     /**
-     * @return
+     *
      */
     public void pumpeErstellen() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(1);
+        int randomNumber = rand.nextInt(5);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if(randomNumber == 0)
+        if (randomNumber == 1)
             map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe());
     }
+
     public void rohrErstellen() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(1);
+        int randomNumber = rand.nextInt(7);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if(randomNumber == 0) {
+        if (randomNumber == 1) {
             Rohr newRohr = new Rohr();
             newRohr.setName("R-G");
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
@@ -119,7 +146,6 @@ public class Kontroller {
     }
 
     /**
-     * @param
      *
      */
     public void punkteKalkulieren() {
@@ -142,11 +168,11 @@ public class Kontroller {
      *
      */
     public void tick() {
-        for(Wasserquelle quelle : map.getWasserquellen()){
-            if(quelle.getAusgangsRohr() != null)
+        for (Wasserquelle quelle : map.getWasserquellen()) {
+            if (quelle.getAusgangsRohr() != null)
                 quelle.getAusgangsRohr().setIstAktiv(true);
         }
-        for(int i = 0; i <  map.getRohre().size() + 1; i++) {
+        for (int i = 0; i < map.getRohre().size() + 1; i++) {
             for (Pumpe pumpe : map.getPumpen()) {
                 pumpe.wasserWeiterleiten();
             }
@@ -164,7 +190,7 @@ public class Kontroller {
 
     /**
      * @param zisterne
-     *      */
+     */
     public void addZisterne(Zisterne zisterne) {
         map.getZisternen().add(zisterne);
 
@@ -173,7 +199,6 @@ public class Kontroller {
 
     /**
      * @param pumpe
-     *
      */
     public void addPumpe(Pumpe pumpe) {
         map.getPumpen().add(pumpe);
@@ -183,7 +208,6 @@ public class Kontroller {
 
     /**
      * @param rohr
-     *
      */
     public void addRohr(Rohr rohr) {
         map.getRohre().add(rohr);
@@ -218,13 +242,11 @@ public class Kontroller {
         map.getWasserquellen().add(wasserquellen.get(2));
 
 
-
         binden(rohre.get(0), wasserquellen.get(0), pumpen.get(0));
         binden(rohre.get(1), pumpen.get(0), zisternen.get(0));
         binden(rohre.get(2), zisternen.get(0), pumpen.get(1));
         binden(rohre.get(3), wasserquellen.get(2), pumpen.get(2));
         binden(rohre.get(4), pumpen.get(2), zisternen.get(2));
-
 
 
         wasserquellen.get(0).setAusgangsRohr(rohre.get(0));
@@ -236,7 +258,6 @@ public class Kontroller {
         pumpen.get(2).setEingangsRohr(rohre.get(3));
         pumpen.get(2).setAusgangsRohr(rohre.get(4));
         zisternen.get(2).setEingangsRohr(rohre.get(4));
-
 
 
         // logger
@@ -251,33 +272,33 @@ public class Kontroller {
         Scanner scanner = new Scanner(System.in);
         int choose;
 
-        //System.out.println("Eralubene befähle:\n" + "");
+        //
         while (aktuelleRunde < maxRunde) {
-            System.out.println("Team Installateur: Mit welchem Spieler möchtest du spielen? (Index: <1-"+spielerZahlProTeam+">)");
-            for (int i =0; i < spielerZahlProTeam; i++){
-                System.out.println((i+1) + ": " + installateurTeam.get(i).getName());
+            System.out.println("Team Installateur: Mit welchem Spieler möchtest du spielen? (Index: <1-" + spielerZahlProTeam + ">)");
+            for (int i = 0; i < spielerZahlProTeam; i++) {
+                System.out.println((i + 1) + ": " + installateurTeam.get(i).getName());
             }
 
             System.out.print(">");
             choose = scanner.nextInt();
 
             // installateur
-            Installateur installateur = installateurTeam.get(choose-1);
+            Installateur installateur = installateurTeam.get(choose - 1);
 
             // installateur step
             System.out.println("Wohin möchtest du gehen? (Index: <1-" + installateur.getPosition().getNachbarn().size() + ">, 0: stehen bleiben)");
-            for (int i =0; i < installateur.getPosition().getNachbarn().size(); i++){
-                System.out.println((i+1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
+            for (int i = 0; i < installateur.getPosition().getNachbarn().size(); i++) {
+                System.out.println((i + 1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
             }
             System.out.print(">");
-            choose=scanner.nextInt();
+            choose = scanner.nextInt();
 
-            if(choose!=0){
-                installateur.step(installateur.getPosition().getNachbarn().get(choose-1));
+            if (choose != 0) {
+                installateur.step(installateur.getPosition().getNachbarn().get(choose - 1));
             }
 
             // installateur aktion
-            if(installateur.getPosition() instanceof Pumpe){
+            if (installateur.getPosition() instanceof Pumpe) {
                 System.out.print("\nSpieler: Welchen Aktion möchtest du durchführen? " +
                         "\n1: Eingangsrohr Umstellen, " +
                         "\n2: Ausgangsrohr Umstellen" +
@@ -291,16 +312,16 @@ public class Kontroller {
                 aktuellePumpe = getAktuellePosition(installateur, aktuellePumpe);
 
 
-                switch(choose) {
+                switch (choose) {
                     case 1: {
                         System.out.println("Rohr auswählen:");
-                        for (int i =0; i < installateur.getPosition().getNachbarn().size(); i++){
-                            System.out.println((i+1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
+                        for (int i = 0; i < installateur.getPosition().getNachbarn().size(); i++) {
+                            System.out.println((i + 1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        for (Rohr r: map.getRohre()){
-                            if (r==aktuellePumpe.getNachbarn().get(choose - 1)){
+                        for (Rohr r : map.getRohre()) {
+                            if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
                                 aktuellePumpe.setEingangsRohr(r);
                             }
                         }
@@ -308,13 +329,13 @@ public class Kontroller {
                     }
                     case 2: {
                         System.out.println("Rohr auswählen: ");
-                        for (int i =0; i < installateur.getPosition().getNachbarn().size(); i++){
-                            System.out.println((i+1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
+                        for (int i = 0; i < installateur.getPosition().getNachbarn().size(); i++) {
+                            System.out.println((i + 1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        for (Rohr r: map.getRohre()){
-                            if (r==aktuellePumpe.getNachbarn().get(choose - 1)){
+                        for (Rohr r : map.getRohre()) {
+                            if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
                                 aktuellePumpe.setAusgangsRohr(r);
                                 break;
                             }
@@ -334,75 +355,70 @@ public class Kontroller {
                         break;
                     }
                 }
-            }else{
+            } else {
                 System.out.print("\nSpieler: Welchen Aktion möchtest du durchführen? " +
-                                "\n1: Rohr reparieren" +
-                                "\n2: Rohr umbinden" +
-                                "\n3: Pumpe einmontieren" +
-                                "\n>");
+                        "\n1: Rohr reparieren" +
+                        "\n2: Rohr umbinden" +
+                        "\n3: Pumpe einmontieren" +
+                        "\n>");
                 choose = scanner.nextInt();
-                switch(choose){
-                    case 1:{
+                switch (choose) {
+                    case 1: {
                         installateur.getPosition().reparieren();
                         break;
                     }
-                    case 2:{
-                        System.out.println("Index, woher ausbinden (Index: <1-"+(installateur.getPosition().getNachbarn().size())+">)");
-                        for (int i =0; i < installateur.getPosition().getNachbarn().size(); i++){
-                            System.out.println((i+1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
+                    case 2: {
+                        System.out.println("Index, woher ausbinden (Index: <1-" + (installateur.getPosition().getNachbarn().size()) + ">)");
+                        for (int i = 0; i < installateur.getPosition().getNachbarn().size(); i++) {
+                            System.out.println((i + 1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
                         }
                         System.out.print(">");
-                        choose = scanner.nextInt() ;
-                        System.out.println("Index, wohin einbinden (Index: <1-"+(map.getPumpen().size())+">) ausser der index: "+ choose);
-                        for (int i =0; i < map.getPumpen().size(); i++){
-                            System.out.println((i+1) + ": " + map.getPumpen().get(i).getName());
+                        choose = scanner.nextInt();
+                        System.out.println("Index, wohin einbinden (Index: <1-" + (map.getPumpen().size()) + ">) ausser der index: " + choose);
+                        for (int i = 0; i < map.getPumpen().size(); i++) {
+                            System.out.println((i + 1) + ": " + map.getPumpen().get(i).getName());
                         }
                         System.out.print(">");
                         int chooseWohin = scanner.nextInt();
 
-                        for (Pumpe pumpe: map.getPumpen()) {
-                            if (installateur.getPosition().getNachbarn().get(choose-1) == pumpe)
-                                installateur.umbinden(pumpe, map.getPumpen().get(chooseWohin-1));
+                        for (Pumpe pumpe : map.getPumpen()) {
+                            if (installateur.getPosition().getNachbarn().get(choose - 1) == pumpe)
+                                installateur.umbinden(pumpe, map.getPumpen().get(chooseWohin - 1));
                         }
                         break;
                     }
-                    case 3:{
+                    case 3: {
                         System.out.println("In die Mitte des Rohres? (1 = yes/0 = no)");
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        if(choose == 1){
-                            installateur.pumpeEinmontieren(true);
-                        }
-                        else{
-                            installateur.pumpeEinmontieren(false);
-                        }
+                        installateur.pumpeEinmontieren(choose == 1);
                         break;
                     }
                 }
             }
 
             // saboteur
-            System.out.println("Team Saboteur: Mit welchen Spieler möchtest du spielen? (Index: <1-"+spielerZahlProTeam+">)");
-            for (int i =0; i < spielerZahlProTeam; i++){
-                System.out.println((i+1) + ": " + saboteurTeam.get(i).getName());
+            System.out.println("Team Saboteur: Mit welchen Spieler möchtest du spielen? (Index: <1-" + spielerZahlProTeam + ">)");
+            for (int i = 0; i < spielerZahlProTeam; i++) {
+                System.out.println((i + 1) + ": " + saboteurTeam.get(i).getName());
             }
             System.out.print(">");
             choose = scanner.nextInt();
 
-            Saboteur saboteur = saboteurTeam.get(choose-1);
+            Saboteur saboteur = saboteurTeam.get(choose - 1);
 
             //saboteur step
             System.out.println("Wohin möchtest du gehen? (Index: <1-" + saboteur.getPosition().getNachbarn().size() + ">, 0: stehen bleiben)");
-            for (int i =0; i < saboteur.getPosition().getNachbarn().size(); i++){
-                System.out.println((i+1) + ": " + saboteur.getPosition().getNachbarn().get(i).getName());
+            for (int i = 0; i < saboteur.getPosition().getNachbarn().size(); i++) {
+                System.out.println((i + 1) + ": " + saboteur.getPosition().getNachbarn().get(i).getName());
             }
             System.out.print(">");
-            choose=scanner.nextInt();
+            choose = scanner.nextInt();
 
-            if(choose!=0){
-                saboteur.step(saboteur.getPosition().getNachbarn().get(choose-1));
+            if (choose != 0) {
+                saboteur.step(saboteur.getPosition().getNachbarn().get(choose - 1));
             }
-            if(saboteur.getPosition() instanceof Pumpe){
+            if (saboteur.getPosition() instanceof Pumpe) {
                 System.out.print("\nSpieler: Welchen Aktion möchtest du durchführen? " +
                         "\n1: Eingangsrohr Umstellen, " +
                         "\n2: Ausgangsrohr Umstellen" +
@@ -415,17 +431,16 @@ public class Kontroller {
                 aktuellePumpe = getAktuellePosition(saboteur, aktuellePumpe);
 
 
-
-                switch(choose) {
+                switch (choose) {
                     case 1: {
                         System.out.println("Rohr auswählen: ");
-                        for (int i =0; i < saboteur.getPosition().getNachbarn().size(); i++){
-                            System.out.println((i+1) + ": " + saboteur.getPosition().getNachbarn().get(i).getName());
+                        for (int i = 0; i < saboteur.getPosition().getNachbarn().size(); i++) {
+                            System.out.println((i + 1) + ": " + saboteur.getPosition().getNachbarn().get(i).getName());
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        for (Rohr r: map.getRohre()){
-                            if (r==aktuellePumpe.getNachbarn().get(choose - 1)){
+                        for (Rohr r : map.getRohre()) {
+                            if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
                                 aktuellePumpe.setEingangsRohr(r);
                             }
                         }
@@ -433,13 +448,13 @@ public class Kontroller {
                     }
                     case 2: {
                         System.out.println("Rohr auswählen: ");
-                        for (int i =0; i < saboteur.getPosition().getNachbarn().size(); i++){
-                            System.out.println((i+1) + ": " + saboteur.getPosition().getNachbarn().get(i).getName());
+                        for (int i = 0; i < saboteur.getPosition().getNachbarn().size(); i++) {
+                            System.out.println((i + 1) + ": " + saboteur.getPosition().getNachbarn().get(i).getName());
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
-                        for (Rohr r: map.getRohre()){
-                            if (r==aktuellePumpe.getNachbarn().get(choose - 1)){
+                        for (Rohr r : map.getRohre()) {
+                            if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
                                 aktuellePumpe.setAusgangsRohr(r);
                             }
                             break;
@@ -455,7 +470,7 @@ public class Kontroller {
                         break;
                     }
                 }
-            }else {
+            } else {
                 System.out.print("\nSpieler: Welchen Aktion möchtest du durchführen? " +
                         "\n1: Rohr loechern" +
                         "\n2: Rohr umbinden" +
@@ -469,14 +484,14 @@ public class Kontroller {
                     }
                     case 2: {
                         System.out.println("Index, woher ausbinden (Index: <1-" + (saboteur.getPosition().getNachbarn().size()) + ">)");
-                        for (int i =0; i < saboteur.getPosition().getNachbarn().size(); i++){
-                            System.out.println((i+1) + ": " + saboteur.getPosition().getNachbarn().get(i).getName());
+                        for (int i = 0; i < saboteur.getPosition().getNachbarn().size(); i++) {
+                            System.out.println((i + 1) + ": " + saboteur.getPosition().getNachbarn().get(i).getName());
                         }
                         System.out.print(">");
                         choose = scanner.nextInt();
                         System.out.println("Index, wohin einbinden (Index: <1-" + (map.getPumpen().size()) + ">) ausser der index: " + choose);
-                        for (int i =0; i < map.getPumpen().size(); i++){
-                            System.out.println((i+1) + ": " + map.getPumpen().get(i).getName());
+                        for (int i = 0; i < map.getPumpen().size(); i++) {
+                            System.out.println((i + 1) + ": " + map.getPumpen().get(i).getName());
                         }
                         System.out.print(">");
                         int chooseWohin = scanner.nextInt();
@@ -485,8 +500,10 @@ public class Kontroller {
                             if (saboteur.getPosition().getNachbarn().get(choose-1) == pumpe)
                                 saboteur.umbinden(pumpe, map.getPumpen().get(chooseWohin-1));
                         }*/
-                        Pumpe pumpe = map.findPumpe(saboteur.getPosition().getNachbarn().get(choose-1));
-                        if (pumpe!=null){ saboteur.umbinden(pumpe, map.getPumpen().get(chooseWohin-1)); }
+                        Pumpe pumpe = map.findPumpe(saboteur.getPosition().getNachbarn().get(choose - 1));
+                        if (pumpe != null) {
+                            saboteur.umbinden(pumpe, map.getPumpen().get(chooseWohin - 1));
+                        }
                         break;
                     }
                 }
@@ -502,14 +519,14 @@ public class Kontroller {
         endGame();
     }
 
-    private void endGame(){
-        leaderboard.addRekord(installateurTeamName,installateurPunkte);
-        leaderboard.addRekord(saboteurTeamName,saboteurPunkte);
-        if(installateurPunkte>saboteurPunkte){
-            System.out.println("Hurray! Team "+installateurTeamName+" hat gewonnen.");
-        }else if (installateurPunkte<saboteurPunkte){
-            System.out.println("Hurray! Team "+saboteurTeamName+" hat gewonnen.");
-        }else{
+    private void endGame() {
+        leaderboard.addRekord(installateurTeamName, installateurPunkte);
+        leaderboard.addRekord(saboteurTeamName, saboteurPunkte);
+        if (installateurPunkte > saboteurPunkte) {
+            System.out.println("Hurray! Team " + installateurTeamName + " hat gewonnen.");
+        } else if (installateurPunkte < saboteurPunkte) {
+            System.out.println("Hurray! Team " + saboteurTeamName + " hat gewonnen.");
+        } else {
             System.out.println("Das Spiel endet unentschieden.");
         }
 
@@ -520,30 +537,36 @@ public class Kontroller {
 
 
     private Pumpe getAktuellePosition(Spieler spieler, Pumpe aktuellePumpe) {
-        if(spieler.getPosition() instanceof Zisterne) {
+        if (spieler.getPosition() instanceof Zisterne) {
             /*for (Zisterne zisterne : map.getZisternen()) {
                 if (zisterne== spieler.getPosition()){
                     aktuellePumpe =zisterne;
                 }
             }*/
-            Pumpe p=map.findZisterne(spieler.getPosition());
-            if(p!=null){ aktuellePumpe=p; }
-        } else if(spieler.getPosition() instanceof Wasserquelle) {
+            Pumpe p = map.findZisterne(spieler.getPosition());
+            if (p != null) {
+                aktuellePumpe = p;
+            }
+        } else if (spieler.getPosition() instanceof Wasserquelle) {
             /*for (Wasserquelle wasserquelle : map.getWasserquellen()) {
                 if (wasserquelle== spieler.getPosition()){
                     aktuellePumpe =wasserquelle;
                 }
             }*/
-            Pumpe p=map.findWasserquelle(spieler.getPosition());
-            if(p!=null){ aktuellePumpe=p; }
+            Pumpe p = map.findWasserquelle(spieler.getPosition());
+            if (p != null) {
+                aktuellePumpe = p;
+            }
         } else {
             /*for (Pumpe pumpe : map.getPumpen()) {
                 if (pumpe== spieler.getPosition()){
                     aktuellePumpe =pumpe;
                 }
             }*/
-            Pumpe p=map.findPumpe(spieler.getPosition());
-            if(p!=null){ aktuellePumpe=p; }
+            Pumpe p = map.findPumpe(spieler.getPosition());
+            if (p != null) {
+                aktuellePumpe = p;
+            }
         }
         return aktuellePumpe;
     }

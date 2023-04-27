@@ -1,21 +1,25 @@
 package main.java.desert.control;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import lombok.Getter;
 import lombok.Setter;
 import main.java.desert.network.*;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameMap {
-    @Getter @Setter private List<Rohr> rohre = new ArrayList<>();
-    @Getter @Setter private List<Pumpe> pumpen = new ArrayList<>();
-    @Getter @Setter private List<Wasserquelle> wasserquellen = new ArrayList<>();
-    @Getter @Setter private List<Zisterne> zisternen = new ArrayList<>();
+    @Getter
+    @Setter
+    private List<Rohr> rohre = new ArrayList<>();
+    @Getter
+    @Setter
+    private List<Pumpe> pumpen = new ArrayList<>();
+    @Getter
+    @Setter
+    private List<Wasserquelle> wasserquellen = new ArrayList<>();
+    @Getter
+    @Setter
+    private List<Zisterne> zisternen = new ArrayList<>();
 
 
 /*
@@ -41,33 +45,36 @@ public class GameMap {
     }
 */
 
-    public Pumpe findPumpe(Netzelement pumpe){
+    public Pumpe findPumpe(Netzelement pumpe) {
         for (Pumpe p : pumpen) {
-            if (p == pumpe){
+            if (p == pumpe) {
                 return p;
             }
         }
         return null;
     }
-    public Rohr findRohr(Netzelement rohr){
-        for (Rohr r: rohre) {
-            if (r == rohr){
+
+    public Rohr findRohr(Netzelement rohr) {
+        for (Rohr r : rohre) {
+            if (r == rohr) {
                 return r;
             }
         }
         return null;
     }
-    public Wasserquelle findWasserquelle(Netzelement wasserquelle){
+
+    public Wasserquelle findWasserquelle(Netzelement wasserquelle) {
         for (Wasserquelle w : wasserquellen) {
-            if (w == wasserquelle){
+            if (w == wasserquelle) {
                 return w;
             }
         }
         return null;
     }
-    public Zisterne findZisterne(Netzelement zisterne){
+
+    public Zisterne findZisterne(Netzelement zisterne) {
         for (Zisterne z : zisternen) {
-            if (z == zisterne){
+            if (z == zisterne) {
                 return z;
             }
         }

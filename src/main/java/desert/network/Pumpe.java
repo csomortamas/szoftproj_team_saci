@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.tinylog.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Pumpe extends Netzelement {
 

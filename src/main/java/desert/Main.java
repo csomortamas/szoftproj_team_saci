@@ -1,4 +1,5 @@
 package main.java.desert;
+
 import main.java.desert.control.Kontroller;
 import main.java.desert.network.Pumpe;
 import main.java.desert.network.Rohr;
@@ -6,11 +7,9 @@ import main.java.desert.network.Wasserquelle;
 import main.java.desert.network.Zisterne;
 import main.java.desert.player.Installateur;
 import main.java.desert.player.Saboteur;
-import main.java.desert.player.Spieler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -51,7 +50,7 @@ public class Main {
         pumpe2.setName("P2");
         Pumpe pumpe3 = new Pumpe();
         pumpe3.setName("P3");
-        List<Pumpe> pumpeList=new ArrayList<>();
+        List<Pumpe> pumpeList = new ArrayList<>();
         pumpeList.add(pumpe1);
         pumpeList.add(pumpe2);
         pumpeList.add(pumpe3);
@@ -68,7 +67,7 @@ public class Main {
         rohr4.setName("R4");
         rohr5.setName("R5");
 
-        List<Rohr> rohrList=new ArrayList<>();
+        List<Rohr> rohrList = new ArrayList<>();
         rohrList.add(rohr1);
         rohrList.add(rohr2);
         rohrList.add(rohr3);
@@ -79,16 +78,16 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.print("Anzahl der Spielern pro Team: ");
         int spielerAnzahl = sc.nextInt();
-        Random rand = new Random();
-        for(int i = 0; i < spielerAnzahl; i++){
+        //Random rand = new Random();
+        for (int i = 0; i < spielerAnzahl; i++) {
             //int  randomNum = rand.nextInt(3);
-            Installateur installateur=new Installateur(wasserquelleList.get(i%3));
-            installateur.setName("Installateur"+(i+1));
+            Installateur installateur = new Installateur(wasserquelleList.get(i % 3));
+            installateur.setName("Installateur" + (i + 1));
             Kontroller.getKontroller().getInstallateurTeam().add(installateur);
 
 
-            Saboteur sb = new Saboteur(zisterneList.get(i%3));
-            sb.setName("Saboteur"+(i+1));
+            Saboteur sb = new Saboteur(zisterneList.get(i % 3));
+            sb.setName("Saboteur" + (i + 1));
             Kontroller.getKontroller().getSaboteurTeam().add(sb);
 
         }

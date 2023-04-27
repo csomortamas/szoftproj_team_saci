@@ -27,7 +27,7 @@ public abstract class Spieler {
 
     /**
      * @param rohr
-     *
+     * @param eingangsRohr
      */
     public void rohrUmstellen(Rohr rohr, boolean eingangsRohr) {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
@@ -46,7 +46,7 @@ public abstract class Spieler {
     }
 
     /**
-     *
+     * @param einSchalten
      */
     public void pumpeSchalten(boolean einSchalten) {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();

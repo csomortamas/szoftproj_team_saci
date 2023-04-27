@@ -29,14 +29,14 @@ public class Kontroller {
      */
     @Getter
     @Setter
-    GameMap map = new GameMap();
+    private GameMap map = new GameMap();
 
     /**
      *
      */
     @Getter
     @Setter
-    Leaderboard leaderboard = new Leaderboard();
+    private Leaderboard leaderboard = new Leaderboard();
 
 
     /**
@@ -65,7 +65,7 @@ public class Kontroller {
      */
     @Getter
     @Setter
-    public String saboteurTeamName;
+    private String saboteurTeamName;
 
     /**
      *

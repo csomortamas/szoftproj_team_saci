@@ -43,8 +43,8 @@ public class RekordSpeicher {
             JsonReader reader = new JsonReader(new FileReader("records.json"));
             rekordSpeicher = gson.fromJson(reader, new TypeToken<RekordSpeicher>() {
             }.getType());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException ignored) {
+
         }
         return rekordSpeicher;
     }

@@ -43,26 +43,34 @@ public class GameMap {
         }
     }
 
-    private GameMap fromHash(GameMap gameMap) {
+    private void fromHash() {
         List<Netzelement> allElements = new ArrayList<>();
-        allElements.addAll(gameMap.rohre);
-        allElements.addAll(gameMap.pumpen);
-        allElements.addAll(gameMap.wasserquellen);
-        allElements.addAll(gameMap.zisternen);
+        allElements.addAll(rohre);
+        allElements.addAll(pumpen);
+        allElements.addAll(wasserquellen);
+        allElements.addAll(zisternen);
 
         for (Netzelement n : allElements) {
             for (int integer : n.getNachbarnHash()) {
                 for (Netzelement n2 : allElements) {
-                    int valami = n2.hashCode();
                     if (n2.getHash() == integer) {
-                        n2.setIstAktiv(true);
                         n.getNachbarn().add(n2);
                         if(n2 instanceof Pumpe){
                             Pumpe p;
                             if(n2 instanceof Wasserquelle){
                                 p=findWasserquelle(n2);
                             }else if(n2 instanceof Zisterne){
-                                p=findZisterne(n2);
+                                p = findZisterne(n2);
+                                Zisterne z = findZisterne(n2);
+                                if (z.getPumpeZurVerfuegung() != null) {
+                                    for (Pumpe pumAkk : pumpen) {
+                                        if (pumAkk.getHash().equals(z.getPumpeZurVerfuegung().getHash())) {
+                                            z.setPumpeZurVerfuegung(pumAkk);
+                                            break;
+                                        }
+                                    }
+                                }
+
                             }else{
                                 p=findPumpe(n2);
                             }
@@ -90,7 +98,6 @@ public class GameMap {
             }
             n.getNachbarnHash().clear();
         }
-        return gameMap;
     }
 
     public void saveMap() {
@@ -111,8 +118,8 @@ public class GameMap {
             JsonReader reader = new JsonReader(new FileReader("gameMap.json"));
             map = gson.fromJson(reader, new TypeToken<GameMap>() {
             }.getType());
-            map = map.fromHash(map);
-        } catch (FileNotFoundException Ignored) {
+            map.fromHash();
+        } catch (FileNotFoundException ignored) {
         }
         return map;
     }

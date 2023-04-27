@@ -539,8 +539,8 @@ public class Kontroller {
 
             // ende der runde
             tick();
-            System.out.println("Saboteur: " + Kontroller.getKontroller().getSaboteurPunkte());
-            System.out.println("Installateur: " + Kontroller.getKontroller().getInstallateurPunkte());
+            System.out.println("\033[1;32m"+installateurTeamName + ": " + Kontroller.getKontroller().getInstallateurPunkte());
+            System.out.println("\033[1;31m"+saboteurTeamName + ": " + Kontroller.getKontroller().getSaboteurPunkte()+"\033[0m");
         }
 
         endGame();
@@ -550,11 +550,11 @@ public class Kontroller {
         leaderboard.addRekord(installateurTeamName, installateurPunkte);
         leaderboard.addRekord(saboteurTeamName, saboteurPunkte);
         if (installateurPunkte > saboteurPunkte) {
-            System.out.println("Hurray! Team " + installateurTeamName + " hat gewonnen.");
+            System.out.println("\033[1;32mHurray! Team " + installateurTeamName + " hat gewonnen.\033[0m");
         } else if (installateurPunkte < saboteurPunkte) {
-            System.out.println("Hurray! Team " + saboteurTeamName + " hat gewonnen.");
+            System.out.println("\033[1;32mHurray! Team " + saboteurTeamName + " hat gewonnen.\033[0m");
         } else {
-            System.out.println("Das Spiel endet unentschieden.");
+            System.out.println("\033[1;33mDas Spiel endet unentschieden.\033[0m");
         }
 
         leaderboard.listAll();

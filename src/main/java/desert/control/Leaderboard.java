@@ -60,7 +60,7 @@ public class Leaderboard {
 
     public void listAll() {
         if (sortedRekordSpeicher != null) {
-            System.out.println("\nLEADERBOARD:");
+            System.out.println("\033[1;35m\nLEADERBOARD:\033[0m");
             for (int i = 1; i <= rekordSpeicher.getRekordAnzahl(); i++) {
                 System.out.println("Name: " + sortedRekordSpeicher.getNameMap().get(i) + "\t Punkte: " + sortedRekordSpeicher.getPunktMap().get(i));
             }

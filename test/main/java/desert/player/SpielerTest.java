@@ -1,5 +1,11 @@
 package main.java.desert.player;
 
+import main.java.desert.control.Kontroller;
+import main.java.desert.network.Pumpe;
+import main.java.desert.network.Rohr;
+import main.java.desert.network.Wasserquelle;
+import main.java.desert.network.Zisterne;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,7 +49,23 @@ class SpielerTest {
         assertEquals(r1, pumpe1.getAusgangsRohr());
     }
     @Test
-    void umbinden() {
+    void rohrUmbinden() {
+        Pumpe pumpe1 = new Pumpe();
+        Pumpe pumpe2 = new Pumpe();
+        Pumpe pumpe3 = new Pumpe();
+        Rohr r1 = new Rohr();
+        Kontroller.getKontroller().addPumpe(pumpe1);
+        Kontroller.getKontroller().addPumpe(pumpe2);
+        Kontroller.getKontroller().addPumpe(pumpe3);
+        Kontroller.getKontroller().addRohr(r1);
+        Installateur installateur = new Installateur(new Wasserquelle());
+        Kontroller.getKontroller().binden(r1, pumpe1, pumpe2);
+        installateur.setPosition(r1);
+        installateur.umbinden(pumpe2, pumpe3);
+        boolean oldRemoved = !pumpe2.getNachbarn().contains(r1);
+        boolean newAdded = pumpe3.getNachbarn().contains(r1);
+        Assertions.assertTrue(oldRemoved);
+        Assertions.assertTrue(newAdded);
     }
 
     @Test
@@ -89,10 +111,54 @@ class SpielerTest {
     }
 
     @Test
-    void eingangsRohrUmstellen() {
+    void eingangsRohrUmstellenAufAusgangsrohr() {
+        Pumpe pumpe1 = new Pumpe();
+        Kontroller.getKontroller().addPumpe(pumpe1);
+        Rohr r1 = new Rohr();
+        Rohr r2 = new Rohr();
+        Kontroller.getKontroller().addRohr(r1);
+        Kontroller.getKontroller().addRohr(r2);
+
+        pumpe1.getNachbarn().add(r1);
+        pumpe1.getNachbarn().add(r2);
+
+        Installateur installateur = new Installateur(new Wasserquelle());
+        installateur.setPosition(pumpe1);
+
+        pumpe1.setEingangsRohr(r1);
+        installateur.ausgangsRohrUmstellen(r1);
+
+        Assertions.assertNull(pumpe1.getAusgangsRohr());
     }
 
     @Test
-    void ausgangsRohrUmstellen() {
+    void pumpeAktivieren() {
+        Pumpe pumpe = new Pumpe();
+        Kontroller.getKontroller().addPumpe(pumpe);
+        Installateur installateur = new Installateur(new Wasserquelle());
+        installateur.setPosition(pumpe);
+        installateur.pumpeSchalten(true);
+        Assertions.assertTrue(pumpe.isIstAktiv());
+    }
+
+    @Test
+    void pumpeDeaktivieren() {
+        Pumpe pumpe = new Pumpe();
+        Kontroller.getKontroller().addPumpe(pumpe);
+        Installateur installateur = new Installateur(new Wasserquelle());
+        installateur.setPosition(pumpe);
+        installateur.pumpeSchalten(false);
+        Assertions.assertFalse(pumpe.isIstAktiv());
+    }
+
+    @Test
+    void pumpeDeaktivierenWennEsSchonDeaktiviertIst(){
+        Pumpe pumpe = new Pumpe();
+        Kontroller.getKontroller().addPumpe(pumpe);
+        Installateur installateur = new Installateur(new Wasserquelle());
+        installateur.setPosition(pumpe);
+        pumpe.setIstAktiv(false);
+        installateur.pumpeSchalten(false);
+        Assertions.assertFalse(pumpe.isIstAktiv());
     }
 }

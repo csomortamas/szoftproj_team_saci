@@ -330,7 +330,8 @@ public class Kontroller {
                         choose = scanner.nextInt();
                         for (Rohr r : map.getRohre()) {
                             if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
-                                aktuellePumpe.setEingangsRohr(r);
+                                installateur.eingangsRohrUmstellen(r);
+                                //aktuellePumpe.setEingangsRohr(r);
                             }
                         }
                         break;
@@ -344,7 +345,8 @@ public class Kontroller {
                         choose = scanner.nextInt();
                         for (Rohr r : map.getRohre()) {
                             if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
-                                aktuellePumpe.setAusgangsRohr(r);
+                                installateur.ausgangsRohrUmstellen(r);
+                                //aktuellePumpe.setAusgangsRohr(r);
                                 break;
                             }
                         }
@@ -463,7 +465,8 @@ public class Kontroller {
                         choose = scanner.nextInt();
                         for (Rohr r : map.getRohre()) {
                             if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
-                                aktuellePumpe.setEingangsRohr(r);
+                                saboteur.eingangsRohrUmstellen(r);
+                                //aktuellePumpe.setEingangsRohr(r);
                             }
                         }
                         break;
@@ -477,7 +480,8 @@ public class Kontroller {
                         choose = scanner.nextInt();
                         for (Rohr r : map.getRohre()) {
                             if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
-                                aktuellePumpe.setAusgangsRohr(r);
+                               saboteur.ausgangsRohrUmstellen(r);
+                                //aktuellePumpe.setAusgangsRohr(r);
                             }
                             break;
                         }

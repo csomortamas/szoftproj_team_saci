@@ -55,7 +55,34 @@ public class GameMap {
                 for (Netzelement n2 : allElements) {
                     int valami = n2.hashCode();
                     if (n2.getHash() == integer) {
+                        n2.setIstAktiv(true);
                         n.getNachbarn().add(n2);
+                        if(n2 instanceof Pumpe){
+                            Pumpe p;
+                            if(n2 instanceof Wasserquelle){
+                                p=findWasserquelle(n2);
+                            }else if(n2 instanceof Zisterne){
+                                p=findZisterne(n2);
+                            }else{
+                                p=findPumpe(n2);
+                            }
+                            if(p.getAusgangsRohr()!=null){
+                                for (Rohr r:rohre){
+                                    if(r.getHash().equals(p.getAusgangsRohr().getHash())){
+                                        p.setAusgangsRohr(r);
+                                        break;
+                                    }
+                                }
+                            }
+                            if(p.getEingangsRohr()!=null){
+                                for (Rohr r:rohre){
+                                    if(r.getHash().equals(p.getEingangsRohr().getHash())){
+                                        p.setEingangsRohr(r);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                         break;
                     }
 

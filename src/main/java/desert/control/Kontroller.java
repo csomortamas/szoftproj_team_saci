@@ -266,9 +266,10 @@ public class Kontroller {
         Logger.info("Setup erfolgreich");
     }*/
 
-    public void setup(){
+    public void setup(String teamInstallateurName, String teamSaboteurName){
         map = map.loadMap();
-
+        installateurTeamName= teamInstallateurName;
+        saboteurTeamName=teamSaboteurName;
         Logger.info("Setup erfolgreich");
     }
 

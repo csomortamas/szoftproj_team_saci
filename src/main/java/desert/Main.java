@@ -75,7 +75,7 @@ public class Main {
         rohrList.add(rohr5);*/
 
 
-        Kontroller.getKontroller().setup();
+        Kontroller.getKontroller().setup("Installateure","Saboteure");
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Anzahl der Spielern pro Team: ");

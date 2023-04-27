@@ -37,7 +37,7 @@ public class RekordSpeicher {
     }
 
     public RekordSpeicher importRekorde() {
-        RekordSpeicher rekordSpeicher = null;
+        RekordSpeicher rekordSpeicher = new RekordSpeicher();
         Gson gson = new Gson();
         try {
             JsonReader reader = new JsonReader(new FileReader("records.json"));

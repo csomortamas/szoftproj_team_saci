@@ -11,4 +11,9 @@ public class Saboteur extends Spieler {
     public Saboteur(Zisterne startPunkt) {
         super(startPunkt);
     }
+
+
+    public void rohrLoechern() {
+        this.position.kaputtMachen();
+    }
 }

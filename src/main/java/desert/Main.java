@@ -80,9 +80,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.print("Anzahl der Spielern pro Team: ");
         int spielerAnzahl = sc.nextInt();
-        //Random rand = new Random();
         for (int i = 0; i < spielerAnzahl; i++) {
-            //int  randomNum = rand.nextInt(3);
             Installateur installateur = new Installateur(Kontroller.getKontroller().getMap().getWasserquellen().get(i % 3));
             installateur.setName("Installateur" + (i + 1));
             Kontroller.getKontroller().getInstallateurTeam().add(installateur);

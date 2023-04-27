@@ -160,7 +160,7 @@ public abstract class Spieler {
         for(Pumpe pumpe : allePumpen) {
             if(pumpe == position) {
                 if(pumpe.getNachbarn().contains(rohr)) {
-                    if(rohr != pumpe.getAusgangsRohr() ){
+                    if(rohr != pumpe.getEingangsRohr() ){
                         pumpe.setAusgangsRohr(rohr);
                         Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
                     } else {

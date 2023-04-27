@@ -42,6 +42,7 @@ public class Installateur extends Spieler {
                 if(position == rohr) {
                     rohr.rohrSplit(pumpeInHand);
                     this.setPosition(pumpeInHand);
+                    break;
                 }
             }
         }

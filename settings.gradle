@@ -1,2 +1,4 @@
 rootProject.name = 'szoftver-projekt-labor'
+include 'resources'
+include 'resources'
 

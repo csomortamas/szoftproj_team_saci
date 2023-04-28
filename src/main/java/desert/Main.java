@@ -20,11 +20,11 @@ public class Main {
     public static void main(String[] args) {
         // SETUP GAME MAP
         // create wasserquelle
-        /*Wasserquelle wasserquelle1 = new Wasserquelle();
+        /*Wasserquelle wasserquelle1 = new Wasserquelle(1,2);
         wasserquelle1.setName("Q1");
-        Wasserquelle wasserquelle2 = new Wasserquelle();
+        Wasserquelle wasserquelle2 = new Wasserquelle(1,5);
         wasserquelle2.setName("Q2");
-        Wasserquelle wasserquelle3 = new Wasserquelle();
+        Wasserquelle wasserquelle3 = new Wasserquelle(1,8);
         wasserquelle3.setName("Q3");
         List<Wasserquelle> wasserquelleList = new ArrayList<>();
         wasserquelleList.add(wasserquelle1);
@@ -32,11 +32,11 @@ public class Main {
         wasserquelleList.add(wasserquelle3);
 
         // create 3 zisterne
-        Zisterne zisterne1 = new Zisterne();
+        Zisterne zisterne1 = new Zisterne(10,2);
         zisterne1.setName("Z1");
-        Zisterne zisterne2 = new Zisterne();
+        Zisterne zisterne2 = new Zisterne(10,5);
         zisterne2.setName("Z2");
-        Zisterne zisterne3 = new Zisterne();
+        Zisterne zisterne3 = new Zisterne(10,8);
         zisterne3.setName("Z3");
         List<Zisterne> zisterneList = new ArrayList<>();
         zisterneList.add(zisterne1);
@@ -44,11 +44,11 @@ public class Main {
         zisterneList.add(zisterne3);
 
         // create 1 pumpe
-        Pumpe pumpe1 = new Pumpe();
+        Pumpe pumpe1 = new Pumpe(5,2);
         pumpe1.setName("P1");
-        Pumpe pumpe2 = new Pumpe();
+        Pumpe pumpe2 = new Pumpe(5,5);
         pumpe2.setName("P2");
-        Pumpe pumpe3 = new Pumpe();
+        Pumpe pumpe3 = new Pumpe(5,8);
         pumpe3.setName("P3");
         List<Pumpe> pumpeList = new ArrayList<>();
         pumpeList.add(pumpe1);
@@ -72,8 +72,9 @@ public class Main {
         rohrList.add(rohr2);
         rohrList.add(rohr3);
         rohrList.add(rohr4);
-        rohrList.add(rohr5);*/
-
+        rohrList.add(rohr5);
+        Kontroller.getKontroller().setup(wasserquelleList,zisterneList,pumpeList,rohrList,"Installateure","Saboteure");
+        */
 
         Kontroller.getKontroller().setup("Installateure","Saboteure");
 

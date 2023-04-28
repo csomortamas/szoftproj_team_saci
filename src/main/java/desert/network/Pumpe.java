@@ -10,6 +10,17 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
+    @Getter @Setter
+    protected double posX;
+
+    /**
+     *
+     */
+    @Getter @Setter
+    protected double posY;
+    /**
+     *
+     */
     @Getter @Setter private Rohr eingangsRohr;
     /**
      *
@@ -34,7 +45,9 @@ public class Pumpe extends Netzelement {
     /**
      * Default Konstruktor
      */
-    public Pumpe() {
+    public Pumpe(double x, double y) {
+        this.posX = x;
+        this.posY = y;
         istAktiv = true;
         Logger.info("Neue Pumpe erstellt.");
     }

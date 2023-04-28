@@ -116,7 +116,7 @@ public class Kontroller {
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
         if (randomNumber == 1)
-            map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe());
+            map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(),map.getZisternen().get(randomZisterneIndex).getPosY()));
     }
 
     public void rohrErstellen() {
@@ -215,6 +215,7 @@ public class Kontroller {
         Logger.info("Ein Rohr wurde hinzugefügt");
     }
 
+
     /*
     public void setup(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre, String teamInstName, String teamSabName) {      // binden
         // setup
@@ -266,10 +267,11 @@ public class Kontroller {
         Logger.info("Setup erfolgreich");
     }*/
 
+
     public void setup(String teamInstallateurName, String teamSaboteurName){
         map = map.loadMap();
-        installateurTeamName= teamInstallateurName;
-        saboteurTeamName=teamSaboteurName;
+        installateurTeamName = teamInstallateurName;
+        saboteurTeamName = teamSaboteurName;
         Logger.info("Setup erfolgreich");
     }
 

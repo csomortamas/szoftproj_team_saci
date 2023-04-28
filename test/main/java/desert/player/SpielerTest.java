@@ -14,15 +14,15 @@ class SpielerTest {
 
     @Test
     void eingangsrohrUmstellen() {
-        Pumpe pumpe1 = new Pumpe();
-        Pumpe pumpe2 = new Pumpe();
+        Pumpe pumpe1 = new Pumpe(5,2);
+        Pumpe pumpe2 = new Pumpe(5,6);
         Rohr r1 = new Rohr();
 
         Kontroller.getKontroller().getMap().getPumpen().add(pumpe1);
         Kontroller.getKontroller().getMap().getPumpen().add(pumpe2);
         Kontroller.getKontroller().getMap().getRohre().add(r1);
 
-        Installateur spieler = new Installateur(new Wasserquelle());
+        Installateur spieler = new Installateur(new Wasserquelle(1,2));
         spieler.setPosition(pumpe1);
         Kontroller.getKontroller().binden(r1, pumpe1, pumpe2);
 
@@ -33,15 +33,15 @@ class SpielerTest {
 
     @Test
     void ausgangsrohrUmstellen(){
-        Pumpe pumpe1 = new Pumpe();
-        Pumpe pumpe2 = new Pumpe();
+        Pumpe pumpe1 = new Pumpe(5,2);
+        Pumpe pumpe2 = new Pumpe(5,6);
         Rohr r1 = new Rohr();
 
         Kontroller.getKontroller().getMap().getPumpen().add(pumpe1);
         Kontroller.getKontroller().getMap().getPumpen().add(pumpe2);
         Kontroller.getKontroller().getMap().getRohre().add(r1);
 
-        Installateur spieler = new Installateur(new Wasserquelle());
+        Installateur spieler = new Installateur(new Wasserquelle(1,2));
         spieler.setPosition(pumpe1);
         Kontroller.getKontroller().binden(r1, pumpe1, pumpe2);
 
@@ -50,15 +50,15 @@ class SpielerTest {
     }
     @Test
     void rohrUmbinden() {
-        Pumpe pumpe1 = new Pumpe();
-        Pumpe pumpe2 = new Pumpe();
-        Pumpe pumpe3 = new Pumpe();
+        Pumpe pumpe1 = new Pumpe(5,2);
+        Pumpe pumpe2 = new Pumpe(5,5);
+        Pumpe pumpe3 = new Pumpe(5,8);
         Rohr r1 = new Rohr();
         Kontroller.getKontroller().addPumpe(pumpe1);
         Kontroller.getKontroller().addPumpe(pumpe2);
         Kontroller.getKontroller().addPumpe(pumpe3);
         Kontroller.getKontroller().addRohr(r1);
-        Installateur installateur = new Installateur(new Wasserquelle());
+        Installateur installateur = new Installateur(new Wasserquelle(1,2));
         Kontroller.getKontroller().binden(r1, pumpe1, pumpe2);
         installateur.setPosition(r1);
         installateur.umbinden(pumpe2, pumpe3);
@@ -70,9 +70,9 @@ class SpielerTest {
 
     @Test
     void Step() {
-        Wasserquelle pumpe0 = new Wasserquelle();
-        Pumpe pumpe1 = new Pumpe();
-        Zisterne pumpe2 = new Zisterne();
+        Wasserquelle pumpe0 = new Wasserquelle(0,1);
+        Pumpe pumpe1 = new Pumpe(5,5);
+        Zisterne pumpe2 = new Zisterne(5,7);
         Rohr r1 = new Rohr();
         Rohr r2 = new Rohr();
 
@@ -112,7 +112,7 @@ class SpielerTest {
 
     @Test
     void eingangsRohrUmstellenAufAusgangsrohr() {
-        Pumpe pumpe1 = new Pumpe();
+        Pumpe pumpe1 = new Pumpe(5,2);
         Kontroller.getKontroller().addPumpe(pumpe1);
         Rohr r1 = new Rohr();
         Rohr r2 = new Rohr();
@@ -122,7 +122,7 @@ class SpielerTest {
         pumpe1.getNachbarn().add(r1);
         pumpe1.getNachbarn().add(r2);
 
-        Installateur installateur = new Installateur(new Wasserquelle());
+        Installateur installateur = new Installateur(new Wasserquelle(1,1));
         installateur.setPosition(pumpe1);
 
         pumpe1.setEingangsRohr(r1);
@@ -133,9 +133,9 @@ class SpielerTest {
 
     @Test
     void pumpeAktivieren() {
-        Pumpe pumpe = new Pumpe();
+        Pumpe pumpe = new Pumpe(5,2);
         Kontroller.getKontroller().addPumpe(pumpe);
-        Installateur installateur = new Installateur(new Wasserquelle());
+        Installateur installateur = new Installateur(new Wasserquelle(1,1));
         installateur.setPosition(pumpe);
         installateur.pumpeSchalten(true);
         Assertions.assertTrue(pumpe.isIstAktiv());
@@ -143,9 +143,9 @@ class SpielerTest {
 
     @Test
     void pumpeDeaktivieren() {
-        Pumpe pumpe = new Pumpe();
+        Pumpe pumpe = new Pumpe(5,2);
         Kontroller.getKontroller().addPumpe(pumpe);
-        Installateur installateur = new Installateur(new Wasserquelle());
+        Installateur installateur = new Installateur(new Wasserquelle(1,1));
         installateur.setPosition(pumpe);
         installateur.pumpeSchalten(false);
         Assertions.assertFalse(pumpe.isIstAktiv());
@@ -153,9 +153,9 @@ class SpielerTest {
 
     @Test
     void pumpeDeaktivierenWennEsSchonDeaktiviertIst(){
-        Pumpe pumpe = new Pumpe();
+        Pumpe pumpe = new Pumpe(5,2);
         Kontroller.getKontroller().addPumpe(pumpe);
-        Installateur installateur = new Installateur(new Wasserquelle());
+        Installateur installateur = new Installateur(new Wasserquelle(1,1));
         installateur.setPosition(pumpe);
         pumpe.setIstAktiv(false);
         installateur.pumpeSchalten(false);

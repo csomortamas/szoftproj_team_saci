@@ -18,10 +18,10 @@ class InstallateurTest {
     Zisterne z1;
     @BeforeEach
     public void init(){
-        wq = new Wasserquelle();
+        wq = new Wasserquelle(1,1);
         ins = new Installateur(wq);
-        p1 = new Pumpe();
-        z1 = new Zisterne();
+        p1 = new Pumpe(5,5);
+        z1 = new Zisterne(10,1);
     }
 
 
@@ -36,8 +36,8 @@ class InstallateurTest {
     @Test
     void pumpeEinmontierenImRohr() {
         Rohr r1 =new Rohr();
-        Pumpe nachbarnP1 = new Pumpe();
-        Pumpe nachbarnP2 = new Pumpe();
+        Pumpe nachbarnP1 = new Pumpe(5,2);
+        Pumpe nachbarnP2 = new Pumpe(5,6);
         Kontroller.getKontroller().getMap().getRohre().add(r1);
         Kontroller.getKontroller().binden(r1,nachbarnP1,nachbarnP2);
         ins.setPumpeInHand(p1);

@@ -26,6 +26,10 @@ public class Installateur extends Spieler {
         super(startPunkt);
     }
 
+    public void reparieren() {
+        this.position.reparieren();
+    }
+
     /**
      * @param middle
      *
@@ -38,6 +42,7 @@ public class Installateur extends Spieler {
                 if(position == rohr) {
                     rohr.rohrSplit(pumpeInHand);
                     this.setPosition(pumpeInHand);
+                    break;
                 }
             }
         }

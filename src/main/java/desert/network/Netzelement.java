@@ -33,7 +33,17 @@ public abstract class Netzelement {
     /**
      *
      */
-    @Getter @Setter protected List<Netzelement> nachbarn = new ArrayList<>();
+    @Getter @Setter protected transient List<Netzelement> nachbarn = new ArrayList<>();
+
+
+    /**
+     *
+     */
+    @Getter @Setter protected Integer hash;
+    /**
+     *
+     */
+    @Getter protected List<Integer> nachbarnHash = new ArrayList<>();
 
     /**
      *

@@ -29,14 +29,14 @@ public class Kontroller {
      */
     @Getter
     @Setter
-    GameMap map = new GameMap();
+    private GameMap map = new GameMap();
 
     /**
      *
      */
     @Getter
     @Setter
-    Leaderboard leaderboard = new Leaderboard();
+    private Leaderboard leaderboard = new Leaderboard();
 
 
     /**
@@ -65,7 +65,7 @@ public class Kontroller {
      */
     @Getter
     @Setter
-    public String saboteurTeamName;
+    private String saboteurTeamName;
 
     /**
      *
@@ -116,7 +116,7 @@ public class Kontroller {
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
         if (randomNumber == 1)
-            map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe());
+            map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(),map.getZisternen().get(randomZisterneIndex).getPosY()));
     }
 
     public void rohrErstellen() {
@@ -215,6 +215,8 @@ public class Kontroller {
         Logger.info("Ein Rohr wurde hinzugefügt");
     }
 
+
+    /*
     public void setup(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre, String teamInstName, String teamSabName) {      // binden
         // setup
 
@@ -259,8 +261,17 @@ public class Kontroller {
         pumpen.get(2).setAusgangsRohr(rohre.get(4));
         zisternen.get(2).setEingangsRohr(rohre.get(4));
 
+        map.saveMap();
 
         // logger
+        Logger.info("Setup erfolgreich");
+    }*/
+
+
+    public void setup(String teamInstallateurName, String teamSaboteurName){
+        map = map.loadMap();
+        installateurTeamName = teamInstallateurName;
+        saboteurTeamName = teamSaboteurName;
         Logger.info("Setup erfolgreich");
     }
 
@@ -322,7 +333,8 @@ public class Kontroller {
                         choose = scanner.nextInt();
                         for (Rohr r : map.getRohre()) {
                             if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
-                                aktuellePumpe.setEingangsRohr(r);
+                                installateur.eingangsRohrUmstellen(r);
+                                //aktuellePumpe.setEingangsRohr(r);
                             }
                         }
                         break;
@@ -336,7 +348,8 @@ public class Kontroller {
                         choose = scanner.nextInt();
                         for (Rohr r : map.getRohre()) {
                             if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
-                                aktuellePumpe.setAusgangsRohr(r);
+                                installateur.ausgangsRohrUmstellen(r);
+                                //aktuellePumpe.setAusgangsRohr(r);
                                 break;
                             }
                         }
@@ -455,7 +468,8 @@ public class Kontroller {
                         choose = scanner.nextInt();
                         for (Rohr r : map.getRohre()) {
                             if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
-                                aktuellePumpe.setEingangsRohr(r);
+                                saboteur.eingangsRohrUmstellen(r);
+                                //aktuellePumpe.setEingangsRohr(r);
                             }
                         }
                         break;
@@ -469,7 +483,8 @@ public class Kontroller {
                         choose = scanner.nextInt();
                         for (Rohr r : map.getRohre()) {
                             if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
-                                aktuellePumpe.setAusgangsRohr(r);
+                               saboteur.ausgangsRohrUmstellen(r);
+                                //aktuellePumpe.setAusgangsRohr(r);
                             }
                             break;
                         }
@@ -526,8 +541,8 @@ public class Kontroller {
 
             // ende der runde
             tick();
-            System.out.println("Saboteur: " + Kontroller.getKontroller().getSaboteurPunkte());
-            System.out.println("Installateur: " + Kontroller.getKontroller().getInstallateurPunkte());
+            System.out.println("\033[1;32m"+installateurTeamName + ": " + Kontroller.getKontroller().getInstallateurPunkte());
+            System.out.println("\033[1;31m"+saboteurTeamName + ": " + Kontroller.getKontroller().getSaboteurPunkte()+"\033[0m");
         }
 
         endGame();
@@ -537,11 +552,11 @@ public class Kontroller {
         leaderboard.addRekord(installateurTeamName, installateurPunkte);
         leaderboard.addRekord(saboteurTeamName, saboteurPunkte);
         if (installateurPunkte > saboteurPunkte) {
-            System.out.println("Hurray! Team " + installateurTeamName + " hat gewonnen.");
+            System.out.println("\033[1;32mHurray! Team " + installateurTeamName + " hat gewonnen.\033[0m");
         } else if (installateurPunkte < saboteurPunkte) {
-            System.out.println("Hurray! Team " + saboteurTeamName + " hat gewonnen.");
+            System.out.println("\033[1;32mHurray! Team " + saboteurTeamName + " hat gewonnen.\033[0m");
         } else {
-            System.out.println("Das Spiel endet unentschieden.");
+            System.out.println("\033[1;33mDas Spiel endet unentschieden.\033[0m");
         }
 
         leaderboard.listAll();

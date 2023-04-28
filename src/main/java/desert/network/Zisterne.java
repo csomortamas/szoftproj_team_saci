@@ -12,4 +12,14 @@ public class Zisterne extends Pumpe {
      *
      */
     @Getter @Setter private Pumpe pumpeZurVerfuegung;
+
+    /**
+     * Default Konstruktor
+     *
+     * @param x
+     * @param y
+     */
+    public Zisterne(double x, double y) {
+        super(x, y);
+    }
 }

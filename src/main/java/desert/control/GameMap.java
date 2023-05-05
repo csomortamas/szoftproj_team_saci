@@ -51,10 +51,10 @@ public class GameMap {
         allElements.addAll(zisternen);
 
         for (Netzelement n : allElements) {
+            if (n.getNachbarn()==null) n.setNachbarn(new ArrayList<>());
             for (int integer : n.getNachbarnHash()) {
                 for (Netzelement n2 : allElements) {
                     if (n2.getHash() == integer) {
-                        if (n.getNachbarn()==null) n.setNachbarn(new ArrayList<>());
                         n.getNachbarn().add(n2);
                         if(n2 instanceof Pumpe){
                             Pumpe p;

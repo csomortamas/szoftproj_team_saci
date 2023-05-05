@@ -42,13 +42,19 @@ public class Installateur extends Spieler {
                 if(position == rohr) {
                     rohr.rohrSplit(pumpeInHand);
                     this.setPosition(pumpeInHand);
+                    Kontroller.getKontroller().addPumpe(pumpeInHand);
+                    pumpeInHand = null;
+                    Logger.info("Pumpe eingebaut.");
                     break;
                 }
             }
+        } else if(!middle && position instanceof Rohr && this.pumpeInHand!=null){
+            Kontroller.getKontroller().addPumpe(pumpeInHand);
+            pumpeInHand = null;
+            Logger.info("Pumpe eingebaut.");
+        }else {
+            Logger.error("Pumpe kann nicht eingebaut werden.");
         }
-
-        Kontroller.getKontroller().addPumpe(pumpeInHand);
-        pumpeInHand = null;
     }
 
     /**

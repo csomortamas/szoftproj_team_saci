@@ -11,7 +11,7 @@ import java.util.*;
 
 public class RekordSpeicher {
     @Getter
-    private List<Rekord> rekorde = new ArrayList<>();
+    private final List<Rekord> rekorde = new ArrayList<>();
 
     public RekordSpeicher() {
 

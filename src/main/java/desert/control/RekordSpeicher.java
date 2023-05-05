@@ -3,31 +3,30 @@ package main.java.desert.control;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import lombok.Getter;
-import lombok.Setter;
 
+import java.time.Instant;
+import lombok.Getter;
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class RekordSpeicher {
     @Getter
-    private final Map<Integer, Integer> punktMap = new HashMap<>();
-    @Getter
-    private final Map<Integer, String> nameMap = new HashMap<>();
+    private List<Rekord> rekorde = new ArrayList<>();
 
     public RekordSpeicher() {
 
     }
 
     public void addRekord(String name, Integer punkt) {
-        punktMap.put((punktMap.size() + 1), punkt);
-        nameMap.put((nameMap.size() + 1), name);
+        rekorde.add(new Rekord(name, punkt, Instant.now()));
         exportRekorde();
     }
 
     public void exportRekorde() {
         try {
+            for (Rekord r : rekorde) {
+                r.serialize();
+            }
             Writer writer = new FileWriter("records.json");
             new Gson().toJson(this, writer);
             writer.close();
@@ -46,10 +45,13 @@ public class RekordSpeicher {
         } catch (FileNotFoundException ignored) {
 
         }
+        for (Rekord r : rekordSpeicher.rekorde) {
+            r.deserialize();
+        }
         return rekordSpeicher;
     }
 
     public int getRekordAnzahl() {
-        return punktMap.size();
+        return rekorde.size();
     }
 }

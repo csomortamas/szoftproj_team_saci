@@ -1,4 +1,4 @@
-package main.java.desert.control;
+package desert.control;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

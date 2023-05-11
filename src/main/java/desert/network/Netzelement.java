@@ -1,4 +1,4 @@
-package main.java.desert.network;
+package desert.network;
 
 import org.tinylog.Logger;
 

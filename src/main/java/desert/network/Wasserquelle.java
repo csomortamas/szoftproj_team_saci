@@ -1,4 +1,4 @@
-package main.java.desert.network;
+package desert.network;
 
 public class Wasserquelle extends Pumpe {
     /**

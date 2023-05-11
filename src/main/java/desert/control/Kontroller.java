@@ -1,9 +1,9 @@
-package main.java.desert.control;
+package desert.control;
 
-import main.java.desert.network.*;
-import main.java.desert.player.Installateur;
-import main.java.desert.player.Saboteur;
-import main.java.desert.player.Spieler;
+import desert.network.*;
+import desert.player.Installateur;
+import desert.player.Saboteur;
+import desert.player.Spieler;
 import org.tinylog.Logger;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package main.java.desert.network;
+package desert.network;
 
-import main.java.desert.control.Kontroller;
+import desert.control.Kontroller;
 import org.tinylog.Logger;
 
 public class Rohr extends Netzelement {

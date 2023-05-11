@@ -1,9 +1,9 @@
-package main.java.desert.control;
+package desert.control;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import main.java.desert.network.*;
+import desert.network.*;
 
 import java.io.*;
 import java.util.ArrayList;

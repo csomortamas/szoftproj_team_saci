@@ -1,4 +1,4 @@
-package main.java.desert.control;
+package desert.control;
 
 import java.time.Instant;
 import java.time.ZoneId;

@@ -1,5 +1,6 @@
-package main.java.desert.network;
+package desert.network;
 
+import desert.network.Rohr;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

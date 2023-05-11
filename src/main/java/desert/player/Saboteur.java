@@ -1,6 +1,7 @@
-package main.java.desert.player;
+package desert.player;
 
-import main.java.desert.network.Zisterne;
+import desert.network.Zisterne;
+import desert.player.Spieler;
 
 /**
  *
@@ -12,7 +13,7 @@ public class Saboteur extends Spieler {
     public Saboteur(Zisterne startPunkt) {
         super(startPunkt);
     }
-
+//
 
     public void rohrLoechern() {
         this.position.kaputtMachen();

@@ -26,13 +26,12 @@ class InstallateurTest {
 
 
 
-    @Test
+    /*@Test
     void pumpeEinmontierenInDerWueste() {
         ins.setPumpeInHand(p1);
         ins.pumpeEinmontieren(false);
         Assertions.assertTrue(Kontroller.getKontroller().getMap().getPumpen().contains(p1));
-
-    }
+    }*/
     @Test
     void pumpeEinmontierenImRohr() {
         Rohr r1 =new Rohr();

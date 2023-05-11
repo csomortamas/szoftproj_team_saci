@@ -1,6 +1,5 @@
 package main.java.desert.player;
-import lombok.Getter;
-import lombok.Setter;
+
 import main.java.desert.control.Kontroller;
 import main.java.desert.network.Netzelement;
 import main.java.desert.network.Pumpe;
@@ -16,9 +15,9 @@ public abstract class Spieler {
     /**
      *
      */
-    @Getter @Setter protected Netzelement position;
+    protected Netzelement position;
 
-    @Getter @Setter protected String name;
+    protected String name;
 
 
     public Spieler(Netzelement startPunkt) {
@@ -36,8 +35,7 @@ public abstract class Spieler {
                 if (eingangsRohr) {
                     pumpe.setEingangsRohr(rohr);
                     Logger.info("Eingangsrohr der Pumpe {} wurde auf {} umgestellt.", pumpe, rohr);
-                }
-                else {
+                } else {
                     pumpe.setAusgangsRohr(rohr);
                     Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", pumpe, rohr);
                 }
@@ -52,11 +50,10 @@ public abstract class Spieler {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
         for (Pumpe pumpe : allePumpen) {
             if (pumpe == position) {
-                if(einSchalten) {
+                if (einSchalten) {
                     pumpe.setIstAktiv(true);
                     Logger.info("Pumpe {} wurde eingeschaltet.", pumpe);
-                }
-                else {
+                } else {
                     pumpe.setIstAktiv(false);
                     Logger.info("Pumpe {} wurde ausgeschaltet.", pumpe);
                 }
@@ -67,8 +64,6 @@ public abstract class Spieler {
     /**
      * @param pumpeWohin
      * @param pumpeWoher
-     *
-     *
      */
     public void umbinden(Pumpe pumpeWoher, Pumpe pumpeWohin) {
         List<Rohr> alleRohre = Kontroller.getKontroller().getMap().getRohre();
@@ -80,12 +75,12 @@ public abstract class Spieler {
             }
         }
 
-        if(aktuelleRohr==null) return;
+        if (aktuelleRohr == null) return;
 
         Netzelement pumpe0 = aktuelleRohr.getNachbarn().get(0);
         Netzelement pumpe1 = aktuelleRohr.getNachbarn().get(1);
 
-        if(aktuelleRohr.getNachbarn().contains(null)){
+        if (aktuelleRohr.getNachbarn().contains(null)) {
             aktuelleRohr.getNachbarn().remove(null);
             aktuelleRohr.getNachbarn().add(pumpeWohin);
         } else {
@@ -103,7 +98,7 @@ public abstract class Spieler {
             }
         }
 
-        if(pumpeWoher.getEingangsRohr() == aktuelleRohr) {
+        if (pumpeWoher.getEingangsRohr() == aktuelleRohr) {
             pumpeWoher.setEingangsRohr(null);
         } else if (pumpeWoher.getAusgangsRohr() == aktuelleRohr) {
             pumpeWoher.setAusgangsRohr(null);
@@ -114,11 +109,11 @@ public abstract class Spieler {
      * @param netzwerkElement
      */
     public void step(Netzelement netzwerkElement) {
-        if(netzwerkElement.isIstBesetzt()){
+        if (netzwerkElement.isIstBesetzt()) {
             Logger.error("Netzwerkelement ist schon besetzt: " + netzwerkElement);
             return;
         }
-        if(position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isIstBesetzt()) {
+        if (position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isIstBesetzt()) {
             position.setIstBesetzt(false);
 
             position = netzwerkElement;
@@ -128,8 +123,7 @@ public abstract class Spieler {
             }
 
             Logger.info("Spieler ist jetzt bei " + position);
-        }
-        else {
+        } else {
             Logger.error("NetzwerkElement ist kein Nachbar von " + position);
         }
     }
@@ -137,17 +131,16 @@ public abstract class Spieler {
     // Pumpe eingansrohr umstellen
     public void eingangsRohrUmstellen(Rohr rohr) {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
-        for(Pumpe pumpe : allePumpen) {
-            if(pumpe == position) {
-                if(pumpe.getNachbarn().contains(rohr)) {
-                    if(rohr != pumpe.getAusgangsRohr()) {
+        for (Pumpe pumpe : allePumpen) {
+            if (pumpe == position) {
+                if (pumpe.getNachbarn().contains(rohr)) {
+                    if (rohr != pumpe.getAusgangsRohr()) {
                         pumpe.setEingangsRohr(rohr);
                         Logger.info("Eingangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
                     } else {
                         Logger.error("Ausgangsrohr und Eingangsrohr dürfen nicht gleich sein.");
                     }
-                }
-                else {
+                } else {
                     Logger.error("Rohr ist kein Nachbar von " + position);
                 }
             }
@@ -157,22 +150,38 @@ public abstract class Spieler {
     // Pumpe ausgangsrohr umstellen
     public void ausgangsRohrUmstellen(Rohr rohr) {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
-        for(Pumpe pumpe : allePumpen) {
-            if(pumpe == position) {
-                if(pumpe.getNachbarn().contains(rohr)) {
-                    if(rohr != pumpe.getEingangsRohr() ){
+        for (Pumpe pumpe : allePumpen) {
+            if (pumpe == position) {
+                if (pumpe.getNachbarn().contains(rohr)) {
+                    if (rohr != pumpe.getEingangsRohr()) {
                         pumpe.setAusgangsRohr(rohr);
                         Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
                     } else {
                         Logger.error("Ausgangsrohr und Eingangsrohr dürfen nicht gleich sein.");
                     }
 
-                }
-                else {
+                } else {
                     Logger.error("Rohr ist kein Nachbar von " + position);
                 }
             }
         }
     }
+    //=======================================================================================
+    //=======================================================================================
 
+    public Netzelement getPosition() {
+        return position;
+    }
+
+    public void setPosition(Netzelement position) {
+        this.position = position;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

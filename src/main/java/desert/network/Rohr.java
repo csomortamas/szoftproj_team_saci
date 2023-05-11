@@ -1,19 +1,14 @@
 package main.java.desert.network;
 
-import lombok.Getter;
-import lombok.Setter;
 import main.java.desert.control.Kontroller;
 import org.tinylog.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Rohr extends Netzelement {
 
     /**
      *
      */
-    @Getter @Setter private boolean besetzt;
+    private boolean besetzt;
 
 
     /**
@@ -39,5 +34,15 @@ public class Rohr extends Netzelement {
         // binden
         Kontroller.getKontroller().binden(r1, this.getNachbarn().get(0), pumpeInHand);
         Kontroller.getKontroller().binden(r2, pumpeInHand, this.getNachbarn().get(1));
+    }
+    //=======================================================================================
+    //=======================================================================================
+
+    public boolean isBesetzt() {
+        return besetzt;
+    }
+
+    public void setBesetzt(boolean besetzt) {
+        this.besetzt = besetzt;
     }
 }

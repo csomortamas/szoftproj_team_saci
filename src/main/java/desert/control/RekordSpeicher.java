@@ -4,13 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
-import java.time.Instant;
-import lombok.Getter;
 import java.io.*;
-import java.util.*;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RekordSpeicher {
-    @Getter
+
     private final List<Rekord> rekorde = new ArrayList<>();
 
     public RekordSpeicher() {
@@ -53,5 +53,11 @@ public class RekordSpeicher {
 
     public int getRekordAnzahl() {
         return rekorde.size();
+    }
+
+    //=======================================================================================
+    //=======================================================================================
+    public List<Rekord> getRekorde() {
+        return rekorde;
     }
 }

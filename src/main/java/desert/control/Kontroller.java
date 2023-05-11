@@ -1,15 +1,15 @@
 package main.java.desert.control;
 
-import lombok.Getter;
-import lombok.Setter;
 import main.java.desert.network.*;
 import main.java.desert.player.Installateur;
 import main.java.desert.player.Saboteur;
-
 import main.java.desert.player.Spieler;
 import org.tinylog.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -24,74 +24,65 @@ public class Kontroller {
         return kontroller;
     }
 
+
     /**
      *
      */
-    @Getter
-    @Setter
+
     private GameMap map = new GameMap();
 
     /**
      *
      */
-    @Getter
-    @Setter
+
     private Leaderboard leaderboard = new Leaderboard();
 
 
     /**
      *
      */
-    @Getter
-    @Setter
+
     private int aktuelleRunde;
 
     /**
      *
      */
-    @Getter
-    @Setter
+
     private int maxRunde = 1;
 
     /**
      *
      */
-    @Getter
-    @Setter
+
     private String installateurTeamName;
 
     /**
      *
      */
-    @Getter
-    @Setter
+
     private String saboteurTeamName;
 
     /**
      *
      */
-    @Getter
-    @Setter
+
     private List<Installateur> installateurTeam = new ArrayList<>();
 
     /**
      *
      */
-    @Getter
-    @Setter
+
     private List<Saboteur> saboteurTeam = new ArrayList<>();
 
     /**
      *
      */
-    @Getter
-    @Setter
+
     private int installateurPunkte;
     /**
      *
      */
-    @Getter
-    @Setter
+
     private int saboteurPunkte;
 
 
@@ -116,7 +107,7 @@ public class Kontroller {
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
         if (randomNumber == 1)
-            map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(),map.getZisternen().get(randomZisterneIndex).getPosY()));
+            map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY()));
     }
 
     public void rohrErstellen() {
@@ -268,7 +259,7 @@ public class Kontroller {
     }*/
 
 
-    public void setup(String teamInstallateurName, String teamSaboteurName){
+    public void setup(String teamInstallateurName, String teamSaboteurName) {
         map = map.loadMap();
         installateurTeamName = teamInstallateurName;
         saboteurTeamName = teamSaboteurName;
@@ -381,7 +372,7 @@ public class Kontroller {
                         break;
                     }
                     case 2: {
-                        if(installateur.getPosition().getNachbarn().contains(null) == false){
+                        if (installateur.getPosition().getNachbarn().contains(null) == false) {
                             System.out.println("Index, woher ausbinden (Index: <1-" + (installateur.getPosition().getNachbarn().size()) + ">)");
                             for (int i = 0; i < installateur.getPosition().getNachbarn().size(); i++) {
                                 System.out.println((i + 1) + ": " + installateur.getPosition().getNachbarn().get(i).getName());
@@ -399,7 +390,7 @@ public class Kontroller {
                                 if (installateur.getPosition().getNachbarn().get(choose - 1) == pumpe)
                                     installateur.umbinden(pumpe, map.getPumpen().get(chooseWohin - 1));
                             }
-                        }else{
+                        } else {
                             System.out.println("Index, wohin einbinden (Index: <1-" + (map.getPumpen().size()) + ">) ausser der index: " + choose);
                             for (int i = 0; i < map.getPumpen().size(); i++) {
                                 System.out.println((i + 1) + ": " + map.getPumpen().get(i).getName());
@@ -483,7 +474,7 @@ public class Kontroller {
                         choose = scanner.nextInt();
                         for (Rohr r : map.getRohre()) {
                             if (r == aktuellePumpe.getNachbarn().get(choose - 1)) {
-                               saboteur.ausgangsRohrUmstellen(r);
+                                saboteur.ausgangsRohrUmstellen(r);
                                 //aktuellePumpe.setAusgangsRohr(r);
                             }
                             break;
@@ -541,8 +532,8 @@ public class Kontroller {
 
             // ende der runde
             tick();
-            System.out.println("\033[1;32m"+installateurTeamName + ": " + Kontroller.getKontroller().getInstallateurPunkte());
-            System.out.println("\033[1;31m"+saboteurTeamName + ": " + Kontroller.getKontroller().getSaboteurPunkte()+"\033[0m");
+            System.out.println("\033[1;32m" + installateurTeamName + ": " + Kontroller.getKontroller().getInstallateurPunkte());
+            System.out.println("\033[1;31m" + saboteurTeamName + ": " + Kontroller.getKontroller().getSaboteurPunkte() + "\033[0m");
         }
 
         endGame();
@@ -598,6 +589,88 @@ public class Kontroller {
             }
         }
         return aktuellePumpe;
+    }
+
+    //=======================================================================================
+    //=======================================================================================
+    public GameMap getMap() {
+        return map;
+    }
+
+    public void setMap(GameMap map) {
+        this.map = map;
+    }
+
+    public Leaderboard getLeaderboard() {
+        return leaderboard;
+    }
+
+    public void setLeaderboard(Leaderboard leaderboard) {
+        this.leaderboard = leaderboard;
+    }
+
+    public int getAktuelleRunde() {
+        return aktuelleRunde;
+    }
+
+    public void setAktuelleRunde(int aktuelleRunde) {
+        this.aktuelleRunde = aktuelleRunde;
+    }
+
+    public int getMaxRunde() {
+        return maxRunde;
+    }
+
+    public void setMaxRunde(int maxRunde) {
+        this.maxRunde = maxRunde;
+    }
+
+    public String getInstallateurTeamName() {
+        return installateurTeamName;
+    }
+
+    public void setInstallateurTeamName(String installateurTeamName) {
+        this.installateurTeamName = installateurTeamName;
+    }
+
+    public String getSaboteurTeamName() {
+        return saboteurTeamName;
+    }
+
+    public void setSaboteurTeamName(String saboteurTeamName) {
+        this.saboteurTeamName = saboteurTeamName;
+    }
+
+    public List<Installateur> getInstallateurTeam() {
+        return installateurTeam;
+    }
+
+    public void setInstallateurTeam(List<Installateur> installateurTeam) {
+        this.installateurTeam = installateurTeam;
+    }
+
+    public List<Saboteur> getSaboteurTeam() {
+        return saboteurTeam;
+    }
+
+    public void setSaboteurTeam(List<Saboteur> saboteurTeam) {
+        this.saboteurTeam = saboteurTeam;
+    }
+
+    public int getInstallateurPunkte() {
+        return installateurPunkte;
+    }
+
+    public void setInstallateurPunkte(int installateurPunkte) {
+        this.installateurPunkte = installateurPunkte;
+    }
+
+    public int getSaboteurPunkte() {
+        return saboteurPunkte;
+    }
+
+    public void setSaboteurPunkte(int saboteurPunkte) {
+        this.saboteurPunkte = saboteurPunkte;
     }
 }
 

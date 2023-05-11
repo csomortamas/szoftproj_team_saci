@@ -1,15 +1,9 @@
 package main.java.desert;
 
 import main.java.desert.control.Kontroller;
-import main.java.desert.network.Pumpe;
-import main.java.desert.network.Rohr;
-import main.java.desert.network.Wasserquelle;
-import main.java.desert.network.Zisterne;
 import main.java.desert.player.Installateur;
 import main.java.desert.player.Saboteur;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -76,7 +70,7 @@ public class Main {
         Kontroller.getKontroller().setup(wasserquelleList,zisterneList,pumpeList,rohrList,"Installateure","Saboteure");
         */
 
-        Kontroller.getKontroller().setup("Installateure","Saboteure");
+        Kontroller.getKontroller().setup("Installateure", "Saboteure");
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Anzahl der Spielern pro Team: ");

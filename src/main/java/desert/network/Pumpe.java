@@ -1,7 +1,5 @@
 package main.java.desert.network;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.tinylog.Logger;
 
 
@@ -10,36 +8,34 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
-    @Getter @Setter
     protected double posX;
 
     /**
      *
      */
-    @Getter @Setter
     protected double posY;
     /**
      *
      */
-    @Getter @Setter private Rohr eingangsRohr;
+    private Rohr eingangsRohr;
     /**
      *
      */
-    @Getter @Setter private Rohr ausgangsRohr;
+    private Rohr ausgangsRohr;
     /**
      *
      */
-    @Getter @Setter private int wasserTank;
+    private int wasserTank;
     /**
      *
      */
-    @Getter final private int maxRohrAnzahl = 4;
+    final private int maxRohrAnzahl = 4;
     /**
      *
      */
-    @Getter @Setter private boolean isForZisterne;
+    private boolean isForZisterne;
 
-    @Getter @Setter private boolean isForQuelle;
+    private boolean isForQuelle;
 
 
     /**
@@ -56,16 +52,78 @@ public class Pumpe extends Netzelement {
      *
      */
     public void wasserWeiterleiten() {
-        if(!istAktiv)
+        if (!istAktiv)
             return;
 
-        if(eingangsRohr != null && ausgangsRohr != null && !eingangsRohr.isIstKaputt()) {
+        if (eingangsRohr != null && ausgangsRohr != null && !eingangsRohr.isIstKaputt()) {
             ausgangsRohr.setIstAktiv(eingangsRohr.istAktiv);
-        } else if(eingangsRohr != null && ausgangsRohr == null && eingangsRohr.istAktiv && !eingangsRohr.isIstKaputt()) {
+        } else if (eingangsRohr != null && ausgangsRohr == null && eingangsRohr.istAktiv && !eingangsRohr.isIstKaputt()) {
             wasserTank++;
-        } else if(eingangsRohr == null && ausgangsRohr != null && ausgangsRohr.istAktiv && wasserTank > 0) {
+        } else if (eingangsRohr == null && ausgangsRohr != null && ausgangsRohr.istAktiv && wasserTank > 0) {
             wasserTank--;
             ausgangsRohr.setIstAktiv(true);
         }
+    }
+    //=======================================================================================
+    //=======================================================================================
+
+    public int getMaxRohrAnzahl() {
+        return maxRohrAnzahl;
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public double getPosY() {
+        return posY;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
+    }
+
+    public Rohr getEingangsRohr() {
+        return eingangsRohr;
+    }
+
+    public void setEingangsRohr(Rohr eingangsRohr) {
+        this.eingangsRohr = eingangsRohr;
+    }
+
+    public Rohr getAusgangsRohr() {
+        return ausgangsRohr;
+    }
+
+    public void setAusgangsRohr(Rohr ausgangsRohr) {
+        this.ausgangsRohr = ausgangsRohr;
+    }
+
+    public int getWasserTank() {
+        return wasserTank;
+    }
+
+    public void setWasserTank(int wasserTank) {
+        this.wasserTank = wasserTank;
+    }
+
+    public boolean isForZisterne() {
+        return isForZisterne;
+    }
+
+    public void setForZisterne(boolean forZisterne) {
+        isForZisterne = forZisterne;
+    }
+
+    public boolean isForQuelle() {
+        return isForQuelle;
+    }
+
+    public void setForQuelle(boolean forQuelle) {
+        isForQuelle = forQuelle;
     }
 }

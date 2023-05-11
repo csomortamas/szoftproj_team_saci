@@ -3,8 +3,6 @@ package main.java.desert.control;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import lombok.Getter;
-import lombok.Setter;
 import main.java.desert.network.*;
 
 import java.io.*;
@@ -12,17 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameMap {
-    @Getter
-    @Setter
     private List<Rohr> rohre = new ArrayList<>();
-    @Getter
-    @Setter
     private List<Pumpe> pumpen = new ArrayList<>();
-    @Getter
-    @Setter
     private List<Wasserquelle> wasserquellen = new ArrayList<>();
-    @Getter
-    @Setter
     private List<Zisterne> zisternen = new ArrayList<>();
 
 
@@ -51,16 +41,16 @@ public class GameMap {
         allElements.addAll(zisternen);
 
         for (Netzelement n : allElements) {
-            if (n.getNachbarn()==null) n.setNachbarn(new ArrayList<>());
+            if (n.getNachbarn() == null) n.setNachbarn(new ArrayList<>());
             for (int integer : n.getNachbarnHash()) {
                 for (Netzelement n2 : allElements) {
                     if (n2.getHash() == integer) {
                         n.getNachbarn().add(n2);
-                        if(n2 instanceof Pumpe){
+                        if (n2 instanceof Pumpe) {
                             Pumpe p;
-                            if(n2 instanceof Wasserquelle){
-                                p=findWasserquelle(n2);
-                            }else if(n2 instanceof Zisterne){
+                            if (n2 instanceof Wasserquelle) {
+                                p = findWasserquelle(n2);
+                            } else if (n2 instanceof Zisterne) {
                                 p = findZisterne(n2);
                                 Zisterne z = findZisterne(n2);
                                 if (z.getPumpeZurVerfuegung() != null) {
@@ -72,20 +62,20 @@ public class GameMap {
                                     }
                                 }
 
-                            }else{
-                                p=findPumpe(n2);
+                            } else {
+                                p = findPumpe(n2);
                             }
-                            if(p.getAusgangsRohr()!=null){
-                                for (Rohr r:rohre){
-                                    if(r.getHash().equals(p.getAusgangsRohr().getHash())){
+                            if (p.getAusgangsRohr() != null) {
+                                for (Rohr r : rohre) {
+                                    if (r.getHash().equals(p.getAusgangsRohr().getHash())) {
                                         p.setAusgangsRohr(r);
                                         break;
                                     }
                                 }
                             }
-                            if(p.getEingangsRohr()!=null){
-                                for (Rohr r:rohre){
-                                    if(r.getHash().equals(p.getEingangsRohr().getHash())){
+                            if (p.getEingangsRohr() != null) {
+                                for (Rohr r : rohre) {
+                                    if (r.getHash().equals(p.getEingangsRohr().getHash())) {
                                         p.setEingangsRohr(r);
                                         break;
                                     }
@@ -160,5 +150,39 @@ public class GameMap {
             }
         }
         return null;
+    }
+
+    //=======================================================================================
+    //=======================================================================================
+    public List<Rohr> getRohre() {
+        return rohre;
+    }
+
+    public void setRohre(List<Rohr> rohre) {
+        this.rohre = rohre;
+    }
+
+    public List<Pumpe> getPumpen() {
+        return pumpen;
+    }
+
+    public void setPumpen(List<Pumpe> pumpen) {
+        this.pumpen = pumpen;
+    }
+
+    public List<Wasserquelle> getWasserquellen() {
+        return wasserquellen;
+    }
+
+    public void setWasserquellen(List<Wasserquelle> wasserquellen) {
+        this.wasserquellen = wasserquellen;
+    }
+
+    public List<Zisterne> getZisternen() {
+        return zisternen;
+    }
+
+    public void setZisternen(List<Zisterne> zisternen) {
+        this.zisternen = zisternen;
     }
 }

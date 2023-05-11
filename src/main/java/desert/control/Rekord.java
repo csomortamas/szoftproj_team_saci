@@ -1,24 +1,17 @@
 package main.java.desert.control;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class Rekord {
-    @Getter
-    @Setter
+
     private String name;
-    @Getter
-    @Setter
+
     private Integer punkt;
-    @Getter
-    @Setter
+
     transient private Instant datum;
-    @Getter
-    @Setter
+
     private long epochS;
 
     public Rekord(String name, int punkt, Instant datum) {
@@ -38,5 +31,40 @@ public class Rekord {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm - dd.MM.yyyy").withZone(ZoneId.systemDefault());
         return ("Name: " + name + " Punkte: " + punkt + " Datum: " + formatter.format(datum));
+    }
+
+    //=======================================================================================
+    //=======================================================================================
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getPunkt() {
+        return punkt;
+    }
+
+    public void setPunkt(Integer punkt) {
+        this.punkt = punkt;
+    }
+
+    public Instant getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Instant datum) {
+        this.datum = datum;
+    }
+
+    public long getEpochS() {
+        return epochS;
+    }
+
+    public void setEpochS(long epochS) {
+        this.epochS = epochS;
     }
 }

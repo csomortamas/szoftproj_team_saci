@@ -39,4 +39,14 @@ public class Leaderboard {
         }
 
     }
+    //=======================================================================================
+    //=======================================================================================
+
+    public RekordSpeicher getRekordSpeicher() {
+        return rekordSpeicher;
+    }
+
+    public void setRekordSpeicher(RekordSpeicher rekordSpeicher) {
+        this.rekordSpeicher = rekordSpeicher;
+    }
 }

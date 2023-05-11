@@ -1,9 +1,5 @@
 package main.java.desert.network;
 
-import lombok.Getter;
-import lombok.Setter;
-import main.java.desert.network.Pumpe;
-
 /**
  *
  */
@@ -11,7 +7,7 @@ public class Zisterne extends Pumpe {
     /**
      *
      */
-    @Getter @Setter private Pumpe pumpeZurVerfuegung;
+    private Pumpe pumpeZurVerfuegung;
 
     /**
      * Default Konstruktor
@@ -21,5 +17,15 @@ public class Zisterne extends Pumpe {
      */
     public Zisterne(double x, double y) {
         super(x, y);
+    }
+    //=======================================================================================
+    //=======================================================================================
+
+    public Pumpe getPumpeZurVerfuegung() {
+        return pumpeZurVerfuegung;
+    }
+
+    public void setPumpeZurVerfuegung(Pumpe pumpeZurVerfuegung) {
+        this.pumpeZurVerfuegung = pumpeZurVerfuegung;
     }
 }

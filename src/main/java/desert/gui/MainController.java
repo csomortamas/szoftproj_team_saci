@@ -29,4 +29,57 @@ public class MainController {
             }
         }
     }
+
+    public void onPumpeClick(ActionEvent e){
+        Button buttonQuelle = (Button)e.getSource();
+        Pumpe pumpe = new Pumpe(buttonQuelle.getLayoutX(), buttonQuelle.getLayoutY());
+
+        for (Pumpe p : Kontroller.getKontroller().getMap().getPumpen()) {
+            System.out.println(p.getPosX());
+            if (p.getButton() == buttonQuelle) {
+                pumpe = p;
+                p.getButton().setText("pumpe");
+                break;
+            }
+        }
+    }
+
+    public void onZisterneClick(ActionEvent e){
+        Button buttonQuelle = (Button)e.getSource();
+        Zisterne zist = new Zisterne(buttonQuelle.getLayoutX(), buttonQuelle.getLayoutY());
+
+        for (Zisterne z : Kontroller.getKontroller().getMap().getZisternen()) {
+            System.out.println(z.getPosX());
+            if (z.getButton() == buttonQuelle) {
+                zist = z;
+                z.getButton().setText("zisterne");
+                break;
+            }
+        }
+    }
+
+    public void onRohrClick(MouseEvent e) {
+        new LineClickAction().handle(e);
+    }
+
+
+    public static class LineClickAction implements EventHandler<MouseEvent> {
+        @Override
+        public void handle(MouseEvent e){
+            Line line = (Line)e.getSource();
+            Rohr rohr = new Rohr();
+
+            for (Rohr r : Kontroller.getKontroller().getMap().getRohre()) {
+                if (r.getLine() == line) {
+                    rohr = r;
+                    System.out.println("line");
+                    break;
+                }
+            }
+            rohr.setIstKaputt(true);
+            GuiMap.getGuiMap().refreshLine();
+
+        }
+    }
+
 }

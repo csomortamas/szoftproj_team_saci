@@ -207,8 +207,8 @@ public class Kontroller {
     }
 
 
-    /*
-    public void setup(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre, String teamInstName, String teamSabName) {      // binden
+
+    public void setupV2(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre, String teamInstName, String teamSabName) {      // binden
         // setup
 
         // add to kontroller
@@ -252,11 +252,11 @@ public class Kontroller {
         pumpen.get(2).setAusgangsRohr(rohre.get(4));
         zisternen.get(2).setEingangsRohr(rohre.get(4));
 
-        map.saveMap();
+        //map.saveMap();
 
         // logger
         Logger.info("Setup erfolgreich");
-    }*/
+    }
 
 
     public void setup(String teamInstallateurName, String teamSaboteurName) {

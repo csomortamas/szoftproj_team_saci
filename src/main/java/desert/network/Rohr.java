@@ -1,9 +1,11 @@
 package desert.network;
 
 import desert.control.Kontroller;
+import javafx.scene.shape.Line;
 import org.tinylog.Logger;
 
 public class Rohr extends Netzelement {
+    Line line;
 
     /**
      *
@@ -44,5 +46,12 @@ public class Rohr extends Netzelement {
 
     public void setBesetzt(boolean besetzt) {
         this.besetzt = besetzt;
+    }
+
+    public void setLine(Line _line){
+        this.line = _line;
+    }
+    public Line getLine(){
+        return this.line;
     }
 }

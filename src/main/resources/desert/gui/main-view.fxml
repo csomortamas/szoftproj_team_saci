@@ -1,14 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="desert.gui.MainController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-
-    <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Nyomjad!" />
-</VBox>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="desert.gui.MainController">
+   <children>
+      <Button id="wasserQuelle2" layoutX="14.0" layoutY="159.0" mnemonicParsing="false" onAction="#onQuelleClick">
+         <graphic>
+            <ImageView fitHeight="60.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@waterfall.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="zisterne2" layoutX="564.0" layoutY="161.0" mnemonicParsing="false" onAction="#onZisterneClick">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@water-tank.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Line id="rohr1" endX="135.20001220703125" layoutX="196.0" layoutY="332.0" onMouseClicked="#onRohrClick" startX="-138.39999389648438" strokeWidth="7.0" />
+      <Line id="rohr2" endX="107.5999755859375" endY="-1.5" layoutX="486.0" layoutY="333.0" onMouseClicked="#onRohrClick" startX="-148.5" startY="-1.5" strokeWidth="7.0" />
+      <Line id="rohr3" endX="128.0999755859375" endY="90.0" layoutX="466.0" layoutY="241.0" onMouseClicked="#onRohrClick" startX="-132.5" startY="-48.49998474121094" strokeWidth="7.0" />
+      <Line id="rohr4" endX="133.20001220703125" endY="-0.4999885559082031" layoutX="194.0" layoutY="50.0" onMouseClicked="#onRohrClick" startX="-138.5" startY="-0.4999885559082031" strokeWidth="7.0" />
+      <Line id="rohr5" endX="125.199951171875" endY="1.0000114440917969" layoutX="466.0" layoutY="47.0" onMouseClicked="#onRohrClick" startX="-133.0" startY="1.0000114440917969" strokeWidth="7.0" />
+      <Button id="wasserQuelle1" layoutX="16.0" layoutY="301.0" mnemonicParsing="false" onAction="#onQuelleClick">
+         <graphic>
+            <ImageView fitHeight="71.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@waterfall.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="pumpe1" layoutX="303.0" layoutY="301.0" mnemonicParsing="false" onAction="#onPumpeClick">
+         <graphic>
+            <ImageView fitHeight="53.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@water-pump.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="zisterne1" layoutX="565.0" layoutY="301.0" mnemonicParsing="false" onAction="#onZisterneClick">
+         <graphic>
+            <ImageView fitHeight="60.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@water-tank.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="pumpe2" layoutX="299.0" layoutY="162.0" mnemonicParsing="false" onAction="#onPumpeClick">
+         <graphic>
+            <ImageView fitHeight="53.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@water-pump.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="pumpe3" layoutX="294.0" layoutY="13.0" mnemonicParsing="false" onAction="#onPumpeClick" prefHeight="61.0" prefWidth="70.0">
+         <graphic>
+            <ImageView fitHeight="73.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@water-pump.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="zisterne3" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" onAction="#onZisterneClick">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@water-tank.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="wasserQuelle3" layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#onQuelleClick" prefHeight="70.0" prefWidth="74.0">
+         <graphic>
+            <ImageView fitHeight="98.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@waterfall.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+   </children>
+</Pane>

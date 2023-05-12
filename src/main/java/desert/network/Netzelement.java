@@ -34,7 +34,6 @@ public abstract class Netzelement {
      */
     protected transient List<Netzelement> nachbarn = new ArrayList<>();
 
-
     /**
      *
      */

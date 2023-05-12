@@ -263,10 +263,11 @@ public class Kontroller {
         map = map.loadMap();
         installateurTeamName = teamInstallateurName;
         saboteurTeamName = teamSaboteurName;
+
         Logger.info("Setup erfolgreich");
     }
 
-    public void game() {
+    /*public void game() {
         //System.out.print(alleZisternen.get(0).getNachbarn().size());
 
 
@@ -519,7 +520,7 @@ public class Kontroller {
                         /*for (Pumpe pumpe : map.getPumpen()) {
                             if (saboteur.getPosition().getNachbarn().get(choose-1) == pumpe)
                                 saboteur.umbinden(pumpe, map.getPumpen().get(chooseWohin-1));
-                        }*/
+                        }*//*
                         Pumpe pumpe = map.findPumpe(saboteur.getPosition().getNachbarn().get(choose - 1));
                         if (pumpe != null) {
                             saboteur.umbinden(pumpe, map.getPumpen().get(chooseWohin - 1));
@@ -537,6 +538,9 @@ public class Kontroller {
         }
 
         endGame();
+    }*/
+    public void game(){
+
     }
 
     private void endGame() {

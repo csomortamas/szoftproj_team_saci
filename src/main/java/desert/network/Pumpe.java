@@ -1,10 +1,13 @@
 package desert.network;
 
+import javafx.scene.control.Button;
 import org.tinylog.Logger;
 
 
 public class Pumpe extends Netzelement {
 
+
+    private Button button;
     /**
      *
      */
@@ -125,5 +128,12 @@ public class Pumpe extends Netzelement {
 
     public void setForQuelle(boolean forQuelle) {
         isForQuelle = forQuelle;
+    }
+
+    public Button getButton() {
+        return button;
+    }
+    public void setButton(Button _button){
+        this.button = _button;
     }
 }

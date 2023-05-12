@@ -9,9 +9,13 @@ import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//Water Pump pic: <a href="https://www.flaticon.com/free-icons/water-pump" title="water pump icons">Water pump icons created by Freepik - Flaticon</a>
+//Zistern pic: <a href="https://www.flaticon.com/free-icons/water-tank" title="water tank icons">Water tank icons created by Enes Gozcu - Flaticon</a>
+//Water source/Waterfall pic: <a href="https://www.flaticon.com/free-icons/waterfall" title="waterfall icons">Waterfall icons created by photo3idea_studio - Flaticon</a>
+//Installateur pic: <a href="https://www.flaticon.com/free-icons/installation" title="installation icons">Installation icons created by Muhammad_Usman - Flaticon</a>
+//Saboteur pic: <a href="https://www.flaticon.com/free-icons/thief" title="thief icons">Thief icons created by Freepik - Flaticon</a>
 public class GuiMap {
-    Scene scene;
+    private Scene scene;
     private final static GuiMap guiMap = new GuiMap();
     public static GuiMap getGuiMap (){
         return guiMap;
@@ -25,10 +29,10 @@ public class GuiMap {
     public GuiMap(Scene _scene){
         this.scene = _scene;
     }
-    private List<Button> buttonsOfQuelle = new ArrayList<>();
+    /*private List<Button> buttonsOfQuelle = new ArrayList<>();
     private List<Button> buttonsOfZisterne = new ArrayList<>();
     private List<Button> buttonsOfPumpe = new ArrayList<>();
-    private List<Line> linesOfRohre = new ArrayList<>();
+    private List<Line> linesOfRohre = new ArrayList<>();*/
 
     public void sceneSetup(){
         for(int i = 0; i < Kontroller.getKontroller().getMap().getWasserquellen().size(); i++){
@@ -47,7 +51,7 @@ public class GuiMap {
     }
 
 //getters  --------------------------------------
-    public List<Button> getButtonsOfQuelle() {
+    /*public List<Button> getButtonsOfQuelle() {
         return buttonsOfQuelle;
     }
 
@@ -57,7 +61,7 @@ public class GuiMap {
 
     public List<Button> getButtonsOfPumpe() {
         return buttonsOfPumpe;
-    }
+    }*/
     public void refreshLine(){
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()){
             if(rohr.isIstKaputt() == true){

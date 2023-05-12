@@ -5,7 +5,7 @@ import javafx.scene.shape.Line;
 import org.tinylog.Logger;
 
 public class Rohr extends Netzelement {
-    Line line;
+    private Line line;
 
     /**
      *

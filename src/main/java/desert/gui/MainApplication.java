@@ -82,7 +82,7 @@ public class MainApplication extends Application {
         Spieler installateur1 = new Installateur(wasserquelle1);
         Spieler installateur2 = new Installateur(wasserquelle3);
         Spieler sabpoteur1 = new Saboteur(zisterne1);
-        Spieler saboteur2 = new Saboteur(zisterne2);
+        Spieler saboteur2 = new Saboteur(zisterne3);
 
 
         Group group = new Group();

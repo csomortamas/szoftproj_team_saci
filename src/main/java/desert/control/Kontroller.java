@@ -606,6 +606,16 @@ public class Kontroller {
 
     //=======================================================================================
     //=======================================================================================
+
+
+    public int getActionCount() {
+        return actionCount;
+    }
+
+    public void setActionCount(int actionCount) {
+        this.actionCount = actionCount;
+    }
+
     public GameMap getMap() {
         return map;
     }
@@ -620,14 +630,6 @@ public class Kontroller {
 
     public void setLeaderboard(Leaderboard leaderboard) {
         this.leaderboard = leaderboard;
-    }
-
-    public int getAktuelleRunde() {
-        return stepCount;
-    }
-
-    public void setAktuelleRunde(int aktuelleRunde) {
-        this.stepCount = stepCount;
     }
 
     public int getMaxRunde() {

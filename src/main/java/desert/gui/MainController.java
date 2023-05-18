@@ -13,6 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
+
+import java.text.AttributedCharacterIterator;
+
+import static java.lang.Math.abs;
 
 public class MainController {
 
@@ -30,12 +35,11 @@ public class MainController {
         }
     }
 
-    public void onPumpeClick(ActionEvent e){
-        Button buttonQuelle = (Button)e.getSource();
-        Pumpe pumpe = new Pumpe(buttonQuelle.getLayoutX(), buttonQuelle.getLayoutY());
+    public void onPumpeClick(ActionEvent e) {
 
-        for (Pumpe p : Kontroller.getKontroller().getMap().getPumpen()) {
-            System.out.println(p.getPosX());
+        Button buttonQuelle = (Button) e.getSource();
+        Pumpe pumpe =null;
+        for (Pumpe p : Kontroller.getKontroller().getMap().getPumpen()){
             if (p.getButton() == buttonQuelle) {
                 break;
             }
@@ -78,7 +82,9 @@ public class MainController {
 
         }
     }
-
+    private double calculateSpielerPos(double startCoord, double endCoord){
+        return (abs((endCoord - startCoord))/2 +startCoord);
+    }
 
     public void pumpeAkrivierenClick(ActionEvent e){
         if(Kontroller.getKontroller().getAktuelleRunde() %2 ==0) return;
@@ -99,6 +105,29 @@ public class MainController {
     public void onSaboteurClick (ActionEvent e){
         Button bAktiv = (Button)e.getSource();
 
+    }
+
+    public void onReparierenClick(ActionEvent e) {
+        Kontroller.getKontroller().getSelectedPlayer().getPosition().reparieren();
+        GuiMap.getGuiMap().refresh();
+    }
+
+    public void onRohrUmbindenClick(ActionEvent e) {
+        Rohr r = Kontroller.getKontroller().getMap().findRohr(Kontroller.getKontroller().getSelectedPlayer().getPosition());
+       // System.out.println("aktuelle Rohr: "+ r.getName());
+        rohrUmbinden = true;
+    }
+
+    public void onLoechernClick(ActionEvent e) {
+        Kontroller.getKontroller().getSelectedPlayer().getPosition().kaputtMachen();
+        GuiMap.getGuiMap().refresh();
+    }
+
+    public void onPumpeAufnehmen(ActionEvent e) {
+        if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
+            Installateur inst = (Installateur) Kontroller.getKontroller().getSelectedPlayer();
+            inst.pumpeAufnehmen();
+        }
     }
 
 }

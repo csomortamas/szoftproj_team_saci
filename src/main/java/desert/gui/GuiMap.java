@@ -48,6 +48,8 @@ public class GuiMap {
         for(int i=0; i<Kontroller.getKontroller().getMap().getRohre().size();i++){
             Kontroller.getKontroller().getMap().getRohre().get(i).setLine((Line)scene.lookup("#rohr" + (i+1)));
         }
+
+
         for(int i = 0; i < 2; i++){
             Kontroller.getKontroller().getInstallateurTeam().get(i).setButton((Button)scene.lookup("#installateur"+(i+1)));
             Kontroller.getKontroller().getSaboteurTeam().get(i).setButton((Button)scene.lookup("#saboteur"+(i+1)));
@@ -77,5 +79,9 @@ public class GuiMap {
                 rohr.getLine().setStroke(Color.BLACK);
             }
         }
+    }
+
+    public Scene getScene() {
+        return scene;
     }
 }

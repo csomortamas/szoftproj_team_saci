@@ -15,12 +15,9 @@ import java.util.List;
 public abstract class Spieler {
     private Button button;
 
-
-
     protected Netzelement position;
 
     protected String name;
-
 
     public Spieler(Netzelement startPunkt) {
         position = startPunkt;

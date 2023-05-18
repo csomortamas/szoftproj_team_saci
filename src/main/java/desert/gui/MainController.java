@@ -1,11 +1,10 @@
 package desert.gui;
 
 import desert.control.Kontroller;
-import desert.network.Pumpe;
-import desert.network.Rohr;
-import desert.network.Wasserquelle;
-import desert.network.Zisterne;
+import desert.network.*;
+import desert.player.Installateur;
 import desert.player.Saboteur;
+import desert.player.Spieler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,9 +20,19 @@ import static java.lang.Math.abs;
 
 public class MainController {
 
+
+    boolean eingangsrohrUmstellung = false;
+    Pumpe eingangsrohrUmstellungPumpe = null;
+    boolean ausgangsrohrUmstellung = false;
+    Pumpe ausgangsrohrUmstellungPumpe = null;
+    boolean step = true;
+    boolean rohrUmbinden = false;
+    Pumpe pumpeWoher = null;
+    int rohrUmbindenZaehler = 0;
+
     @FXML
-    public void onQuelleClick(ActionEvent e){
-        Button buttonQuelle = (Button)e.getSource();
+    public void onQuelleClick(ActionEvent e) {
+        Button buttonQuelle = (Button) e.getSource();
         Wasserquelle quelle = new Wasserquelle(buttonQuelle.getLayoutX(), buttonQuelle.getLayoutY());
 
         for (Wasserquelle w : Kontroller.getKontroller().getMap().getWasserquellen()) {
@@ -90,8 +99,8 @@ public class MainController {
         }
     }
 
-    public void onZisterneClick(ActionEvent e){
-        Button buttonQuelle = (Button)e.getSource();
+    public void onZisterneClick(ActionEvent e) {
+        Button buttonQuelle = (Button) e.getSource();
         Zisterne zist = new Zisterne(buttonQuelle.getLayoutX(), buttonQuelle.getLayoutY());
 
         for (Zisterne z : Kontroller.getKontroller().getMap().getZisternen()) {
@@ -104,6 +113,7 @@ public class MainController {
     }
 
     public void onRohrClick(MouseEvent e) {
+
         new LineClickAction().handle(e);
     }
 
@@ -117,9 +127,9 @@ public class MainController {
 
     public class LineClickAction implements EventHandler<MouseEvent> {
         @Override
-        public void handle(MouseEvent e){
-            Line line = (Line)e.getSource();
-            Rohr rohr = new Rohr();
+        public void handle(MouseEvent e) {
+            Line line = (Line) e.getSource();
+            /*Rohr rohr = new Rohr();
 
             for (Rohr r : Kontroller.getKontroller().getMap().getRohre()) {
                 if (r.getLine() == line) {
@@ -218,13 +228,24 @@ public class MainController {
         ausgangsrohrUmstellung = true;
     }
 
-    public void onInstallateurClick (ActionEvent e){
-
+    public void onInstallateurClick(ActionEvent e) {
+        Button b = (Button) e.getSource();
+        for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
+            if (i.getButton() == b) {
+                Kontroller.getKontroller().setSelectedPlayer(i);
+                break;
+            }
+        }
     }
 
-    public void onSaboteurClick (ActionEvent e){
-        Button bAktiv = (Button)e.getSource();
-
+    public void onSaboteurClick(ActionEvent e) {
+        Button b = (Button) e.getSource();
+        for (Saboteur s : Kontroller.getKontroller().getSaboteurTeam()) {
+            if (s.getButton() == b) {
+                Kontroller.getKontroller().setSelectedPlayer(s);
+                break;
+            }
+        }
     }
 
     public void onReparierenClick(ActionEvent e) {

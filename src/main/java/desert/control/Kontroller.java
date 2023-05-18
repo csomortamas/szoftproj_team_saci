@@ -15,8 +15,6 @@ import java.util.Scanner;
  *
  */
 public class Kontroller {
-    private Spieler aktulleSpieler;
-
     private static final Kontroller kontroller = new Kontroller();
 
     private Kontroller() {
@@ -44,7 +42,7 @@ public class Kontroller {
      *
      */
 
-    private int stepCount=0;
+    private int actionCount=0;
 
     /**
      *

@@ -44,13 +44,13 @@ public class Kontroller {
      *
      */
 
-    private int aktuelleRunde;
+    private int stepCount=0;
 
     /**
      *
      */
 
-    private int maxRunde = 1;
+    private int maxRunde = 3;
 
     /**
      *
@@ -174,7 +174,7 @@ public class Kontroller {
 
         punkteKalkulieren();
 
-        aktuelleRunde++;
+        //aktuelleRunde++;
         pumpeKaputtMacht();
         pumpeErstellen();
         rohrErstellen();

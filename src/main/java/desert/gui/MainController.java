@@ -79,4 +79,26 @@ public class MainController {
         }
     }
 
+
+    public void pumpeAkrivierenClick(ActionEvent e){
+        if(Kontroller.getKontroller().getAktuelleRunde() %2 ==0) return;
+
+        if(Kontroller.getKontroller().getSelectedPlayer() instanceof Saboteur) return;
+        Button bAktiv = (Button)e.getSource();
+        for(Pumpe p : Kontroller.getKontroller().getMap().getPumpen()){
+            if(p.getButton() == bAktiv){
+
+            }
+        }
+    }
+
+    public void onInstallateurClick (ActionEvent e){
+
+    }
+
+    public void onSaboteurClick (ActionEvent e){
+        Button bAktiv = (Button)e.getSource();
+
+    }
+
 }

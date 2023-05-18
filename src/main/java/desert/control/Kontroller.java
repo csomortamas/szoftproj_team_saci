@@ -87,6 +87,7 @@ public class Kontroller {
 
     private int saboteurPunkte;
 
+    private Spieler selectedPlayer;
 
     public void binden(Rohr rohr, Netzelement left, Netzelement right) {
         if (left instanceof Pumpe && right instanceof Pumpe) {
@@ -684,5 +685,9 @@ public class Kontroller {
     public void setSaboteurPunkte(int saboteurPunkte) {
         this.saboteurPunkte = saboteurPunkte;
     }
+    public void setSelectedPlayer(Spieler s) {
+        this.selectedPlayer = s;
+    }
+    public Spieler getSelectedPlayer(){return selectedPlayer; }
 }
 

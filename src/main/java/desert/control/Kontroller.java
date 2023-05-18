@@ -622,11 +622,11 @@ public class Kontroller {
     }
 
     public int getAktuelleRunde() {
-        return aktuelleRunde;
+        return stepCount;
     }
 
     public void setAktuelleRunde(int aktuelleRunde) {
-        this.aktuelleRunde = aktuelleRunde;
+        this.stepCount = stepCount;
     }
 
     public int getMaxRunde() {

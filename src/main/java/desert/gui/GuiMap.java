@@ -30,10 +30,6 @@ public class GuiMap {
     public GuiMap(Scene _scene){
         this.scene = _scene;
     }
-    /*private List<Button> buttonsOfQuelle = new ArrayList<>();
-    private List<Button> buttonsOfZisterne = new ArrayList<>();
-    private List<Button> buttonsOfPumpe = new ArrayList<>();
-    private List<Line> linesOfRohre = new ArrayList<>();*/
 
     public void sceneSetup(){
         for(int i = 0; i < Kontroller.getKontroller().getMap().getWasserquellen().size(); i++){
@@ -79,20 +75,6 @@ public class GuiMap {
             }else{
                 rohr.getLine().setStroke(Color.BLACK);
             }
-/*
-            if(rohr.getNachbarn().get(0) != null){
-                Pumpe nachbarnPumpe1 = Kontroller.getKontroller().getMap().findPumpe(rohr.getNachbarn().get(0));
-                rohr.getLine().setStartX(nachbarnPumpe1.getPosX());
-                rohr.getLine().setStartY(nachbarnPumpe1.getPosY());
-                rohr.getLine().toBack();
-            }
-            if(rohr.getNachbarn().get(1) != null){
-                Pumpe nachbarnPumpe2 = Kontroller.getKontroller().getMap().findPumpe(rohr.getNachbarn().get(1));
-                rohr.getLine().setEndX(nachbarnPumpe2.getPosX());
-                rohr.getLine().setEndY(nachbarnPumpe2.getPosY());
-                rohr.getLine().toBack();
-            }
-            */
         }
     }
 

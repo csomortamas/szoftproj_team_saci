@@ -36,7 +36,7 @@ public class GuiMap {
 
     public void sceneSetup(){
         for(int i = 0; i < Kontroller.getKontroller().getMap().getWasserquellen().size(); i++){
-          /*  buttonsOfPumpe.add((Button)scene.lookup("#pumpe"+i));
+          /*buttonsOfPumpe.add((Button)scene.lookup("#pumpe"+i));
             buttonsOfQuelle.add((Button)scene.lookup("#wasserQuelle"+i));
             buttonsOfZisterne.add((Button)scene.lookup("#zisterne"+i));*/
 
@@ -48,6 +48,11 @@ public class GuiMap {
         for(int i=0; i<Kontroller.getKontroller().getMap().getRohre().size();i++){
             Kontroller.getKontroller().getMap().getRohre().get(i).setLine((Line)scene.lookup("#rohr" + (i+1)));
         }
+        for(int i = 0; i < 2; i++){
+            Kontroller.getKontroller().getInstallateurTeam().get(i).setButton((Button)scene.lookup("#installateur"+(i+1)));
+            Kontroller.getKontroller().getSaboteurTeam().get(i).setButton((Button)scene.lookup("#saboteur"+(i+1)));
+        }
+
     }
 
 //getters  --------------------------------------
@@ -62,7 +67,7 @@ public class GuiMap {
     public List<Button> getButtonsOfPumpe() {
         return buttonsOfPumpe;
     }*/
-    public void refreshLine(){
+    public void refresh(){
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()){
             if(rohr.isIstKaputt() == true){
                 rohr.getLine().setStroke(Color.RED);

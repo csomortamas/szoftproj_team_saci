@@ -4,6 +4,7 @@ import desert.control.Kontroller;
 import desert.network.Netzelement;
 import desert.network.Pumpe;
 import desert.network.Rohr;
+import javafx.scene.control.Button;
 import org.tinylog.Logger;
 
 import java.util.List;
@@ -12,9 +13,10 @@ import java.util.List;
  *
  */
 public abstract class Spieler {
-    /**
-     *
-     */
+    private Button button;
+
+
+
     protected Netzelement position;
 
     protected String name;
@@ -183,5 +185,13 @@ public abstract class Spieler {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button sButton) {
+        this.button = sButton;
     }
 }

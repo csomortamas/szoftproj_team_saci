@@ -23,6 +23,9 @@ public class Installateur extends Spieler {
      */
     public Installateur(Wasserquelle startPunkt) {
         super(startPunkt);
+        Kontroller.getKontroller().getInstallateurTeam().add(this);
+
+
     }
 
     public void reparieren() {

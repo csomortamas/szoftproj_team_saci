@@ -5,6 +5,7 @@ import desert.network.Pumpe;
 import desert.network.Rohr;
 import desert.network.Wasserquelle;
 import desert.network.Zisterne;
+import desert.player.Saboteur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,8 +24,7 @@ public class MainController {
         for (Wasserquelle w : Kontroller.getKontroller().getMap().getWasserquellen()) {
             System.out.println(w.getPosX());
             if (w.getButton() == buttonQuelle) {
-                quelle = w;
-                w.getButton().setText("quelle");
+
                 break;
             }
         }
@@ -37,8 +37,6 @@ public class MainController {
         for (Pumpe p : Kontroller.getKontroller().getMap().getPumpen()) {
             System.out.println(p.getPosX());
             if (p.getButton() == buttonQuelle) {
-                pumpe = p;
-                p.getButton().setText("pumpe");
                 break;
             }
         }
@@ -51,8 +49,7 @@ public class MainController {
         for (Zisterne z : Kontroller.getKontroller().getMap().getZisternen()) {
             System.out.println(z.getPosX());
             if (z.getButton() == buttonQuelle) {
-                zist = z;
-                z.getButton().setText("zisterne");
+
                 break;
             }
         }
@@ -77,7 +74,7 @@ public class MainController {
                 }
             }
             rohr.setIstKaputt(true);
-            GuiMap.getGuiMap().refreshLine();
+            GuiMap.getGuiMap().refresh();
 
         }
     }

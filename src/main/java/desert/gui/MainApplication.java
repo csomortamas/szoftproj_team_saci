@@ -6,6 +6,9 @@ import desert.network.Pumpe;
 import desert.network.Rohr;
 import desert.network.Wasserquelle;
 import desert.network.Zisterne;
+import desert.player.Installateur;
+import desert.player.Saboteur;
+import desert.player.Spieler;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,7 +26,7 @@ import java.util.List;
 
 public class MainApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, InterruptedException {
         Wasserquelle wasserquelle1 = new Wasserquelle(10,10);
         wasserquelle1.setName("Q1");
         Wasserquelle wasserquelle2 = new Wasserquelle(100,100);
@@ -74,12 +77,12 @@ public class MainApplication extends Application {
         rohrList.add(rohr4);
         rohrList.add(rohr5);
         Kontroller.getKontroller().setupV2(wasserquelleList, zisterneList, pumpeList, rohrList, "inst", "sab");
+        //Kontroller.getKontroller().setup("ins", "sab");
+        Spieler installateur1 = new Installateur(wasserquelle1);
+        Spieler installateur2 = new Installateur(wasserquelle3);
+        Spieler sabpoteur1 = new Saboteur(zisterne1);
+        Spieler saboteur2 = new Saboteur(zisterne2);
 
-
-
-        Line line = new Line(10,10, 500, 500);
-        line.setStrokeWidth(20);
-        line.setOnMouseClicked(new MainController.LineClickAction());
 
         Group group = new Group();
 
@@ -87,7 +90,7 @@ public class MainApplication extends Application {
         //--------fxml load
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         group.getChildren().add(fxmlLoader.load());
-        group.getChildren().add(line);
+
         Scene scene = new Scene(group, 1024, 800);
 
 
@@ -99,6 +102,7 @@ public class MainApplication extends Application {
         //-------fxml load
 
 
+        System.out.println("Hello world");
 
     }
 

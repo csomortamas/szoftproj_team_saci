@@ -15,6 +15,8 @@ import java.util.Scanner;
  *
  */
 public class Kontroller {
+    private Spieler aktulleSpieler;
+
     private static final Kontroller kontroller = new Kontroller();
 
     private Kontroller() {
@@ -266,21 +268,29 @@ public class Kontroller {
 
         Logger.info("Setup erfolgreich");
     }
-
-    /*public void game() {
-        //System.out.print(alleZisternen.get(0).getNachbarn().size());
-
-
+/*
+    public void game() {
         int spielerZahlProTeam = installateurTeam.size();
-        Scanner scanner = new Scanner(System.in);
         int choose;
 
-        //
-        while (aktuelleRunde < maxRunde) {
+       // while (aktuelleRunde < maxRunde) {
+            if(aktuelleRunde % 2 == 0){
+                for (int i = 0; i < spielerZahlProTeam; i++){
+                    installateurTeam.get(i).getButton().setDisable(false);
+                    saboteurTeam.get(i).getButton().setDisable(true);
+                }
+            }else{
+                for (int i = 0; i < spielerZahlProTeam; i++){
+                    installateurTeam.get(i).getButton().setDisable(true);
+                    saboteurTeam.get(i).getButton().setDisable(false);
+                }
+            }
+
             System.out.println("Team Installateur: Mit welchem Spieler möchtest du spielen? (Index: <1-" + spielerZahlProTeam + ">)");
             for (int i = 0; i < spielerZahlProTeam; i++) {
                 System.out.println((i + 1) + ": " + installateurTeam.get(i).getName());
             }
+
 
             System.out.print(">");
             choose = scanner.nextInt();
@@ -539,9 +549,7 @@ public class Kontroller {
 
         endGame();
     }*/
-    public void game(){
 
-    }
 
     private void endGame() {
         leaderboard.addRekord(installateurTeamName, installateurPunkte);

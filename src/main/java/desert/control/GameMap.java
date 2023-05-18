@@ -103,7 +103,6 @@ public class GameMap {
     }
 
     public GameMap loadMap() {
-
         GameMap map = new GameMap();
         Gson gson = new Gson();
         try {

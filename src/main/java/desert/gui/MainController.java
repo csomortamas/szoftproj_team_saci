@@ -22,6 +22,15 @@ import java.util.List;
 import static java.lang.Math.abs;
 
 public class MainController {
+    private static MainController mainController = null;
+    public static MainController getMainController() {
+        if (mainController == null) {
+            mainController = new MainController();
+        }
+        return mainController;
+    }
+
+
     boolean eingangsrohrUmstellung = false;
     boolean ausgangsrohrUmstellung = false;
     boolean step = true;
@@ -135,6 +144,9 @@ public class MainController {
             }
         }
     }
+    public LineClickAction getLineClickAction() {
+        return new LineClickAction();
+    }
 
     public void onPumpeAktivierenClick(ActionEvent e) {
         if (step) {
@@ -170,6 +182,7 @@ public class MainController {
         }
         ausgangsrohrUmstellungPumpe = Kontroller.getKontroller().getMap().findInAllePumpen(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         ausgangsrohrUmstellung = true;
+
     }
 
     public void onInstallateurClick(ActionEvent e) {
@@ -218,7 +231,10 @@ public class MainController {
         if (step) {
             step = false;
         }
+        //Line l =  e.get
+       // if ()
         rohrUmbinden = true;
+
     }
 
     public void onLoechernClick(ActionEvent e) {

@@ -70,8 +70,9 @@ public class GuiMap {
         }
     }
 
-    public void repositionRohr(Rohr rohr){
-
+    public void refreshRohrPosition(Rohr rohr){
+        Pumpe nachbarnPumpe1=Kontroller.getKontroller().getMap().findInAllePumpen(rohr.getNachbarn().get(0));
+        Pumpe nachbarnPumpe2=Kontroller.getKontroller().getMap().findInAllePumpen(rohr.getNachbarn().get(1));
 
         rohr.getLine().setStartX(nachbarnPumpe1.getButton().getLayoutX() + (nachbarnPumpe1.getButton().getWidth() / 2));
         rohr.getLine().setStartY(nachbarnPumpe1.getButton().getLayoutY() + (nachbarnPumpe1.getButton().getHeight() / 2));

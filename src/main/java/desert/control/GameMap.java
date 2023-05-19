@@ -153,7 +153,38 @@ public class GameMap {
         return null;
     }
 
-    public Pumpe findInAll
+    public Pumpe findInAllePumpen(Netzelement _pumpe){
+        List<Pumpe> allePumpen = new ArrayList<>();
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getZisternen());
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
+
+        Pumpe pumpe = null;
+        for (Pumpe p : allePumpen) {
+            if (p == _pumpe) {
+                pumpe = p;
+            }
+        }
+        return pumpe;
+    }
+
+
+    public Pumpe findInAllPumpeWithButton(Button butt){
+        Pumpe pumpe = null;
+        List<Pumpe> allePumpen = new ArrayList<>();
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getZisternen());
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
+
+
+        for (Pumpe p : allePumpen) {
+            if (p.getButton() == butt) {
+                pumpe = p;
+                break;
+            }
+        }
+        return pumpe;
+    }
 
     //=======================================================================================
     //=======================================================================================

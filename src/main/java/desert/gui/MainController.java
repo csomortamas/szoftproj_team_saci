@@ -153,52 +153,19 @@ public class MainController {
             step = false;
         }
 
-        List<Pumpe> allePumpen = new ArrayList<>();
-        allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());
-        allePumpen.addAll(Kontroller.getKontroller().getMap().getZisternen());
-        allePumpen.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
-        Pumpe p = null;
-        for (Pumpe pumpe : allePumpen) {
-            if (pumpe == Kontroller.getKontroller().getSelectedPlayer().getPosition()) {
-                p = pumpe;
-            }
-        }
-
-        eingangsrohrUmstellungPumpe = p;
+        eingangsrohrUmstellungPumpe = Kontroller.getKontroller().getMap().findInAllePumpen(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         eingangsrohrUmstellung = true;
-        endOfAction();
     }
-
-    /*public void onStehenBleibenClick(ActionEvent e) {
-        step = false;
-    }*/
 
     public void onAusgangsRohrUmstellenClick(ActionEvent e) {
         if (step) {
             step = false;
         }
-
-        List<Pumpe> allePumpen = new ArrayList<>();
-        allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());
-        allePumpen.addAll(Kontroller.getKontroller().getMap().getZisternen());
-        allePumpen.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
-        Pumpe p = null;
-        for (Pumpe pumpe : allePumpen) {
-            if (pumpe == Kontroller.getKontroller().getSelectedPlayer().getPosition()) {
-                p = pumpe;
-            }
-        }
-
-        ausgangsrohrUmstellungPumpe = p;
+        ausgangsrohrUmstellungPumpe = Kontroller.getKontroller().getMap().findInAllePumpen( Kontroller.getKontroller().getSelectedPlayer().getPosition());
         ausgangsrohrUmstellung = true;
-        endOfAction();
     }
 
     public void onInstallateurClick(ActionEvent e) {
-        if (step) {
-            step = false;
-        }
-
         Button b = (Button) e.getSource();
         for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
             if (i.getButton() == b) {
@@ -206,14 +173,10 @@ public class MainController {
                 break;
             }
         }
-        endOfAction();
+        step=true;
     }
 
     public void onSaboteurClick(ActionEvent e) {
-        if (step) {
-            step = false;
-        }
-
         Button b = (Button) e.getSource();
         for (Saboteur s : Kontroller.getKontroller().getSaboteurTeam()) {
             if (s.getButton() == b) {
@@ -221,7 +184,7 @@ public class MainController {
                 break;
             }
         }
-        endOfAction();
+        step=true;
     }
 
     public void onReparierenClick(ActionEvent e) {
@@ -239,7 +202,6 @@ public class MainController {
             step = false;
         }
         rohrUmbinden = true;
-        endOfAction();
     }
 
     public void onLoechernClick(ActionEvent e) {
@@ -260,8 +222,7 @@ public class MainController {
         if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
             Installateur inst = (Installateur) Kontroller.getKontroller().getSelectedPlayer();
             inst.pumpeAufnehmen();
-            endOfAction();
         }
+        endOfAction();
     }
-
 }

@@ -77,13 +77,14 @@ public abstract class Spieler {
 
         if (aktuelleRohr == null) return;
 
-        Netzelement pumpe0 = aktuelleRohr.getNachbarn().get(0);
-        Netzelement pumpe1 = aktuelleRohr.getNachbarn().get(1);
 
-        if (aktuelleRohr.getNachbarn().contains(null)) {
+        if (aktuelleRohr.getNachbarn().size() == 1) {
             aktuelleRohr.getNachbarn().remove(null);
             aktuelleRohr.getNachbarn().add(pumpeWohin);
         } else {
+            Netzelement pumpe0 = aktuelleRohr.getNachbarn().get(0);
+            Netzelement pumpe1 = aktuelleRohr.getNachbarn().get(1);
+
             if (pumpeWoher == pumpe0) {
                 Kontroller.getKontroller().binden(aktuelleRohr, pumpe1, pumpeWohin);
                 pumpe0.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
@@ -96,13 +97,15 @@ public abstract class Spieler {
                 aktuelleRohr.getNachbarn().remove(pumpe1); // entfernt die pumpe aus der liste der nachbarn
                 aktuelleRohr.getNachbarn().remove(pumpe0);
             }
+
+            if (pumpeWoher.getEingangsRohr() == aktuelleRohr) {
+                pumpeWoher.setEingangsRohr(null);
+            } else if (pumpeWoher.getAusgangsRohr() == aktuelleRohr) {
+                pumpeWoher.setAusgangsRohr(null);
+            }
         }
 
-        if (pumpeWoher.getEingangsRohr() == aktuelleRohr) {
-            pumpeWoher.setEingangsRohr(null);
-        } else if (pumpeWoher.getAusgangsRohr() == aktuelleRohr) {
-            pumpeWoher.setAusgangsRohr(null);
-        }
+
 
         GuiMap.getGuiMap().refreshRohrPosition(aktuelleRohr);
     }

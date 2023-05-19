@@ -81,7 +81,7 @@ public class GuiMap {
     public void refreshRoehre() {
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()) {
             if (rohr.isIstAktiv() && rohr.isIstKaputt()) {
-                rohr.getLine().setStroke(Color.PURPLE);
+                rohr.getLine().setStroke(Color.ORANGE);
             } else if (rohr.isIstAktiv() && !rohr.isIstKaputt()) {
                 rohr.getLine().setStroke(Color.BLUE);
             } else if (!rohr.isIstAktiv() && rohr.isIstKaputt()) {

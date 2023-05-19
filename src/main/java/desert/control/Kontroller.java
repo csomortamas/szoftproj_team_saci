@@ -123,7 +123,7 @@ public class Kontroller {
         int randomNumber = rand.nextInt(10);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber ==2) {
+        if (randomNumber !=200) {
             Rohr newRohr = new Rohr();
             newRohr.setName("R-G");
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);

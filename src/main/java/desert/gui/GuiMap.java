@@ -2,6 +2,7 @@ package desert.gui;
 import desert.control.Kontroller;
 import desert.network.Pumpe;
 import desert.network.Rohr;
+import desert.player.Spieler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
@@ -50,19 +51,7 @@ public class GuiMap {
 
     }
 
-//getters  --------------------------------------
-    /*public List<Button> getButtonsOfQuelle() {
-        return buttonsOfQuelle;
-    }
-
-    public List<Button> getButtonsOfZisterne() {
-        return buttonsOfZisterne;
-    }
-
-    public List<Button> getButtonsOfPumpe() {
-        return buttonsOfPumpe;
-    }*/
-    public void refresh(){
+    public void refreshRoehre(){
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()){
             if(rohr.isIstKaputt() == true){
                 rohr.getLine().setStroke(Color.RED);
@@ -73,6 +62,42 @@ public class GuiMap {
             }
         }
     }
+
+    public void repositionRohr(Rohr rohr){
+
+
+        rohr.getLine().setStartX(nachbarnPumpe1.getButton().getLayoutX() + (nachbarnPumpe1.getButton().getWidth() / 2));
+        rohr.getLine().setStartY(nachbarnPumpe1.getButton().getLayoutY() + (nachbarnPumpe1.getButton().getHeight() / 2));
+
+
+        rohr.getLine().setEndX(nachbarnPumpe2.getButton().getLayoutX() + (nachbarnPumpe2.getButton().getWidth() / 2));
+        rohr.getLine().setEndY(nachbarnPumpe2.getButton().getLayoutY() + (nachbarnPumpe2.getButton().getHeight() / 2));
+        rohr.getLine().toBack();
+
+        Kontroller.getKontroller().getSelectedPlayer().getButton().setLayoutX(calculateSpielerPos(rohr.getLine().getStartX(), rohr.getLine().getEndX()));
+        Kontroller.getKontroller().getSelectedPlayer().getButton().setLayoutY(calculateSpielerPos(rohr.getLine().getEndY(), rohr.getLine().getStartY()));
+
+    }
+
+    public void refreshSpieler() {
+        List<Spieler> alleSpielerList = new ArrayList<>();
+        alleSpielerList.addAll(Kontroller.getKontroller().getInstallateurTeam());
+        alleSpielerList.addAll(Kontroller.getKontroller().getSaboteurTeam());
+
+        for (Spieler spieler : alleSpielerList) {
+            spieler.getButton().setLayoutX(spieler.getPosition().);
+        }
+
+        //sp.getButton().setLayoutX(netzelement.getButton().getLayoutX() + (netzelement.getButton().getWidth() / 2));
+        //sp.getButton().setLayoutY(netzelement.getButton().getLayoutY() + (netzelement.getButton().getHeight() / 2));
+    }
+
+    public void
+
+
+
+
+
 
     public Scene getScene() {
         return scene;

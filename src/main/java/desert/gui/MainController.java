@@ -15,6 +15,9 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
 import java.text.AttributedCharacterIterator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.Math.abs;
 
@@ -111,6 +114,23 @@ public class MainController {
                 pumpeWoher = null;
                 pumpeWohin = null;
                 endOfAction();
+            }
+        } else if (step) {
+            List<Pumpe> alleNetzelemente = new ArrayList<>();
+            alleNetzelemente.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
+            alleNetzelemente.addAll(Kontroller.getKontroller().getMap().getZisternen());
+            alleNetzelemente.addAll(Kontroller.getKontroller().getMap().getPumpen());
+
+            Button clickedButton = (Button) e.getSource();
+
+            Spieler sp = Kontroller.getKontroller().getSelectedPlayer();
+
+            for (Pumpe netzelement : alleNetzelemente) {
+                if (netzelement.getButton() == clickedButton) {
+
+                    if (sp.step(netzelement)) step = false;
+                    break;
+                }
             }
         }
     }
@@ -287,12 +307,14 @@ public class MainController {
     public void onLoechernClick(ActionEvent e) {
         Kontroller.getKontroller().getSelectedPlayer().getPosition().kaputtMachen();
         GuiMap.getGuiMap().refresh();
+        endOfAction();
     }
 
     public void onPumpeAufnehmen(ActionEvent e) {
         if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
             Installateur inst = (Installateur) Kontroller.getKontroller().getSelectedPlayer();
             inst.pumpeAufnehmen();
+            endOfAction();
         }
     }
 

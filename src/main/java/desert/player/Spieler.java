@@ -108,10 +108,10 @@ public abstract class Spieler {
     /**
      * @param netzwerkElement
      */
-    public void step(Netzelement netzwerkElement) {
+    public boolean step(Netzelement netzwerkElement) {
         if (netzwerkElement.isIstBesetzt()) {
             Logger.error("Netzwerkelement ist schon besetzt: " + netzwerkElement);
-            return;
+            return false;
         }
         if (position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isIstBesetzt()) {
             position.setIstBesetzt(false);
@@ -123,8 +123,10 @@ public abstract class Spieler {
             }
 
             Logger.info("Spieler ist jetzt bei " + position);
+            return true;
         } else {
             Logger.error("NetzwerkElement ist kein Nachbar von " + position);
+            return false;
         }
     }
 

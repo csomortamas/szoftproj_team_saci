@@ -35,28 +35,8 @@ public class MainController {
     public void onPumpeClick(ActionEvent e) {
         Button buttonQuelle = (Button) e.getSource();
         Pumpe pumpe = null;
-        for (Pumpe p : Kontroller.getKontroller().getMap().getPumpen()) {
-            if (p.getButton() == buttonQuelle) {
-                pumpe = p;
-                break;
-            }
-        }
-        if (pumpe == null) {
-            for (Pumpe p : Kontroller.getKontroller().getMap().getZisternen()) {
-                if (p.getButton() == buttonQuelle) {
-                    pumpe = p;
-                    break;
-                }
-            }
-        }
-        if (pumpe == null) {
-            for (Pumpe p : Kontroller.getKontroller().getMap().getWasserquellen()) {
-                if (p.getButton() == buttonQuelle) {
-                    pumpe = p;
-                    break;
-                }
-            }
-        }
+
+        pumpe = Kontroller.getKontroller().getMap().findInAllPumpeWithButton(buttonQuelle);
         if (rohrUmbinden) {
             if (rohrUmbindenZaehler == 0) {
                 pumpeWoher = pumpe;

@@ -28,7 +28,7 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
-    private int wasserTank;
+    private int wasserTank =0;
     /**
      *
      */

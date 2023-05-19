@@ -60,15 +60,12 @@ public class GuiMap {
             Kontroller.getKontroller().getMap().getWasserquellen().get(i).setButton((Button) scene.lookup("#wasserQuelle" + (i + 1)));
             Kontroller.getKontroller().getMap().getWasserquellen().get(i).getButton().setBackground(Background.EMPTY);
             Kontroller.getKontroller().getMap().getZisternen().get(i).setButton((Button) scene.lookup("#zisterne" + (i + 1)));
-        }
-        for (int i = 0; i < Kontroller.getKontroller().getMap().getPumpen().size(); i++) {
-            Kontroller.getKontroller().getMap().getPumpen().get(i).setButton((Button) scene.lookup("#pumpe" + (i + 1)));
-        }
-        for (int i = 0; i < Kontroller.getKontroller().getMap().getZisternen().size(); i++) {
-            Kontroller.getKontroller().getMap().getZisternen().get(i).setButton((Button) scene.lookup("#zisterne" + (i + 1)));
+            Kontroller.getKontroller().getMap().getZisternen().get(i).getButton().setBackground(Background.EMPTY);
             Kontroller.getKontroller().getMap().getZisternen().get(i).getButton().setBackground(Background.EMPTY);
             Kontroller.getKontroller().getMap().getZisternen().get(i).setReadyPumpImage((ImageView) scene.lookup("#readyPump" + (i + 1)));
+
         }
+
         for (int i = 0; i < Kontroller.getKontroller().getMap().getRohre().size(); i++) {
             Kontroller.getKontroller().getMap().getRohre().get(i).setLine((Line) scene.lookup("#rohr" + (i + 1)));
         }
@@ -173,6 +170,8 @@ public class GuiMap {
         group.getChildren().add(l1);
         group.getChildren().add(l2);
 
+
+
     }
 
     public void refreshSpieler() {
@@ -268,16 +267,17 @@ public class GuiMap {
         Random rand = new Random();
         int plusY=rand.nextInt(-40,40);
 
-        double startX=z.getButton().getLayoutX()+(z.getButton().getWidth()/2);
-        double startY=z.getButton().getLayoutY()+(z.getButton().getHeight()/2);
+        double startX=z.getButton().getLayoutX()+7;
+        double startY=z.getButton().getLayoutY()+27;
         Line line=new Line(startX,startY,(startX-100),(startY+plusY));
 
         line.setStrokeWidth(7);
         newRohr.setLine(line);
+        line.setOnMouseClicked(MainController.getMainController().getLineClickAction());
         group.getChildren().add(line);
-        line.toBack();
+        //z.getButton().toFront();
+        //line.toBack();
 
-        //line.setOnMouseClicked(n);
     }
     public void refreshAlleRohre(){
         for(Rohr rohr : Kontroller.getKontroller().getMap().getRohre()){

@@ -81,7 +81,7 @@ public class MainApplication extends Application {
         //Kontroller.getKontroller().setup("ins", "sab");
         Spieler installateur1 = new Installateur(wasserquelle1);
         Spieler installateur2 = new Installateur(wasserquelle3);
-        Spieler sabpoteur1 = new Saboteur(zisterne1);
+        Spieler saboteur1 = new Saboteur(zisterne1);
         Spieler saboteur2 = new Saboteur(zisterne3);
 
 
@@ -91,7 +91,7 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         GuiMap.getGuiMap().getGroup().getChildren().add(fxmlLoader.load());
 
-        Scene scene = new Scene(GuiMap.getGuiMap().getGroup(), 1024, 800);
+        Scene scene = new Scene(GuiMap.getGuiMap().getGroup(), 687, 580);
 
 
         GuiMap.getGuiMap().setGuiMapScene(scene);

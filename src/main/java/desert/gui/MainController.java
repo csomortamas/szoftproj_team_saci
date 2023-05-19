@@ -140,7 +140,7 @@ public class MainController {
         if (step) {
             step = false;
         }
-        Pumpe p = Kontroller.getKontroller().getMap().findPumpe(Kontroller.getKontroller().getSelectedPlayer().getPosition());
+        Pumpe p = Kontroller.getKontroller().getMap().findInAllePumpen(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         p.setIstAktiv(true);
         endOfAction();
     }
@@ -150,7 +150,7 @@ public class MainController {
             step = false;
         }
 
-        Pumpe p = Kontroller.getKontroller().getMap().findPumpe(Kontroller.getKontroller().getSelectedPlayer().getPosition());
+        Pumpe p = Kontroller.getKontroller().getMap().findInAllePumpen(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         p.setIstAktiv(false);
         endOfAction();
     }

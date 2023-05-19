@@ -118,10 +118,10 @@ public class Kontroller {
 
     public void rohrErstellen() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(7);
+        int randomNumber = rand.nextInt(10);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber >(-1)) {
+        if (randomNumber ==2) {
             Rohr newRohr = new Rohr();
             newRohr.setName("R-G");
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
@@ -129,7 +129,9 @@ public class Kontroller {
 
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
             GuiMap.getGuiMap().refreshNewRohre(map.getZisternen().get(randomZisterneIndex),newRohr);
-            System.out.println("lol");
+            map.getRohre().add(newRohr);
+            //map.getZisternen().get(randomZisterneIndex).getButton().toFront();
+            //System.out.println("lol");
         }
     }
 

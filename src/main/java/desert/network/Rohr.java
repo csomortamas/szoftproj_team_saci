@@ -29,6 +29,8 @@ public class Rohr extends Netzelement {
         Rohr r1 = new Rohr();
         Rohr r2 = new Rohr();
 
+        line.setVisible(false);
+        line.setDisable(true);
         Kontroller.getKontroller().getMap().getRohre().remove(this);
 
         Kontroller.getKontroller().addRohr(r1);
@@ -37,7 +39,7 @@ public class Rohr extends Netzelement {
         // binden
         Kontroller.getKontroller().binden(r1, this.getNachbarn().get(0), pumpeInHand);
         Kontroller.getKontroller().binden(r2, pumpeInHand, this.getNachbarn().get(1));
-        GuiMap.getGuiMap().refreshSplittedRohr(r1,r2);
+        GuiMap.getGuiMap().refreshSplittedRohr(r1, r2);
     }
     //=======================================================================================
     //=======================================================================================
@@ -50,10 +52,11 @@ public class Rohr extends Netzelement {
         this.besetzt = besetzt;
     }
 
-    public void setLine(Line _line){
+    public void setLine(Line _line) {
         this.line = _line;
     }
-    public Line getLine(){
+
+    public Line getLine() {
         return this.line;
     }
 

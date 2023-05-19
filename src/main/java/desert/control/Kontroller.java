@@ -105,11 +105,13 @@ public class Kontroller {
      */
     public void pumpeErstellen() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(5);
+        int randomNumber = rand.nextInt(4);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber == 1)
+        if (randomNumber  >-2) {
             map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY()));
+            GuiMap.getGuiMap().refreshPlayerButtons();
+        }
     }
 
     public void rohrErstellen() {
@@ -173,10 +175,12 @@ public class Kontroller {
 
         punkteKalkulieren();
 
+        //aktuelleRunde++;
         pumpeKaputtMacht();
         pumpeErstellen();
         rohrErstellen();
-
+        GuiMap.getGuiMap().refreshReadyPumps();
+        GuiMap.getGuiMap().refreshPoints();
         Logger.info("Tick");
     }
 
@@ -611,7 +615,7 @@ public class Kontroller {
     }
 
     public void setActionCount(int actionCount) {
-        if(actionCount == maxRunde) Logger.info("End of Game");
+        if(actionCount == maxRunde) Logger.info("Game over");
         this.actionCount = actionCount;
         GuiMap.getGuiMap().refreshRoundCounter();
     }
@@ -691,6 +695,5 @@ public class Kontroller {
         this.selectedPlayer = s;
     }
     public Spieler getSelectedPlayer(){return selectedPlayer; }
-
 }
 

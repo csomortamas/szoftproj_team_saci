@@ -1,6 +1,7 @@
 package desert.player;
 
 import desert.control.Kontroller;
+import desert.gui.GuiMap;
 import desert.network.Pumpe;
 import desert.network.Rohr;
 import desert.network.Wasserquelle;
@@ -41,9 +42,16 @@ public class Installateur extends Spieler {
             List<Rohr> alleRohre = Kontroller.getKontroller().getMap().getRohre();
             for (Rohr rohr : alleRohre) {
                 if (position == rohr) {
+                    double startX = rohr.getLine().getStartX();
+                    double endX = rohr.getLine().getEndX();
+                    double startY = rohr.getLine().getStartY();
+                    double endY = rohr.getLine().getEndY();
                     rohr.rohrSplit(pumpeInHand);
                     this.setPosition(pumpeInHand);
                     Kontroller.getKontroller().addPumpe(pumpeInHand);
+
+                    GuiMap.getGuiMap().refreshEinmontiertePumpe(pumpeInHand, startX, startY, endX, endY);
+                    GuiMap.getGuiMap().refreshSpieler();
                     pumpeInHand = null;
                     Logger.info("Pumpe eingebaut.");
                     break;
@@ -68,6 +76,8 @@ public class Installateur extends Spieler {
             if (position == zisterne && zisterne.getPumpeZurVerfuegung() != null) {
                 pumpeInHand = zisterne.getPumpeZurVerfuegung();
                 zisterne.setPumpeZurVerfuegung(null);
+                GuiMap.getGuiMap().refreshReadyPumps();
+                GuiMap.getGuiMap().refreshSpieler();
                 Logger.info("Pumpe aufgenommen.");
                 return;
             }

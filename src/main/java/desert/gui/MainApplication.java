@@ -102,9 +102,12 @@ public class MainApplication extends Application {
         stage.show();
         //-------fxml load
         Kontroller.getKontroller().tick();
+        Kontroller.getKontroller().setInstallateurPunkte(0);
+        GuiMap.getGuiMap().refreshPoints();
         GuiMap.getGuiMap().refreshRoehre();
 
     }
+
 
     public static void main(String[] args) {
         launch();

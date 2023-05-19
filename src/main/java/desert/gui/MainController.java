@@ -65,6 +65,7 @@ public class MainController {
                     break;
                 }
             }
+               GuiMap.getGuiMap().refreshControlPanes();
         }
     }
 
@@ -89,6 +90,8 @@ public class MainController {
         if(Kontroller.getKontroller().getActionCount() % 2 == 0){
             Kontroller.getKontroller().tick();
         }
+
+        GuiMap.getGuiMap().refreshPlayerButtons();
     }
 
     public class LineClickAction implements EventHandler<MouseEvent> {
@@ -124,6 +127,7 @@ public class MainController {
                 if(sp.step(clickedRohr)) {
                     step = false;
                 }
+                GuiMap.getGuiMap().refreshControlPanes();
 
             }
         }
@@ -166,25 +170,35 @@ public class MainController {
     }
 
     public void onInstallateurClick(ActionEvent e) {
-        Button b = (Button) e.getSource();
-        for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
-            if (i.getButton() == b) {
-                Kontroller.getKontroller().setSelectedPlayer(i);
-                break;
+        if (!playerSelected) {
+            Button b = (Button) e.getSource();
+            for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
+                if (i.getButton() == b) {
+                    Kontroller.getKontroller().setSelectedPlayer(i);
+                    break;
+                }
             }
+            GuiMap.getGuiMap().refreshControlPanes();
+
+            step = true;
+            playerSelected = true;
         }
-        step=true;
     }
 
     public void onSaboteurClick(ActionEvent e) {
-        Button b = (Button) e.getSource();
-        for (Saboteur s : Kontroller.getKontroller().getSaboteurTeam()) {
-            if (s.getButton() == b) {
-                Kontroller.getKontroller().setSelectedPlayer(s);
-                break;
+        if(!playerSelected){
+            Button b = (Button) e.getSource();
+            for (Saboteur s : Kontroller.getKontroller().getSaboteurTeam()) {
+                if (s.getButton() == b) {
+                    Kontroller.getKontroller().setSelectedPlayer(s);
+                    break;
+                }
             }
+            GuiMap.getGuiMap().refreshControlPanes();
+
+            step = true;
+            playerSelected = true;
         }
-        step=true;
     }
 
     public void onReparierenClick(ActionEvent e) {
@@ -222,6 +236,7 @@ public class MainController {
         if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
             Installateur inst = (Installateur) Kontroller.getKontroller().getSelectedPlayer();
             inst.pumpeAufnehmen();
+
         }
         endOfAction();
     }

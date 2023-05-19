@@ -1,9 +1,14 @@
 package desert.network;
 
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+
 /**
  *
  */
 public class Zisterne extends Pumpe {
+    private ImageView readyPumpImage;
+
     /**
      *
      */
@@ -27,5 +32,13 @@ public class Zisterne extends Pumpe {
 
     public void setPumpeZurVerfuegung(Pumpe pumpeZurVerfuegung) {
         this.pumpeZurVerfuegung = pumpeZurVerfuegung;
+    }
+
+    public ImageView getReadyPumpImage() {
+        return readyPumpImage;
+    }
+
+    public void setReadyPumpImage(ImageView readyPumpImage) {
+        this.readyPumpImage = readyPumpImage;
     }
 }

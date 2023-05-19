@@ -5,11 +5,66 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="651.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="desert.gui.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="desert.gui.MainController">
    <children>
-      <Button id="wasserQuelle2" layoutX="14.0" layoutY="159.0" mnemonicParsing="false" onAction="#onPumpeClick">
+      <Text layoutX="28.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Round">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font></Text>
+      <Text id="txtAktuelleRunde" layoutX="150.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font></Text>
+      <Text id="instPunkte" fill="LIME" layoutX="291.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Text>
+      <Text layoutX="320.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Text>
+      <Text id="sabPunkte" fill="RED" layoutX="336.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Text>
+      <Pane id="instRohrPane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(0,100,0);">
+         <children>
+            <Button id="instRohrReparieren" layoutX="224.0" layoutY="25.0" mnemonicParsing="false" onAction="#onReparierenClick" text="Reparieren" />
+            <Button id="instRohrUmbinden" layoutX="390.0" layoutY="25.0" mnemonicParsing="false" onAction="#onRohrUmbindenClick" text="Umbinden" />
+            <Button layoutX="526.0" layoutY="25.0" mnemonicParsing="false" onAction="#onEinmontierenMiddleClick" text="Einmontieren" />
+         </children>
+      </Pane>
+      <Pane id="sabRohrPane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(100,0,0);" visible="false">
+         <children>
+            <Button id="sabRohrLoechern" layoutX="231.0" layoutY="26.0" mnemonicParsing="false" onAction="#onLoechernClick" text="Löchern" />
+            <Button id="sabRohrUmbinden" layoutX="358.0" layoutY="26.0" mnemonicParsing="false" onAction="#onRohrUmbindenClick" text="Umbinden" />
+         </children>
+      </Pane>
+      <Pane id="instPumpePane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(0,100,0);" visible="false">
+         <children>
+            <Button id="instEingangsrohrUmstellen" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#onEingangsrohrUmstellenClick" text="Eingangsrohr umstellen" />
+            <Button id="instAusgangsrohrUmstellen" layoutX="177.0" layoutY="12.0" mnemonicParsing="false" onAction="#onAusgangsRohrUmstellenClick" text="Ausgangsrohr Umstellen" />
+            <Button id="instPumpeAktivieren" layoutX="333.0" layoutY="12.0" mnemonicParsing="false" onAction="#onPumpeAktivierenClick" text="Aktivieren" />
+            <Button id="instPumpeDeaktivieren" layoutX="414.0" layoutY="12.0" mnemonicParsing="false" onAction="#onPumpeDeaktivierenClick" text="Deaktivieren" />
+            <Button id="instPumpeAufnehmen" layoutX="515.0" layoutY="12.0" mnemonicParsing="false" onAction="#onPumpeAufnehmen" text="Pumpe Aufnehmen" />
+            <Button id="instRohrReparieren" layoutX="291.0" layoutY="44.0" mnemonicParsing="false" onAction="#onReparierenClick" text="Reparieren" />
+         </children>
+      </Pane>
+      <Pane id="sabPumpePane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(100,0,0);" visible="false">
+         <children>
+            <Button id="sabEingangsrohrUmstellen" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#onEingangsrohrUmstellenClick" text="Eingangsrohr umstellen" />
+            <Button id="sabPumpeAktivieren" layoutX="234.0" layoutY="26.0" mnemonicParsing="false" onAction="#onPumpeAktivierenClick" text="Aktivieren" />
+            <Button id="pumpeDektivieren" layoutX="364.0" layoutY="26.0" mnemonicParsing="false" onAction="#onPumpeDeaktivierenClick" text="Deaktivieren" />
+            <Button id="sabAusgangsrohrUmstellen" layoutX="490.0" layoutY="25.0" mnemonicParsing="false" onAction="#onAusgangsRohrUmstellenClick" text="Ausgangsrohr Umstellen" />
+         </children>
+      </Pane>
+      <Button id="wasserQuelle2" layoutX="25.0" layoutY="256.0" mnemonicParsing="false" onAction="#onPumpeClick">
          <graphic>
             <ImageView fitHeight="60.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -18,7 +73,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="zisterne2" layoutX="564.0" layoutY="161.0" mnemonicParsing="false" onAction="#onPumpeClick">
+      <Button id="zisterne2" layoutX="575.0" layoutY="258.0" mnemonicParsing="false" onAction="#onPumpeClick">
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -27,12 +82,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <Line id="rohr1" endX="337.5000305175781" endY="331.5" onMouseClicked="#onRohrClick" startX="51.000003814697266" startY="332.0" strokeWidth="7.0" />
-      <Line id="rohr2" endX="603.1497802734375" endY="334.54974365234375" onMouseClicked="#onRohrClick" startX="342.44976806640625" startY="331.75" strokeWidth="7.0" />
-      <Line id="rohr3" endX="598.2000732421875" endY="329.6000061035156" onMouseClicked="#onRohrClick" startX="333.4999694824219" startY="192.5" strokeWidth="7.0" />
-      <Line id="rohr4" endX="326.250244140625" endY="45.250244140625" onMouseClicked="#onRohrClick" startX="56.650264739990234" startY="45.250240325927734" strokeWidth="7.0" />
-      <Line id="rohr5" endX="599.0" endY="47.999996185302734" onMouseClicked="#onRohrClick" startX="337.94970703125" startY="48.5" strokeWidth="7.0" />
-      <Button id="wasserQuelle1" layoutX="16.0" layoutY="301.0" mnemonicParsing="false" onAction="#onPumpeClick">
+      <Line id="rohr1" endX="348.5" endY="428.4999694824219" onMouseClicked="#onRohrClick" startX="61.9999885559082" startY="428.9999694824219" strokeWidth="7.0" />
+      <Line id="rohr2" endX="615.4498901367188" endY="433.4496765136719" onMouseClicked="#onRohrClick" startX="348.5" startY="428.4999694824219" strokeWidth="7.0" />
+      <Line id="rohr3" endX="610.5000610351562" endY="428.4999694824219" onMouseClicked="#onRohrClick" startX="344.5" startY="289.5" strokeWidth="7.0" />
+      <Line id="rohr4" endX="345.60003662109375" endY="148.60000610351562" onMouseClicked="#onRohrClick" startX="69.59999084472656" startY="148.60000610351562" strokeWidth="7.0" />
+      <Line id="rohr5" endX="611.2000122070312" endY="153.39999389648438" onMouseClicked="#onRohrClick" startX="340.0" startY="153.39999389648438" strokeWidth="7.0" />
+      <Button id="wasserQuelle1" layoutX="27.0" layoutY="398.0" mnemonicParsing="false" onAction="#onPumpeClick">
          <graphic>
             <ImageView fitHeight="71.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -41,7 +96,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="pumpe1" layoutX="303.0" layoutY="301.0" mnemonicParsing="false" onAction="#onPumpeClick">
+      <Button id="pumpe1" layoutX="314.0" layoutY="398.0" mnemonicParsing="false" onAction="#onPumpeClick">
          <graphic>
             <ImageView fitHeight="53.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -50,7 +105,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="zisterne1" layoutX="565.0" layoutY="301.0" mnemonicParsing="false" onAction="#onPumpeClick">
+      <Button id="zisterne1" layoutX="576.0" layoutY="398.0" mnemonicParsing="false" onAction="#onPumpeClick">
          <graphic>
             <ImageView fitHeight="60.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -59,7 +114,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="pumpe2" layoutX="299.0" layoutY="162.0" mnemonicParsing="false" onAction="#onPumpeClick">
+      <Button id="pumpe2" layoutX="310.0" layoutY="259.0" mnemonicParsing="false" onAction="#onPumpeClick">
          <graphic>
             <ImageView fitHeight="53.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -68,7 +123,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="pumpe3" layoutX="294.0" layoutY="13.0" mnemonicParsing="false" onAction="#onPumpeClick" prefHeight="61.0" prefWidth="70.0">
+      <Button id="pumpe3" layoutX="305.0" layoutY="110.0" mnemonicParsing="false" onAction="#onPumpeClick" prefHeight="61.0" prefWidth="70.0">
          <graphic>
             <ImageView fitHeight="73.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -77,7 +132,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="zisterne3" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" onAction="#onPumpeClick">
+      <Button id="zisterne3" layoutX="575.0" layoutY="114.0" mnemonicParsing="false" onAction="#onPumpeClick">
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -86,15 +141,16 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="wasserQuelle3" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPumpeClick" prefHeight="70.0" prefWidth="74.0">
+      <Button id="wasserQuelle3" layoutX="25.0" layoutY="111.0" mnemonicParsing="false" onAction="#onPumpeClick" prefHeight="70.0" prefWidth="74.0">
          <graphic>
             <ImageView fitHeight="98.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@waterfall.png" />
                </image>
             </ImageView>
-         </graphic></Button>
-      <Button id="installateur2" layoutX="56.0" layoutY="60.0" mnemonicParsing="false" onAction="#onInstallateurClick" prefHeight="38.0" prefWidth="35.0">
+         </graphic>
+      </Button>
+      <Button id="installateur2" layoutX="67.0" layoutY="157.0" mnemonicParsing="false" onAction="#onInstallateurClick" prefHeight="38.0" prefWidth="35.0">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -103,7 +159,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="installateur1" layoutX="44.0" layoutY="335.0" mnemonicParsing="false" onAction="#onInstallateurClick" prefHeight="38.0" prefWidth="35.0">
+      <Button id="installateur1" layoutX="55.0" layoutY="432.0" mnemonicParsing="false" onAction="#onInstallateurClick" prefHeight="38.0" prefWidth="35.0">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -112,54 +168,38 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="saboteur2" layoutX="564.0" layoutY="53.0" mnemonicParsing="false" onAction="#onSaboteurClick" prefHeight="38.0" prefWidth="35.0">
+      <Button id="saboteur1" disable="true" layoutX="575.0" layoutY="432.0" mnemonicParsing="false" onAction="#onSaboteurClick" prefHeight="38.0" prefWidth="35.0">
          <graphic>
-            <ImageView fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@saboteur.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button id="saboteur1" layoutX="564.0" layoutY="335.0" mnemonicParsing="false" onAction="#onSaboteurClick" prefHeight="38.0" prefWidth="35.0">
+      <ImageView id="readyPump3" fitHeight="25.0" fitWidth="23.0" layoutX="647.0" layoutY="149.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@water-pump.png" />
+         </image>
+      </ImageView>
+      <ImageView id="readyPump2" fitHeight="25.0" fitWidth="23.0" layoutX="647.0" layoutY="292.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@water-pump.png" />
+         </image>
+      </ImageView>
+      <ImageView id="readyPump1" fitHeight="25.0" fitWidth="23.0" layoutX="647.0" layoutY="431.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@water-pump.png" />
+         </image>
+      </ImageView>
+      <Button id="saboteur2" disable="true" layoutX="575.0" layoutY="163.0" mnemonicParsing="false" onAction="#onSaboteurClick" prefHeight="38.0" prefWidth="35.0">
          <graphic>
-            <ImageView fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@saboteur.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Pane layoutX="-1.0" layoutY="413.0" prefHeight="50.0" prefWidth="648.0" style="-fx-background-color: RGBA(100,0,0);">
-         <children>
-            <Button id="sabEingangsrohrUmstellen" layoutX="24.0" layoutY="13.0" mnemonicParsing="false" onAction="#onEingangsrohrUmstellenClick" text="Eingangsrohr umstellen" />
-            <Button id="sabPumpeAktivieren" layoutX="417.0" layoutY="13.0" mnemonicParsing="false" onAction="#onPumpeAktivierenClick" text="Aktivieren" />
-            <Button id="pumpeDektivieren" layoutX="523.0" layoutY="13.0" mnemonicParsing="false" onAction="#onPumpeDeaktivierenClick" text="Deaktivieren" />
-            <Button id="sabAusgangsrohrUmstellen" layoutX="215.0" layoutY="13.0" mnemonicParsing="false" onAction="#onAusgangsRohrUmstellenClick" text="Ausgangsrohr Umstellen" />
-         </children>
-      </Pane>
-      <Pane layoutX="-1.0" layoutY="484.0" prefHeight="50.0" prefWidth="648.0" style="-fx-background-color: RGBA(0,100,0);">
-         <children>
-            <Button id="instEingangsrohrUmstellen" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#onEingangsrohrUmstellenClick" text="Eingangsrohr umstellen" />
-            <Button id="instAusgangsrohrUmstellen" layoutX="177.0" layoutY="12.0" mnemonicParsing="false" onAction="#onAusgangsRohrUmstellenClick" text="Ausgangsrohr Umstellen" />
-            <Button id="instPumpeAktivieren" layoutX="333.0" layoutY="12.0" mnemonicParsing="false" onAction="#onPumpeAktivierenClick" text="Aktivieren" />
-            <Button id="instPumpeDeaktivieren" layoutX="414.0" layoutY="12.0" mnemonicParsing="false" onAction="#onPumpeDeaktivierenClick" text="Deaktivieren" />
-            <Button id="instPumpeAufnehmen" layoutX="515.0" layoutY="12.0" mnemonicParsing="false" onAction="#onPumpeAufnehmen" text="Pumpe Aufnehmen" />
-         </children>
-      </Pane>
-      <Pane layoutY="554.0" prefHeight="50.0" prefWidth="648.0" style="-fx-background-color: RGBA(100,0,0);">
-         <children>
-            <Button id="sabRohrLoechern" layoutX="257.0" layoutY="13.0" mnemonicParsing="false" onAction="#onLoechernClick" text="Löchern" />
-            <Button id="sabRohrUmbinden" layoutX="366.0" layoutY="13.0" mnemonicParsing="false" onAction="#onRohrUmbindenClick" text="Umbinden" />
-         </children>
-      </Pane>
-      <Pane layoutX="-1.0" layoutY="611.0" prefHeight="50.0" prefWidth="648.0" style="-fx-background-color: RGBA(0,100,0);">
-         <children>
-            <Button id="instRohrReparieren" layoutX="250.0" layoutY="12.0" mnemonicParsing="false" onAction="#onReparierenClick" text="Reparieren" />
-            <Button id="instRohrUmbinden" layoutX="368.0" layoutY="12.0" mnemonicParsing="false" onAction="#onRohrUmbindenClick" text="Umbinden" />
-         </children>
-      </Pane>
-      <Text layoutX="15.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aktuelle Runde:" />
-      <Text id="txtAktuelleRunde" layoutX="107.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
    </children>
 </Pane>

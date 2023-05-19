@@ -122,21 +122,7 @@ public class Pumpe extends Netzelement {
         this.wasserTank = wasserTank;
     }
 
-    public boolean isForZisterne() {
-        return isForZisterne;
-    }
 
-    public void setForZisterne(boolean forZisterne) {
-        isForZisterne = forZisterne;
-    }
-
-    public boolean isForQuelle() {
-        return isForQuelle;
-    }
-
-    public void setForQuelle(boolean forQuelle) {
-        isForQuelle = forQuelle;
-    }
 
     public Button getButton() {
         return button;

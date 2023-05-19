@@ -51,7 +51,7 @@ public class Installateur extends Spieler {
                     Kontroller.getKontroller().addPumpe(pumpeInHand);
 
                     GuiMap.getGuiMap().refreshEinmontiertePumpe(pumpeInHand, startX, startY, endX, endY);
-                    GuiMap.getGuiMap().refreshSpieler();
+
                     pumpeInHand = null;
                     Logger.info("Pumpe eingebaut.");
                     break;

@@ -293,6 +293,10 @@ public class GuiMap {
         p.getButton().setOnMouseClicked(group.getOnMouseClicked());*/
     }
 
+    public void refreshRemovedRohr(Rohr oldRohr) {
+        group.getChildren().remove(oldRohr.getLine());
+    }
+
     public Scene getScene() {
         return scene;
     }

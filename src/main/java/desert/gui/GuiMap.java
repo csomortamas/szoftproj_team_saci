@@ -164,6 +164,10 @@ public class GuiMap {
     public void refreshSplittedRohr(Rohr r1, Rohr r2) {
         Line l1 = new Line();
         Line l2 = new Line();
+        l1.setStrokeWidth(7);
+        l2.setStrokeWidth(7);
+        l1.setOnMouseClicked(MainController.getMainController().getLineClickAction());
+        l2.setOnMouseClicked(MainController.getMainController().getLineClickAction());
 
         r1.setLine(l1);
         r2.setLine(l2);

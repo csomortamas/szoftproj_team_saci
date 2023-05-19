@@ -210,7 +210,7 @@ public class MainController {
         }
 
         Kontroller.getKontroller().getSelectedPlayer().getPosition().reparieren();
-
+        GuiMap.getGuiMap().refreshPumpen();
         endOfAction();
     }
 

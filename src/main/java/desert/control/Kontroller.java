@@ -111,8 +111,10 @@ public class Kontroller {
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
         if (randomNumber  >-2) {
-            map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY()));
+            Pumpe p=new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY());
+            map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(p);
             GuiMap.getGuiMap().refreshPlayerButtons();
+            map.getPumpen().add(p);
         }
     }
 

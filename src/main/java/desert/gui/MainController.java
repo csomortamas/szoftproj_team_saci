@@ -32,19 +32,6 @@ public class MainController {
     Pumpe pumpeWoher = null;
     int rohrUmbindenZaehler = 0;
 
-    @FXML
-    public void onQuelleClick(ActionEvent e) {
-        Button buttonQuelle = (Button) e.getSource();
-        Wasserquelle quelle = new Wasserquelle(buttonQuelle.getLayoutX(), buttonQuelle.getLayoutY());
-
-        for (Wasserquelle w : Kontroller.getKontroller().getMap().getWasserquellen()) {
-            System.out.println(w.getPosX());
-            if (w.getButton() == buttonQuelle) {
-                break;
-            }
-        }
-    }
-
     public void onPumpeClick(ActionEvent e) {
         Button buttonQuelle = (Button) e.getSource();
         Pumpe pumpe = null;
@@ -79,28 +66,6 @@ public class MainController {
                 Pumpe pumpeWohin = pumpe;
                 Kontroller.getKontroller().getSelectedPlayer().umbinden(pumpeWoher, pumpeWohin);
 
-                Rohr rohr = Kontroller.getKontroller().getMap().findRohr(Kontroller.getKontroller().getSelectedPlayer().getPosition());
-
-                List<Pumpe> allePumpen = new ArrayList<>();
-                allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());
-                allePumpen.addAll(Kontroller.getKontroller().getMap().getZisternen());
-                allePumpen.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
-
-                Pumpe nachbarnPumpe1 = null;
-                Pumpe nachbarnPumpe2 = null;
-                for (Pumpe p : allePumpen) {
-                    if (p == rohr.getNachbarn().get(0)) {
-                        nachbarnPumpe1 = p;
-                    }
-                    if (p == rohr.getNachbarn().get(1)) {
-                        nachbarnPumpe2 = p;
-                    }
-                }
-
-
-
-
-                //GuiMap.getGuiMap().refresh();
                 endOfAction();
             }
         } else if (step) {
@@ -123,19 +88,6 @@ public class MainController {
         }
     }
 
-    public void onZisterneClick(ActionEvent e) {
-        Button buttonQuelle = (Button) e.getSource();
-        Zisterne zist = new Zisterne(buttonQuelle.getLayoutX(), buttonQuelle.getLayoutY());
-
-        for (Zisterne z : Kontroller.getKontroller().getMap().getZisternen()) {
-            System.out.println(z.getPosX());
-            if (z.getButton() == buttonQuelle) {
-
-                break;
-            }
-        }
-    }
-
     public void onRohrClick(MouseEvent e) {
 
         new LineClickAction().handle(e);
@@ -154,27 +106,16 @@ public class MainController {
         rohrUmbindenZaehler = 0;
 
         Kontroller.getKontroller().setActionCount(Kontroller.getKontroller().getActionCount() + 1);
-        Text l = (Text) GuiMap.getGuiMap().getScene().lookup("#txtAktuelleRunde");
-        l.setText(String.valueOf(Math.floor((Kontroller.getKontroller().getActionCount() / 2) + 1)));
+        if(Kontroller.getKontroller().getActionCount() % 2 == 0){
+            Kontroller.getKontroller().tick();
+        }
     }
-
 
     public class LineClickAction implements EventHandler<MouseEvent> {
         @Override
         public void handle(MouseEvent e) {
             Line line = (Line) e.getSource();
-            /*Rohr rohr = new Rohr();
 
-            for (Rohr r : Kontroller.getKontroller().getMap().getRohre()) {
-                if (r.getLine() == line) {
-                    rohr = r;
-                    System.out.println("line");
-                    break;
-                }
-            }
-            rohr.setIstKaputt(true);
-            GuiMap.getGuiMap().refresh();
-          */
             Rohr clickedRohr = null;
             for (Rohr r : Kontroller.getKontroller().getMap().getRohre()) {
                 if (r.getLine() == line) {
@@ -193,41 +134,25 @@ public class MainController {
             } else if (step) {
                 Spieler sp = Kontroller.getKontroller().getSelectedPlayer();
                 Netzelement pos = sp.getPosition();
-                boolean nachbar = false;
+
                 for (Netzelement n : pos.getNachbarn()) {
                     if (clickedRohr == n) {
-                        nachbar = true;
+
                         break;
                     }
                 }
-                if (nachbar) {
-                    sp.step(clickedRohr);
-                    double startX = line.getStartX();
-                    double endX = line.getEndX();
-                    double startY = line.getStartY();
-                    double endY = line.getEndY();
-
-                    sp.getButton().setLayoutX(calculateSpielerPos(startX, endX));
-                    sp.getButton().setLayoutY(calculateSpielerPos(startY, endY));
+                if(sp.step(clickedRohr)) {
                     step = false;
                 }
+
             }
-
         }
-    }
-
-    private double calculateSpielerPos(double startCoord, double endCoord) {
-        return (abs((endCoord - startCoord)) / 2 + startCoord);
     }
 
     public void onPumpeAktivierenClick(ActionEvent e) {
-       /* if(Kontroller.getKontroller().getAktuelleRunde() %2 ==0) return;
-
-        if(Kontroller.getKontroller().getSelectedPlayer() instanceof Saboteur) return; */
         if (step) {
             step = false;
         }
-
         Pumpe p = Kontroller.getKontroller().getMap().findPumpe(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         p.setIstAktiv(true);
         endOfAction();
@@ -325,7 +250,7 @@ public class MainController {
         }
 
         Kontroller.getKontroller().getSelectedPlayer().getPosition().reparieren();
-        GuiMap.getGuiMap().refresh();
+
         endOfAction();
     }
 
@@ -333,9 +258,6 @@ public class MainController {
         if (step) {
             step = false;
         }
-
-        Rohr r = Kontroller.getKontroller().getMap().findRohr(Kontroller.getKontroller().getSelectedPlayer().getPosition());
-        // System.out.println("aktuelle Rohr: "+ r.getName());
         rohrUmbinden = true;
         endOfAction();
     }
@@ -346,7 +268,7 @@ public class MainController {
         }
 
         Kontroller.getKontroller().getSelectedPlayer().getPosition().kaputtMachen();
-        GuiMap.getGuiMap().refresh();
+
         endOfAction();
     }
 

@@ -103,6 +103,8 @@ public abstract class Spieler {
         } else if (pumpeWoher.getAusgangsRohr() == aktuelleRohr) {
             pumpeWoher.setAusgangsRohr(null);
         }
+
+        GuiMap.getGuiMap().refreshRohrPosition(aktuelleRohr);
     }
 
     /**
@@ -117,6 +119,8 @@ public abstract class Spieler {
             position.setIstBesetzt(false);
             
             position = netzwerkElement;
+
+
             GuiMap.getGuiMap().refreshSpieler();
             if (netzwerkElement instanceof Rohr) {
                 netzwerkElement.setIstBesetzt(true);

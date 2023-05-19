@@ -1,5 +1,6 @@
 package desert.network;
 
+import desert.gui.GuiMap;
 import org.tinylog.Logger;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public abstract class Netzelement {
     public void kaputtMachen() {
         istKaputt = true;
         Logger.info("Netzelement {} ist kaputt.", this);
+        GuiMap.getGuiMap().refreshRoehre();
     }
 
     /**
@@ -57,6 +59,7 @@ public abstract class Netzelement {
     public void reparieren() {
         istKaputt = false;
         Logger.info("Netzelement {} wurde repariert.", this);
+        GuiMap.getGuiMap().refreshRoehre();
     }
 
     //=======================================================================================
@@ -80,6 +83,7 @@ public abstract class Netzelement {
 
     public void setIstAktiv(boolean istAktiv) {
         this.istAktiv = istAktiv;
+        GuiMap.getGuiMap().refreshPumpen();
     }
 
     public boolean isIstKaputt() {

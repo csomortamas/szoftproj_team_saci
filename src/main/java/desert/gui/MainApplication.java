@@ -101,6 +101,8 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         stage.show();
         //-------fxml load
+        Kontroller.getKontroller().tick();
+        GuiMap.getGuiMap().refreshRoehre();
 
     }
 

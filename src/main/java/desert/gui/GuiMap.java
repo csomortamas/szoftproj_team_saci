@@ -6,10 +6,17 @@ import desert.player.Spieler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Math.abs;
+
 //Water Pump pic: <a href="https://www.flaticon.com/free-icons/water-pump" title="water pump icons">Water pump icons created by Freepik - Flaticon</a>
 //Zistern pic: <a href="https://www.flaticon.com/free-icons/water-tank" title="water tank icons">Water tank icons created by Enes Gozcu - Flaticon</a>
 //Water source/Waterfall pic: <a href="https://www.flaticon.com/free-icons/waterfall" title="waterfall icons">Waterfall icons created by photo3idea_studio - Flaticon</a>
@@ -33,22 +40,18 @@ public class GuiMap {
 
     public void sceneSetup(){
         for(int i = 0; i < Kontroller.getKontroller().getMap().getWasserquellen().size(); i++){
-
             Kontroller.getKontroller().getMap().getPumpen().get(i).setButton((Button)scene.lookup("#pumpe"+(i+1)));
             Kontroller.getKontroller().getMap().getWasserquellen().get(i).setButton((Button)scene.lookup("#wasserQuelle"+(i+1)));
             Kontroller.getKontroller().getMap().getZisternen().get(i).setButton((Button)scene.lookup("#zisterne"+(i+1)));
-          
         }
         for(int i=0; i<Kontroller.getKontroller().getMap().getRohre().size();i++){
             Kontroller.getKontroller().getMap().getRohre().get(i).setLine((Line)scene.lookup("#rohr" + (i+1)));
         }
 
-
         for(int i = 0; i < 2; i++){
             Kontroller.getKontroller().getInstallateurTeam().get(i).setButton((Button)scene.lookup("#installateur"+(i+1)));
             Kontroller.getKontroller().getSaboteurTeam().get(i).setButton((Button)scene.lookup("#saboteur"+(i+1)));
         }
-
     }
 
     public void refreshRoehre(){
@@ -57,7 +60,9 @@ public class GuiMap {
                 rohr.getLine().setStroke(Color.RED);
             }else if(rohr.isIstAktiv() == true){
                 rohr.getLine().setStroke(Color.BLUE);
-            }else{
+            } else if(!rohr.isIstAktiv() && rohr.isIstKaputt()) {
+                rohr.getLine().setStroke(Color.RED);
+            } else if(!rohr.isIstAktiv() && !rohr.isIstKaputt()) {
                 rohr.getLine().setStroke(Color.BLACK);
             }
         }
@@ -84,20 +89,48 @@ public class GuiMap {
         alleSpielerList.addAll(Kontroller.getKontroller().getInstallateurTeam());
         alleSpielerList.addAll(Kontroller.getKontroller().getSaboteurTeam());
 
-        for (Spieler spieler : alleSpielerList) {
-            spieler.getButton().setLayoutX(spieler.getPosition().);
-        }
+        Spieler spieler = Kontroller.getKontroller().getSelectedPlayer();
+        Netzelement spielerPosition = spieler.getPosition();
 
-        //sp.getButton().setLayoutX(netzelement.getButton().getLayoutX() + (netzelement.getButton().getWidth() / 2));
-        //sp.getButton().setLayoutY(netzelement.getButton().getLayoutY() + (netzelement.getButton().getHeight() / 2));
+        if(spieler.getPosition() instanceof Rohr) {
+            Rohr rohr = Kontroller.getKontroller().getMap().findRohr(spielerPosition);
+            spieler.getButton().setLayoutX(calculateSpielerPos(rohr.getLine().getStartX(), rohr.getLine().getEndX()));
+            spieler.getButton().setLayoutY(calculateSpielerPos(rohr.getLine().getStartY(), rohr.getLine().getEndY()));
+        } else {
+            Pumpe pumpe = Kontroller.getKontroller().getMap().findInAllePumpen(spielerPosition);
+            spieler.getButton().setLayoutX(pumpe.getButton().getLayoutX() + randomTinyShift(pumpe.getButton(), spieler));
+            spieler.getButton().setLayoutY(pumpe.getButton().getLayoutY() + randomTinyShift(pumpe.getButton(), spieler));
+        }
+    }
+    // helper function
+    private double calculateSpielerPos(double startCoord, double endCoord) {
+        return (abs((endCoord - startCoord)) / 2 + Math.min(startCoord, endCoord));
     }
 
-    public void
+    // helper function
+    private double randomTinyShift(Button buttonSurface, Spieler spieler) {
+        double pumpeButtonWidth = buttonSurface.getWidth();
+        double spielerButtonWidth = spieler.getButton().getWidth();
+        return Math.random() * (pumpeButtonWidth - spielerButtonWidth);
+    }
 
+    public void refreshRoundCounter() {
+        Text l = (Text) GuiMap.getGuiMap().getScene().lookup("#txtAktuelleRunde");
+        l.setText(String.valueOf((int)(Math.floor((Kontroller.getKontroller().getActionCount() / 2) + 1))));
+    }
 
-
-
-
+    public void refreshPumpen() {
+        for (Pumpe pumpe : Kontroller.getKontroller().getMap().getPumpen()) {
+            if(pumpe.isIstAktiv()) {
+                pumpe.getButton().setBackground(Background.EMPTY);
+            } else {
+                pumpe.getButton().setBackground(Background.fill(Color.BLANCHEDALMOND));
+            }
+            if(pumpe.isIstKaputt()) {
+                pumpe.getButton().setBackground(Background.fill(Color.RED));
+            }
+        }
+    }
 
     public Scene getScene() {
         return scene;

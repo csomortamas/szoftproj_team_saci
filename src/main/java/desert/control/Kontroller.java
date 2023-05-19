@@ -1,5 +1,6 @@
 package desert.control;
 
+import desert.gui.GuiMap;
 import desert.network.*;
 import desert.player.Installateur;
 import desert.player.Saboteur;
@@ -172,7 +173,6 @@ public class Kontroller {
 
         punkteKalkulieren();
 
-        //aktuelleRunde++;
         pumpeKaputtMacht();
         pumpeErstellen();
         rohrErstellen();
@@ -611,7 +611,9 @@ public class Kontroller {
     }
 
     public void setActionCount(int actionCount) {
+        if(actionCount == maxRunde) Logger.info("End of Game");
         this.actionCount = actionCount;
+        GuiMap.getGuiMap().refreshRoundCounter();
     }
 
     public GameMap getMap() {
@@ -689,5 +691,6 @@ public class Kontroller {
         this.selectedPlayer = s;
     }
     public Spieler getSelectedPlayer(){return selectedPlayer; }
+
 }
 

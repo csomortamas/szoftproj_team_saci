@@ -1,6 +1,7 @@
 package desert.network;
 
 import desert.control.Kontroller;
+import desert.gui.GuiMap;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Line;
 import org.tinylog.Logger;
@@ -36,6 +37,7 @@ public class Rohr extends Netzelement {
         // binden
         Kontroller.getKontroller().binden(r1, this.getNachbarn().get(0), pumpeInHand);
         Kontroller.getKontroller().binden(r2, pumpeInHand, this.getNachbarn().get(1));
+        GuiMap.getGuiMap().refreshSplittedRohr(r1,r2);
     }
     //=======================================================================================
     //=======================================================================================

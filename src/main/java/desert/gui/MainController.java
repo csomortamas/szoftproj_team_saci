@@ -240,4 +240,17 @@ public class MainController {
         }
         endOfAction();
     }
+
+    public void onEinmontierenMiddleClick(ActionEvent e){
+        if (step) {
+            step = false;
+        }
+        if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
+            Installateur inst = (Installateur) Kontroller.getKontroller().getSelectedPlayer();
+            inst.pumpeEinmontieren(true);
+        }
+        GuiMap.getGuiMap().refreshAlleRohre();
+        GuiMap.getGuiMap().refreshRoehre();
+        endOfAction();
+    }
 }

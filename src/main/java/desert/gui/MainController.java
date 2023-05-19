@@ -81,38 +81,26 @@ public class MainController {
 
                 Rohr rohr = Kontroller.getKontroller().getMap().findRohr(Kontroller.getKontroller().getSelectedPlayer().getPosition());
 
-                Pumpe nachbarnPumpe1 = Kontroller.getKontroller().getMap().findPumpe(rohr.getNachbarn().get(0));
-                if (nachbarnPumpe1 == null) {
-                    nachbarnPumpe1 = Kontroller.getKontroller().getMap().findZisterne(rohr.getNachbarn().get(0));
-                }
-                if (nachbarnPumpe1 == null) {
-                    nachbarnPumpe1 = Kontroller.getKontroller().getMap().findWasserquelle(rohr.getNachbarn().get(0));
-                }
-                Pumpe nachbarnPumpe2 = Kontroller.getKontroller().getMap().findPumpe(rohr.getNachbarn().get(1));
-                if (nachbarnPumpe2 == null) {
-                    nachbarnPumpe2 = Kontroller.getKontroller().getMap().findZisterne(rohr.getNachbarn().get(1));
-                }
-                if (nachbarnPumpe2 == null) {
-                    nachbarnPumpe2 = Kontroller.getKontroller().getMap().findWasserquelle(rohr.getNachbarn().get(1));
+                List<Pumpe> allePumpen = new ArrayList<>();
+                allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());
+                allePumpen.addAll(Kontroller.getKontroller().getMap().getZisternen());
+                allePumpen.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
+
+                Pumpe nachbarnPumpe1 = null;
+                Pumpe nachbarnPumpe2 = null;
+                for (Pumpe p : allePumpen) {
+                    if (p == rohr.getNachbarn().get(0)) {
+                        nachbarnPumpe1 = p;
+                    }
+                    if (p == rohr.getNachbarn().get(1)) {
+                        nachbarnPumpe2 = p;
+                    }
                 }
 
-                rohr.getLine().setStartX(nachbarnPumpe1.getButton().getLayoutX() + (nachbarnPumpe1.getButton().getWidth() / 2));
-                rohr.getLine().setStartY(nachbarnPumpe1.getButton().getLayoutY() + (nachbarnPumpe1.getButton().getHeight() / 2));
 
-
-                rohr.getLine().setEndX(nachbarnPumpe2.getButton().getLayoutX() + (nachbarnPumpe2.getButton().getWidth() / 2));
-                rohr.getLine().setEndY(nachbarnPumpe2.getButton().getLayoutY() + (nachbarnPumpe2.getButton().getHeight() / 2));
-                rohr.getLine().toBack();
-
-                Kontroller.getKontroller().getSelectedPlayer().getButton().setLayoutX(calculateSpielerPos(rohr.getLine().getStartX(), rohr.getLine().getEndX()));
-                Kontroller.getKontroller().getSelectedPlayer().getButton().setLayoutY(calculateSpielerPos(rohr.getLine().getEndY(),rohr.getLine().getStartY()));
 
 
                 //GuiMap.getGuiMap().refresh();
-                rohrUmbindenZaehler = 0;
-                rohrUmbinden = false;
-                pumpeWoher = null;
-                pumpeWohin = null;
                 endOfAction();
             }
         } else if (step) {
@@ -154,7 +142,17 @@ public class MainController {
     }
 
     public void endOfAction() {
+        eingangsrohrUmstellung = false;
         step = true;
+        rohrUmbinden = false;
+        ausgangsrohrUmstellung = false;
+
+        eingangsrohrUmstellungPumpe = null;
+        ausgangsrohrUmstellungPumpe = null;
+        pumpeWoher = null;
+
+        rohrUmbindenZaehler = 0;
+
         Kontroller.getKontroller().setActionCount(Kontroller.getKontroller().getActionCount() + 1);
         Text l = (Text) GuiMap.getGuiMap().getScene().lookup("#txtAktuelleRunde");
         l.setText(String.valueOf(Math.floor((Kontroller.getKontroller().getActionCount() / 2) + 1)));
@@ -226,24 +224,39 @@ public class MainController {
        /* if(Kontroller.getKontroller().getAktuelleRunde() %2 ==0) return;
 
         if(Kontroller.getKontroller().getSelectedPlayer() instanceof Saboteur) return; */
+        if (step) {
+            step = false;
+        }
+
         Pumpe p = Kontroller.getKontroller().getMap().findPumpe(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         p.setIstAktiv(true);
         endOfAction();
     }
 
     public void onPumpeDeaktivierenClick(ActionEvent e) {
+        if (step) {
+            step = false;
+        }
+
         Pumpe p = Kontroller.getKontroller().getMap().findPumpe(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         p.setIstAktiv(false);
         endOfAction();
     }
 
     public void onEingangsrohrUmstellenClick(ActionEvent e) {
-        Pumpe p = Kontroller.getKontroller().getMap().findPumpe(Kontroller.getKontroller().getSelectedPlayer().getPosition());
-        if (p == null) {
-            p = Kontroller.getKontroller().getMap().findZisterne(Kontroller.getKontroller().getSelectedPlayer().getPosition());
+        if (step) {
+            step = false;
         }
-        if (p == null) {
-            p = Kontroller.getKontroller().getMap().findWasserquelle(Kontroller.getKontroller().getSelectedPlayer().getPosition());
+
+        List<Pumpe> allePumpen = new ArrayList<>();
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getZisternen());
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
+        Pumpe p = null;
+        for (Pumpe pumpe : allePumpen) {
+            if (pumpe == Kontroller.getKontroller().getSelectedPlayer().getPosition()) {
+                p = pumpe;
+            }
         }
 
         eingangsrohrUmstellungPumpe = p;
@@ -251,17 +264,24 @@ public class MainController {
         endOfAction();
     }
 
-    public void onStehenBleibenClick(ActionEvent e) {
+    /*public void onStehenBleibenClick(ActionEvent e) {
         step = false;
-    }
+    }*/
 
     public void onAusgangsRohrUmstellenClick(ActionEvent e) {
-        Pumpe p = Kontroller.getKontroller().getMap().findPumpe(Kontroller.getKontroller().getSelectedPlayer().getPosition());
-        if (p == null) {
-            p = Kontroller.getKontroller().getMap().findZisterne(Kontroller.getKontroller().getSelectedPlayer().getPosition());
+        if (step) {
+            step = false;
         }
-        if (p == null) {
-            p = Kontroller.getKontroller().getMap().findWasserquelle(Kontroller.getKontroller().getSelectedPlayer().getPosition());
+
+        List<Pumpe> allePumpen = new ArrayList<>();
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getZisternen());
+        allePumpen.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
+        Pumpe p = null;
+        for (Pumpe pumpe : allePumpen) {
+            if (pumpe == Kontroller.getKontroller().getSelectedPlayer().getPosition()) {
+                p = pumpe;
+            }
         }
 
         ausgangsrohrUmstellungPumpe = p;
@@ -270,6 +290,10 @@ public class MainController {
     }
 
     public void onInstallateurClick(ActionEvent e) {
+        if (step) {
+            step = false;
+        }
+
         Button b = (Button) e.getSource();
         for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
             if (i.getButton() == b) {
@@ -281,6 +305,10 @@ public class MainController {
     }
 
     public void onSaboteurClick(ActionEvent e) {
+        if (step) {
+            step = false;
+        }
+
         Button b = (Button) e.getSource();
         for (Saboteur s : Kontroller.getKontroller().getSaboteurTeam()) {
             if (s.getButton() == b) {
@@ -292,12 +320,20 @@ public class MainController {
     }
 
     public void onReparierenClick(ActionEvent e) {
+        if (step) {
+            step = false;
+        }
+
         Kontroller.getKontroller().getSelectedPlayer().getPosition().reparieren();
         GuiMap.getGuiMap().refresh();
         endOfAction();
     }
 
     public void onRohrUmbindenClick(ActionEvent e) {
+        if (step) {
+            step = false;
+        }
+
         Rohr r = Kontroller.getKontroller().getMap().findRohr(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         // System.out.println("aktuelle Rohr: "+ r.getName());
         rohrUmbinden = true;
@@ -305,12 +341,20 @@ public class MainController {
     }
 
     public void onLoechernClick(ActionEvent e) {
+        if (step) {
+            step = false;
+        }
+
         Kontroller.getKontroller().getSelectedPlayer().getPosition().kaputtMachen();
         GuiMap.getGuiMap().refresh();
         endOfAction();
     }
 
     public void onPumpeAufnehmen(ActionEvent e) {
+        if (step) {
+            step = false;
+        }
+
         if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
             Installateur inst = (Installateur) Kontroller.getKontroller().getSelectedPlayer();
             inst.pumpeAufnehmen();

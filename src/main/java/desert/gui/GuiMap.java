@@ -1,10 +1,12 @@
 package desert.gui;
 import desert.control.Kontroller;
+import desert.network.Netzelement;
 import desert.network.Pumpe;
 import desert.network.Rohr;
 import desert.player.Spieler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -56,9 +58,9 @@ public class GuiMap {
 
     public void refreshRoehre(){
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()){
-            if(rohr.isIstKaputt() == true){
-                rohr.getLine().setStroke(Color.RED);
-            }else if(rohr.isIstAktiv() == true){
+            if(rohr.isIstAktiv() && rohr.isIstKaputt()){
+                rohr.getLine().setStroke(Color.PURPLE);
+            }else if(rohr.isIstAktiv() && !rohr.isIstKaputt()){
                 rohr.getLine().setStroke(Color.BLUE);
             } else if(!rohr.isIstAktiv() && rohr.isIstKaputt()) {
                 rohr.getLine().setStroke(Color.RED);

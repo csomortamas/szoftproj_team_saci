@@ -117,7 +117,7 @@ public abstract class Spieler {
         }
         if (position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isIstBesetzt()) {
             position.setIstBesetzt(false);
-            
+
             position = netzwerkElement;
 
 

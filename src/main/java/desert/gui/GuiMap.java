@@ -1,5 +1,4 @@
 package desert.gui;
-//import desert.*;
 import desert.control.Kontroller;
 import desert.network.Pumpe;
 import desert.network.Rohr;
@@ -33,9 +32,6 @@ public class GuiMap {
 
     public void sceneSetup(){
         for(int i = 0; i < Kontroller.getKontroller().getMap().getWasserquellen().size(); i++){
-          /*buttonsOfPumpe.add((Button)scene.lookup("#pumpe"+i));
-            buttonsOfQuelle.add((Button)scene.lookup("#wasserQuelle"+i));
-            buttonsOfZisterne.add((Button)scene.lookup("#zisterne"+i));*/
 
             Kontroller.getKontroller().getMap().getPumpen().get(i).setButton((Button)scene.lookup("#pumpe"+(i+1)));
             Kontroller.getKontroller().getMap().getWasserquellen().get(i).setButton((Button)scene.lookup("#wasserQuelle"+(i+1)));

@@ -1,6 +1,7 @@
 package desert.player;
 
 import desert.control.Kontroller;
+import desert.gui.GuiMap;
 import desert.network.Netzelement;
 import desert.network.Pumpe;
 import desert.network.Rohr;
@@ -114,9 +115,9 @@ public abstract class Spieler {
         }
         if (position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isIstBesetzt()) {
             position.setIstBesetzt(false);
-
+            
             position = netzwerkElement;
-
+            GuiMap.getGuiMap().refreshSpieler();
             if (netzwerkElement instanceof Rohr) {
                 netzwerkElement.setIstBesetzt(true);
             }

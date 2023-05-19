@@ -63,7 +63,7 @@ public class MainController {
             }
         }
         if (pumpe == null) {
-            for (Pumpe p : Kontroller.getKontroller().getMap().getZisternen()) {
+            for (Pumpe p : Kontroller.getKontroller().getMap().getWasserquellen()) {
                 if (p.getButton() == buttonQuelle) {
                     pumpe = p;
                     break;

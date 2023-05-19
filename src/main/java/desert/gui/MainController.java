@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import org.tinylog.Logger;
 
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class MainController {
     boolean step = true;
     boolean rohrUmbinden = false;
     boolean playerSelected = false;
+    boolean rohrMitFreiemEndeUmbinden = false;
+
 
     Pumpe ausgangsrohrUmstellungPumpe = null;
     Pumpe eingangsrohrUmstellungPumpe = null;
@@ -59,7 +62,13 @@ public class MainController {
 
                 endOfAction();
             }
-        } else if (step) {
+        } else if(rohrMitFreiemEndeUmbinden){
+            Kontroller.getKontroller().getSelectedPlayer().umbinden(null, pumpe);
+            rohrMitFreiemEndeUmbinden = false;
+            Logger.error("itt vunk");
+            endOfAction();
+        }
+        else if (step) {
             List<Pumpe> alleNetzelemente = new ArrayList<>();
             alleNetzelemente.addAll(Kontroller.getKontroller().getMap().getWasserquellen());
             alleNetzelemente.addAll(Kontroller.getKontroller().getMap().getZisternen());
@@ -231,9 +240,16 @@ public class MainController {
         if (step) {
             step = false;
         }
-        //Line l =  e.get
-       // if ()
-        rohrUmbinden = true;
+        Button b = (Button) e.getSource();
+        Rohr rohr= null;
+        for(Rohr r : Kontroller.getKontroller().getMap().getRohre()){
+            if(r.getLine() == ((Rohr)Kontroller.getKontroller().getSelectedPlayer().getPosition()).getLine()){
+                rohr = r;
+                break;
+            }
+        }
+        if(rohr.getNachbarn().size() == 2)rohrUmbinden = true;
+        else rohrMitFreiemEndeUmbinden = true;
 
     }
 

@@ -2,6 +2,7 @@ package desert.player;
 
 import desert.control.Kontroller;
 import desert.gui.GuiMap;
+import desert.gui.MainController;
 import desert.network.Netzelement;
 import desert.network.Pumpe;
 import desert.network.Rohr;
@@ -81,6 +82,9 @@ public abstract class Spieler {
         if (aktuelleRohr.getNachbarn().size() == 1) {
             aktuelleRohr.getNachbarn().remove(null);
             aktuelleRohr.getNachbarn().add(pumpeWohin);
+            pumpeWohin.getNachbarn().add(aktuelleRohr);
+            aktuelleRohr.getLine().setOnMouseClicked(MainController.getMainController().getLineClickAction());
+            Logger.error("csáhh");
         } else {
             Netzelement pumpe0 = aktuelleRohr.getNachbarn().get(0);
             Netzelement pumpe1 = aktuelleRohr.getNachbarn().get(1);

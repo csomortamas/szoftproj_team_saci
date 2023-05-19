@@ -85,14 +85,13 @@ public class MainApplication extends Application {
         Spieler saboteur2 = new Saboteur(zisterne3);
 
 
-        Group group = new Group();
-
+        GuiMap.getGuiMap().setGroup(new Group());
 
         //--------fxml load
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
-        group.getChildren().add(fxmlLoader.load());
+        GuiMap.getGuiMap().getGroup().getChildren().add(fxmlLoader.load());
 
-        Scene scene = new Scene(group, 1024, 800);
+        Scene scene = new Scene(GuiMap.getGuiMap().getGroup(), 1024, 800);
 
 
         GuiMap.getGuiMap().setGuiMapScene(scene);
@@ -114,4 +113,7 @@ public class MainApplication extends Application {
 
         //
     }
+
+
+
 }

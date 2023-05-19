@@ -1,6 +1,7 @@
 package desert.control;
 
 import desert.gui.GuiMap;
+import desert.gui.MainController;
 import desert.network.*;
 import desert.player.Installateur;
 import desert.player.Saboteur;
@@ -31,6 +32,7 @@ public class Kontroller {
      */
 
     private GameMap map = new GameMap();
+
 
     /**
      *
@@ -119,13 +121,15 @@ public class Kontroller {
         int randomNumber = rand.nextInt(7);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber == 1) {
+        if (randomNumber >(-1)) {
             Rohr newRohr = new Rohr();
             newRohr.setName("R-G");
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
             newRohr.getNachbarn().add(map.getZisternen().get(randomZisterneIndex));
 
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
+            GuiMap.getGuiMap().refreshNewRohre(map.getZisternen().get(randomZisterneIndex),newRohr);
+            System.out.println("lol");
         }
     }
 

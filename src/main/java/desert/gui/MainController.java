@@ -22,14 +22,16 @@ import java.util.List;
 import static java.lang.Math.abs;
 
 public class MainController {
-
     boolean eingangsrohrUmstellung = false;
-    Pumpe eingangsrohrUmstellungPumpe = null;
     boolean ausgangsrohrUmstellung = false;
-    Pumpe ausgangsrohrUmstellungPumpe = null;
     boolean step = true;
     boolean rohrUmbinden = false;
+    boolean playerSelected = false;
+
+    Pumpe ausgangsrohrUmstellungPumpe = null;
+    Pumpe eingangsrohrUmstellungPumpe = null;
     Pumpe pumpeWoher = null;
+
     int rohrUmbindenZaehler = 0;
 
     public void onPumpeClick(ActionEvent e) {
@@ -79,6 +81,7 @@ public class MainController {
         step = true;
         rohrUmbinden = false;
         ausgangsrohrUmstellung = false;
+        playerSelected = false;
 
         eingangsrohrUmstellungPumpe = null;
         ausgangsrohrUmstellungPumpe = null;
@@ -87,7 +90,7 @@ public class MainController {
         rohrUmbindenZaehler = 0;
 
         Kontroller.getKontroller().setActionCount(Kontroller.getKontroller().getActionCount() + 1);
-        if(Kontroller.getKontroller().getActionCount() % 2 == 0){
+        if (Kontroller.getKontroller().getActionCount() % 2 == 0) {
             Kontroller.getKontroller().tick();
         }
 
@@ -124,7 +127,7 @@ public class MainController {
                         break;
                     }
                 }
-                if(sp.step(clickedRohr)) {
+                if (sp.step(clickedRohr)) {
                     step = false;
                 }
                 GuiMap.getGuiMap().refreshControlPanes();
@@ -165,7 +168,7 @@ public class MainController {
         if (step) {
             step = false;
         }
-        ausgangsrohrUmstellungPumpe = Kontroller.getKontroller().getMap().findInAllePumpen( Kontroller.getKontroller().getSelectedPlayer().getPosition());
+        ausgangsrohrUmstellungPumpe = Kontroller.getKontroller().getMap().findInAllePumpen(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         ausgangsrohrUmstellung = true;
     }
 

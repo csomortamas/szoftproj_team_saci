@@ -1,9 +1,14 @@
 package desert.gui;
+
 import desert.control.Kontroller;
 import desert.network.Netzelement;
 import desert.network.Pumpe;
 import desert.network.Rohr;
+import desert.network.Zisterne;
+import desert.player.Installateur;
+import desert.player.Saboteur;
 import desert.player.Spieler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Blend;
@@ -19,6 +24,7 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static java.lang.Math.abs;
 
@@ -28,18 +34,23 @@ import static java.lang.Math.abs;
 //Installateur pic: <a href="https://www.flaticon.com/free-icons/installation" title="installation icons">Installation icons created by Muhammad_Usman - Flaticon</a>
 //Saboteur pic: <a href="https://www.flaticon.com/free-icons/thief" title="thief icons">Thief icons created by Freepik - Flaticon</a>
 public class GuiMap {
+    private Group group=null;
     private Scene scene;
     private final static GuiMap guiMap = new GuiMap();
-    public static GuiMap getGuiMap (){
+
+    public static GuiMap getGuiMap() {
         return guiMap;
     }
-    public void setGuiMapScene(Scene _scene){
+
+    public void setGuiMapScene(Scene _scene) {
         this.scene = _scene;
     }
-    private GuiMap(){
+
+    private GuiMap() {
 
     }
-    public GuiMap(Scene _scene){
+
+    public GuiMap(Scene _scene) {
         this.scene = _scene;
     }
 
@@ -62,24 +73,42 @@ public class GuiMap {
             Kontroller.getKontroller().getMap().getRohre().get(i).setLine((Line) scene.lookup("#rohr" + (i + 1)));
         }
 
-        for(int i = 0; i < 2; i++){
-            Kontroller.getKontroller().getInstallateurTeam().get(i).setButton((Button)scene.lookup("#installateur"+(i+1)));
-            Kontroller.getKontroller().getSaboteurTeam().get(i).setButton((Button)scene.lookup("#saboteur"+(i+1)));
+        for (int i = 0; i < 2; i++) {
+            Kontroller.getKontroller().getInstallateurTeam().get(i).setButton((Button) scene.lookup("#installateur" + (i + 1)));
+            Kontroller.getKontroller().getSaboteurTeam().get(i).setButton((Button) scene.lookup("#saboteur" + (i + 1)));
         }
 
 
     }
 
-    public void refreshRoehre(){
-        for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()){
-            if(rohr.isIstAktiv() && rohr.isIstKaputt()){
+    public void refreshRoehre() {
+        for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()) {
+            if (rohr.isIstAktiv() && rohr.isIstKaputt()) {
                 rohr.getLine().setStroke(Color.PURPLE);
-            }else if(rohr.isIstAktiv() && !rohr.isIstKaputt()){
+            } else if (rohr.isIstAktiv() && !rohr.isIstKaputt()) {
                 rohr.getLine().setStroke(Color.BLUE);
-            } else if(!rohr.isIstAktiv() && rohr.isIstKaputt()) {
+            } else if (!rohr.isIstAktiv() && rohr.isIstKaputt()) {
                 rohr.getLine().setStroke(Color.RED);
-            } else if(!rohr.isIstAktiv() && !rohr.isIstKaputt()) {
+            } else if (!rohr.isIstAktiv() && !rohr.isIstKaputt()) {
                 rohr.getLine().setStroke(Color.BLACK);
+            }
+        }
+    }
+
+    public void refreshPlayerButtons() {
+        if (Kontroller.getKontroller().getActionCount() % 2 == 0) {
+            for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
+                i.getButton().setDisable(false);
+            }
+            for (Saboteur s : Kontroller.getKontroller().getSaboteurTeam()) {
+                s.getButton().setDisable(true);
+            }
+        } else {
+            for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
+                i.getButton().setDisable(true);
+            }
+            for (Saboteur s : Kontroller.getKontroller().getSaboteurTeam()) {
+                s.getButton().setDisable(false);
             }
         }
     }
@@ -163,7 +192,7 @@ public class GuiMap {
             }
         }
 
-        if(spieler.getPosition() instanceof Rohr) {
+        if (spieler.getPosition() instanceof Rohr) {
             Rohr rohr = Kontroller.getKontroller().getMap().findRohr(spielerPosition);
             spieler.getButton().setLayoutX(calculateSpielerPos(rohr.getLine().getStartX(), rohr.getLine().getEndX()));
             spieler.getButton().setLayoutY(calculateSpielerPos(rohr.getLine().getStartY(), rohr.getLine().getEndY()));
@@ -173,6 +202,7 @@ public class GuiMap {
             spieler.getButton().setLayoutY(pumpe.getButton().getLayoutY() + randomTinyShift(pumpe.getButton(), spieler));
         }
     }
+
     // helper function
     private double calculateSpielerPos(double startCoord, double endCoord) {
         return (abs((endCoord - startCoord)) / 2 + Math.min(startCoord, endCoord));
@@ -187,7 +217,7 @@ public class GuiMap {
 
     public void refreshRoundCounter() {
         Text l = (Text) GuiMap.getGuiMap().getScene().lookup("#txtAktuelleRunde");
-        l.setText(String.valueOf((int)(Math.floor((Kontroller.getKontroller().getActionCount() / 2) + 1))));
+        l.setText(String.valueOf((int) (Math.floor((Kontroller.getKontroller().getActionCount() / 2) + 1))));
     }
 
     public void refreshPoints() {
@@ -203,12 +233,13 @@ public class GuiMap {
 
     public void refreshPumpen() {
         for (Pumpe pumpe : Kontroller.getKontroller().getMap().getPumpen()) {
-            if(pumpe.isIstAktiv()) {
-                pumpe.getButton().setBackground(Background.EMPTY);
+
+            if (pumpe.isIstAktiv()) {
+                //pumpe.getButton().setBackground(Background.EMPTY);
             } else {
                 pumpe.getButton().setBackground(Background.fill(Color.BLANCHEDALMOND));
             }
-            if(pumpe.isIstKaputt()) {
+            if (pumpe.isIstKaputt()) {
                 pumpe.getButton().setBackground(Background.fill(Color.RED));
             }
         }
@@ -260,5 +291,12 @@ public class GuiMap {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

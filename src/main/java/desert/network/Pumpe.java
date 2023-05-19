@@ -55,8 +55,11 @@ public class Pumpe extends Netzelement {
      *
      */
     public void wasserWeiterleiten() {
-        if (!istAktiv)
+        if (isIstKaputt()){
+            ausgangsRohr.setIstAktiv(false);
             return;
+        }
+
 
         if (eingangsRohr != null && ausgangsRohr != null && !eingangsRohr.isIstKaputt()) {
             ausgangsRohr.setIstAktiv(eingangsRohr.istAktiv);

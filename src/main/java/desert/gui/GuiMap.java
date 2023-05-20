@@ -219,20 +219,14 @@ public class GuiMap {
         l1.setOnMouseClicked(MainController.getMainController().getLineClickAction());
         l2.setOnMouseClicked(MainController.getMainController().getLineClickAction());
 
-        Pumpe p;
-        for (Netzelement n1 : r1.getNachbarn()) {
-            for (Netzelement n2 : r2.getNachbarn()) {
-                if (n1 == n2) {
-                    p = Kontroller.getKontroller().getMap().findPumpe(n1);
-                }
-            }
-        }
-
 
         r1.setLine(l1);
         r2.setLine(l2);
-        group.getChildren().add(l1);
-        group.getChildren().add(l2);
+        Pane pane = (Pane) GuiMap.getGuiMap().getScene().lookup("#mainPane");
+        pane.getChildren().add(l1);
+        pane.getChildren().add(l2);
+        l1.toBack();
+        l2.toBack();
     }
 
     public void refreshSpieler() {
@@ -247,7 +241,7 @@ public class GuiMap {
         for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
             if (i.getPumpeInHand() != null) {
                 i.getButton().setBackground(Background.fill(Color.YELLOW));
-            }else{
+            } else {
                 i.getButton().setStyle(null);
             }
         }
@@ -320,7 +314,14 @@ public class GuiMap {
         newPumpeButton.setGraphic(imageView);
         newPumpeButton.setBackground(Background.EMPTY);
         p.setButton(newPumpeButton);
-        group.getChildren().add(newPumpeButton);
+
+        Pane pane = (Pane) GuiMap.getGuiMap().getScene().lookup("#mainPane");
+        pane.getChildren().add(newPumpeButton);
+        newPumpeButton.toBack();
+        Rohr r1 = Kontroller.getKontroller().getMap().findRohr(p.getNachbarn().get(0));
+        Rohr r2 = Kontroller.getKontroller().getMap().findRohr(p.getNachbarn().get(1));
+        r1.getLine().toBack();
+        r2.getLine().toBack();
     }
 
     public void refreshReadyPumps() {
@@ -337,14 +338,18 @@ public class GuiMap {
         Random rand = new Random();
         int plusY = rand.nextInt(-40, 40);
 
-        double startX = z.getButton().getLayoutX() + 7;
-        double startY = z.getButton().getLayoutY() + 27;
+        double startX = z.getButton().getLayoutX() + 35;
+        double startY = z.getButton().getLayoutY() + 31;
         Line line = new Line(startX, startY, (startX - 100), (startY + plusY));
 
         line.setStrokeWidth(7);
         newRohr.setLine(line);
         line.setOnMouseClicked(MainController.getMainController().getLineClickAction());
-        group.getChildren().add(line);
+
+        Pane pane = (Pane) GuiMap.getGuiMap().getScene().lookup("#mainPane");
+        pane.getChildren().add(line);
+        line.toBack();
+        //group.getChildren().add(line);
         //z.getButton().toFront();
         //line.toBack();
 
@@ -358,10 +363,6 @@ public class GuiMap {
         }
        /* Pumpe p = new Pumpe(1,2);
         p.getButton().setOnMouseClicked(group.getOnMouseClicked());*/
-    }
-
-    public void refreshRemovedRohr(Rohr oldRohr) {
-        group.getChildren().remove(oldRohr.getLine());
     }
 
     public Scene getScene() {

@@ -110,10 +110,9 @@ public class Kontroller {
         int randomNumber = rand.nextInt(4);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber == 2) {
+        if (randomNumber == 2||true) {
             Pumpe p = new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY());
             map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(p);
-            //map.getPumpen().add(p);
         }
     }
 

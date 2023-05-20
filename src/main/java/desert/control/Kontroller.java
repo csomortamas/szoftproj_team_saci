@@ -1,7 +1,6 @@
 package desert.control;
 
 import desert.gui.GuiMap;
-import desert.gui.MainController;
 import desert.network.*;
 import desert.player.Installateur;
 import desert.player.Saboteur;
@@ -11,7 +10,6 @@ import org.tinylog.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  *
@@ -45,7 +43,7 @@ public class Kontroller {
      *
      */
 
-    private int actionCount=0;
+    private int actionCount = 0;
 
     /**
      *
@@ -112,8 +110,8 @@ public class Kontroller {
         int randomNumber = rand.nextInt(4);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber  >-2) {
-            Pumpe p=new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY());
+        if (randomNumber == 2) {
+            Pumpe p = new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY());
             map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(p);
             //map.getPumpen().add(p);
         }
@@ -121,17 +119,17 @@ public class Kontroller {
 
     public void rohrErstellen() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(10);
+        int randomNumber = rand.nextInt(7);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber ==5) {
+        if (randomNumber == 5) {
             Rohr newRohr = new Rohr();
             newRohr.setName("R-G");
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
             newRohr.getNachbarn().add(map.getZisternen().get(randomZisterneIndex));
 
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
-            GuiMap.getGuiMap().refreshNewRohre(map.getZisternen().get(randomZisterneIndex),newRohr);
+            GuiMap.getGuiMap().refreshNewRohre(map.getZisternen().get(randomZisterneIndex), newRohr);
             map.getRohre().add(newRohr);
             //map.getZisternen().get(randomZisterneIndex).getButton().toFront();
             //System.out.println("lol");
@@ -144,7 +142,7 @@ public class Kontroller {
         int randomPumpeIndex = rand.nextInt(map.getPumpen().size());
 
         // Pumpe Random kaputt machen
-        if (map.getPumpen().size() > 0 && randomNumber >= -1) {
+        if (map.getPumpen().size() > 0 && randomNumber == 1) {
             map.getPumpen().get(randomPumpeIndex).kaputtMachen();
         }
     }
@@ -219,7 +217,6 @@ public class Kontroller {
 
         Logger.info("Ein Rohr wurde hinzugefügt");
     }
-
 
 
     public void setupV2(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre, String teamInstName, String teamSabName) {      // binden
@@ -624,7 +621,7 @@ public class Kontroller {
     }
 
     public void setActionCount(int actionCount) {
-        if(actionCount == maxRunde) Logger.info("Game over");
+        if (actionCount == maxRunde) Logger.info("Game over");
         this.actionCount = actionCount;
         GuiMap.getGuiMap().refreshRoundCounter();
     }
@@ -700,10 +697,14 @@ public class Kontroller {
     public void setSaboteurPunkte(int saboteurPunkte) {
         this.saboteurPunkte = saboteurPunkte;
     }
+
     public void setSelectedPlayer(Spieler s) {
         this.selectedPlayer = s;
     }
-    public Spieler getSelectedPlayer(){return selectedPlayer; }
+
+    public Spieler getSelectedPlayer() {
+        return selectedPlayer;
+    }
 
     public Spieler getLastSelectedPlayer() {
         return lastSelectedPlayer;

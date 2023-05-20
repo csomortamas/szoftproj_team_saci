@@ -1,6 +1,5 @@
 package desert.gui;
 
-import desert.control.GameMap;
 import desert.control.Kontroller;
 import desert.network.Pumpe;
 import desert.network.Rohr;
@@ -10,16 +9,10 @@ import desert.player.Installateur;
 import desert.player.Saboteur;
 import desert.player.Spieler;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,12 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainApplication extends Application {
-    public void initMap(){
-        Wasserquelle wasserquelle1 = new Wasserquelle(10,10);
+    public void initMap() {
+        Wasserquelle wasserquelle1 = new Wasserquelle(10, 10);
         wasserquelle1.setName("Q1");
-        Wasserquelle wasserquelle2 = new Wasserquelle(100,100);
+        Wasserquelle wasserquelle2 = new Wasserquelle(100, 100);
         wasserquelle2.setName("Q2");
-        Wasserquelle wasserquelle3 = new Wasserquelle(10,100);
+        Wasserquelle wasserquelle3 = new Wasserquelle(10, 100);
         wasserquelle3.setName("Q3");
         List<Wasserquelle> wasserquelleList = new ArrayList<>();
         wasserquelleList.add(wasserquelle1);
@@ -85,10 +78,11 @@ public class MainApplication extends Application {
         Kontroller.getKontroller().setSelectedPlayer(installateur1);
         Kontroller.getKontroller().setLastSelectedPlayer(saboteur1);
     }
+
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
         initMap();
-        Group group=new  Group();
+        Group group = new Group();
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("landing-page.fxml"));
         try {
@@ -109,7 +103,6 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 
 
 }

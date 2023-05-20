@@ -45,7 +45,7 @@ public class MainController {
 
     private int rohrUmbindenZaehler = 0;
 
-    public void onSpielStartenClick(ActionEvent e){
+    public void onSpielStartenClick(ActionEvent e) {
         TextField instTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtInstTName");
         TextField sabTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtSabTName");
         Kontroller.getKontroller().setInstallateurTeamName(instTName.getText());

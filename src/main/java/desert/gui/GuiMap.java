@@ -11,14 +11,11 @@ import desert.player.Spieler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Blend;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
@@ -34,8 +31,10 @@ import static java.lang.Math.abs;
 //Installateur pic: <a href="https://www.flaticon.com/free-icons/installation" title="installation icons">Installation icons created by Muhammad_Usman - Flaticon</a>
 //Saboteur pic: <a href="https://www.flaticon.com/free-icons/thief" title="thief icons">Thief icons created by Freepik - Flaticon</a>
 public class GuiMap {
-    private Group group=null;
+    private Group group = null;
     private Scene scene;
+
+    private DropShadow borderGlow;
     private final static GuiMap guiMap = new GuiMap();
 
     public static GuiMap getGuiMap() {
@@ -57,6 +56,7 @@ public class GuiMap {
     public void sceneSetup() {
         for (int i = 0; i < Kontroller.getKontroller().getMap().getWasserquellen().size(); i++) {
             Kontroller.getKontroller().getMap().getPumpen().get(i).setButton((Button) scene.lookup("#pumpe" + (i + 1)));
+            Kontroller.getKontroller().getMap().getPumpen().get(i).getButton().setBackground(Background.EMPTY);
             Kontroller.getKontroller().getMap().getWasserquellen().get(i).setButton((Button) scene.lookup("#wasserQuelle" + (i + 1)));
             Kontroller.getKontroller().getMap().getWasserquellen().get(i).getButton().setBackground(Background.EMPTY);
             Kontroller.getKontroller().getMap().getZisternen().get(i).setButton((Button) scene.lookup("#zisterne" + (i + 1)));
@@ -74,9 +74,13 @@ public class GuiMap {
             Kontroller.getKontroller().getInstallateurTeam().get(i).setButton((Button) scene.lookup("#installateur" + (i + 1)));
             Kontroller.getKontroller().getSaboteurTeam().get(i).setButton((Button) scene.lookup("#saboteur" + (i + 1)));
         }
-
-
+        borderGlow = new DropShadow();
+        borderGlow.setOffsetY(0f);
+        borderGlow.setOffsetX(0f);
+        borderGlow.setWidth(20);
+        borderGlow.setHeight(20);
     }
+
 
     public void refreshRoehre() {
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()) {
@@ -108,6 +112,15 @@ public class GuiMap {
                 s.getButton().setDisable(false);
             }
         }
+
+
+        if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
+            borderGlow.setColor(Color.GREEN);
+        } else {
+            borderGlow.setColor(Color.RED);
+        }
+        Kontroller.getKontroller().getSelectedPlayer().getButton().setEffect(borderGlow);
+        Kontroller.getKontroller().getLastSelectedPlayer().getButton().setEffect(null);
     }
 
     public void refreshControlPanes() {
@@ -143,6 +156,13 @@ public class GuiMap {
             }
         }
 
+        Zisterne zisterne = Kontroller.getKontroller().getMap().findZisterne(Kontroller.getKontroller().getSelectedPlayer().getPosition());
+        Button b = (Button) GuiMap.getGuiMap().getScene().lookup("#instPumpeAufnehmen");
+        if (zisterne != null && zisterne.getPumpeZurVerfuegung() != null) {
+            b.setDisable(false);
+        } else {
+            b.setDisable(true);
+        }
     }
 
     public void refreshRohrPosition(Rohr rohr) {
@@ -155,12 +175,12 @@ public class GuiMap {
 
         rohr.getLine().setEndX(nachbarnPumpe2.getButton().getLayoutX() + (nachbarnPumpe2.getButton().getWidth() / 2));
         rohr.getLine().setEndY(nachbarnPumpe2.getButton().getLayoutY() + (nachbarnPumpe2.getButton().getHeight() / 2));
-        rohr.getLine().toBack();
 
         Kontroller.getKontroller().getSelectedPlayer().getButton().setLayoutX(calculateSpielerPos(rohr.getLine().getStartX(), rohr.getLine().getEndX()));
         Kontroller.getKontroller().getSelectedPlayer().getButton().setLayoutY(calculateSpielerPos(rohr.getLine().getEndY(), rohr.getLine().getStartY()));
 
     }
+
     public void refreshSplittedRohr(Rohr r1, Rohr r2) {
         Line l1 = new Line();
         Line l2 = new Line();
@@ -175,7 +195,6 @@ public class GuiMap {
         group.getChildren().add(l2);
 
 
-
     }
 
     public void refreshSpieler() {
@@ -187,12 +206,12 @@ public class GuiMap {
         Netzelement spielerPosition = spieler.getPosition();
 
 
-        for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()){
-            if(i.getPumpeInHand() != null){
+        for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
+            if (i.getPumpeInHand() != null) {
                 i.getButton().setBackground(Background.fill(Color.YELLOW));
-            }else{
+            }/*else{
                 i.getButton().setBackground(Background.EMPTY);
-            }
+            }*/
         }
 
         if (spieler.getPosition() instanceof Rohr) {
@@ -247,13 +266,14 @@ public class GuiMap {
             }
         }
     }
-    public void refreshEinmontiertePumpe(Pumpe p, double startX, double startY, double endX, double endY){
-            Button newPumpeButton = new Button();
 
-            newPumpeButton.setLayoutX(calculateSpielerPos(startX, endX));
-            newPumpeButton.setLayoutY(calculateSpielerPos(startY, endY));
-            p.setButton(newPumpeButton);
-            group.getChildren().add(newPumpeButton);
+    public void refreshEinmontiertePumpe(Pumpe p, double startX, double startY, double endX, double endY) {
+        Button newPumpeButton = new Button();
+
+        newPumpeButton.setLayoutX(calculateSpielerPos(startX, endX));
+        newPumpeButton.setLayoutY(calculateSpielerPos(startY, endY));
+        p.setButton(newPumpeButton);
+        group.getChildren().add(newPumpeButton);
 
     }
 
@@ -261,7 +281,7 @@ public class GuiMap {
         for (Zisterne z : Kontroller.getKontroller().getMap().getZisternen()) {
             if (z.getPumpeZurVerfuegung() != null) {
                 z.getReadyPumpImage().setOpacity(1.0);
-            }else if(z.getPumpeZurVerfuegung() == null){
+            } else if (z.getPumpeZurVerfuegung() == null) {
                 z.getReadyPumpImage().setOpacity(0.5);
             }
         }
@@ -269,11 +289,11 @@ public class GuiMap {
 
     public void refreshNewRohre(Zisterne z, Rohr newRohr) {
         Random rand = new Random();
-        int plusY=rand.nextInt(-40,40);
+        int plusY = rand.nextInt(-40, 40);
 
-        double startX=z.getButton().getLayoutX()+7;
-        double startY=z.getButton().getLayoutY()+27;
-        Line line=new Line(startX,startY,(startX-100),(startY+plusY));
+        double startX = z.getButton().getLayoutX() + 7;
+        double startY = z.getButton().getLayoutY() + 27;
+        Line line = new Line(startX, startY, (startX - 100), (startY + plusY));
 
         line.setStrokeWidth(7);
         newRohr.setLine(line);
@@ -283,9 +303,10 @@ public class GuiMap {
         //line.toBack();
 
     }
-    public void refreshAlleRohre(){
-        for(Rohr rohr : Kontroller.getKontroller().getMap().getRohre()){
-            if(rohr.getNachbarn().size()==2){
+
+    public void refreshAlleRohre() {
+        for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()) {
+            if (rohr.getNachbarn().size() == 2) {
                 refreshRohrPosition(rohr);
             }
         }
@@ -304,6 +325,7 @@ public class GuiMap {
     public Group getGroup() {
         return group;
     }
+
     public void setGroup(Group group) {
         this.group = group;
     }

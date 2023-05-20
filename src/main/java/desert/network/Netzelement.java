@@ -51,6 +51,7 @@ public abstract class Netzelement {
         istKaputt = true;
         Logger.info("Netzelement {} ist kaputt.", this);
         GuiMap.getGuiMap().refreshRoehre();
+        GuiMap.getGuiMap().refreshPumpen();
     }
 
     /**

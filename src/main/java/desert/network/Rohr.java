@@ -10,11 +10,6 @@ public class Rohr extends Netzelement {
     private Line line;
 
     /**
-     *
-     */
-    private boolean besetzt;
-
-    /**
      * Default Konstruktor
      */
     public Rohr() {
@@ -44,13 +39,6 @@ public class Rohr extends Netzelement {
     //=======================================================================================
     //=======================================================================================
 
-    public boolean isBesetzt() {
-        return besetzt;
-    }
-
-    public void setBesetzt(boolean besetzt) {
-        this.besetzt = besetzt;
-    }
 
     public void setLine(Line _line) {
         this.line = _line;

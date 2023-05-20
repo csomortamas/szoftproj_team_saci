@@ -84,7 +84,6 @@ public abstract class Spieler {
             aktuelleRohr.getNachbarn().add(pumpeWohin);
             pumpeWohin.getNachbarn().add(aktuelleRohr);
             aktuelleRohr.getLine().setOnMouseClicked(MainController.getMainController().getLineClickAction());
-            Logger.error("csáhh");
         } else {
             Netzelement pumpe0 = aktuelleRohr.getNachbarn().get(0);
             Netzelement pumpe1 = aktuelleRohr.getNachbarn().get(1);

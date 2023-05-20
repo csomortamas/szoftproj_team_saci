@@ -83,7 +83,8 @@ public class MainApplication extends Application {
         Spieler installateur2 = new Installateur(wasserquelle3);
         Spieler saboteur1 = new Saboteur(zisterne1);
         Spieler saboteur2 = new Saboteur(zisterne3);
-
+        Kontroller.getKontroller().setSelectedPlayer(installateur1);
+        Kontroller.getKontroller().setLastSelectedPlayer(saboteur1);
 
         GuiMap.getGuiMap().setGroup(new Group());
 
@@ -104,7 +105,8 @@ public class MainApplication extends Application {
         Kontroller.getKontroller().setInstallateurPunkte(0);
         GuiMap.getGuiMap().refreshPoints();
         GuiMap.getGuiMap().refreshRoehre();
-
+        GuiMap.getGuiMap().refreshPlayerButtons();
+        GuiMap.getGuiMap().refreshControlPanes();
     }
 
 

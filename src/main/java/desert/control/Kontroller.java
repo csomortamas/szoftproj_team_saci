@@ -90,6 +90,8 @@ public class Kontroller {
 
     private Spieler selectedPlayer;
 
+    private Spieler lastSelectedPlayer;
+
     public void binden(Rohr rohr, Netzelement left, Netzelement right) {
         if (left instanceof Pumpe && right instanceof Pumpe) {
             rohr.getNachbarn().add(left);
@@ -113,7 +115,6 @@ public class Kontroller {
         if (randomNumber  >-2) {
             Pumpe p=new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY());
             map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(p);
-            GuiMap.getGuiMap().refreshPlayerButtons();
             map.getPumpen().add(p);
         }
     }
@@ -703,5 +704,13 @@ public class Kontroller {
         this.selectedPlayer = s;
     }
     public Spieler getSelectedPlayer(){return selectedPlayer; }
+
+    public Spieler getLastSelectedPlayer() {
+        return lastSelectedPlayer;
+    }
+
+    public void setLastSelectedPlayer(Spieler lastSelectedPlayer) {
+        this.lastSelectedPlayer = lastSelectedPlayer;
+    }
 }
 

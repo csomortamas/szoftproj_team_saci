@@ -146,6 +146,7 @@ public class MainController {
 
         GuiMap.getGuiMap().refreshPlayerButtons();
         GuiMap.getGuiMap().refreshControlPanes();
+        GuiMap.getGuiMap().refreshRoehre();
     }
 
     public class LineClickAction implements EventHandler<MouseEvent> {

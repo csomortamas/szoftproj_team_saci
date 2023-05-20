@@ -162,12 +162,10 @@ public class MainController {
             }
             if (eingangsrohrUmstellung) {
                 eingangsrohrUmstellungPumpe.setEingangsRohr(clickedRohr);
-                eingangsrohrUmstellungPumpe = null;
-                eingangsrohrUmstellung = false;
+                endOfAction();
             } else if (ausgangsrohrUmstellung) {
                 ausgangsrohrUmstellungPumpe.setAusgangsRohr(clickedRohr);
-                ausgangsrohrUmstellungPumpe = null;
-                ausgangsrohrUmstellung = false;
+                endOfAction();
             } else if (step) {
                 Spieler sp = Kontroller.getKontroller().getSelectedPlayer();
                 Netzelement pos = sp.getPosition();

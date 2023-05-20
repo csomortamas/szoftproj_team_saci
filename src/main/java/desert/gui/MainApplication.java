@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -26,8 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainApplication extends Application {
-    @Override
-    public void start(Stage stage) throws IOException, InterruptedException {
+    public void initMap(){
         Wasserquelle wasserquelle1 = new Wasserquelle(10,10);
         wasserquelle1.setName("Q1");
         Wasserquelle wasserquelle2 = new Wasserquelle(100,100);
@@ -78,42 +78,36 @@ public class MainApplication extends Application {
         rohrList.add(rohr4);
         rohrList.add(rohr5);
         Kontroller.getKontroller().setupV2(wasserquelleList, zisterneList, pumpeList, rohrList, "inst", "sab");
-        //Kontroller.getKontroller().setup("ins", "sab");
         Spieler installateur1 = new Installateur(wasserquelle1);
         Spieler installateur2 = new Installateur(wasserquelle3);
         Spieler saboteur1 = new Saboteur(zisterne1);
         Spieler saboteur2 = new Saboteur(zisterne3);
         Kontroller.getKontroller().setSelectedPlayer(installateur1);
         Kontroller.getKontroller().setLastSelectedPlayer(saboteur1);
+    }
+    @Override
+    public void start(Stage stage){
+        initMap();
+        Group group=new  Group();
 
-        GuiMap.getGuiMap().setGroup(new Group());
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("landing-page.fxml"));
+        try {
+            group.getChildren().add(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        //--------fxml load
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
-        GuiMap.getGuiMap().getGroup().getChildren().add(fxmlLoader.load());
-
-        Scene scene = new Scene(GuiMap.getGuiMap().getGroup(), 687, 580);
-
-
+        Scene scene = new Scene(group, 687, 580);
         GuiMap.getGuiMap().setGuiMapScene(scene);
-        GuiMap.getGuiMap().sceneSetup();
         stage.setTitle("Desert");
-        stage.setScene(scene);
+        stage.getIcons().add(new Image(MainApplication.class.getResourceAsStream("desert_smallLogo.png")));
+        stage.setScene(GuiMap.getGuiMap().getScene());
         stage.show();
-        //-------fxml load
-        Kontroller.getKontroller().tick();
-        Kontroller.getKontroller().setInstallateurPunkte(0);
-        GuiMap.getGuiMap().refreshPoints();
-        GuiMap.getGuiMap().refreshRoehre();
-        GuiMap.getGuiMap().refreshPlayerButtons();
-        GuiMap.getGuiMap().refreshControlPanes();
     }
 
 
     public static void main(String[] args) {
         launch();
-
-        //
     }
 
 

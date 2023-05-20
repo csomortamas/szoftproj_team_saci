@@ -9,10 +9,14 @@ import desert.player.Saboteur;
 import desert.player.Spieler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,19 +31,45 @@ public class MainController {
     }
 
 
-    boolean eingangsrohrUmstellung = false;
-    boolean ausgangsrohrUmstellung = false;
-    boolean step = true;
-    boolean rohrUmbinden = false;
-    boolean playerSelected = false;
-    boolean rohrMitFreiemEndeUmbinden = false;
+    private boolean eingangsrohrUmstellung = false;
+    private boolean ausgangsrohrUmstellung = false;
+    private boolean step = true;
+    private boolean rohrUmbinden = false;
+    private boolean playerSelected = false;
+    private boolean rohrMitFreiemEndeUmbinden = false;
 
 
-    Pumpe ausgangsrohrUmstellungPumpe = null;
-    Pumpe eingangsrohrUmstellungPumpe = null;
-    Pumpe pumpeWoher = null;
+    private Pumpe ausgangsrohrUmstellungPumpe = null;
+    private Pumpe eingangsrohrUmstellungPumpe = null;
+    private Pumpe pumpeWoher = null;
 
-    int rohrUmbindenZaehler = 0;
+    private int rohrUmbindenZaehler = 0;
+
+    public void onSpielStartenClick(ActionEvent e){
+        TextField instTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtInstTName");
+        TextField sabTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtSabTName");
+        Kontroller.getKontroller().setInstallateurTeamName(instTName.getText());
+        Kontroller.getKontroller().setSaboteurTeamName(sabTName.getText());
+
+        GuiMap.getGuiMap().setGroup(new Group());
+
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
+        try {
+            GuiMap.getGuiMap().getGroup().getChildren().add(fxmlLoader.load());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        GuiMap.getGuiMap().getScene().setRoot(GuiMap.getGuiMap().getGroup());
+        GuiMap.getGuiMap().sceneSetup();
+
+        Kontroller.getKontroller().tick();
+        Kontroller.getKontroller().setInstallateurPunkte(0);
+        GuiMap.getGuiMap().refreshPoints();
+        GuiMap.getGuiMap().refreshRoehre();
+        GuiMap.getGuiMap().refreshPlayerButtons();
+        GuiMap.getGuiMap().refreshControlPanes();
+    }
 
     public void onPumpeClick(ActionEvent e) {
         Button buttonQuelle = (Button) e.getSource();
@@ -315,6 +345,12 @@ public class MainController {
         if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
             Installateur inst = (Installateur) Kontroller.getKontroller().getSelectedPlayer();
             inst.pumpeEinmontieren(true);
+            Pumpe p = Kontroller.getKontroller().getMap().findPumpe(inst.getPosition());
+            p.getButton().setOnAction(this::onPumpeClick);
+            Rohr r = Kontroller.getKontroller().getMap().findRohr(p.getNachbarn().get(0));
+            r.getLine().setOnMouseClicked(getLineClickAction());
+            r = Kontroller.getKontroller().getMap().findRohr(p.getNachbarn().get(1));
+            r.getLine().setOnMouseClicked(getLineClickAction());
         }
         GuiMap.getGuiMap().refreshAlleRohre();
         GuiMap.getGuiMap().refreshRoehre();
@@ -325,7 +361,7 @@ public class MainController {
         //    selectedPlayer.getButton().setLayoutY((Kontroller.getKontroller().getMap().findPumpe(selectedPlayer.getPosition())).getPosY());
         //}
         GuiMap.getGuiMap().refreshSpieler();
-        GuiMap.getGuiMap().refreshRemovedRohr(Kontroller.getKontroller().getMap().findRohr(Kontroller.getKontroller().getSelectedPlayer().getPosition()));
+        //GuiMap.getGuiMap().refreshRemovedRohr(Kontroller.getKontroller().getMap().findRohr(Kontroller.getKontroller().getSelectedPlayer().getPosition()));
 
         endOfAction();
     }

@@ -115,7 +115,7 @@ public class Kontroller {
         if (randomNumber  >-2) {
             Pumpe p=new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY());
             map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(p);
-            map.getPumpen().add(p);
+            //map.getPumpen().add(p);
         }
     }
 
@@ -124,7 +124,7 @@ public class Kontroller {
         int randomNumber = rand.nextInt(10);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber !=200) {
+        if (randomNumber ==5) {
             Rohr newRohr = new Rohr();
             newRohr.setName("R-G");
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
@@ -144,7 +144,7 @@ public class Kontroller {
         int randomPumpeIndex = rand.nextInt(map.getPumpen().size());
 
         // Pumpe Random kaputt machen
-        if (map.getPumpen().size() > 0 && randomNumber == 1) {
+        if (map.getPumpen().size() > 0 && randomNumber >= -1) {
             map.getPumpen().get(randomPumpeIndex).kaputtMachen();
         }
     }

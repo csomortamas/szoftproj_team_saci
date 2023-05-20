@@ -37,7 +37,7 @@
          <children>
             <Button id="instRohrReparieren" layoutX="132.0" layoutY="25.0" mnemonicParsing="false" onAction="#onReparierenClick" text="Reparieren" />
             <Button id="instRohrUmbinden" layoutX="307.0" layoutY="25.0" mnemonicParsing="false" onAction="#onRohrUmbindenClick" text="Umbinden" />
-            <Button layoutX="487.0" layoutY="25.0" mnemonicParsing="false" onAction="#onEinmontierenMiddleClick" text="Einmontieren" />
+            <Button id="instEinmontierenButton" disable="true" layoutX="487.0" layoutY="25.0" mnemonicParsing="false" onAction="#onEinmontierenMiddleClick" text="Einmontieren" />
          </children>
       </Pane>
       <Pane id="sabRohrPane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(100,0,0);" visible="false">

@@ -28,7 +28,7 @@ public class Pumpe extends Netzelement {
     /**
      *
      */
-    private int wasserTank =0;
+    private int wasserTank = 0;
     /**
      *
      */
@@ -55,8 +55,8 @@ public class Pumpe extends Netzelement {
      *
      */
     public void wasserWeiterleiten() {
-        if (isIstKaputt()){
-            if(ausgangsRohr!=null){
+        if (isIstKaputt() || !istAktiv) {
+            if (ausgangsRohr != null) {
                 ausgangsRohr.setIstAktiv(false);
             }
             return;
@@ -64,15 +64,15 @@ public class Pumpe extends Netzelement {
 
 
         if (eingangsRohr != null && ausgangsRohr != null && !eingangsRohr.isIstKaputt()) {
-            ausgangsRohr.setIstAktiv(eingangsRohr.istAktiv);
+            ausgangsRohr.setIstAktiv(eingangsRohr.isIstAktiv());
         } else if (eingangsRohr != null && ausgangsRohr == null && eingangsRohr.istAktiv && !eingangsRohr.isIstKaputt()) {
             wasserTank++;
         } else if (eingangsRohr == null && ausgangsRohr != null && ausgangsRohr.istAktiv && wasserTank > 0) {
             wasserTank--;
             ausgangsRohr.setIstAktiv(true);
-        } else if(eingangsRohr != null && ausgangsRohr != null && eingangsRohr.isIstKaputt() && wasserTank <= 0){
+        } else if (eingangsRohr != null && ausgangsRohr != null && eingangsRohr.isIstKaputt() && wasserTank <= 0) {
             ausgangsRohr.setIstAktiv(false);
-        } else if(eingangsRohr != null && ausgangsRohr != null && eingangsRohr.isIstKaputt() && wasserTank > 0){
+        } else if (eingangsRohr != null && ausgangsRohr != null && eingangsRohr.isIstKaputt() && wasserTank > 0) {
             wasserTank--;
             ausgangsRohr.setIstAktiv(true);
         }
@@ -125,11 +125,11 @@ public class Pumpe extends Netzelement {
     }
 
 
-
     public Button getButton() {
         return button;
     }
-    public void setButton(Button _button){
+
+    public void setButton(Button _button) {
         this.button = _button;
     }
 }

@@ -84,6 +84,10 @@ public class Kontroller {
      *
      */
 
+    private int neuePumpeChance=6;
+    private  int neueRohrChance=6;
+    private int pumpeKaputtGehtChance=6;
+
     private int saboteurPunkte;
 
     private Spieler selectedPlayer;
@@ -107,10 +111,10 @@ public class Kontroller {
      */
     public void pumpeErstellen() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(4);
+        int randomNumber = rand.nextInt(neuePumpeChance);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber == 2||true) {
+        if (randomNumber == 1) {
             Pumpe p = new Pumpe(map.getZisternen().get(randomZisterneIndex).getPosX(), map.getZisternen().get(randomZisterneIndex).getPosY());
             map.getZisternen().get(randomZisterneIndex).setPumpeZurVerfuegung(p);
         }
@@ -118,10 +122,10 @@ public class Kontroller {
 
     public void rohrErstellen() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(7);
+        int randomNumber = rand.nextInt(neueRohrChance);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
 
-        if (randomNumber == 5) {
+        if (randomNumber == 1) {
             Rohr newRohr = new Rohr();
             newRohr.setName("R-G");
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
@@ -137,7 +141,7 @@ public class Kontroller {
 
     public void pumpeKaputtMacht() {
         Random rand = new Random();
-        int randomNumber = rand.nextInt(5);
+        int randomNumber = rand.nextInt(pumpeKaputtGehtChance);
         int randomPumpeIndex = rand.nextInt(map.getPumpen().size());
 
         // Pumpe Random kaputt machen
@@ -612,6 +616,30 @@ public class Kontroller {
     //=======================================================================================
     //=======================================================================================
 
+
+    public int getNeuePumpeChance() {
+        return neuePumpeChance;
+    }
+
+    public void setNeuePumpeChance(int neuePumpeChance) {
+        this.neuePumpeChance = neuePumpeChance;
+    }
+
+    public int getNeueRohrChance() {
+        return neueRohrChance;
+    }
+
+    public void setNeueRohrChance(int neueRohrChance) {
+        this.neueRohrChance = neueRohrChance;
+    }
+
+    public int getPumpeKaputtGehtChance() {
+        return pumpeKaputtGehtChance;
+    }
+
+    public void setPumpeKaputtGehtChance(int pumpeKaputtGehtChance) {
+        this.pumpeKaputtGehtChance = pumpeKaputtGehtChance;
+    }
 
     public int getActionCount() {
         return actionCount;

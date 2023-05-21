@@ -46,21 +46,7 @@ public class MainController {
     private int rohrUmbindenZaehler = 0;
 
     public void onSpielStartenClick(ActionEvent e) {
-        TextField instTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtInstTName");
-        TextField sabTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtSabTName");
-        Kontroller.getKontroller().setInstallateurTeamName(instTName.getText());
-        Kontroller.getKontroller().setSaboteurTeamName(sabTName.getText());
-
-        GuiMap.getGuiMap().setGroup(new Group());
-
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
-        try {
-            GuiMap.getGuiMap().getGroup().getChildren().add(fxmlLoader.load());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        GuiMap.getGuiMap().getScene().setRoot(GuiMap.getGuiMap().getGroup());
+        GuiMap.getGuiMap().loadGame();
         GuiMap.getGuiMap().sceneSetup();
 
         Kontroller.getKontroller().tick();
@@ -110,7 +96,27 @@ public class MainController {
         GuiMap.getGuiMap().endOfGameDialog();
     }
 
+    public void onSettingsClick(ActionEvent e){
+        GuiMap.getGuiMap().openSettings();
+    }
 
+    public void onSaveSettingsClick(ActionEvent e){
+        TextField rundeAnzahl = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#rundeAnzahl");
+        if (Integer.parseInt(rundeAnzahl.getText())>Math.floor((Kontroller.getKontroller().getActionCount() / 2) + 1)){
+            Kontroller.getKontroller().setMaxRunde(Integer.parseInt(rundeAnzahl.getText()));
+        }
+
+        TextField neueP = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#neueP");
+        Kontroller.getKontroller().setNeuePumpeChance(Integer.parseInt(neueP.getText()));
+
+        TextField neueR = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#neueR");
+        Kontroller.getKontroller().setNeueRohrChance(Integer.parseInt(neueR.getText()));
+
+        TextField pumpeK = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#pumpeK");
+        Kontroller.getKontroller().setPumpeKaputtGehtChance(Integer.parseInt(pumpeK.getText()));
+
+        GuiMap.getGuiMap().getSettingsStage().close();
+    }
 
     public void onPumpeClick(ActionEvent e) {
         Button buttonQuelle = (Button) e.getSource();

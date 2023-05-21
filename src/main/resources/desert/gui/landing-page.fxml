@@ -24,5 +24,14 @@
       <Text fill="WHITE" layoutX="406.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Installateur Team Name:" />
       <Text fill="WHITE" layoutX="406.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saboteur Team Name:" />
       <Button layoutX="406.0" layoutY="454.0" mnemonicParsing="false" onAction="#onSpielStartenClick" opacity="0.72" prefHeight="34.0" prefWidth="244.0" text="Spiel Starten!" />
+      <Button layoutX="624.0" layoutY="532.0" mnemonicParsing="false" onAction="#onSettingsClick" opacity="0.72" prefHeight="40.0" prefWidth="40.0">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="27.0" opacity="0.51" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@settings.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </Pane>

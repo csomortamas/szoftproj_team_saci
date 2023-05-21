@@ -9,12 +9,10 @@ import desert.player.Installateur;
 import desert.player.Saboteur;
 import desert.player.Spieler;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogEvent;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +40,8 @@ import static java.lang.Math.abs;
 public class GuiMap {
     private Group group = null;
     private Scene scene;
+    private  Scene settingsScene;
+    private Stage settingsStage;
 
     private DropShadow borderGlow;
     private final static GuiMap guiMap = new GuiMap();
@@ -87,6 +88,54 @@ public class GuiMap {
         borderGlow.setOffsetX(0f);
         borderGlow.setWidth(20);
         borderGlow.setHeight(20);
+    }
+
+    public void loadGame(){
+        TextField instTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtInstTName");
+        TextField sabTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtSabTName");
+        Kontroller.getKontroller().setInstallateurTeamName(instTName.getText());
+        Kontroller.getKontroller().setSaboteurTeamName(sabTName.getText());
+
+        group=new Group();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
+        try {
+            group.getChildren().add(fxmlLoader.load());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        scene.setRoot(GuiMap.getGuiMap().getGroup());
+    }
+
+    public void openSettings(){
+        Group settingsGroup = new Group();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("settings.fxml"));
+        try {
+            settingsGroup.getChildren().add(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        settingsScene = new Scene(settingsGroup, 600, 314);
+        settingsStage=new Stage();
+        settingsStage.setTitle("Desert - Einstellungen");
+        settingsStage.getIcons().add(new Image(MainApplication.class.getResourceAsStream("settings.png")));
+        settingsStage.setScene(settingsScene);
+        settingsStage.show();
+
+        TextField rundeAnzahl = (TextField) settingsScene.lookup("#rundeAnzahl");
+        rundeAnzahl.setText(String.valueOf(Kontroller.getKontroller().getMaxRunde()));
+
+        TextField neueP = (TextField) settingsScene.lookup("#neueP");
+        neueP.setText(String.valueOf(Kontroller.getKontroller().getNeuePumpeChance()));
+
+        TextField neueR = (TextField) settingsScene.lookup("#neueR");
+        neueR.setText(String.valueOf(Kontroller.getKontroller().getNeueRohrChance()));
+
+        TextField pumpeK = (TextField) settingsScene.lookup("#pumpeK");
+        pumpeK.setText(String.valueOf(Kontroller.getKontroller().getPumpeKaputtGehtChance()));
     }
 
     public void endOfGameDialog(){
@@ -414,5 +463,21 @@ public class GuiMap {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public Scene getSettingsScene() {
+        return settingsScene;
+    }
+
+    public void setSettingsScene(Scene settingsScene) {
+        this.settingsScene = settingsScene;
+    }
+
+    public Stage getSettingsStage() {
+        return settingsStage;
+    }
+
+    public void setSettingsStage(Stage settingsStage) {
+        this.settingsStage = settingsStage;
     }
 }

@@ -11,14 +11,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MainController {
     private static MainController mainController = null;
@@ -71,6 +71,47 @@ public class MainController {
         GuiMap.getGuiMap().refreshControlPanes();
     }
 
+
+    public void endOfAction() {
+        if(Math.floor((Kontroller.getKontroller().getActionCount()+1)/2)==Kontroller.getKontroller().getMaxRunde()){
+            endOfGame();
+            return;
+        }
+
+        eingangsrohrUmstellung = false;
+        step = true;
+        rohrUmbinden = false;
+        ausgangsrohrUmstellung = false;
+        playerSelected = false;
+
+        eingangsrohrUmstellungPumpe = null;
+        ausgangsrohrUmstellungPumpe = null;
+        pumpeWoher = null;
+
+        rohrUmbindenZaehler = 0;
+
+        Spieler temp = Kontroller.getKontroller().getSelectedPlayer();
+        Kontroller.getKontroller().setSelectedPlayer(Kontroller.getKontroller().getLastSelectedPlayer());
+        Kontroller.getKontroller().setLastSelectedPlayer(temp);
+
+        Kontroller.getKontroller().setActionCount(Kontroller.getKontroller().getActionCount() + 1);
+        if (Kontroller.getKontroller().getActionCount() % 2 == 0) {
+            Kontroller.getKontroller().tick();
+        }
+
+        GuiMap.getGuiMap().refreshPlayerButtons();
+        GuiMap.getGuiMap().refreshControlPanes();
+        GuiMap.getGuiMap().refreshRoehre();
+    }
+
+    public void endOfGame(){
+        Kontroller.getKontroller().tick();
+        GuiMap.getGuiMap().refreshPoints();
+        GuiMap.getGuiMap().endOfGameDialog();
+    }
+
+
+
     public void onPumpeClick(ActionEvent e) {
         Button buttonQuelle = (Button) e.getSource();
         Pumpe pumpe = null;
@@ -120,33 +161,6 @@ public class MainController {
         }
 
         new LineClickAction().handle(e);
-    }
-
-    public void endOfAction() {
-        eingangsrohrUmstellung = false;
-        step = true;
-        rohrUmbinden = false;
-        ausgangsrohrUmstellung = false;
-        playerSelected = false;
-
-        eingangsrohrUmstellungPumpe = null;
-        ausgangsrohrUmstellungPumpe = null;
-        pumpeWoher = null;
-
-        rohrUmbindenZaehler = 0;
-
-        Spieler temp = Kontroller.getKontroller().getSelectedPlayer();
-        Kontroller.getKontroller().setSelectedPlayer(Kontroller.getKontroller().getLastSelectedPlayer());
-        Kontroller.getKontroller().setLastSelectedPlayer(temp);
-
-        Kontroller.getKontroller().setActionCount(Kontroller.getKontroller().getActionCount() + 1);
-        if (Kontroller.getKontroller().getActionCount() % 2 == 0) {
-            Kontroller.getKontroller().tick();
-        }
-
-        GuiMap.getGuiMap().refreshPlayerButtons();
-        GuiMap.getGuiMap().refreshControlPanes();
-        GuiMap.getGuiMap().refreshRoehre();
     }
 
     public class LineClickAction implements EventHandler<MouseEvent> {

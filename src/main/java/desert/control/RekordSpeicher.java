@@ -28,7 +28,8 @@ public class RekordSpeicher {
                 r.serialize();
             }
             Writer writer = new FileWriter("records.json");
-            new Gson().toJson(this, writer);
+            Gson gson=new Gson();
+            gson.toJson(this, writer);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

@@ -559,20 +559,18 @@ public class Kontroller {
     }*/
 
 
-    private void endGame() {
+    public void endGame() {
         leaderboard.addRekord(installateurTeamName, installateurPunkte);
         leaderboard.addRekord(saboteurTeamName, saboteurPunkte);
-        if (installateurPunkte > saboteurPunkte) {
+        Logger.info("Spiel beendet.");
+        /*if (installateurPunkte > saboteurPunkte) {
             System.out.println("\033[1;32mHurray! Team " + installateurTeamName + " hat gewonnen.\033[0m");
         } else if (installateurPunkte < saboteurPunkte) {
             System.out.println("\033[1;32mHurray! Team " + saboteurTeamName + " hat gewonnen.\033[0m");
         } else {
             System.out.println("\033[1;33mDas Spiel endet unentschieden.\033[0m");
         }
-
-        leaderboard.listAll();
-
-        Logger.info("Spiel beendet.");
+        leaderboard.listAll();*/
     }
 
 

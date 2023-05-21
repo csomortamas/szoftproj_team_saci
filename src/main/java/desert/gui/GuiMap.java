@@ -8,9 +8,13 @@ import desert.network.Zisterne;
 import desert.player.Installateur;
 import desert.player.Saboteur;
 import desert.player.Spieler;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,10 +23,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import static java.lang.Math.abs;
@@ -83,6 +89,39 @@ public class GuiMap {
         borderGlow.setHeight(20);
     }
 
+    public void endOfGameDialog(){
+        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+        dialog.setTitle("Game Over");
+        dialog.setHeaderText("Das Spiel ist zu Ende!");
+        if(Kontroller.getKontroller().getInstallateurPunkte()>Kontroller.getKontroller().getSaboteurPunkte()){
+            dialog.setContentText("Der Team "+Kontroller.getKontroller().getInstallateurTeamName()+" hat gewonnen!");
+        } else if(Kontroller.getKontroller().getInstallateurPunkte()<Kontroller.getKontroller().getSaboteurPunkte()){
+            dialog.setContentText("Der Team "+Kontroller.getKontroller().getSaboteurTeamName()+" hat gewonnen!");
+        }else {
+            dialog.setContentText("Das Spiel ist unentschieden!");
+        }
+
+        dialog.setResizable(false);
+        dialog.setOnCloseRequest(new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent event) {
+                System.exit(0);
+            }
+        });
+
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(MainApplication.class.getResourceAsStream("desert_smallLogo.png")));
+
+        ButtonType exitButtonType = new ButtonType("Exit");
+        //ButtonType leadeboardButtonType = new ButtonType("Leaderboard anzeigen");
+
+        dialog.getButtonTypes().setAll(exitButtonType);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.get() == exitButtonType) {
+            System.exit(0);
+        }
+    }
 
     public void refreshRoehre() {
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()) {

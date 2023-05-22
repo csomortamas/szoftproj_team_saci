@@ -50,7 +50,7 @@ public abstract class Netzelement {
     public void kaputtMachen() {
         istKaputt = true;
         Logger.info("Netzelement {} ist kaputt.", this);
-        GuiMap.getGuiMap().refreshRoehre();
+        GuiMap.getGuiMap().refreshRohrColor();
         GuiMap.getGuiMap().refreshPumpen();
     }
 
@@ -60,7 +60,7 @@ public abstract class Netzelement {
     public void reparieren() {
         istKaputt = false;
         Logger.info("Netzelement {} wurde repariert.", this);
-        GuiMap.getGuiMap().refreshRoehre();
+        GuiMap.getGuiMap().refreshRohrColor();
     }
 
     //=======================================================================================

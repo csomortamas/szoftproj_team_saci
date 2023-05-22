@@ -172,7 +172,7 @@ public class GuiMap {
         }
     }
 
-    public void refreshRoehre() {
+    public void refreshRohrColor() {
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()) {
             if (rohr.isIstAktiv() && rohr.isIstKaputt()) {
                 rohr.getLine().setStroke(Color.ORANGE);

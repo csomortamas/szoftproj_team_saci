@@ -9,16 +9,12 @@ import desert.player.Saboteur;
 import desert.player.Spieler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class MainController {
     private static MainController mainController = null;
@@ -52,14 +48,14 @@ public class MainController {
         Kontroller.getKontroller().tick();
         Kontroller.getKontroller().setInstallateurPunkte(0);
         GuiMap.getGuiMap().refreshPoints();
-        GuiMap.getGuiMap().refreshRoehre();
+        GuiMap.getGuiMap().refreshRohrColor();
         GuiMap.getGuiMap().refreshPlayerButtons();
         GuiMap.getGuiMap().refreshControlPanes();
     }
 
 
     public void endOfAction() {
-        if(Math.floor((Kontroller.getKontroller().getActionCount()+1)/2)==Kontroller.getKontroller().getMaxRunde()){
+        if (Math.floor((Kontroller.getKontroller().getActionCount() + 1) / 2) == Kontroller.getKontroller().getMaxRunde()) {
             endOfGame();
             return;
         }
@@ -87,33 +83,33 @@ public class MainController {
 
         GuiMap.getGuiMap().refreshPlayerButtons();
         GuiMap.getGuiMap().refreshControlPanes();
-        GuiMap.getGuiMap().refreshRoehre();
+        GuiMap.getGuiMap().refreshRohrColor();
     }
 
-    public void endOfGame(){
+    public void endOfGame() {
         Kontroller.getKontroller().tick();
         GuiMap.getGuiMap().refreshPoints();
         GuiMap.getGuiMap().endOfGameDialog();
     }
 
-    public void onSettingsClick(ActionEvent e){
+    public void onSettingsClick(ActionEvent e) {
         GuiMap.getGuiMap().openSettings();
     }
 
-    public void onSaveSettingsClick(ActionEvent e){
+    public void onSaveSettingsClick(ActionEvent e) {
         TextField rundeAnzahl = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#rundeAnzahl");
-        if (Integer.parseInt(rundeAnzahl.getText())>Math.floor((Kontroller.getKontroller().getActionCount() / 2) + 1)){
+        if (Integer.parseInt(rundeAnzahl.getText()) > Math.floor((Kontroller.getKontroller().getActionCount() / 2) + 1)) {
             Kontroller.getKontroller().setMaxRunde(Integer.parseInt(rundeAnzahl.getText()));
         }
 
         TextField neueP = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#neueP");
-        Kontroller.getKontroller().setNeuePumpeChance(Integer.parseInt(neueP.getText()));
+        Kontroller.getKontroller().setNeuePumpeChance(Integer.parseInt(neueP.getText()) + 1);
 
         TextField neueR = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#neueR");
-        Kontroller.getKontroller().setNeueRohrChance(Integer.parseInt(neueR.getText()));
+        Kontroller.getKontroller().setNeueRohrChance(Integer.parseInt(neueR.getText()) + 1);
 
         TextField pumpeK = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#pumpeK");
-        Kontroller.getKontroller().setPumpeKaputtGehtChance(Integer.parseInt(pumpeK.getText()));
+        Kontroller.getKontroller().setPumpeKaputtGehtChance(Integer.parseInt(pumpeK.getText()) + 1);
 
         GuiMap.getGuiMap().getSettingsStage().close();
     }
@@ -372,7 +368,7 @@ public class MainController {
             r.getLine().setOnMouseClicked(getLineClickAction());
         }
         GuiMap.getGuiMap().refreshAlleRohre();
-        GuiMap.getGuiMap().refreshRoehre();
+        GuiMap.getGuiMap().refreshRohrColor();
 
         //Spieler selectedPlayer = Kontroller.getKontroller().getSelectedPlayer();
         //if(selectedPlayer.getPosition() instanceof Pumpe) {

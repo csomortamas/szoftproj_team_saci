@@ -84,15 +84,18 @@ public class Kontroller {
      *
      */
 
-    private int neuePumpeChance=6;
-    private  int neueRohrChance=6;
-    private int pumpeKaputtGehtChance=6;
+    private int neuePumpeChance = 6;
+    private int neueRohrChance = 6;
+    private int pumpeKaputtGehtChance = 6;
 
     private int saboteurPunkte;
 
     private Spieler selectedPlayer;
 
     private Spieler lastSelectedPlayer;
+
+    private int spielerAnzahlProTeam = 3;
+    private boolean spielLauft=false;
 
     public void binden(Rohr rohr, Netzelement left, Netzelement right) {
         if (left instanceof Pumpe && right instanceof Pumpe) {
@@ -616,6 +619,22 @@ public class Kontroller {
     //=======================================================================================
     //=======================================================================================
 
+
+    public boolean isSpielLauft() {
+        return spielLauft;
+    }
+
+    public void setSpielLauft(boolean spielLauft) {
+        this.spielLauft = spielLauft;
+    }
+
+    public int getSpielerAnzahlProTeam() {
+        return spielerAnzahlProTeam;
+    }
+
+    public void setSpielerAnzahlProTeam(int spielerAnzahlProTeam) {
+        this.spielerAnzahlProTeam = spielerAnzahlProTeam;
+    }
 
     public int getNeuePumpeChance() {
         return neuePumpeChance;

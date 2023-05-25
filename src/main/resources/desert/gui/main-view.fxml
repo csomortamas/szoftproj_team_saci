@@ -153,33 +153,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="installateur2" layoutX="67.0" layoutY="157.0" mnemonicParsing="false" onAction="#onInstallateurClick" prefHeight="38.0" prefWidth="35.0">
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@installateur.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button id="installateur1" layoutX="55.0" layoutY="432.0" mnemonicParsing="false" onAction="#onInstallateurClick" prefHeight="38.0" prefWidth="35.0">
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@installateur.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button id="saboteur1" disable="true" layoutX="575.0" layoutY="432.0" mnemonicParsing="false" onAction="#onSaboteurClick" prefHeight="38.0" prefWidth="35.0">
-         <graphic>
-            <ImageView disable="true" fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@saboteur.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <ImageView id="readyPump3" fitHeight="25.0" fitWidth="23.0" layoutX="647.0" layoutY="149.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@water-pump.png" />
@@ -195,15 +168,6 @@
             <Image url="@water-pump.png" />
          </image>
       </ImageView>
-      <Button id="saboteur2" disable="true" layoutX="575.0" layoutY="163.0" mnemonicParsing="false" onAction="#onSaboteurClick" prefHeight="38.0" prefWidth="35.0">
-         <graphic>
-            <ImageView disable="true" fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@saboteur.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <MenuBar prefHeight="26.0" prefWidth="686.0">
          <menus>
             <Menu mnemonicParsing="false" text="Spiel">

@@ -40,7 +40,7 @@ import static java.lang.Math.abs;
 public class GuiMap {
     private Group group = null;
     private Scene scene;
-    private  Scene settingsScene;
+    private Scene settingsScene;
     private Stage settingsStage;
 
     private DropShadow borderGlow;
@@ -63,6 +63,8 @@ public class GuiMap {
     }
 
     public void sceneSetup() {
+        Pane mainPane = (Pane) GuiMap.getGuiMap().getScene().lookup("#mainPane");
+
         for (int i = 0; i < Kontroller.getKontroller().getMap().getWasserquellen().size(); i++) {
             Kontroller.getKontroller().getMap().getPumpen().get(i).setButton((Button) scene.lookup("#pumpe" + (i + 1)));
             Kontroller.getKontroller().getMap().getPumpen().get(i).getButton().setBackground(Background.EMPTY);
@@ -79,9 +81,40 @@ public class GuiMap {
             Kontroller.getKontroller().getMap().getRohre().get(i).setLine((Line) scene.lookup("#rohr" + (i + 1)));
         }
 
-        for (int i = 0; i < 2; i++) {
-            Kontroller.getKontroller().getInstallateurTeam().get(i).setButton((Button) scene.lookup("#installateur" + (i + 1)));
-            Kontroller.getKontroller().getSaboteurTeam().get(i).setButton((Button) scene.lookup("#saboteur" + (i + 1)));
+
+        for (int i = 0; i < Kontroller.getKontroller().getSpielerAnzahlProTeam(); i++) {
+            Image instImg = new Image(MainApplication.class.getResourceAsStream("installateur.png"));
+            ImageView instView = new ImageView(instImg);
+            instView.setPreserveRatio(true);
+            instView.setFitHeight(32);
+            Image sabImg = new Image(MainApplication.class.getResourceAsStream("saboteur.png"));
+            ImageView sabView = new ImageView(sabImg);
+            sabView.setPreserveRatio(true);
+            sabView.setFitHeight(32);
+            int t = (int) Math.floor((double) i / 3);
+            Button installateurButton = new Button();
+            installateurButton.setLayoutX(Kontroller.getKontroller().getMap().getWasserquellen().get(i % 3).getButton().getLayoutX());
+            installateurButton.setLayoutY(Kontroller.getKontroller().getMap().getWasserquellen().get(i % 3).getButton().getLayoutY() + (t * 5));
+            installateurButton.setPrefHeight(38);
+            installateurButton.setPrefWidth(35);
+            installateurButton.setOnAction(event -> MainController.getMainController().onInstallateurClick(event));
+            installateurButton.setGraphic(instView);
+            mainPane.getChildren().add(installateurButton);
+            installateurButton.toFront();
+
+            Button saboteurButton = new Button();
+            saboteurButton.setLayoutX(Kontroller.getKontroller().getMap().getZisternen().get(i % 3).getButton().getLayoutX());
+            saboteurButton.setLayoutY(Kontroller.getKontroller().getMap().getZisternen().get(i % 3).getButton().getLayoutY() + (t * 5));
+            saboteurButton.setPrefHeight(38);
+            saboteurButton.setPrefWidth(35);
+            saboteurButton.setOnAction(event -> MainController.getMainController().onSaboteurClick(event));
+            saboteurButton.setGraphic(sabView);
+            saboteurButton.setDisable(true);
+            mainPane.getChildren().add(saboteurButton);
+            saboteurButton.toFront();
+
+            Kontroller.getKontroller().getInstallateurTeam().get(i).setButton(installateurButton);
+            Kontroller.getKontroller().getSaboteurTeam().get(i).setButton(saboteurButton);
         }
         borderGlow = new DropShadow();
         borderGlow.setOffsetY(0f);
@@ -90,13 +123,13 @@ public class GuiMap {
         borderGlow.setHeight(20);
     }
 
-    public void loadGame(){
+    public void loadGame() {
         TextField instTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtInstTName");
         TextField sabTName = (TextField) GuiMap.getGuiMap().getScene().lookup("#txtSabTName");
         Kontroller.getKontroller().setInstallateurTeamName(instTName.getText());
         Kontroller.getKontroller().setSaboteurTeamName(sabTName.getText());
 
-        group=new Group();
+        group = new Group();
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         try {
@@ -108,7 +141,7 @@ public class GuiMap {
         scene.setRoot(GuiMap.getGuiMap().getGroup());
     }
 
-    public void openSettings(){
+    public void openSettings() {
         Group settingsGroup = new Group();
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("settings.fxml"));
@@ -118,8 +151,8 @@ public class GuiMap {
             e.printStackTrace();
         }
 
-        settingsScene = new Scene(settingsGroup, 600, 314);
-        settingsStage=new Stage();
+        settingsScene = new Scene(settingsGroup, 600, 350);
+        settingsStage = new Stage();
         settingsStage.setTitle("Desert - Einstellungen");
         settingsStage.getIcons().add(new Image(MainApplication.class.getResourceAsStream("settings.png")));
         settingsStage.setScene(settingsScene);
@@ -128,25 +161,31 @@ public class GuiMap {
         TextField rundeAnzahl = (TextField) settingsScene.lookup("#rundeAnzahl");
         rundeAnzahl.setText(String.valueOf(Kontroller.getKontroller().getMaxRunde()));
 
+        TextField spielerAnzahl = (TextField) settingsScene.lookup("#spielerAnzahl");
+        spielerAnzahl.setText(String.valueOf(Kontroller.getKontroller().getSpielerAnzahlProTeam()));
+        if (Kontroller.getKontroller().isSpielLauft()) {
+            spielerAnzahl.setDisable(true);
+        }
+
         TextField neueP = (TextField) settingsScene.lookup("#neueP");
-        neueP.setText(String.valueOf(Kontroller.getKontroller().getNeuePumpeChance()));
+        neueP.setText(String.valueOf(Kontroller.getKontroller().getNeuePumpeChance() - 1));
 
         TextField neueR = (TextField) settingsScene.lookup("#neueR");
-        neueR.setText(String.valueOf(Kontroller.getKontroller().getNeueRohrChance()));
+        neueR.setText(String.valueOf(Kontroller.getKontroller().getNeueRohrChance() - 1));
 
         TextField pumpeK = (TextField) settingsScene.lookup("#pumpeK");
-        pumpeK.setText(String.valueOf(Kontroller.getKontroller().getPumpeKaputtGehtChance()));
+        pumpeK.setText(String.valueOf(Kontroller.getKontroller().getPumpeKaputtGehtChance() - 1));
     }
 
-    public void endOfGameDialog(){
+    public void endOfGameDialog() {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         dialog.setTitle("Game Over");
         dialog.setHeaderText("Das Spiel ist zu Ende!");
-        if(Kontroller.getKontroller().getInstallateurPunkte()>Kontroller.getKontroller().getSaboteurPunkte()){
-            dialog.setContentText("Der Team "+Kontroller.getKontroller().getInstallateurTeamName()+" hat gewonnen!");
-        } else if(Kontroller.getKontroller().getInstallateurPunkte()<Kontroller.getKontroller().getSaboteurPunkte()){
-            dialog.setContentText("Der Team "+Kontroller.getKontroller().getSaboteurTeamName()+" hat gewonnen!");
-        }else {
+        if (Kontroller.getKontroller().getInstallateurPunkte() > Kontroller.getKontroller().getSaboteurPunkte()) {
+            dialog.setContentText("Der Team " + Kontroller.getKontroller().getInstallateurTeamName() + " hat gewonnen!");
+        } else if (Kontroller.getKontroller().getInstallateurPunkte() < Kontroller.getKontroller().getSaboteurPunkte()) {
+            dialog.setContentText("Der Team " + Kontroller.getKontroller().getSaboteurTeamName() + " hat gewonnen!");
+        } else {
             dialog.setContentText("Das Spiel ist unentschieden!");
         }
 

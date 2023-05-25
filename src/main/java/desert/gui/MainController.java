@@ -9,7 +9,8 @@ import desert.player.Saboteur;
 import desert.player.Spieler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 
@@ -42,6 +43,14 @@ public class MainController {
     private int rohrUmbindenZaehler = 0;
 
     public void onSpielStartenClick(ActionEvent e) {
+        int i=0;
+        Kontroller.getKontroller().setSpielLauft(true);
+        while (Kontroller.getKontroller().getInstallateurTeam().size()<Kontroller.getKontroller().getSpielerAnzahlProTeam()){
+            Kontroller.getKontroller().getInstallateurTeam().add(new Installateur(Kontroller.getKontroller().getMap().getWasserquellen().get(i%3)));
+            Kontroller.getKontroller().getSaboteurTeam().add(new Saboteur(Kontroller.getKontroller().getMap().getZisternen().get(i%3)));
+            i++;
+        }
+
         GuiMap.getGuiMap().loadGame();
         GuiMap.getGuiMap().sceneSetup();
 
@@ -102,14 +111,25 @@ public class MainController {
             Kontroller.getKontroller().setMaxRunde(Integer.parseInt(rundeAnzahl.getText()));
         }
 
+        TextField spielerAnzahl = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#spielerAnzahl");
+        if (Integer.parseInt(spielerAnzahl.getText()) >= 1&& !Kontroller.getKontroller().isSpielLauft()) {
+            Kontroller.getKontroller().setSpielerAnzahlProTeam(Integer.parseInt(spielerAnzahl.getText()));
+        }
+
         TextField neueP = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#neueP");
-        Kontroller.getKontroller().setNeuePumpeChance(Integer.parseInt(neueP.getText()) + 1);
+        if (Integer.parseInt(neueP.getText()) >= 1) {
+            Kontroller.getKontroller().setNeuePumpeChance(Integer.parseInt(neueP.getText()) + 1);
+        }
 
         TextField neueR = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#neueR");
-        Kontroller.getKontroller().setNeueRohrChance(Integer.parseInt(neueR.getText()) + 1);
+        if (Integer.parseInt(neueR.getText()) >= 1) {
+            Kontroller.getKontroller().setNeueRohrChance(Integer.parseInt(neueR.getText()) + 1);
+        }
 
         TextField pumpeK = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#pumpeK");
-        Kontroller.getKontroller().setPumpeKaputtGehtChance(Integer.parseInt(pumpeK.getText()) + 1);
+        if (Integer.parseInt(pumpeK.getText()) >= 1) {
+            Kontroller.getKontroller().setPumpeKaputtGehtChance(Integer.parseInt(pumpeK.getText()) + 1);
+        }
 
         GuiMap.getGuiMap().getSettingsStage().close();
     }

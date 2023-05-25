@@ -34,7 +34,7 @@ public class MainController {
     private boolean rohrUmbinden = false;
     private boolean playerSelected = false;
     private boolean rohrMitFreiemEndeUmbinden = false;
-
+    private boolean actionStarted = false;
 
     private Pumpe ausgangsrohrUmstellungPumpe = null;
     private Pumpe eingangsrohrUmstellungPumpe = null;
@@ -43,11 +43,11 @@ public class MainController {
     private int rohrUmbindenZaehler = 0;
 
     public void onSpielStartenClick(ActionEvent e) {
-        int i=0;
+        int i = 0;
         Kontroller.getKontroller().setSpielLauft(true);
-        while (Kontroller.getKontroller().getInstallateurTeam().size()<Kontroller.getKontroller().getSpielerAnzahlProTeam()){
-            Kontroller.getKontroller().getInstallateurTeam().add(new Installateur(Kontroller.getKontroller().getMap().getWasserquellen().get(i%3)));
-            Kontroller.getKontroller().getSaboteurTeam().add(new Saboteur(Kontroller.getKontroller().getMap().getZisternen().get(i%3)));
+        while (Kontroller.getKontroller().getInstallateurTeam().size() < Kontroller.getKontroller().getSpielerAnzahlProTeam()) {
+            Kontroller.getKontroller().getInstallateurTeam().add(new Installateur(Kontroller.getKontroller().getMap().getWasserquellen().get(i % 3)));
+            Kontroller.getKontroller().getSaboteurTeam().add(new Saboteur(Kontroller.getKontroller().getMap().getZisternen().get(i % 3)));
             i++;
         }
 
@@ -74,6 +74,7 @@ public class MainController {
         rohrUmbinden = false;
         ausgangsrohrUmstellung = false;
         playerSelected = false;
+        actionStarted = false;
 
         eingangsrohrUmstellungPumpe = null;
         ausgangsrohrUmstellungPumpe = null;
@@ -112,7 +113,7 @@ public class MainController {
         }
 
         TextField spielerAnzahl = (TextField) GuiMap.getGuiMap().getSettingsScene().lookup("#spielerAnzahl");
-        if (Integer.parseInt(spielerAnzahl.getText()) >= 1&& !Kontroller.getKontroller().isSpielLauft()) {
+        if (Integer.parseInt(spielerAnzahl.getText()) >= 1 && !Kontroller.getKontroller().isSpielLauft()) {
             Kontroller.getKontroller().setSpielerAnzahlProTeam(Integer.parseInt(spielerAnzahl.getText()));
         }
 
@@ -220,8 +221,10 @@ public class MainController {
         return new LineClickAction();
     }
 
-    public void onPassClick(ActionEvent e){
-        endOfAction();
+    public void onPassClick(ActionEvent e) {
+        if (!actionStarted) {
+            endOfAction();
+        }
     }
 
     public void onPumpeAktivierenClick(ActionEvent e) {
@@ -231,6 +234,7 @@ public class MainController {
         if (!playerSelected) {
             playerSelected = true;
         }
+        actionStarted = true;
 
         Pumpe p = Kontroller.getKontroller().getMap().findInAllePumpen(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         p.setIstAktiv(true);
@@ -244,6 +248,7 @@ public class MainController {
         if (!playerSelected) {
             playerSelected = true;
         }
+        actionStarted = true;
 
         Pumpe p = Kontroller.getKontroller().getMap().findInAllePumpen(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         p.setIstAktiv(false);
@@ -257,6 +262,7 @@ public class MainController {
         if (!playerSelected) {
             playerSelected = true;
         }
+        actionStarted = true;
 
         eingangsrohrUmstellungPumpe = Kontroller.getKontroller().getMap().findInAllePumpen(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         eingangsrohrUmstellung = true;
@@ -269,6 +275,7 @@ public class MainController {
         if (!playerSelected) {
             playerSelected = true;
         }
+        actionStarted = true;
 
         ausgangsrohrUmstellungPumpe = Kontroller.getKontroller().getMap().findInAllePumpen(Kontroller.getKontroller().getSelectedPlayer().getPosition());
         ausgangsrohrUmstellung = true;
@@ -317,6 +324,7 @@ public class MainController {
         if (!playerSelected) {
             playerSelected = true;
         }
+        actionStarted = true;
 
         Kontroller.getKontroller().getSelectedPlayer().getPosition().reparieren();
         GuiMap.getGuiMap().refreshPumpen();
@@ -330,6 +338,7 @@ public class MainController {
         if (!playerSelected) {
             playerSelected = true;
         }
+        actionStarted = true;
 
         Button b = (Button) e.getSource();
         Rohr rohr = null;
@@ -351,6 +360,7 @@ public class MainController {
         if (!playerSelected) {
             playerSelected = true;
         }
+        actionStarted = true;
 
         Kontroller.getKontroller().getSelectedPlayer().getPosition().kaputtMachen();
 
@@ -364,6 +374,7 @@ public class MainController {
         if (!playerSelected) {
             playerSelected = true;
         }
+        actionStarted = true;
 
         if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
             Installateur inst = (Installateur) Kontroller.getKontroller().getSelectedPlayer();
@@ -380,6 +391,7 @@ public class MainController {
         if (!playerSelected) {
             playerSelected = true;
         }
+        actionStarted = true;
 
         if (Kontroller.getKontroller().getSelectedPlayer() instanceof Installateur) {
             Installateur inst = (Installateur) Kontroller.getKontroller().getSelectedPlayer();

@@ -36,13 +36,6 @@ public class Kontroller {
      *
      */
 
-    private Leaderboard leaderboard = new Leaderboard();
-
-
-    /**
-     *
-     */
-
     private int actionCount = 0;
 
     /**
@@ -95,7 +88,7 @@ public class Kontroller {
     private Spieler lastSelectedPlayer;
 
     private int spielerAnzahlProTeam = 3;
-    private boolean spielLauft=false;
+    private boolean spielLauft = false;
 
     public void binden(Rohr rohr, Netzelement left, Netzelement right) {
         if (left instanceof Pumpe && right instanceof Pumpe) {
@@ -567,8 +560,6 @@ public class Kontroller {
 
 
     public void endGame() {
-        leaderboard.addRekord(installateurTeamName, installateurPunkte);
-        leaderboard.addRekord(saboteurTeamName, saboteurPunkte);
         Logger.info("Spiel beendet.");
         /*if (installateurPunkte > saboteurPunkte) {
             System.out.println("\033[1;32mHurray! Team " + installateurTeamName + " hat gewonnen.\033[0m");
@@ -676,14 +667,6 @@ public class Kontroller {
 
     public void setMap(GameMap map) {
         this.map = map;
-    }
-
-    public Leaderboard getLeaderboard() {
-        return leaderboard;
-    }
-
-    public void setLeaderboard(Leaderboard leaderboard) {
-        this.leaderboard = leaderboard;
     }
 
     public int getMaxRunde() {

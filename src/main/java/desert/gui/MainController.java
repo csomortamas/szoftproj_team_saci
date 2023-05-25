@@ -220,6 +220,10 @@ public class MainController {
         return new LineClickAction();
     }
 
+    public void onPassClick(ActionEvent e){
+        endOfAction();
+    }
+
     public void onPumpeAktivierenClick(ActionEvent e) {
         if (step) {
             step = false;

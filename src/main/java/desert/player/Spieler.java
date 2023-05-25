@@ -109,7 +109,6 @@ public abstract class Spieler {
         }
 
 
-
         GuiMap.getGuiMap().refreshRohrPosition(aktuelleRohr);
     }
 

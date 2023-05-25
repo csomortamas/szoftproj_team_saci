@@ -2,7 +2,6 @@ package desert.network;
 
 import desert.control.Kontroller;
 import desert.gui.GuiMap;
-import javafx.scene.control.Button;
 import javafx.scene.shape.Line;
 import org.tinylog.Logger;
 

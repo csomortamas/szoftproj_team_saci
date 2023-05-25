@@ -36,20 +36,15 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Text>
-      <Pane id="instRohrPane" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(0,100,0);">
+      <Pane id="instRohrPane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(0,100,0);" visible="false">
          <children>
-            <Button id="instRohrReparieren" layoutX="132.0" layoutY="25.0" mnemonicParsing="false" onAction="#onReparierenClick" text="Reparieren" />
+            <Button id="instRohrReparieren" layoutX="142.0" layoutY="24.0" mnemonicParsing="false" onAction="#onReparierenClick" text="Reparieren" />
             <Button id="instRohrUmbinden" layoutX="307.0" layoutY="25.0" mnemonicParsing="false" onAction="#onRohrUmbindenClick" text="Umbinden" />
-            <Button id="instEinmontierenButton" disable="true" layoutX="487.0" layoutY="25.0" mnemonicParsing="false" onAction="#onEinmontierenMiddleClick" text="Einmontieren" />
+            <Button id="instEinmontierenButton" disable="true" layoutX="472.0" layoutY="25.0" mnemonicParsing="false" onAction="#onEinmontierenMiddleClick" text="Einmontieren" />
+            <Button layoutX="634.0" layoutY="45.0" mnemonicParsing="false" onAction="#onPassClick" text="Pass" />
          </children>
       </Pane>
-      <Pane id="sabRohrPane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(100,0,0);" visible="false">
-         <children>
-            <Button id="sabRohrLoechern" layoutX="231.0" layoutY="26.0" mnemonicParsing="false" onAction="#onLoechernClick" text="Löchern" />
-            <Button id="sabRohrUmbinden" layoutX="384.0" layoutY="25.0" mnemonicParsing="false" onAction="#onRohrUmbindenClick" text="Umbinden" />
-         </children>
-      </Pane>
-      <Pane id="instPumpePane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(0,100,0);" visible="false">
+      <Pane id="instPumpePane" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(0,100,0);">
          <children>
             <Button id="instEingangsrohrUmstellen" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#onEingangsrohrUmstellenClick" text="Eingangsrohr umstellen" />
             <Button id="instAusgangsrohrUmstellen" layoutX="177.0" layoutY="12.0" mnemonicParsing="false" onAction="#onAusgangsRohrUmstellenClick" text="Ausgangsrohr Umstellen" />
@@ -57,14 +52,23 @@
             <Button id="instPumpeDeaktivieren" layoutX="436.0" layoutY="12.0" mnemonicParsing="false" onAction="#onPumpeDeaktivierenClick" text="Deaktivieren" />
             <Button id="instPumpeAufnehmen" disable="true" layoutX="536.0" layoutY="12.0" mnemonicParsing="false" onAction="#onPumpeAufnehmen" text="Pumpe Aufnehmen" />
             <Button id="instRohrReparieren" layoutX="306.0" layoutY="44.0" mnemonicParsing="false" onAction="#onReparierenClick" text="Reparieren" />
+            <Button layoutX="634.0" layoutY="45.0" mnemonicParsing="false" onAction="#onPassClick" text="Pass" />
+         </children>
+      </Pane>
+      <Pane id="sabRohrPane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(100,0,0);" visible="false">
+         <children>
+            <Button id="sabRohrLoechern" layoutX="243.0" layoutY="24.0" mnemonicParsing="false" onAction="#onLoechernClick" text="Löchern" />
+            <Button id="sabRohrUmbinden" layoutX="413.0" layoutY="25.0" mnemonicParsing="false" onAction="#onRohrUmbindenClick" text="Umbinden" />
+            <Button layoutX="634.0" layoutY="45.0" mnemonicParsing="false" onAction="#onPassClick" text="Pass" />
          </children>
       </Pane>
       <Pane id="sabPumpePane" disable="true" layoutY="506.0" prefHeight="75.0" prefWidth="686.0" style="-fx-background-color: RGBA(100,0,0);" visible="false">
          <children>
-            <Button id="sabEingangsrohrUmstellen" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#onEingangsrohrUmstellenClick" text="Eingangsrohr umstellen" />
-            <Button id="sabPumpeAktivieren" layoutX="234.0" layoutY="26.0" mnemonicParsing="false" onAction="#onPumpeAktivierenClick" text="Aktivieren" />
-            <Button id="pumpeDektivieren" layoutX="364.0" layoutY="26.0" mnemonicParsing="false" onAction="#onPumpeDeaktivierenClick" text="Deaktivieren" />
-            <Button id="sabAusgangsrohrUmstellen" layoutX="490.0" layoutY="25.0" mnemonicParsing="false" onAction="#onAusgangsRohrUmstellenClick" text="Ausgangsrohr Umstellen" />
+            <Button id="sabEingangsrohrUmstellen" layoutX="25.0" layoutY="13.0" mnemonicParsing="false" onAction="#onEingangsrohrUmstellenClick" text="Eingangsrohr umstellen" />
+            <Button id="sabPumpeAktivieren" layoutX="234.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPumpeAktivierenClick" text="Aktivieren" />
+            <Button id="pumpeDektivieren" layoutX="364.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPumpeDeaktivierenClick" text="Deaktivieren" />
+            <Button id="sabAusgangsrohrUmstellen" layoutX="490.0" layoutY="13.0" mnemonicParsing="false" onAction="#onAusgangsRohrUmstellenClick" text="Ausgangsrohr Umstellen" />
+            <Button layoutX="634.0" layoutY="45.0" mnemonicParsing="false" onAction="#onPassClick" text="Pass" />
          </children>
       </Pane>
       <Button id="wasserQuelle2" layoutX="25.0" layoutY="256.0" mnemonicParsing="false" onAction="#onPumpeClick">

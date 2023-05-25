@@ -2,7 +2,6 @@ package desert.player;
 
 import desert.control.Kontroller;
 import desert.network.Zisterne;
-import desert.player.Spieler;
 
 /**
  *

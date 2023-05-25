@@ -1,6 +1,5 @@
 package desert.network;
 
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 /**

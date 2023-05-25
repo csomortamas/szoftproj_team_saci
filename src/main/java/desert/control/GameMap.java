@@ -153,7 +153,7 @@ public class GameMap {
         return null;
     }
 
-    public Pumpe findInAllePumpen(Netzelement _pumpe){
+    public Pumpe findInAllePumpen(Netzelement _pumpe) {
         List<Pumpe> allePumpen = new ArrayList<>();
         allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());
         allePumpen.addAll(Kontroller.getKontroller().getMap().getZisternen());
@@ -169,7 +169,7 @@ public class GameMap {
     }
 
 
-    public Pumpe findInAllPumpeWithButton(Button butt){
+    public Pumpe findInAllPumpeWithButton(Button butt) {
         Pumpe pumpe = null;
         List<Pumpe> allePumpen = new ArrayList<>();
         allePumpen.addAll(Kontroller.getKontroller().getMap().getPumpen());

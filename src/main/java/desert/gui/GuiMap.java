@@ -462,10 +462,6 @@ public class GuiMap {
         Pane pane = (Pane) GuiMap.getGuiMap().getScene().lookup("#mainPane");
         pane.getChildren().add(line);
         line.toBack();
-        //group.getChildren().add(line);
-        //z.getButton().toFront();
-        //line.toBack();
-
     }
 
     public void refreshAlleRohre() {
@@ -474,8 +470,6 @@ public class GuiMap {
                 refreshRohrPosition(rohr);
             }
         }
-       /* Pumpe p = new Pumpe(1,2);
-        p.getButton().setOnMouseClicked(group.getOnMouseClicked());*/
     }
 
     public Scene getScene() {

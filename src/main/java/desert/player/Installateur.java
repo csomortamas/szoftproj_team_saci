@@ -10,18 +10,9 @@ import org.tinylog.Logger;
 
 import java.util.List;
 
-/**
- *
- */
 public class Installateur extends Spieler {
-    /**
-     * Objekt von Pumpe in der Hand von der Installateur.
-     */
     private Pumpe pumpeInHand;
 
-    /**
-     * Default Konstruktor
-     */
     public Installateur(Wasserquelle startPunkt) {
         super(startPunkt);
         Kontroller.getKontroller().getInstallateurTeam().add(this);
@@ -58,9 +49,6 @@ public class Installateur extends Spieler {
         }
     }
 
-    /**
-     *
-     */
     public void pumpeAufnehmen() {
         List<Zisterne> zisterneList = Kontroller.getKontroller().getMap().getZisternen();
 

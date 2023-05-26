@@ -6,47 +6,19 @@ import org.tinylog.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- */
 public abstract class Netzelement {
 
-    /**
-     *
-     */
     protected String name;
-    /**
-     *
-     */
+
     protected boolean istAktiv;
 
-    /**
-     *
-     */
     protected boolean istKaputt = false;
 
-    /**
-     *
-     */
     protected boolean istBesetzt = false;
 
-    /**
-     *
-     */
     protected transient List<Netzelement> nachbarn = new ArrayList<>();
 
-    /**
-     *
-     */
-    protected Integer hash;
-    /**
-     *
-     */
-    protected List<Integer> nachbarnHash = new ArrayList<>();
 
-    /**
-     *
-     */
     public void kaputtMachen() {
         istKaputt = true;
         Logger.info("Netzelement {} ist kaputt.", this);
@@ -54,9 +26,6 @@ public abstract class Netzelement {
         GuiMap.getGuiMap().refreshPumpen();
     }
 
-    /**
-     *
-     */
     public void reparieren() {
         istKaputt = false;
         Logger.info("Netzelement {} wurde repariert.", this);

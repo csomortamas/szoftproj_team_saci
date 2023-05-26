@@ -8,42 +8,17 @@ public class Pumpe extends Netzelement {
 
 
     private Button button;
-    /**
-     *
-     */
+
     protected double posX;
 
-    /**
-     *
-     */
     protected double posY;
-    /**
-     *
-     */
+
     private Rohr eingangsRohr;
-    /**
-     *
-     */
+
     private Rohr ausgangsRohr;
-    /**
-     *
-     */
+
     private int wasserTank = 0;
-    /**
-     *
-     */
-    final private int maxRohrAnzahl = 4;
-    /**
-     *
-     */
-    private boolean isForZisterne;
 
-    private boolean isForQuelle;
-
-
-    /**
-     * Default Konstruktor
-     */
     public Pumpe(double x, double y) {
         this.posX = x;
         this.posY = y;
@@ -51,9 +26,6 @@ public class Pumpe extends Netzelement {
         Logger.info("Neue Pumpe erstellt.");
     }
 
-    /**
-     *
-     */
     public void wasserWeiterleiten() {
         if (isIstKaputt() || !istAktiv) {
             if (ausgangsRohr != null) {

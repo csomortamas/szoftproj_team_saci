@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- *
- */
+
 public class Kontroller {
     private static final Kontroller kontroller = new Kontroller();
 
@@ -24,58 +22,21 @@ public class Kontroller {
         return kontroller;
     }
 
-
-    /**
-     *
-     */
-
     private GameMap map = new GameMap();
-
-
-    /**
-     *
-     */
 
     private int actionCount = 0;
 
-    /**
-     *
-     */
-
     private int maxRunde = 3;
-
-    /**
-     *
-     */
 
     private String installateurTeamName;
 
-    /**
-     *
-     */
-
     private String saboteurTeamName;
 
-    /**
-     *
-     */
+    private final List<Installateur> installateurTeam = new ArrayList<>();
 
-    private List<Installateur> installateurTeam = new ArrayList<>();
-
-    /**
-     *
-     */
-
-    private List<Saboteur> saboteurTeam = new ArrayList<>();
-
-    /**
-     *
-     */
+    private final List<Saboteur> saboteurTeam = new ArrayList<>();
 
     private int installateurPunkte;
-    /**
-     *
-     */
 
     private int neuePumpeChance = 6;
     private int neueRohrChance = 6;
@@ -102,9 +63,6 @@ public class Kontroller {
         }
     }
 
-    /**
-     *
-     */
     public void pumpeErstellen() {
         Random rand = new Random();
         int randomNumber = rand.nextInt(neuePumpeChance);
@@ -130,8 +88,6 @@ public class Kontroller {
             map.getZisternen().get(randomZisterneIndex).getNachbarn().add(newRohr);
             GuiMap.getGuiMap().refreshNewRohre(map.getZisternen().get(randomZisterneIndex), newRohr);
             map.getRohre().add(newRohr);
-            //map.getZisternen().get(randomZisterneIndex).getButton().toFront();
-            //System.out.println("lol");
         }
     }
 
@@ -140,15 +96,11 @@ public class Kontroller {
         int randomNumber = rand.nextInt(pumpeKaputtGehtChance);
         int randomPumpeIndex = rand.nextInt(map.getPumpen().size());
 
-        // Pumpe Random kaputt machen
         if (map.getPumpen().size() > 0 && randomNumber == 1) {
             map.getPumpen().get(randomPumpeIndex).kaputtMachen();
         }
     }
 
-    /**
-     *
-     */
     public void punkteKalkulieren() {
         for (Rohr rohr : map.getRohre()) {
             if (rohr.isIstAktiv() && rohr.isIstKaputt()) {
@@ -165,9 +117,6 @@ public class Kontroller {
         }
     }
 
-    /**
-     *
-     */
     public void tick() {
         for (Wasserquelle quelle : map.getWasserquellen()) {
             if (quelle.getAusgangsRohr() != null)
@@ -180,8 +129,6 @@ public class Kontroller {
         }
 
         punkteKalkulieren();
-
-        //aktuelleRunde++;
         pumpeKaputtMacht();
         pumpeErstellen();
         rohrErstellen();
@@ -190,27 +137,12 @@ public class Kontroller {
         Logger.info("Tick");
     }
 
-    /**
-     * @param zisterne
-     */
-    public void addZisterne(Zisterne zisterne) {
-        map.getZisternen().add(zisterne);
-
-        Logger.info("Eine Zisterne wurde hinzugefügt");
-    }
-
-    /**
-     * @param pumpe
-     */
     public void addPumpe(Pumpe pumpe) {
         map.getPumpen().add(pumpe);
 
         Logger.info("Eine Pumpe wurde hinzugefügt");
     }
 
-    /**
-     * @param rohr
-     */
     public void addRohr(Rohr rohr) {
         map.getRohre().add(rohr);
 
@@ -218,10 +150,7 @@ public class Kontroller {
     }
 
 
-    public void setupV2(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre, String teamInstName, String teamSabName) {      // binden
-        // setup
-
-        // add to kontroller
+    public void setupV2(List<Wasserquelle> wasserquellen, List<Zisterne> zisternen, List<Pumpe> pumpen, List<Rohr> rohre, String teamInstName, String teamSabName) {
         installateurTeamName = teamInstName;
         saboteurTeamName = teamSabName;
         map = new GameMap();
@@ -262,9 +191,6 @@ public class Kontroller {
         pumpen.get(2).setAusgangsRohr(rohre.get(4));
         zisternen.get(2).setEingangsRohr(rohre.get(4));
 
-        //map.saveMap();
-
-        // logger
         Logger.info("Setup erfolgreich");
     }
 

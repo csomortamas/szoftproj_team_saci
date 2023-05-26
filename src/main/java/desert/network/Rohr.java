@@ -8,17 +8,11 @@ import org.tinylog.Logger;
 public class Rohr extends Netzelement {
     private Line line;
 
-    /**
-     * Default Konstruktor
-     */
     public Rohr() {
         istAktiv = false;
         Logger.info("Neues Rohr erstellt.");
     }
 
-    /**
-     * @param pumpeInHand
-     */
     public void rohrSplit(Pumpe pumpeInHand) {
         Rohr r1 = new Rohr();
         Rohr r2 = new Rohr();

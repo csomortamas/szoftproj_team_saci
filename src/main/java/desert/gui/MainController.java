@@ -403,14 +403,6 @@ public class MainController {
         GuiMap.getGuiMap().refreshAlleRohre();
         GuiMap.getGuiMap().refreshRohrColor();
 
-        //Spieler selectedPlayer = Kontroller.getKontroller().getSelectedPlayer();
-        //if(selectedPlayer.getPosition() instanceof Pumpe) {
-        //    selectedPlayer.getButton().setLayoutX((Kontroller.getKontroller().getMap().findPumpe(selectedPlayer.getPosition())).getPosX());
-        //    selectedPlayer.getButton().setLayoutY((Kontroller.getKontroller().getMap().findPumpe(selectedPlayer.getPosition())).getPosY());
-        //}
-        GuiMap.getGuiMap().refreshSpieler();
-        //GuiMap.getGuiMap().refreshRemovedRohr(Kontroller.getKontroller().getMap().findRohr(Kontroller.getKontroller().getSelectedPlayer().getPosition()));
-
         endOfAction();
     }
 }

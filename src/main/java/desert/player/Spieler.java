@@ -11,9 +11,6 @@ import org.tinylog.Logger;
 
 import java.util.List;
 
-/**
- *
- */
 public abstract class Spieler {
     private Button button;
 
@@ -38,10 +35,6 @@ public abstract class Spieler {
         }
     }
 
-    /**
-     * @param pumpeWohin
-     * @param pumpeWoher
-     */
     public void umbinden(Pumpe pumpeWoher, Pumpe pumpeWohin) {
         List<Rohr> alleRohre = Kontroller.getKontroller().getMap().getRohre();
         Rohr aktuelleRohr = null;
@@ -88,9 +81,6 @@ public abstract class Spieler {
         GuiMap.getGuiMap().refreshRohrPosition(aktuelleRohr);
     }
 
-    /**
-     * @param netzwerkElement
-     */
     public boolean step(Netzelement netzwerkElement) {
         if (netzwerkElement.isIstBesetzt()) {
             Logger.error("Netzwerkelement ist schon besetzt: " + netzwerkElement);
@@ -114,8 +104,7 @@ public abstract class Spieler {
             return false;
         }
     }
-
-    // Pumpe eingansrohr umstellen
+    
     public void eingangsRohrUmstellen(Rohr rohr) {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
         for (Pumpe pumpe : allePumpen) {

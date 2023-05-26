@@ -200,13 +200,13 @@ public class GuiMap {
 
     public void refreshRohrColor() {
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()) {
-            if (rohr.isAktiv() && rohr.isIstKaputt()) {
+            if (rohr.isAktiv() && rohr.isKaputt()) {
                 rohr.getLine().setStroke(Color.ORANGE);
-            } else if (rohr.isAktiv() && !rohr.isIstKaputt()) {
+            } else if (rohr.isAktiv() && !rohr.isKaputt()) {
                 rohr.getLine().setStroke(Color.BLUE);
-            } else if (!rohr.isAktiv() && rohr.isIstKaputt()) {
+            } else if (!rohr.isAktiv() && rohr.isKaputt()) {
                 rohr.getLine().setStroke(Color.RED);
-            } else if (!rohr.isAktiv() && !rohr.isIstKaputt()) {
+            } else if (!rohr.isAktiv() && !rohr.isKaputt()) {
                 rohr.getLine().setStroke(Color.BLACK);
             }
         }
@@ -405,7 +405,7 @@ public class GuiMap {
             } else {
                 pumpe.getButton().setBackground(Background.fill(Color.BLANCHEDALMOND));
             }
-            if (pumpe.isIstKaputt()) {
+            if (pumpe.isKaputt()) {
                 pumpe.getButton().setBackground(Background.fill(Color.RED));
             }
         }

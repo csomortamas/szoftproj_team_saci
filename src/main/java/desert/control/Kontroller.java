@@ -103,14 +103,14 @@ public class Kontroller {
 
     public void punkteKalkulieren() {
         for (Rohr rohr : map.getRohre()) {
-            if (rohr.isAktiv() && rohr.isIstKaputt()) {
+            if (rohr.isAktiv() && rohr.isKaputt()) {
                 saboteurPunkte++;
             }
         }
 
         for (Zisterne zisterne : map.getZisternen()) {
             if (zisterne.getEingangsRohr() != null) {
-                if (zisterne.getEingangsRohr().isAktiv() && !zisterne.getEingangsRohr().isIstKaputt()) {
+                if (zisterne.getEingangsRohr().isAktiv() && !zisterne.getEingangsRohr().isKaputt()) {
                     installateurPunkte++;
                 }
             }

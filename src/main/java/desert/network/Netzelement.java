@@ -48,7 +48,7 @@ public abstract class Netzelement {
         GuiMap.getGuiMap().refreshPumpen();
     }
 
-    public boolean isIstKaputt() {
+    public boolean isKaputt() {
         return istKaputt;
     }
 

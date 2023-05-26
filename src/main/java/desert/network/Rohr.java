@@ -35,7 +35,7 @@ public class Rohr extends Netzelement {
         Kontroller.getKontroller().binden(r2, pumpeInHand, this.getNachbarn().get(1));
         GuiMap.getGuiMap().refreshSplittedRohr(r1, r2);
     }
-    //=======================================================================================
+    //=================================GETTERS & SETTERS=====================================
     //=======================================================================================
 
 

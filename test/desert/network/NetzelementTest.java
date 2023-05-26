@@ -1,18 +1,15 @@
 package desert.network;
 
-import desert.network.Rohr;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class NetzelementTest {
     @Test
     void kaputtMachen() {
         Rohr r1= new Rohr();
         r1.kaputtMachen();
-        Assertions.assertEquals(true, r1.istKaputt);
+        Assertions.assertTrue(r1.istKaputt);
     }
 
     @Test
@@ -20,12 +17,12 @@ class NetzelementTest {
         Rohr r2= new Rohr();
         r2.kaputtMachen();
         r2.reparieren();
-        Assertions.assertEquals(false,r2.istKaputt);
+        Assertions.assertFalse(r2.istKaputt);
     }
     @Test
     void reparierenEinNichtKaputtesRohr() {
         Rohr r2= new Rohr();
         r2.reparieren();
-        Assertions.assertEquals(false,r2.istKaputt);
+        Assertions.assertFalse(r2.istKaputt);
     }
 }

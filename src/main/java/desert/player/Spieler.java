@@ -19,34 +19,10 @@ public abstract class Spieler {
 
     protected Netzelement position;
 
-    protected String name;
-
     public Spieler(Netzelement startPunkt) {
         position = startPunkt;
     }
 
-    /**
-     * @param rohr
-     * @param eingangsRohr
-     */
-    public void rohrUmstellen(Rohr rohr, boolean eingangsRohr) {
-        List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
-        for (Pumpe pumpe : allePumpen) {
-            if (pumpe == position) {
-                if (eingangsRohr) {
-                    pumpe.setEingangsRohr(rohr);
-                    Logger.info("Eingangsrohr der Pumpe {} wurde auf {} umgestellt.", pumpe, rohr);
-                } else {
-                    pumpe.setAusgangsRohr(rohr);
-                    Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", pumpe, rohr);
-                }
-            }
-        }
-    }
-
-    /**
-     * @param einSchalten
-     */
     public void pumpeSchalten(boolean einSchalten) {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
         for (Pumpe pumpe : allePumpen) {
@@ -90,14 +66,14 @@ public abstract class Spieler {
 
             if (pumpeWoher == pumpe0) {
                 Kontroller.getKontroller().binden(aktuelleRohr, pumpe1, pumpeWohin);
-                pumpe0.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
-                aktuelleRohr.getNachbarn().remove(pumpe0); // entfernt die pumpe aus der liste der nachbarn
+                pumpe0.getNachbarn().remove(aktuelleRohr);
+                aktuelleRohr.getNachbarn().remove(pumpe0);
                 aktuelleRohr.getNachbarn().remove(pumpe1);
 
             } else {
                 Kontroller.getKontroller().binden(aktuelleRohr, pumpe0, pumpeWohin);
-                pumpe1.getNachbarn().remove(aktuelleRohr); // entfernt das rohr aus der liste der nachbarn
-                aktuelleRohr.getNachbarn().remove(pumpe1); // entfernt die pumpe aus der liste der nachbarn
+                pumpe1.getNachbarn().remove(aktuelleRohr);
+                aktuelleRohr.getNachbarn().remove(pumpe1);
                 aktuelleRohr.getNachbarn().remove(pumpe0);
             }
 
@@ -158,7 +134,6 @@ public abstract class Spieler {
         }
     }
 
-    // Pumpe ausgangsrohr umstellen
     public void ausgangsRohrUmstellen(Rohr rohr) {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
         for (Pumpe pumpe : allePumpen) {
@@ -177,7 +152,7 @@ public abstract class Spieler {
             }
         }
     }
-    //=======================================================================================
+    //===============================GETTERS & SETTERS=======================================
     //=======================================================================================
 
     public Netzelement getPosition() {
@@ -186,14 +161,6 @@ public abstract class Spieler {
 
     public void setPosition(Netzelement position) {
         this.position = position;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Button getButton() {

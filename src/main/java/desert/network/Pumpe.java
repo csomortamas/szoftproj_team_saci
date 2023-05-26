@@ -79,27 +79,16 @@ public class Pumpe extends Netzelement {
             ausgangsRohr.setIstAktiv(true);
         }
     }
-    //=======================================================================================
+    //==============================GETTERS & SETTERS========================================
     //=======================================================================================
 
-    public int getMaxRohrAnzahl() {
-        return maxRohrAnzahl;
-    }
 
     public double getPosX() {
         return posX;
     }
 
-    public void setPosX(double posX) {
-        this.posX = posX;
-    }
-
     public double getPosY() {
         return posY;
-    }
-
-    public void setPosY(double posY) {
-        this.posY = posY;
     }
 
     public Rohr getEingangsRohr() {
@@ -117,15 +106,6 @@ public class Pumpe extends Netzelement {
     public void setAusgangsRohr(Rohr ausgangsRohr) {
         this.ausgangsRohr = ausgangsRohr;
     }
-
-    public int getWasserTank() {
-        return wasserTank;
-    }
-
-    public void setWasserTank(int wasserTank) {
-        this.wasserTank = wasserTank;
-    }
-
 
     public Button getButton() {
         return button;

@@ -29,13 +29,6 @@ public class Installateur extends Spieler {
 
     }
 
-    public void reparieren() {
-        this.position.reparieren();
-    }
-
-    /**
-     * @param middle
-     */
     public void pumpeEinmontieren(boolean middle) {
         if (middle && position instanceof Rohr && this.pumpeInHand != null) {
             List<Rohr> alleRohre = Kontroller.getKontroller().getMap().getRohre();
@@ -50,8 +43,8 @@ public class Installateur extends Spieler {
                     Kontroller.getKontroller().addPumpe(pumpeInHand);
                     rohr.rohrSplit(pumpeInHand);
                     GuiMap.getGuiMap().refreshEinmontiertePumpe(pumpeInHand, startX, startY, endX, endY);
-
                     pumpeInHand = null;
+                    GuiMap.getGuiMap().refreshSpieler();
                     Logger.info("Pumpe eingebaut.");
                     break;
                 }
@@ -83,7 +76,7 @@ public class Installateur extends Spieler {
         }
         Logger.error("Keine Pumpe aufgenommen.");
     }
-    //=======================================================================================
+    //==================================GETTERS & SETTERS====================================
     //=======================================================================================
 
     public Pumpe getPumpeInHand() {

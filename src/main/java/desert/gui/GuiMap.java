@@ -42,29 +42,20 @@ public class GuiMap {
     private Scene scene;
     private Scene settingsScene;
     private Stage settingsStage;
-
     private DropShadow borderGlow;
     private final static GuiMap guiMap = new GuiMap();
-
     public static GuiMap getGuiMap() {
         return guiMap;
     }
-
     public void setGuiMapScene(Scene _scene) {
         this.scene = _scene;
     }
-
     private GuiMap() {
 
     }
 
-    public GuiMap(Scene _scene) {
-        this.scene = _scene;
-    }
-
     public void sceneSetup() {
         Pane mainPane = (Pane) GuiMap.getGuiMap().getScene().lookup("#mainPane");
-
         for (int i = 0; i < Kontroller.getKontroller().getMap().getWasserquellen().size(); i++) {
             Kontroller.getKontroller().getMap().getPumpen().get(i).setButton((Button) scene.lookup("#pumpe" + (i + 1)));
             Kontroller.getKontroller().getMap().getPumpen().get(i).getButton().setBackground(Background.EMPTY);
@@ -74,13 +65,10 @@ public class GuiMap {
             Kontroller.getKontroller().getMap().getZisternen().get(i).getButton().setBackground(Background.EMPTY);
             Kontroller.getKontroller().getMap().getZisternen().get(i).getButton().setBackground(Background.EMPTY);
             Kontroller.getKontroller().getMap().getZisternen().get(i).setReadyPumpImage((ImageView) scene.lookup("#readyPump" + (i + 1)));
-
         }
-
         for (int i = 0; i < Kontroller.getKontroller().getMap().getRohre().size(); i++) {
             Kontroller.getKontroller().getMap().getRohre().get(i).setLine((Line) scene.lookup("#rohr" + (i + 1)));
         }
-
 
         for (int i = 0; i < Kontroller.getKontroller().getSpielerAnzahlProTeam(); i++) {
             Image instImg = new Image(MainApplication.class.getResourceAsStream("installateur.png"));
@@ -201,7 +189,6 @@ public class GuiMap {
         stage.getIcons().add(new Image(MainApplication.class.getResourceAsStream("desert_smallLogo.png")));
 
         ButtonType exitButtonType = new ButtonType("Exit");
-        //ButtonType leadeboardButtonType = new ButtonType("Leaderboard anzeigen");
 
         dialog.getButtonTypes().setAll(exitButtonType);
 
@@ -370,6 +357,7 @@ public class GuiMap {
                 i.getButton().setBackground(Background.fill(Color.YELLOW));
             } else {
                 i.getButton().setStyle(null);
+                i.getButton().setBackground(Background.EMPTY);
             }
         }
 
@@ -384,12 +372,10 @@ public class GuiMap {
         }
     }
 
-    // helper function
     private double calculateSpielerPos(double startCoord, double endCoord) {
         return (abs((endCoord - startCoord)) / 2 + Math.min(startCoord, endCoord));
     }
 
-    // helper function
     private double randomTinyShift(Button buttonSurface, Spieler spieler) {
         double pumpeButtonWidth = buttonSurface.getWidth();
         double spielerButtonWidth = spieler.getButton().getWidth();
@@ -500,23 +486,12 @@ public class GuiMap {
         return group;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
     public Scene getSettingsScene() {
         return settingsScene;
-    }
-
-    public void setSettingsScene(Scene settingsScene) {
-        this.settingsScene = settingsScene;
     }
 
     public Stage getSettingsStage() {
         return settingsStage;
     }
 
-    public void setSettingsStage(Stage settingsStage) {
-        this.settingsStage = settingsStage;
-    }
 }

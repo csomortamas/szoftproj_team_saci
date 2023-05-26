@@ -26,8 +26,6 @@ public class MainController {
         }
         return mainController;
     }
-
-
     private boolean eingangsrohrUmstellung = false;
     private boolean ausgangsrohrUmstellung = false;
     private boolean step = true;
@@ -35,7 +33,6 @@ public class MainController {
     private boolean playerSelected = false;
     private boolean rohrMitFreiemEndeUmbinden = false;
     private boolean actionStarted = false;
-
     private Pumpe ausgangsrohrUmstellungPumpe = null;
     private Pumpe eingangsrohrUmstellungPumpe = null;
     private Pumpe pumpeWoher = null;
@@ -137,7 +134,7 @@ public class MainController {
 
     public void onPumpeClick(ActionEvent e) {
         Button buttonQuelle = (Button) e.getSource();
-        Pumpe pumpe = null;
+        Pumpe pumpe;
 
         pumpe = Kontroller.getKontroller().getMap().findInAllPumpeWithButton(buttonQuelle);
         if (rohrUmbinden) {

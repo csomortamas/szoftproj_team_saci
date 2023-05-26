@@ -63,16 +63,10 @@ public abstract class Netzelement {
         GuiMap.getGuiMap().refreshRohrColor();
     }
 
-    //=======================================================================================
+    //===============================GETTERS & SETTERS=======================================
     //=======================================================================================
 
-    public List<Integer> getNachbarnHash() {
-        return nachbarnHash;
-    }
 
-    public String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -91,10 +85,6 @@ public abstract class Netzelement {
         return istKaputt;
     }
 
-    public void setIstKaputt(boolean istKaputt) {
-        this.istKaputt = istKaputt;
-    }
-
     public boolean isIstBesetzt() {
         return istBesetzt;
     }
@@ -107,15 +97,4 @@ public abstract class Netzelement {
         return nachbarn;
     }
 
-    public void setNachbarn(List<Netzelement> nachbarn) {
-        this.nachbarn = nachbarn;
-    }
-
-    public Integer getHash() {
-        return hash;
-    }
-
-    public void setHash(Integer hash) {
-        this.hash = hash;
-    }
 }

@@ -31,7 +31,6 @@ public class MainApplication extends Application {
         wasserquelleList.add(wasserquelle1);
         wasserquelleList.add(wasserquelle2);
         wasserquelleList.add(wasserquelle3);
-        // create 3 zisterne
         Zisterne zisterne1 = new Zisterne(30, 20);
         zisterne1.setName("Z1");
         Zisterne zisterne2 = new Zisterne(30, 10);
@@ -42,7 +41,6 @@ public class MainApplication extends Application {
         zisterneList.add(zisterne1);
         zisterneList.add(zisterne2);
         zisterneList.add(zisterne3);
-        // create 1 pumpe
         Pumpe pumpe1 = new Pumpe(20, 10);
         pumpe1.setName("P1");
         Pumpe pumpe2 = new Pumpe(20, 20);
@@ -53,7 +51,6 @@ public class MainApplication extends Application {
         pumpeList.add(pumpe1);
         pumpeList.add(pumpe2);
         pumpeList.add(pumpe3);
-        // create 5 rohr
         Rohr rohr1 = new Rohr();
         Rohr rohr2 = new Rohr();
         Rohr rohr3 = new Rohr();
@@ -99,10 +96,8 @@ public class MainApplication extends Application {
         stage.show();
     }
 
-
     public static void main(String[] args) {
         launch();
     }
-
 
 }

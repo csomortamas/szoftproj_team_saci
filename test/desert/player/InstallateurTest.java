@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class InstallateurTest {
     Wasserquelle wq;
     Installateur ins;
@@ -25,14 +23,6 @@ class InstallateurTest {
         z1 = new Zisterne(10,1);
     }
 
-
-
-    /*@Test
-    void pumpeEinmontierenInDerWueste() {
-        ins.setPumpeInHand(p1);
-        ins.pumpeEinmontieren(false);
-        Assertions.assertTrue(Kontroller.getKontroller().getMap().getPumpen().contains(p1));
-    }*/
     @Test
     void pumpeEinmontierenImRohr() {
         Rohr r1 =new Rohr();
@@ -61,6 +51,6 @@ class InstallateurTest {
         ins.setPosition(z1);
         Kontroller.getKontroller().getMap().getZisternen().add(z1);
         ins.pumpeAufnehmen();
-        Assertions.assertEquals(null,ins.getPumpeInHand());
+        Assertions.assertNull(ins.getPumpeInHand());
     }
 }

@@ -63,7 +63,7 @@ public class Kontroller {
         }
     }
 
-    public void pumpeErstellen() {
+    public void pumpeRandomErstellenBeiZisternen() {
         Random rand = new Random();
         int randomNumber = rand.nextInt(neuePumpeChance);
         int randomZisterneIndex = rand.nextInt(map.getZisternen().size());
@@ -103,14 +103,14 @@ public class Kontroller {
 
     public void punkteKalkulieren() {
         for (Rohr rohr : map.getRohre()) {
-            if (rohr.isIstAktiv() && rohr.isIstKaputt()) {
+            if (rohr.isAktiv() && rohr.isIstKaputt()) {
                 saboteurPunkte++;
             }
         }
 
         for (Zisterne zisterne : map.getZisternen()) {
             if (zisterne.getEingangsRohr() != null) {
-                if (zisterne.getEingangsRohr().isIstAktiv() && !zisterne.getEingangsRohr().isIstKaputt()) {
+                if (zisterne.getEingangsRohr().isAktiv() && !zisterne.getEingangsRohr().isIstKaputt()) {
                     installateurPunkte++;
                 }
             }
@@ -130,7 +130,7 @@ public class Kontroller {
 
         punkteKalkulieren();
         pumpeKaputtMacht();
-        pumpeErstellen();
+        pumpeRandomErstellenBeiZisternen();
         rohrErstellen();
         GuiMap.getGuiMap().refreshReadyPumps();
         GuiMap.getGuiMap().refreshPoints();

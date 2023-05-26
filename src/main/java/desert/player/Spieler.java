@@ -82,11 +82,11 @@ public abstract class Spieler {
     }
 
     public boolean step(Netzelement netzwerkElement) {
-        if (netzwerkElement.isIstBesetzt()) {
+        if (netzwerkElement.isBesetzt()) {
             Logger.error("Netzwerkelement ist schon besetzt: " + netzwerkElement);
             return false;
         }
-        if (position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isIstBesetzt()) {
+        if (position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isBesetzt()) {
             position.setIstBesetzt(false);
 
             position = netzwerkElement;

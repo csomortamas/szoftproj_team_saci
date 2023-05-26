@@ -35,13 +35,11 @@ public abstract class Netzelement {
     //===============================GETTERS & SETTERS=======================================
     //=======================================================================================
 
-
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public boolean isIstAktiv() {
+    public boolean isAktiv() {
         return istAktiv;
     }
 
@@ -54,7 +52,7 @@ public abstract class Netzelement {
         return istKaputt;
     }
 
-    public boolean isIstBesetzt() {
+    public boolean isBesetzt() {
         return istBesetzt;
     }
 

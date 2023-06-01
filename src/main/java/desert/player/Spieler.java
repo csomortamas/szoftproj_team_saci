@@ -82,11 +82,11 @@ public abstract class Spieler {
     }
 
     public boolean step(Netzelement netzwerkElement) {
-        if (netzwerkElement.isIstBesetzt()) {
+        if (netzwerkElement.isBesetzt()) {
             Logger.error("Netzwerkelement ist schon besetzt: " + netzwerkElement);
             return false;
         }
-        if (position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isIstBesetzt()) {
+        if (position.getNachbarn().contains(netzwerkElement) && !netzwerkElement.isBesetzt()) {
             position.setIstBesetzt(false);
 
             position = netzwerkElement;
@@ -129,6 +129,7 @@ public abstract class Spieler {
             if (pumpe == position) {
                 if (pumpe.getNachbarn().contains(rohr)) {
                     if (rohr != pumpe.getEingangsRohr()) {
+                        pumpe.getAusgangsRohr().setIstAktiv(false);
                         pumpe.setAusgangsRohr(rohr);
                         Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
                     } else {

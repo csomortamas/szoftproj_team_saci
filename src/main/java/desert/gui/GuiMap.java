@@ -200,13 +200,13 @@ public class GuiMap {
 
     public void refreshRohrColor() {
         for (Rohr rohr : Kontroller.getKontroller().getMap().getRohre()) {
-            if (rohr.isIstAktiv() && rohr.isIstKaputt()) {
+            if (rohr.isAktiv() && rohr.isKaputt()) {
                 rohr.getLine().setStroke(Color.ORANGE);
-            } else if (rohr.isIstAktiv() && !rohr.isIstKaputt()) {
+            } else if (rohr.isAktiv() && !rohr.isKaputt()) {
                 rohr.getLine().setStroke(Color.BLUE);
-            } else if (!rohr.isIstAktiv() && rohr.isIstKaputt()) {
+            } else if (!rohr.isAktiv() && rohr.isKaputt()) {
                 rohr.getLine().setStroke(Color.RED);
-            } else if (!rohr.isIstAktiv() && !rohr.isIstKaputt()) {
+            } else if (!rohr.isAktiv() && !rohr.isKaputt()) {
                 rohr.getLine().setStroke(Color.BLACK);
             }
         }
@@ -400,12 +400,12 @@ public class GuiMap {
 
     public void refreshPumpen() {
         for (Pumpe pumpe : Kontroller.getKontroller().getMap().getPumpen()) {
-            if (pumpe.isIstAktiv()) {
+            if (pumpe.isAktiv()) {
                 pumpe.getButton().setBackground(Background.EMPTY);
             } else {
                 pumpe.getButton().setBackground(Background.fill(Color.BLANCHEDALMOND));
             }
-            if (pumpe.isIstKaputt()) {
+            if (pumpe.isKaputt()) {
                 pumpe.getButton().setBackground(Background.fill(Color.RED));
             }
         }

@@ -196,6 +196,7 @@ public class MainController {
     public class LineClickAction implements EventHandler<MouseEvent> {
         @Override
         public void handle(MouseEvent e) {
+            Spieler sp = Kontroller.getKontroller().getSelectedPlayer();
             Line line = (Line) e.getSource();
 
             Rohr clickedRohr = null;
@@ -206,14 +207,12 @@ public class MainController {
                 }
             }
             if (eingangsrohrUmstellung) {
-                eingangsrohrUmstellungPumpe.setEingangsRohr(clickedRohr);
+                sp.eingangsRohrUmstellen(clickedRohr);
                 endOfAction();
             } else if (ausgangsrohrUmstellung) {
-                ausgangsrohrUmstellungPumpe.setAusgangsRohr(clickedRohr);
+                sp.ausgangsRohrUmstellen(clickedRohr);
                 endOfAction();
             } else if (step) {
-                Spieler sp = Kontroller.getKontroller().getSelectedPlayer();
-                Netzelement pos = sp.getPosition();
 
                 if (sp.step(clickedRohr)) {
                     step = false;

@@ -35,13 +35,11 @@ public abstract class Netzelement {
     //===============================GETTERS & SETTERS=======================================
     //=======================================================================================
 
-
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public boolean isIstAktiv() {
+    public boolean isAktiv() {
         return istAktiv;
     }
 
@@ -50,11 +48,11 @@ public abstract class Netzelement {
         GuiMap.getGuiMap().refreshPumpen();
     }
 
-    public boolean isIstKaputt() {
+    public boolean isKaputt() {
         return istKaputt;
     }
 
-    public boolean isIstBesetzt() {
+    public boolean isBesetzt() {
         return istBesetzt;
     }
 

@@ -5,8 +5,6 @@ import desert.network.Pumpe;
 import desert.network.Rohr;
 import desert.network.Wasserquelle;
 import desert.network.Zisterne;
-import desert.player.Installateur;
-import desert.player.Saboteur;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -140,7 +138,7 @@ class SpielerTest {
         Installateur installateur = new Installateur(new Wasserquelle(1,1));
         installateur.setPosition(pumpe);
         installateur.pumpeSchalten(true);
-        Assertions.assertTrue(pumpe.isIstAktiv());
+        Assertions.assertTrue(pumpe.isAktiv());
     }
 
     @Test
@@ -150,7 +148,7 @@ class SpielerTest {
         Installateur installateur = new Installateur(new Wasserquelle(1,1));
         installateur.setPosition(pumpe);
         installateur.pumpeSchalten(false);
-        Assertions.assertFalse(pumpe.isIstAktiv());
+        Assertions.assertFalse(pumpe.isAktiv());
     }
 
     @Test
@@ -161,6 +159,6 @@ class SpielerTest {
         installateur.setPosition(pumpe);
         pumpe.setIstAktiv(false);
         installateur.pumpeSchalten(false);
-        Assertions.assertFalse(pumpe.isIstAktiv());
+        Assertions.assertFalse(pumpe.isAktiv());
     }
 }

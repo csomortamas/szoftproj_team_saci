@@ -68,12 +68,7 @@ public class MainApplication extends Application {
         rohrList.add(rohr4);
         rohrList.add(rohr5);
         Kontroller.getKontroller().setupV2(wasserquelleList, zisterneList, pumpeList, rohrList, "inst", "sab");
-        Spieler installateur1 = new Installateur(wasserquelle1);
-        Spieler installateur2 = new Installateur(wasserquelle3);
-        Spieler saboteur1 = new Saboteur(zisterne1);
-        Spieler saboteur2 = new Saboteur(zisterne3);
-        //Kontroller.getKontroller().setSelectedPlayer(installateur1);
-        //Kontroller.getKontroller().setLastSelectedPlayer(saboteur1);
+
     }
 
     @Override

@@ -81,6 +81,7 @@ public class GuiMap {
             sabView.setFitHeight(32);
             int t = (int) Math.floor((double) i / 3);
             Button installateurButton = new Button();
+            installateurButton.setBackground(null);
             installateurButton.setLayoutX(Kontroller.getKontroller().getMap().getWasserquellen().get(i % 3).getButton().getLayoutX());
             installateurButton.setLayoutY(Kontroller.getKontroller().getMap().getWasserquellen().get(i % 3).getButton().getLayoutY() + (t * 5));
             installateurButton.setPrefHeight(38);
@@ -91,6 +92,7 @@ public class GuiMap {
             installateurButton.toFront();
 
             Button saboteurButton = new Button();
+            saboteurButton.setBackground(null);
             saboteurButton.setLayoutX(Kontroller.getKontroller().getMap().getZisternen().get(i % 3).getButton().getLayoutX());
             saboteurButton.setLayoutY(Kontroller.getKontroller().getMap().getZisternen().get(i % 3).getButton().getLayoutY() + (t * 5));
             saboteurButton.setPrefHeight(38);
@@ -236,7 +238,7 @@ public class GuiMap {
             borderGlow.setColor(Color.RED);
         }
         Kontroller.getKontroller().getSelectedPlayer().getButton().setEffect(borderGlow);
-        Kontroller.getKontroller().getLastSelectedPlayer().getButton().setEffect(null);
+       // Kontroller.getKontroller().getLastSelectedPlayer().getButton().setEffect(null);
     }
 
     public void refreshControlPanes() {
@@ -356,8 +358,7 @@ public class GuiMap {
             if (i.getPumpeInHand() != null) {
                 i.getButton().setBackground(Background.fill(Color.YELLOW));
             } else {
-                i.getButton().setStyle(null);
-                i.getButton().setBackground(Background.EMPTY);
+                i.getButton().setBackground(null);
             }
         }
 

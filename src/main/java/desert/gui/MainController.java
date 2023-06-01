@@ -32,7 +32,7 @@ public class MainController {
     private boolean ausgangsrohrUmstellung = false;
     private boolean step = true;
     private boolean rohrUmbinden = false;
-    private boolean playerSelected = false;
+    //private Boolean playerSelected = false;
     private boolean rohrMitFreiemEndeUmbinden = false;
     private boolean actionStarted = false;
     private Pumpe ausgangsrohrUmstellungPumpe = null;
@@ -186,8 +186,8 @@ public class MainController {
     }
 
     public void onRohrClick(MouseEvent e) {
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
 
         new LineClickAction().handle(e);
@@ -230,6 +230,7 @@ public class MainController {
     public void onPassClick(ActionEvent e) {
         if (!actionStarted) {
             endOfAction();
+
         }
     }
 
@@ -237,8 +238,8 @@ public class MainController {
         if (step) {
             step = false;
         }
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
         actionStarted = true;
 
@@ -251,8 +252,8 @@ public class MainController {
         if (step) {
             step = false;
         }
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
         actionStarted = true;
 
@@ -265,8 +266,8 @@ public class MainController {
         if (step) {
             step = false;
         }
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
         actionStarted = true;
 
@@ -327,8 +328,8 @@ public class MainController {
         if (step) {
             step = false;
         }
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
         actionStarted = true;
 
@@ -341,8 +342,8 @@ public class MainController {
         if (step) {
             step = false;
         }
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
         actionStarted = true;
 
@@ -363,8 +364,8 @@ public class MainController {
         if (step) {
             step = false;
         }
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
         actionStarted = true;
 
@@ -377,8 +378,8 @@ public class MainController {
         if (step) {
             step = false;
         }
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
         actionStarted = true;
 
@@ -394,8 +395,8 @@ public class MainController {
         if (step) {
             step = false;
         }
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
         actionStarted = true;
 

@@ -41,6 +41,7 @@ public class Installateur extends Spieler {
         } else if (!middle && position instanceof Rohr && this.pumpeInHand != null) {
             Kontroller.getKontroller().addPumpe(pumpeInHand);
             pumpeInHand = null;
+            GuiMap.getGuiMap().refreshSpieler();
             Logger.info("Pumpe eingebaut.");
         } else {
             Logger.error("Pumpe kann nicht eingebaut werden.");

@@ -18,13 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainController {
-    private static MainController mainController = null;
-
+    //final private static MainController INSTANCE = new MainController();
+    private static class InstanceHolder {
+        static MainController INSTANCE = new MainController();
+    }
     public static MainController getMainController() {
-        if (mainController == null) {
-            mainController = new MainController();
-        }
-        return mainController;
+        /*if (mainController == null) {
+            mainController
+        }*/
+        return InstanceHolder.INSTANCE;
     }
     private boolean eingangsrohrUmstellung = false;
     private boolean ausgangsrohrUmstellung = false;
@@ -40,13 +42,19 @@ public class MainController {
     private int rohrUmbindenZaehler = 0;
 
     public void onSpielStartenClick(ActionEvent e) {
-        int i = 0;
+        int i =0;
         Kontroller.getKontroller().setSpielLauft(true);
         while (Kontroller.getKontroller().getInstallateurTeam().size() < Kontroller.getKontroller().getSpielerAnzahlProTeam()) {
+            System.out.println("indexxxxxx : " + i + "  spiel anzahl pro team: " + Kontroller.getKontroller().getSpielerAnzahlProTeam() + "Ins team size: "+ Kontroller.getKontroller().getInstallateurTeam().size() + " sab team size: " + Kontroller.getKontroller().getSaboteurTeam().size());
+
             Kontroller.getKontroller().getInstallateurTeam().add(new Installateur(Kontroller.getKontroller().getMap().getWasserquellen().get(i % 3)));
             Kontroller.getKontroller().getSaboteurTeam().add(new Saboteur(Kontroller.getKontroller().getMap().getZisternen().get(i % 3)));
+            System.out.println("indexxxxxx : " + i + "  spiel anzahl pro team: " + Kontroller.getKontroller().getSpielerAnzahlProTeam() + "Ins team size: "+ Kontroller.getKontroller().getInstallateurTeam().size() + " sab team size: " + Kontroller.getKontroller().getSaboteurTeam().size());
             i++;
         }
+
+        Kontroller.getKontroller().setSelectedPlayer(Kontroller.getKontroller().getInstallateurTeam().get(0));
+        Kontroller.getKontroller().setLastSelectedPlayer(Kontroller.getKontroller().getSaboteurTeam().get(0));
 
         GuiMap.getGuiMap().loadGame();
         GuiMap.getGuiMap().sceneSetup();
@@ -91,6 +99,8 @@ public class MainController {
         GuiMap.getGuiMap().refreshPlayerButtons();
         GuiMap.getGuiMap().refreshControlPanes();
         GuiMap.getGuiMap().refreshRohrColor();
+        playerSelected = false;
+
     }
 
     public void endOfGame() {

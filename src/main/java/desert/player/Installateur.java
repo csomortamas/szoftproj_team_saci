@@ -15,9 +15,7 @@ public class Installateur extends Spieler {
 
     public Installateur(Wasserquelle startPunkt) {
         super(startPunkt);
-        Kontroller.getKontroller().getInstallateurTeam().add(this);
-
-
+        //Kontroller.getKontroller().getInstallateurTeam().add(this);
     }
 
     public void pumpeEinmontieren(boolean middle) {

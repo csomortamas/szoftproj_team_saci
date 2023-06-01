@@ -45,11 +45,9 @@ public class MainController {
         int i =0;
         Kontroller.getKontroller().setSpielLauft(true);
         while (Kontroller.getKontroller().getInstallateurTeam().size() < Kontroller.getKontroller().getSpielerAnzahlProTeam()) {
-            System.out.println("indexxxxxx : " + i + "  spiel anzahl pro team: " + Kontroller.getKontroller().getSpielerAnzahlProTeam() + "Ins team size: "+ Kontroller.getKontroller().getInstallateurTeam().size() + " sab team size: " + Kontroller.getKontroller().getSaboteurTeam().size());
 
             Kontroller.getKontroller().getInstallateurTeam().add(new Installateur(Kontroller.getKontroller().getMap().getWasserquellen().get(i % 3)));
             Kontroller.getKontroller().getSaboteurTeam().add(new Saboteur(Kontroller.getKontroller().getMap().getZisternen().get(i % 3)));
-            System.out.println("indexxxxxx : " + i + "  spiel anzahl pro team: " + Kontroller.getKontroller().getSpielerAnzahlProTeam() + "Ins team size: "+ Kontroller.getKontroller().getInstallateurTeam().size() + " sab team size: " + Kontroller.getKontroller().getSaboteurTeam().size());
             i++;
         }
 
@@ -78,7 +76,7 @@ public class MainController {
         step = true;
         rohrUmbinden = false;
         ausgangsrohrUmstellung = false;
-        playerSelected = false;
+        Kontroller.getKontroller().playerSelected = false;
         actionStarted = false;
 
         eingangsrohrUmstellungPumpe = null;
@@ -99,7 +97,7 @@ public class MainController {
         GuiMap.getGuiMap().refreshPlayerButtons();
         GuiMap.getGuiMap().refreshControlPanes();
         GuiMap.getGuiMap().refreshRohrColor();
-        playerSelected = false;
+        Kontroller.getKontroller().playerSelected = false;
 
     }
 
@@ -279,8 +277,8 @@ public class MainController {
         if (step) {
             step = false;
         }
-        if (!playerSelected) {
-            playerSelected = true;
+        if (!Kontroller.getKontroller().playerSelected) {
+            Kontroller.getKontroller().playerSelected = true;
         }
         actionStarted = true;
 
@@ -290,7 +288,7 @@ public class MainController {
     }
 
     public void onInstallateurClick(ActionEvent e) {
-        if (!playerSelected) {
+        if (!Kontroller.getKontroller().playerSelected) {
             Button b = (Button) e.getSource();
             Kontroller.getKontroller().getSelectedPlayer().getButton().setEffect(null);
             for (Installateur i : Kontroller.getKontroller().getInstallateurTeam()) {
@@ -302,12 +300,12 @@ public class MainController {
             GuiMap.getGuiMap().refreshControlPanes();
             GuiMap.getGuiMap().refreshPlayerButtons();
             step = true;
-            playerSelected = true;
+            Kontroller.getKontroller().playerSelected = true;
         }
     }
 
     public void onSaboteurClick(ActionEvent e) {
-        if (!playerSelected) {
+        if (!Kontroller.getKontroller().playerSelected) {
             Button b = (Button) e.getSource();
             Kontroller.getKontroller().getSelectedPlayer().getButton().setEffect(null);
             for (Saboteur s : Kontroller.getKontroller().getSaboteurTeam()) {
@@ -320,7 +318,7 @@ public class MainController {
             GuiMap.getGuiMap().refreshPlayerButtons();
 
             step = true;
-            playerSelected = true;
+            Kontroller.getKontroller().playerSelected = true;
         }
     }
 

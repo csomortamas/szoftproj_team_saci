@@ -47,7 +47,7 @@ public class Kontroller {
     private Spieler selectedPlayer;
 
     private Spieler lastSelectedPlayer;
-
+    public Boolean playerSelected = false;
     private int spielerAnzahlProTeam = 3;
     private boolean spielLauft = false;
 

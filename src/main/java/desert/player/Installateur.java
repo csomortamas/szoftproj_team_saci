@@ -33,7 +33,6 @@ public class Installateur extends Spieler {
                     rohr.rohrSplit(pumpeInHand);
                     GuiMap.getGuiMap().refreshEinmontiertePumpe(pumpeInHand, startX, startY, endX, endY);
                     pumpeInHand = null;
-                    GuiMap.getGuiMap().refreshSpieler();
                     Logger.info("Pumpe eingebaut.");
                     break;
                 }

@@ -368,8 +368,8 @@ public class GuiMap {
             spieler.getButton().setLayoutY(calculateSpielerPos(rohr.getLine().getStartY(), rohr.getLine().getEndY()));
         } else {
             Pumpe pumpe = Kontroller.getKontroller().getMap().findInAllePumpen(spielerPosition);
-            spieler.getButton().setLayoutX(pumpe.getButton().getLayoutX() + randomTinyShift(pumpe.getButton(), spieler));
-            spieler.getButton().setLayoutY(pumpe.getButton().getLayoutY() + randomTinyShift(pumpe.getButton(), spieler));
+            spieler.getButton().setLayoutX(pumpe.getButton().getLayoutX() + randomTinyShift(pumpe.getButton()));
+            spieler.getButton().setLayoutY(pumpe.getButton().getLayoutY() + randomTinyShift(pumpe.getButton()));
         }
     }
 
@@ -377,10 +377,9 @@ public class GuiMap {
         return (abs((endCoord - startCoord)) / 2 + Math.min(startCoord, endCoord));
     }
 
-    private double randomTinyShift(Button buttonSurface, Spieler spieler) {
+    private double randomTinyShift(Button buttonSurface) {
         double pumpeButtonWidth = buttonSurface.getWidth();
-        double spielerButtonWidth = spieler.getButton().getWidth();
-        return Math.random() * (pumpeButtonWidth - spielerButtonWidth);
+        return Math.random() / 2 * pumpeButtonWidth;
     }
 
     public void refreshRoundCounter() {

@@ -410,6 +410,7 @@ public class MainController {
         }
         GuiMap.getGuiMap().refreshAlleRohre();
         GuiMap.getGuiMap().refreshRohrColor();
+        GuiMap.getGuiMap().refreshSpieler();
 
         endOfAction();
     }

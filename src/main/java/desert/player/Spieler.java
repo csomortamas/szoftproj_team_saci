@@ -3,9 +3,7 @@ package desert.player;
 import desert.control.Kontroller;
 import desert.gui.GuiMap;
 import desert.gui.MainController;
-import desert.network.Netzelement;
-import desert.network.Pumpe;
-import desert.network.Rohr;
+import desert.network.*;
 import javafx.scene.control.Button;
 import org.tinylog.Logger;
 
@@ -107,6 +105,17 @@ public abstract class Spieler {
     
     public void eingangsRohrUmstellen(Rohr rohr) {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
+        List<Zisterne> alleZisternen = Kontroller.getKontroller().getMap().getZisternen();
+        for (Zisterne z : alleZisternen) {
+            if (z == position) {
+                if (z.getNachbarn().contains(rohr)) {
+                    if (rohr != z.getAusgangsRohr()) {
+                        z.setEingangsRohr(rohr);
+                        Logger.info("Eingangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
+                    }
+                }
+            }
+        }
         for (Pumpe pumpe : allePumpen) {
             if (pumpe == position) {
                 if (pumpe.getNachbarn().contains(rohr)) {
@@ -125,11 +134,28 @@ public abstract class Spieler {
 
     public void ausgangsRohrUmstellen(Rohr rohr) {
         List<Pumpe> allePumpen = Kontroller.getKontroller().getMap().getPumpen();
+        List<Wasserquelle> alleQuellen = Kontroller.getKontroller().getMap().getWasserquellen();
+        for(Wasserquelle q : alleQuellen) {
+            if (q == position) {
+                if (q.getNachbarn().contains(rohr)) {
+                    if (rohr != q.getEingangsRohr()) {
+                        if (q.getAusgangsRohr() != null) {
+                            q.getAusgangsRohr().setIstAktiv(false);
+                        }
+                        q.setAusgangsRohr(rohr);
+                        Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
+                    }
+                }
+            }
+        }
+
         for (Pumpe pumpe : allePumpen) {
             if (pumpe == position) {
                 if (pumpe.getNachbarn().contains(rohr)) {
                     if (rohr != pumpe.getEingangsRohr()) {
-                        pumpe.getAusgangsRohr().setIstAktiv(false);
+                        if(pumpe.getAusgangsRohr()!=null) {
+                            pumpe.getAusgangsRohr().setIstAktiv(false);
+                        }
                         pumpe.setAusgangsRohr(rohr);
                         Logger.info("Ausgangsrohr der Pumpe {} wurde auf {} umgestellt.", position, rohr);
                     } else {
